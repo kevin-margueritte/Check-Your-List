@@ -12,31 +12,31 @@ package person.model;
  * 
  * @author kevine2710
  */
-public class User extends Person {
+public abstract class User extends Person {
 	/**
 	 * Description of the property city.
 	 */
-	private String city;
+	protected String city;
 	
 	/**
 	 * Description of the property postCode.
 	 */
-	private String postCode;
+	protected String postCode;
 	
 	/**
 	 * Description of the property street.
 	 */
-	private String street;
+	protected String street;
 	
 	/**
 	 * Description of the property houseNumber.
 	 */
-	private String houseNumber;
+	protected String houseNumber;
 	
 	/**
 	 * Description of the property mail.
 	 */
-	private String mail;
+	protected String mail;
 	
 	// Start of user code (user defined attributes for User)
 	
@@ -58,6 +58,10 @@ public class User extends Person {
 		this.street = street;
 		this.houseNumber = houseNumber;
 		this.mail = mail;
+	}
+	
+	public User(String pseudo) {
+		super(pseudo);
 	}
 
 	// Start of user code (user defined methods for User)

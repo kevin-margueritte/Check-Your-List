@@ -12,7 +12,7 @@ package person.model;
  * 
  * @author kevine2710
  */
-public class Administrator extends Person {
+public abstract class Administrator extends Person {
 	// Start of user code (user defined attributes for Administrator)
 	
 	// End of user code
@@ -24,6 +24,10 @@ public class Administrator extends Person {
 		// Start of user code constructor for Administrator)
 		super();
 		// End of user code
+	}
+	
+	public Administrator(String pseudo) {
+		super(pseudo);
 	}
 	
 	public Administrator(String pseudo, String lastName, String firstName, String description, String password) {

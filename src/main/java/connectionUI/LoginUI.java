@@ -1,48 +1,33 @@
-/*******************************************************************************
- * 2016, All rights reserved.
- *******************************************************************************/
 package connectionUI;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 
-import person.facade.Login;
+import person.facade.LoginFacade;
 import person.model.User;
 
-// Start of user code (user defined imports)
-
-// End of user code
-
-/**
- * Description of LoginUI.
- * 
- * @author kevine2710
- */
 @SuppressWarnings("serial")
-public class LoginUI extends JFrame implements Observer, ActionListener  {
-	/**
-	 * Description of the property Logins.
-	 */
-	private Login login;
-
-	//private JPanel contentPane;
+public class LoginUI extends JFrame implements ActionListener{
+	
+	private LoginFacade login;
 	private JTextField textLogin;
 	private JPasswordField textPassword;
+	private JLabel labelTitle;
+	private JLabel labelLogin;
+	private JLabel labelPassword;
 	
 	public static void main(String args[]) {
 		LoginUI.launch();
@@ -63,71 +48,105 @@ public class LoginUI extends JFrame implements Observer, ActionListener  {
 			}
 		});
 	}
-
-	/**
-	 * Create the frame.
-	 */
+	
 	public LoginUI() {
-		this.login = new Login();
-		this.login.addObserver(this);
-		Container contentPane = this.getContentPane();
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.login = new LoginFacade();
+		SpringLayout springLayout = new SpringLayout();
+		getContentPane().setLayout(springLayout);
 		
-		contentPane.setLayout(new BorderLayout());
+		textLogin = new JTextField();
+		springLayout.putConstraint(SpringLayout.WEST, textLogin, 45, SpringLayout.WEST, getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, textLogin, -124, SpringLayout.SOUTH, getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, textLogin, -45, SpringLayout.EAST, getContentPane());
+		getContentPane().add(textLogin);
+		textLogin.setColumns(10);
 		
-		JLabel labelLogin = new JLabel("Login :      ");
-		labelLogin.setHorizontalAlignment(SwingConstants.CENTER);
-		JLabel labelPassword = new JLabel("Password : ");
-		labelPassword.setHorizontalAlignment(SwingConstants.CENTER);
-
-		this.textLogin = new JTextField();
-	    textLogin.setPreferredSize(new Dimension(150,24));
-
-		this.textPassword = new JPasswordField();
-		textPassword.setPreferredSize(new Dimension(150,24));
+		textPassword = new JPasswordField();
+		springLayout.putConstraint(SpringLayout.WEST, textPassword, 45, SpringLayout.WEST, getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, textPassword, -45, SpringLayout.EAST, getContentPane());
+		textPassword.setColumns(10);
+		getContentPane().add(textPassword);
+		
 		JButton buttonConnect = new JButton("Connect");
-		
-		JPanel formLogin = new JPanel();
-		JPanel formPassword = new JPanel();
-		formLogin.add(labelLogin);
-		formLogin.add(textLogin);	
-		contentPane.add(formLogin, BorderLayout.NORTH);
-		formPassword.add(labelPassword);
-		formPassword.add(textPassword);	
-		contentPane.add(formPassword, BorderLayout.CENTER);
-		
-		JPanel buttonValidate = new JPanel();
-		buttonValidate.add(buttonConnect);
 		buttonConnect.addActionListener(this);
+		buttonConnect.setBackground(SystemColor.activeCaption);
+		springLayout.putConstraint(SpringLayout.NORTH, textPassword, -42, SpringLayout.NORTH, buttonConnect);
+		springLayout.putConstraint(SpringLayout.SOUTH, textPassword, -22, SpringLayout.NORTH, buttonConnect);
+		springLayout.putConstraint(SpringLayout.NORTH, buttonConnect, -46, SpringLayout.SOUTH, getContentPane());
+		springLayout.putConstraint(SpringLayout.WEST, buttonConnect, 66, SpringLayout.WEST, getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, buttonConnect, -23, SpringLayout.SOUTH, getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, buttonConnect, -67, SpringLayout.EAST, getContentPane());
+		buttonConnect.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+		getContentPane().add(buttonConnect);
 		
-		contentPane.add(buttonValidate, BorderLayout.SOUTH);			
+		labelTitle = new JLabel("Check Your List");
+		springLayout.putConstraint(SpringLayout.NORTH, labelTitle, 22, SpringLayout.NORTH, getContentPane());
+		springLayout.putConstraint(SpringLayout.WEST, labelTitle, 68, SpringLayout.WEST, getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, labelTitle, -68, SpringLayout.EAST, getContentPane());
+		labelTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		labelTitle.setFont(new Font("Palatino Linotype", Font.PLAIN, 18));
+		getContentPane().add(labelTitle);
 		
+		labelLogin = new JLabel("Username");
+		springLayout.putConstraint(SpringLayout.WEST, labelLogin, 73, SpringLayout.WEST, getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, labelLogin, -6, SpringLayout.NORTH, textLogin);
+		springLayout.putConstraint(SpringLayout.EAST, labelLogin, -7, SpringLayout.EAST, buttonConnect);
+		labelLogin.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+		labelLogin.setHorizontalAlignment(SwingConstants.CENTER);
+		getContentPane().add(labelLogin);
+		
+		labelPassword = new JLabel("Password");
+		springLayout.putConstraint(SpringLayout.WEST, labelPassword, 79, SpringLayout.WEST, getContentPane());
+		springLayout.putConstraint(SpringLayout.SOUTH, labelPassword, -6, SpringLayout.NORTH, textPassword);
+		springLayout.putConstraint(SpringLayout.EAST, labelPassword, -6, SpringLayout.EAST, labelLogin);
+		labelPassword.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+		labelPassword.setHorizontalAlignment(SwingConstants.CENTER);
+		getContentPane().add(labelPassword);
+		
+		setSize(294,270);
+		setMinimumSize(new Dimension(294, 270));
 		setTitle("Login");
-		setSize(300,200);
-		setVisible(true);
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
-		
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		this.login.setUsername(textLogin.getText());
-		this.login.setPassword(new String(textPassword.getPassword()));
-		this.login.connect();
+		if (!this.checkLoginIsEmpty()) {
+			if (!this.checkPasswordIsEmpty()) {
+				if (this.login.connect(textLogin.getText(),new String(textPassword.getPassword())) ) {
+					User u = (User) this.login.getPerson(textLogin.getText());
+					JOptionPane.showMessageDialog(this,
+						    "Welcome, " + u.getFirstName()+" "+u.getLastName()+" !");
+				}
+				else {
+					JOptionPane.showMessageDialog(this,
+							"Your pseudo or password is incorrect",
+						    "Error",
+						    JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		}
 	}
-
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
-		if ( arg1 instanceof String) {
+	
+	public boolean checkLoginIsEmpty() {
+		if (this.textLogin.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(this,
-					(String)arg1,
+					"Your pseudo is empty",
 				    "Error",
 				    JOptionPane.ERROR_MESSAGE);
+			return true;
 		}
-		else if (arg1 instanceof User) {
-			User u = (User) arg1;
-			JOptionPane.showMessageDialog(this,
-				    "Welcome, " + u.getFirstName()+" "+u.getLastName()+" !");
-		}
+		return false;
 	}
+	
+	public boolean checkPasswordIsEmpty() {
+		if ((new String(textPassword.getPassword())).isEmpty()) {
+			JOptionPane.showMessageDialog(this,
+					"Your password is empty",
+				    "Error",
+				    JOptionPane.ERROR_MESSAGE);
+			return true;
+		}
+		return false;
+	}
+
 }

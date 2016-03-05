@@ -12,36 +12,36 @@ package person.model;
  * 
  * @author kevine2710
  */
-public class Person {
+public abstract class Person {
 	/**
 	 * Description of the property photo.
 	 */
-	private String photo;
+	protected String photo;
 
 	/**
 	 * Description of the property pseudo.
 	 */
-	private String pseudo;
+	protected String pseudo;
 
 	/**
 	 * Description of the property lastName.
 	 */
-	private String lastName;
+	protected String lastName;
 
 	/**
 	 * Description of the property firstName.
 	 */
-	private String firstName;
+	protected String firstName;
 
 	/**
 	 * Description of the property description.
 	 */
-	private String description;
+	protected String description;
 
 	/**
 	 * Description of the property password.
 	 */
-	private String password;
+	protected String password = "";
 
 	// Start of user code (user defined attributes for Person)
 
@@ -67,6 +67,9 @@ public class Person {
 		this.password = password;
 	}
 
+	public Person(String pseudo) {
+		this.pseudo = pseudo;
+	}
 
 
 	// Start of user code (user defined methods for Person)
@@ -167,5 +170,7 @@ public class Person {
 	public void setPassword(String newPassword) {
 		this.password = newPassword;
 	}
+	
+	public abstract Person readByPseudo();
 
 }
