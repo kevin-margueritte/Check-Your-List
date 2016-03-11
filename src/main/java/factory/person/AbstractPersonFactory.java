@@ -1,10 +1,10 @@
-package factory;
+package factory.person;
 
 import model.person.Administrator;
 import model.person.Seller;
 import model.person.User;
 
-public abstract class Factory {
+public abstract class AbstractPersonFactory {
 	
 	public abstract Seller createSeller(String pseudo, String lastName, String firstName, String description, String password, String siret, String phoneNumber, String houseNumber, String street, String postCode, String mail,
 			String city);

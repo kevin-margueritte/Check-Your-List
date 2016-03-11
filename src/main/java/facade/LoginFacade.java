@@ -3,7 +3,7 @@
  *******************************************************************************/
 package facade;
 
-import manager.ManagePerson;
+import manager.PersonManager;
 import model.person.Person;
 
 // Start of user code (user defined imports)
@@ -20,7 +20,7 @@ public class LoginFacade {
 	/**
 	 * Description of the property loginUIs.
 	 */
-	private ManagePerson mu;
+	private PersonManager mu;
 
 	// Start of user code (user defined attributes for Connection)
 
@@ -30,7 +30,7 @@ public class LoginFacade {
 	 * The constructor.
 	 */
 	public LoginFacade() {
-		this.mu = new ManagePerson();
+		this.mu = new PersonManager();
 	}
 
 	public boolean connect(String username, String password) {

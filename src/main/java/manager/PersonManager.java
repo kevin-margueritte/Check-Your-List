@@ -3,17 +3,17 @@ package manager;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-import factory.Factory;
-import factory.PersonFactoryJDBC;
+import factory.person.AbstractPersonFactory;
+import factory.person.PersonFactory;
 import model.person.Person;
 import model.person.User;
 
-public class ManagePerson {
+public class PersonManager {
 	
-	private Factory fact;
+	private AbstractPersonFactory fact;
 	
-	public ManagePerson() {
-		this.fact = new PersonFactoryJDBC();
+	public PersonManager() {
+		this.fact = new PersonFactory();
 	}
 	
 	public boolean connect(String username, String password) {

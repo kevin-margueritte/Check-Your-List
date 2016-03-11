@@ -1,4 +1,4 @@
-package factory;
+package factory.person;
 
 import model.person.Administrator;
 import model.person.Seller;
@@ -7,7 +7,7 @@ import person.persistance.JDBC.AdministratorJDBC;
 import person.persistance.JDBC.SellerJDBC;
 import person.persistance.JDBC.UserJDBC;
 
-public class PersonFactoryJDBC extends Factory {
+public class PersonFactory extends AbstractPersonFactory {
 
 	@Override
 	public Seller createSeller(String pseudo, String lastName, String firstName, String description, String password,
