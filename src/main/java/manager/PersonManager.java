@@ -36,19 +36,15 @@ public class PersonManager {
 		return u;
 	}
 	
-//	public boolean connect(String username, String password) {
-//		String sql = ("SELECT * FROM customer WHERE pseudo = '" + username + "' AND pass = '"+ password + "'");
-//		Statement stm;
-//		try {
-//			stm = this.connection.createStatement();
-//			ResultSet rs = stm.executeQuery(sql);
-//			if ( rs.next() ) {
-//				System.out.println("toto");
-//				return true;
-//			}
-//		} catch (SQLException e) {}
-//		return false;
-//	}
+	public boolean createUser(String pseudo, String lastName, String firstName, String description, String password,
+			String city, String postCode, String street, String houseNumber, String mail) {
+		boolean res = false;
+		try {
+			User u = this.fact.createUser(pseudo, lastName, firstName, description, sha1(password), city, postCode, street, houseNumber, mail);
+			res = u.save();
+		} catch (NoSuchAlgorithmException e) {}
+		return res;
+	}
 	
 	private static String sha1(String input) throws NoSuchAlgorithmException {
 		MessageDigest mDigest = MessageDigest.getInstance("SHA1");

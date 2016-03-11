@@ -12,6 +12,8 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SpringLayout;
 
+import facade.PersonFacade;
+
 @SuppressWarnings("serial")
 public class InscriptionUserUI extends JFrame implements ActionListener {
 	
@@ -26,6 +28,7 @@ public class InscriptionUserUI extends JFrame implements ActionListener {
 	private JTextField street;
 	private JTextField houseNumber;
 	private JTextPane description;
+	private PersonFacade pf;
 	
 	public static void main(String args[]) {
 		InscriptionUserUI.launch();
@@ -48,6 +51,7 @@ public class InscriptionUserUI extends JFrame implements ActionListener {
 	}
 	
 	public InscriptionUserUI() {
+		this.pf = new PersonFacade();
 		setResizable(false);
 		SpringLayout springLayout = new SpringLayout();
 		getContentPane().setLayout(springLayout);
@@ -199,8 +203,11 @@ public class InscriptionUserUI extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		this.formComplete();
+		this.pf.createUser(this.pseudo.getText(), this.lastName.getText(), this.firstName.getText(), this.description.getText(),
+				this.password.getText(), this.city.getText(), this.postCode.getText(), this.street.getText(), 
+				this.houseNumber.getText(), this.email.getText());
 	}
-	
+
 	private boolean formComplete() {
 		if (this.firstName.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(this,
