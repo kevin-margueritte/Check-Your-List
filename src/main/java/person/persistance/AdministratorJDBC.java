@@ -19,4 +19,10 @@ public class AdministratorJDBC extends Administrator {
 		return null;
 	}
 
+	@Override
+	public boolean save() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

@@ -172,5 +172,6 @@ public abstract class Person {
 	}
 	
 	public abstract Person readByPseudo();
+	public abstract boolean save();
 
 }

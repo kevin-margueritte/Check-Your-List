@@ -2,6 +2,6 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="src" output="target/classes" path="src/main/java"/>
-	<classpathentry kind="lib" path="C:/Users/kevine2710/Downloads/postgresql-9.4.1208.jre6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/johannes.meier/Downloads/postgresql-9.4.1208.jre6.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

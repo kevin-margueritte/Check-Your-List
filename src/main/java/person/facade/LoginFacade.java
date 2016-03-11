@@ -3,7 +3,7 @@
  *******************************************************************************/
 package person.facade;
 
-import gestionnaire.ManagePerson;
+import manager.ManagePerson;
 import person.model.Person;
 
 // Start of user code (user defined imports)
