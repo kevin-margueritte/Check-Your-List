@@ -1,4 +1,4 @@
-package connectionUI;
+package UI;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -16,8 +16,8 @@ import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 
-import person.facade.LoginFacade;
-import person.model.User;
+import facade.LoginFacade;
+import model.person.User;
 
 @SuppressWarnings("serial")
 public class LoginUI extends JFrame implements ActionListener{

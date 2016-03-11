@@ -5,8 +5,8 @@ import java.security.NoSuchAlgorithmException;
 
 import factory.Factory;
 import factory.PersonFactoryJDBC;
-import person.model.Person;
-import person.model.User;
+import model.person.Person;
+import model.person.User;
 
 public class ManagePerson {
 	

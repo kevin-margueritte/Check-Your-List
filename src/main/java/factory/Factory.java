@@ -1,8 +1,8 @@
 package factory;
 
-import person.model.Administrator;
-import person.model.Seller;
-import person.model.User;
+import model.person.Administrator;
+import model.person.Seller;
+import model.person.User;
 
 public abstract class Factory {
 	

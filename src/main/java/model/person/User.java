@@ -1,7 +1,7 @@
 /*******************************************************************************
  * 2016, All rights reserved.
  *******************************************************************************/
-package person.model;
+package model.person;
 
 // Start of user code (user defined imports)
 

@@ -1,11 +1,11 @@
 package factory;
 
-import person.model.Administrator;
-import person.model.Seller;
-import person.model.User;
-import person.persistance.AdministratorJDBC;
-import person.persistance.SellerJDBC;
-import person.persistance.UserJDBC;
+import model.person.Administrator;
+import model.person.Seller;
+import model.person.User;
+import person.persistance.JDBC.AdministratorJDBC;
+import person.persistance.JDBC.SellerJDBC;
+import person.persistance.JDBC.UserJDBC;
 
 public class PersonFactoryJDBC extends Factory {
 
