@@ -20,7 +20,7 @@ public class UserJDBC extends User {
 
 	@Override
 	public User readByPseudo() {
-		String sql = ("INSERT INTO Customer VALUES ('" +  this.pseudo + "'");
+		String sql = ("SELECT * FROM customer WHERE pseudo = '" +  this.pseudo + "'");
 		User u = null;
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
@@ -50,7 +50,13 @@ public class UserJDBC extends User {
 
 	@Override
 	public boolean save() {
-		// TODO Auto-generated method stub
+		String sql = ("INSERT INTO customer VALUES ( '" +  this.firstName + "','" + this.lastName + "','" + 
+				this.pseudo + "','" + this.password + "','" + this.description + "','" + this.city + "','" + this.postCode + "','" +
+				this.street + "','" + this.houseNumber + "','" + this.mail +"')");
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			return stm.execute(sql);
+		} catch (SQLException e) {}
 		return false;
 	}
 
