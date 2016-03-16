@@ -1,8 +1,11 @@
 package model.activity.JDBC;
 
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Date;
 import java.util.List;
 
+import database.ConnectionDB;
 import model.activity.Activity;
 import model.category.Subcategory;
 import model.person.User;
@@ -25,7 +28,13 @@ public class ActivityJDBC extends Activity {
 
 	@Override
 	public boolean save() {
-		// TODO Auto-generated method stub
+		String sql = ("INSERT INTO activity (titre, description, visible, creationdate, pseudo_user, name_subcategory) VALUES ( '" +
+				this.title + "','" + this.description + "','" + this.visible + "','" + this.creationDate + "','" + this.user.getPseudo() 
+				+ "','" + this.subcategory.getName() + "')");
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			return stm.execute(sql);
+		} catch (SQLException e) {}
 		return false;
 	}
 

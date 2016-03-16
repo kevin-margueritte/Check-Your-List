@@ -147,6 +147,6 @@ public abstract class User extends Person {
 	    this.mail = newMail;
 	}
 
-
+	public abstract boolean save();
 
 }

@@ -9,14 +9,14 @@ import model.task.Task;
 
 public abstract class Activity {
 
-	private int id;
-	private String title;
-	private String description;
-	private boolean visible;
-	private Date creationDate;
-	private List<Task> listTask;
-	private Subcategory subcategory;
-	private User user;
+	protected int id;
+	protected String title;
+	protected String description;
+	protected boolean visible;
+	protected Date creationDate;
+	protected List<Task> listTask;
+	protected Subcategory subcategory;
+	protected User user;
 	
 	public Activity() {
 		super();

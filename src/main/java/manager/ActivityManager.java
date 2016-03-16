@@ -4,6 +4,7 @@ import java.util.Date;
 
 import factory.activity.AbstractActivityFactory;
 import factory.activity.ActivityFactory;
+import model.activity.Activity;
 import model.category.Subcategory;
 import model.person.User;
 
@@ -17,8 +18,8 @@ private AbstractActivityFactory fact;
 	
 	public boolean createActivity(String title, String description, boolean visible, Date creationDate,
 			Subcategory subcategory, User user) {
-		this.fact.createActivity(title, description, visible, creationDate, subcategory, user);
-		return true;
+		Activity act = this.fact.createActivity(title, description, visible, creationDate, subcategory, user);
+		return act.save();
 	}
 
 }
