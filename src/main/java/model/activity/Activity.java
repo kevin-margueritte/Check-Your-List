@@ -3,15 +3,91 @@ package model.activity;
 import java.util.Date;
 import java.util.List;
 
+import model.category.Subcategory;
+import model.person.User;
 import model.task.Task;
 
 public abstract class Activity {
 
+	private int id;
 	private String title;
 	private String description;
 	private boolean visible;
 	private Date creationDate;
 	private List<Task> listTask;
+	private Subcategory subcategory;
+	private User user;
 	
+	public Activity() {
+		super();
+	}
+
+	public Activity(String title, String description, boolean visible, Date creationDate, Subcategory subcategory,
+			User user) {
+		super();
+		this.title = title;
+		this.description = description;
+		this.visible = visible;
+		this.creationDate = creationDate;
+		this.subcategory = subcategory;
+		this.user = user;
+	}
+	
+	public Activity(int id, String title, String description, boolean visible, Date creationDate,
+			Subcategory subcategory, User user) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.visible = visible;
+		this.creationDate = creationDate;
+		this.subcategory = subcategory;
+		this.user = user;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public boolean isVisible() {
+		return visible;
+	}
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+	public Date getCreationDate() {
+		return creationDate;
+	}
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+	public Subcategory getSubcategory() {
+		return subcategory;
+	}
+	public void setSubcategory(Subcategory subcategory) {
+		this.subcategory = subcategory;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	public abstract boolean save();
+	public abstract Activity readByID();
+	public abstract boolean modify();
+	public abstract List<Activity> readAll();
+	public abstract boolean delete();
+	public abstract boolean addTask();
+	public abstract boolean deleteTask();
 	
 }
