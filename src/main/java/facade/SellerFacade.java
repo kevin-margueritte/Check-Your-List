@@ -5,7 +5,7 @@ import manager.ProductManager;
 public class SellerFacade {
 
 	// manager des Produits
-	private manProd ProductManager;
+	private ProductManager manProd;
 	
 	//initialisation du manager
 	public SellerFacade() {
