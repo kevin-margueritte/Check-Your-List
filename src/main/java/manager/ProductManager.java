@@ -2,7 +2,7 @@ package manager;
 import factory.product.AbstractProductFactory;
 import factory.product.ProductFactory;
 import model.product.Product;
-import product.persistance.JDBC.ProductJDBC;
+import model.product.JDBC.ProductJDBC;
 
 public class ProductManager {
 

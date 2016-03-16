@@ -1,4 +1,4 @@
-package product.persistance.JDBC;
+package model.product.JDBC;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;

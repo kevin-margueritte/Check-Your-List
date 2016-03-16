@@ -1,7 +1,7 @@
 package factory.product;
 
 import model.product.Product;
-import product.persistance.JDBC.ProductJDBC;
+import model.product.JDBC.ProductJDBC;
 
 public class ProductFactory extends AbstractProductFactory{
 

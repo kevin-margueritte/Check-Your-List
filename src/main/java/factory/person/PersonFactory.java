@@ -3,9 +3,9 @@ package factory.person;
 import model.person.Administrator;
 import model.person.Seller;
 import model.person.User;
-import person.persistance.JDBC.AdministratorJDBC;
-import person.persistance.JDBC.SellerJDBC;
-import person.persistance.JDBC.UserJDBC;
+import model.person.JDBC.AdministratorJDBC;
+import model.person.JDBC.SellerJDBC;
+import model.person.JDBC.UserJDBC;
 
 public class PersonFactory extends AbstractPersonFactory {
 
