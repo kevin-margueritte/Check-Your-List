@@ -21,5 +21,6 @@ private AbstractActivityFactory fact;
 		Activity act = this.fact.createActivity(title, description, visible, creationDate, subcategory, user);
 		return act.save();
 	}
+	
 
 }

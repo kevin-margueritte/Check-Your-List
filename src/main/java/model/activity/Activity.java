@@ -45,6 +45,12 @@ public abstract class Activity {
 		this.user = user;
 	}
 
+	public Activity(int id2, String title2) {
+		this.id = id2;
+		this.title = title2;
+
+	}
+
 	public String getTitle() {
 		return title;
 	}
