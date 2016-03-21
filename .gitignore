@@ -1,3 +1,4 @@
 src/mainjava/database/ConnectionDB.java
 target/*
 .classpath
+/bin/

@@ -1,20 +1,32 @@
 package manager;
+import factory.category.AbstractCategoryFactory;
+import factory.person.AbstractPersonFactory;
 import factory.product.AbstractProductFactory;
 import factory.product.ProductFactory;
+import model.category.Subcategory;
+import model.person.Seller;
 import model.product.Product;
 import model.product.JDBC.ProductJDBC;
 
 public class ProductManager {
-
-	private AbstractProductFactory fact;
+	private AbstractPersonFactory factPers;
+	private AbstractProductFactory factProd;
+	private AbstractCategoryFactory factCat;
 	
 	
 	public ProductManager() {
-		this.fact = new ProductFactory();
+		this.factProd = new ProductFactory();
 	}
 	
-	public boolean createProduct(String name, int quantity, double price, String id){
-		Product prod = this.fact.createProduct(name, quantity, price, id);
+	public boolean createProduct(String name, String pseudo, String nomSubCategory){
+		//recupère le Seller
+		Seller seller = factPers.createSeller(pseudo);
+		seller.readByPseudo();
+		//recupere la sub category
+		Subcategory subCategory = factCat.createSubCategory(nomSubCategory);
+		subCategory.readByName();
+		// Creation du produit 
+		Product prod = this.factProd.createProduct(name, seller,subCategory);
 		if(prod != null){
 			return true;
 		}

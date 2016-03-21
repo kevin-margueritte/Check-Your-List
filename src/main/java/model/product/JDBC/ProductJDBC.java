@@ -5,44 +5,50 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import UI.LoginUI;
 import database.ConnectionDB;
+import model.category.Subcategory;
+import model.person.Seller;
 import model.product.Product;
 
 
 public class ProductJDBC extends Product{
-
 	
-	public ProductJDBC(String name, int quantity, double price, String id){
-		super(name,quantity,price,id);
+	public ProductJDBC(String name, Seller seller, Subcategory subCategory){
+		super(name,seller,subCategory);
 	}
 	
-	public Product readByName(){
-		String sql = ("INSERT INTO Product VALUES ('" +  this.name + "," + this.quantity + ","+ this.price + "," + this.id +"'");
-		Product prod = null;
+	/*CREATE TABLE product
+	(
+	  id serial NOT NULL,
+	  name character,
+	  id_sell serial NOT NULL,
+	  name_subcategory character,
+	  [...]
+	 */
+	public boolean save(){
+		//Recupère le Seller 
+		
+		//Recupère la Sub Category
+		
+		String sql = ("INSERT INTO product VALUES ("
+				+ "'" +  this.name + ","
+				//+ this.id + "," 
+				+ this.subCategory + "')");
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
-			ResultSet rs = stm.executeQuery(sql);
-			if ( rs.next() ) {
-				ResultSetMetaData resultMeta = rs.getMetaData();
-				if (resultMeta.getTableName(1).equals("customer")) {
-					this.name = (String) rs.getObject("lastName");
-					this.quantity = (int) rs.getObject("firstName");
-					this.price = (double) rs.getObject("description");
-					this.id = (String) rs.getObject("pass");	
-					prod = new ProductJDBC(name, quantity, price, id);
-				}
-				rs.close();
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return (Product)prod;
+			return stm.execute(sql);
+		} catch (SQLException e) {e.printStackTrace();}
+		return false;
 	}
-		
-		
-		
 	
+	
+	public static void main(String args[]) {
+		//ProductJDBC prod = new ProductJDBC("whisky","jack","boisson");
+		//prod.save();
+	}
 
 	
 }
+
+
