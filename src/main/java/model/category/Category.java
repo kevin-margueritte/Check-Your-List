@@ -3,12 +3,16 @@ package model.category;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Category {
+public abstract class Category {
+	
 	protected String name;
 	protected String shortDescription;
 	protected String detailedDescription;
 	
 	//protected List subcategories = new ArrayList();
+	
+	public Category() {
+	}
 	
 	public Category(String name) {
 		this.name= name;
@@ -19,6 +23,8 @@ public class Category {
 		this.shortDescription = shortDescription;
 		this.detailedDescription = detailedDescription;
 	}
+	
+	public abstract List<Category> getAllCategories();
 	
 	public String getName() {
 		return this.name;

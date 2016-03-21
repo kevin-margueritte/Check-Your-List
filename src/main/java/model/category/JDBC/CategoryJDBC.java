@@ -4,11 +4,20 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import database.ConnectionDB;
 import model.category.Category;
+import model.person.User;
+import model.person.JDBC.UserJDBC;
 
 public class CategoryJDBC extends Category {
+	
+	public CategoryJDBC() {
+		super();
+	}
+	
 	public CategoryJDBC(String name, String shortDescription, String detailedDescription){
 		super(name, shortDescription, detailedDescription);	
 	}
@@ -49,5 +58,37 @@ public class CategoryJDBC extends Category {
 		} catch (SQLException e) {}
 		return false;
 	}
+
+	@Override
+	public List<Category> getAllCategories() {
+		String sql = ("SELECT * FROM category");
+		List<Category> list = new ArrayList<Category>();
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while ( rs.next() ) {
+				Category cat = new CategoryJDBC();
+				ResultSetMetaData resultMeta = rs.getMetaData();
+				if (resultMeta.getTableName(1).equals("category")) {
+					cat.setName((String) rs.getObject("name"));
+					cat.setDetailedDescription((String) rs.getObject("detailledDescription"));
+					cat.setShortDescription((String) rs.getObject("shortDescription"));
+					list.add(cat);
+				}
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public String toString() {
+		return this.name;
+	}
+	
+	
 	
 }

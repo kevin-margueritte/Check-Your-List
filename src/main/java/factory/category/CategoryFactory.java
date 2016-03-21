@@ -27,4 +27,9 @@ public class CategoryFactory extends AbstractCategoryFactory {
 		return new SubcategoryJDBC(pseudo);
 	}
 
+	@Override
+	public Category createCategory() {
+		return new CategoryJDBC();
+	}
+
 }

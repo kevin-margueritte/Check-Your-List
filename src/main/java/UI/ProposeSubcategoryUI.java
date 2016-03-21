@@ -3,8 +3,12 @@ package UI;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -15,7 +19,7 @@ import javax.swing.SpringLayout;
 import javax.swing.border.EmptyBorder;
 
 import facade.CategoryFacade;
-import javax.swing.JComboBox;
+import model.category.Category;
 
 public class ProposeSubcategoryUI extends JFrame implements ActionListener {
 
@@ -24,6 +28,8 @@ public class ProposeSubcategoryUI extends JFrame implements ActionListener {
 	private JTextField categoryName;
 	private JTextPane textShortDescription;
 	private JTextPane textDetailedDescription;
+	private JComboBox comboBoxCategory;
+	private List<Category> listCategory;
 
 	/**
 	 * Launch the application.
@@ -45,6 +51,7 @@ public class ProposeSubcategoryUI extends JFrame implements ActionListener {
 	 * Create the frame.
 	 */
 	public ProposeSubcategoryUI() {
+		this.cf = new CategoryFacade();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -95,10 +102,13 @@ public class ProposeSubcategoryUI extends JFrame implements ActionListener {
 		sl_contentPane.putConstraint(SpringLayout.EAST, textDetailedDescription, 0, SpringLayout.EAST, categoryName);
 		contentPane.add(textDetailedDescription);
 		
-		JComboBox comboBoxCategory = new JComboBox();
+		this.comboBoxCategory = new JComboBox();
 		sl_contentPane.putConstraint(SpringLayout.WEST, comboBoxCategory, 0, SpringLayout.WEST, lblCategoryName);
 		sl_contentPane.putConstraint(SpringLayout.EAST, comboBoxCategory, 0, SpringLayout.EAST, categoryName);
+		List<String> ls = new ArrayList<String>();
 		contentPane.add(comboBoxCategory);
+		this.initComboBoxCategory();
+		
 		//comboBoxCategory.addItem("ok");
 		
 		JLabel lblCategory = new JLabel("Category :");
@@ -107,17 +117,21 @@ public class ProposeSubcategoryUI extends JFrame implements ActionListener {
 		sl_contentPane.putConstraint(SpringLayout.WEST, lblCategory, 0, SpringLayout.WEST, lblCategoryName);
 		contentPane.add(lblCategory);
 		
-		this.cf = new CategoryFacade();
-		
 		setSize(447,694);
 		setResizable(false);
 		setTitle("Propose new subcategory");
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void initComboBoxCategory() {
+		List<Category> list = cf.getAllCategories();
+		this.comboBoxCategory.setModel(new DefaultComboBoxModel(list.toArray()));
+	}
+	
 	public void actionPerformed(ActionEvent arg0) {
-		if (this.formComplete()) {
-			//Category c = this.category.getCategory(categoryName.getText());			
-			this.cf.createSubcategory(this.categoryName.getText(), this.textShortDescription.getText(),this.textDetailedDescription.getText(),null);			
+		if (this.formComplete()) {		
+			this.cf.createSubcategory(this.categoryName.getText(), this.textShortDescription.getText(),
+					this.textDetailedDescription.getText(),(Category) this.comboBoxCategory.getSelectedItem());			
 		}
 	}
 	

@@ -1,5 +1,7 @@
 package manager;
 
+import java.util.List;
+
 import factory.category.AbstractCategoryFactory;
 import factory.category.CategoryFactory;
 import model.category.Category;
@@ -39,6 +41,11 @@ public class CategoryManager {
 		Subcategory c = this.fact.createSubcategory(name, shortDescription, detailedDescription, category);
 		res = ((SubcategoryJDBC)c).save();
 		return res;
+	}
+	
+	public List<Category> getAllCategories() {
+		Category cat = this.fact.createCategory();
+		return cat.getAllCategories();
 	}
 
 }

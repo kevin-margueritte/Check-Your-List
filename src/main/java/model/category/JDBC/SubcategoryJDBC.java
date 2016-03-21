@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import database.ConnectionDB;
 import model.category.Category;
@@ -50,5 +52,9 @@ public class SubcategoryJDBC extends Subcategory {
 			return stm.execute(sql);
 		} catch (SQLException e) {}
 		return false;
+	}
+	
+	public List<Category> readAllCategories() {
+		return new ArrayList<Category>();
 	}
 }

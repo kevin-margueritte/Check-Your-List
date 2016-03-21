@@ -1,5 +1,7 @@
 package facade;
 
+import java.util.List;
+
 import manager.CategoryManager;
 import model.category.Category;
 
@@ -33,6 +35,10 @@ public class CategoryFacade {
 	
 	public Category getSubcategory(String name) {
 		return this.cm.getCategory(name);
+	}
+	
+	public List<Category> getAllCategories() {
+		return this.cm.getAllCategories();
 	}
 	
 }

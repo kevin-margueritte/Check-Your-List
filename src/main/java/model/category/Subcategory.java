@@ -30,10 +30,10 @@ public class Subcategory {
 	public void setShortDescription(String shortDescription) {
 		this.shortDescription = shortDescription;
 	}
-	public String getDetailledDescription() {
+	public String getDetailedDescription() {
 		return detailedDescription;
 	}
-	public void setDetailledDescription(String detailedDescription) {
+	public void setDetailedDescription(String detailedDescription) {
 		this.detailedDescription = detailedDescription;
 	}
 	public Category getCategory() {
