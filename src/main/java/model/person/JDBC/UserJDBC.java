@@ -50,14 +50,31 @@ public class UserJDBC extends User {
 
 	@Override
 	public boolean save() {
-		String sql = ("INSERT INTO customer VALUES ( '" +  this.firstName + "','" + this.lastName + "','" + 
-				this.pseudo + "','" + this.password + "','" + this.description + "','" + this.city + "','" + this.postCode + "','" +
-				this.street + "','" + this.houseNumber + "','" + this.mail +"')");
-		try {
-			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
-			return stm.execute(sql);
-		} catch (SQLException e) {}
+		if (this.pseudoExist() == false) {
+			String sql = ("INSERT INTO customer VALUES ( '" +  this.firstName + "','" + this.lastName + "','" + 
+					this.pseudo + "','" + this.password + "','" + this.description + "','" + this.city + "','" + this.postCode + "','" +
+					this.street + "','" + this.houseNumber + "','" + this.mail +"')");
+			try {
+				Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+				stm.executeQuery(sql);
+				return true;
+			} catch (SQLException e) {
+				return true;
+			}
+		}
 		return false;
 	}
-
+	
+	public boolean pseudoExist() {
+		String sql1 = ("SELECT pseudo FROM customer WHERE pseudo='"+ this.pseudo + "'");
+		String sql2 = ("SELECT pseudo FROM seller WHERE pseudo='"+ this.pseudo + "'");
+		try {
+			Statement stm1 = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			Statement stm2 = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			ResultSet rs1 = stm1.executeQuery(sql1);
+			ResultSet rs2 = stm2.executeQuery(sql2);
+			return (rs1.next() || rs2.next()); 
+		} catch (SQLException e) {}
+		return true;
+	}
 }

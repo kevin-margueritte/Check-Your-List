@@ -7,29 +7,31 @@ import java.sql.Statement;
 
 import database.ConnectionDB;
 import model.category.Category;
+import model.category.Subcategory;
 
-public class CategoryJDBC extends Category {
-	public CategoryJDBC(String name, String shortDescription, String detailedDescription){
-		super(name, shortDescription, detailedDescription);	
+public class SubcategoryJDBC extends Subcategory {
+	public SubcategoryJDBC(String name, String shortDescription, String detailedDescription, Category category){
+		super(name, shortDescription, detailedDescription, category);	
 	}
 	
-	public CategoryJDBC(String name) {
+	public SubcategoryJDBC(String name) {
 		super(name);
 	}
 	
-	public Category readByName() {
-		String sql = ("SELECT * FROM category WHERE name = '" +  this.name + "'");
-		Category c = null;
+	public Subcategory readByName() {
+		String sql = ("SELECT * FROM subCategory WHERE name = '" +  this.name + "'");
+		Subcategory c = null;
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
 			ResultSet rs = stm.executeQuery(sql);
 			if ( rs.next() ) {
 				ResultSetMetaData resultMeta = rs.getMetaData();
-				if (resultMeta.getTableName(1).equals("category")) {
+				if (resultMeta.getTableName(1).equals("subCategory")) {
 					this.name = (String) rs.getObject("name");
 					this.shortDescription = (String) rs.getObject("shortDescription");
 					this.detailedDescription = (String) rs.getObject("detailedDescription");
-					c = new CategoryJDBC(name, shortDescription, detailedDescription);
+					this.category = (Category) rs.getObject("name_category");
+					c = new SubcategoryJDBC(name, shortDescription, detailedDescription, category);
 				}
 				rs.close();
 			}
@@ -37,17 +39,16 @@ public class CategoryJDBC extends Category {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return (Category)c;
+		return (Subcategory)c;
 	}
 	
 	public boolean save() {
-		String sql = ("INSERT INTO category VALUES ( '" +  this.name + "','" + this.shortDescription + "','" + 
-				this.detailedDescription +"')");
+		String sql = ("INSERT INTO subCategory VALUES ( '" +  this.name + "','" + this.shortDescription + "','" + 
+				this.detailedDescription + "','" + this.category +"')");
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
 			return stm.execute(sql);
 		} catch (SQLException e) {}
 		return false;
 	}
-	
 }
