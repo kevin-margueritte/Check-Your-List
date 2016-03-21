@@ -4,8 +4,19 @@ public class Subcategory {
 
 	protected String name;
 	protected String shortDescription;
-	protected String detailledDescription;
+	protected String detailedDescription;
 	protected Category category;
+	
+	public Subcategory(String name) {
+		this.name= name;
+	}
+	
+	public Subcategory(String name, String shortDescription, String detailedDescription, Category category) {
+		this.name= name;
+		this.shortDescription = shortDescription;
+		this.detailedDescription = detailedDescription;
+		this.category = category;
+	}
 	
 	public String getName() {
 		return name;
@@ -20,10 +31,10 @@ public class Subcategory {
 		this.shortDescription = shortDescription;
 	}
 	public String getDetailledDescription() {
-		return detailledDescription;
+		return detailedDescription;
 	}
-	public void setDetailledDescription(String detailledDescription) {
-		this.detailledDescription = detailledDescription;
+	public void setDetailledDescription(String detailedDescription) {
+		this.detailedDescription = detailedDescription;
 	}
 	public Category getCategory() {
 		return category;
@@ -31,7 +42,5 @@ public class Subcategory {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-	
-	
 	
 }
