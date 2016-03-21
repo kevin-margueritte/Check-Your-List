@@ -8,7 +8,7 @@ public class Category {
 	protected String shortDescription;
 	protected String detailedDescription;
 	
-	protected List subcategories = new ArrayList();
+	//protected List subcategories = new ArrayList();
 	
 	public Category(String name) {
 		this.name= name;

@@ -1,12 +1,11 @@
 package manager;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import factory.category.AbstractCategoryFactory;
 import factory.category.CategoryFactory;
 import model.category.Category;
+import model.category.Subcategory;
 import model.category.JDBC.CategoryJDBC;
+import model.category.JDBC.SubcategoryJDBC;
 
 public class CategoryManager {
 	
@@ -26,6 +25,19 @@ public class CategoryManager {
 		boolean res = false;
 		Category c = this.fact.createCategory(name, shortDescription, detailedDescription);
 		res = ((CategoryJDBC)c).save();
+		return res;
+	}
+	
+	public Subcategory getSubcategory(String name) {
+		Subcategory c = this.fact.createSubcategory(name);
+		((SubcategoryJDBC)c).readByName();
+		return c;
+	}
+	
+	public boolean createCategory(String name, String shortDescription, String detailedDescription, Category category) {
+		boolean res = false;
+		Subcategory c = this.fact.createSubcategory(name, shortDescription, detailedDescription, category);
+		res = ((SubcategoryJDBC)c).save();
 		return res;
 	}
 

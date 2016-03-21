@@ -1,5 +1,7 @@
 package facade;
 import manager.ProductManager;
+import model.person.Seller;
+import model.person.JDBC.SellerJDBC;
 
 
 public class SellerFacade {
