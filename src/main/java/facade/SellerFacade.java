@@ -1,5 +1,7 @@
 package facade;
 import manager.ProductManager;
+import model.person.Seller;
+import model.person.JDBC.SellerJDBC;
 
 
 public class SellerFacade {
@@ -12,8 +14,8 @@ public class SellerFacade {
 		this.manProd = new ProductManager();
 	}
 	
-	public boolean createProduct(String name, int quantity, double price, String id) {
-		return this.manProd.createProduct(name, quantity, price, id);
+	public boolean createProduct(String name, String nomSeller ,String nomSubCategory) {
+		return this.manProd.createProduct(name,  nomSeller, nomSubCategory);
 	}
 	
 }

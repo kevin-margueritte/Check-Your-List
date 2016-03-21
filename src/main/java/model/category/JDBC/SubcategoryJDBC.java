@@ -12,6 +12,7 @@ import model.category.Category;
 import model.category.Subcategory;
 
 public class SubcategoryJDBC extends Subcategory {
+	
 	public SubcategoryJDBC(String name, String shortDescription, String detailedDescription, Category category){
 		super(name, shortDescription, detailedDescription, category);	
 	}
