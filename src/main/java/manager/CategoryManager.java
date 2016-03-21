@@ -1,8 +1,5 @@
 package manager;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import factory.category.AbstractCategoryFactory;
 import factory.category.CategoryFactory;
 import model.category.Category;
