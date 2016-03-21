@@ -1,49 +1,35 @@
 package model.product;
 
+import model.category.Subcategory;
+import model.person.Seller;
+
 public abstract class Product {
 
 	/***
 	 * name of product
 	 */
 	protected String name;
-	
-	
-	/***
-	 * quantity offered by the seller
-	 */
-	protected int quantity;
-	
-	
-	/***
-	 * price of one product
-	 */
-	protected double price;
-	
-	
 	/***
 	 * id of the product
 	 */
-	protected String id;
+	protected Seller seller;
 	
-	
-	
-	//protected SubCategory subCategoryProduct;
-	
-	//protected Category categoryProduct;
-	
+	protected Subcategory subCategory;
+
 	
 	
 	/**
 	 * The constructor.
 	 */
-	public Product(String name, int quantity, double price, String id) {
+	public Product(String name, Seller seller, Subcategory subCategory) {
 		// Start of user code constructor for User)
 		this.name=name;
-		this.quantity= quantity;
-		this.price=price;
-		this.id=id;
+		this.seller=seller;
+		this.subCategory=subCategory;
+		
 		// End of user code
 	}
+
 
 	public String getName() {
 		return name;
@@ -53,30 +39,27 @@ public abstract class Product {
 		this.name = name;
 	}
 
-	public int getQuantity() {
-		return quantity;
+
+	public Seller getSeller() {
+		return seller;
 	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+
+	public void setSeller(Seller seller) {
+		this.seller = seller;
 	}
 
-	public double getPrice() {
-		return price;
+
+	public Subcategory getSubCategory() {
+		return subCategory;
 	}
 
-	public void setPrice(double price) {
-		this.price = price;
+
+	public void setSubCategory(Subcategory subCategory) {
+		this.subCategory = subCategory;
 	}
 
-	public String getId() {
-		return id;
-	}
 
-	public void setId(String id) {
-		this.id = id;
-	}
-	
 	
 	
 }

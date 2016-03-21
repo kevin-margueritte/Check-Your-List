@@ -1,4 +1,4 @@
 src/mainjava/database/ConnectionDB.java
-target/
+target/*
 .classpath
-classpath
+/bin/
