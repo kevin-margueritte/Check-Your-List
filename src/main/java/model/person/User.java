@@ -67,6 +67,9 @@ public abstract class User extends Person {
 	// Start of user code (user defined methods for User)
 	
 	// End of user code
+	public String getPseudo() {
+		return this.pseudo;
+	}
 	/**
 	 * Returns city.
 	 * @return city 

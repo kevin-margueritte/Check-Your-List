@@ -12,7 +12,9 @@ import model.activity.Activity;
 import model.category.Category;
 import model.category.Subcategory;
 import model.category.JDBC.CategoryJDBC;
+import model.category.JDBC.SubcategoryJDBC;
 import model.person.User;
+import model.person.JDBC.UserJDBC;
 
 public class ActivityJDBC extends Activity {
 	
@@ -60,9 +62,11 @@ public class ActivityJDBC extends Activity {
 					this.description = (String) rs.getObject("description");
 					this.visible = (Boolean) rs.getObject("visible");
 					this.creationDate = (Date) rs.getObject("creationdate");
-					this.subcategory = (Subcategory) rs.getObject("crea");
-					//, user
-					//c = new CategoryJDBC(name, shortDescription, detailedDescription);
+					SubcategoryJDBC subcat = (SubcategoryJDBC) new Subcategory(((Subcategory) rs.getObject("name_subcategory")).getName());
+					this.subcategory = subcat.readByName();
+					UserJDBC user = (UserJDBC) new UserJDBC(((User) rs.getObject("pseudo_user")).getPseudo());
+					this.user = user.readByPseudo();
+					c = new ActivityJDBC(title, description, visible, creationDate, subcategory, user);
 				}
 				rs.close();
 			}
