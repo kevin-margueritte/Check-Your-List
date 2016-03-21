@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SpringLayout;
@@ -20,8 +21,8 @@ public class InscriptionUserUI extends JFrame implements ActionListener {
 	private JTextField firstName;
 	private JTextField lastName;
 	private JTextField pseudo;
-	private JTextField password;
-	private JTextField repeatPassword;
+	private JPasswordField password;
+	private JPasswordField repeatPassword;
 	private JTextField email;
 	private JTextField city;
 	private JTextField postCode;
@@ -93,7 +94,7 @@ public class InscriptionUserUI extends JFrame implements ActionListener {
 		springLayout.putConstraint(SpringLayout.SOUTH, lblPseudo, -6, SpringLayout.NORTH, pseudo);
 		getContentPane().add(lblPseudo);
 		
-		password = new JTextField();
+		password = new JPasswordField();
 		springLayout.putConstraint(SpringLayout.NORTH, password, 36, SpringLayout.SOUTH, pseudo);
 		springLayout.putConstraint(SpringLayout.WEST, password, 0, SpringLayout.WEST, firstName);
 		springLayout.putConstraint(SpringLayout.SOUTH, password, 56, SpringLayout.SOUTH, pseudo);
@@ -106,7 +107,7 @@ public class InscriptionUserUI extends JFrame implements ActionListener {
 		springLayout.putConstraint(SpringLayout.SOUTH, lblPassword, -6, SpringLayout.NORTH, password);
 		getContentPane().add(lblPassword);
 		
-		repeatPassword = new JTextField();
+		repeatPassword = new JPasswordField();
 		springLayout.putConstraint(SpringLayout.NORTH, repeatPassword, 39, SpringLayout.SOUTH, password);
 		springLayout.putConstraint(SpringLayout.WEST, repeatPassword, 0, SpringLayout.WEST, firstName);
 		springLayout.putConstraint(SpringLayout.SOUTH, repeatPassword, 59, SpringLayout.SOUTH, password);
@@ -135,7 +136,6 @@ public class InscriptionUserUI extends JFrame implements ActionListener {
 		city = new JTextField();
 		springLayout.putConstraint(SpringLayout.NORTH, city, 39, SpringLayout.NORTH, getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, city, 115, SpringLayout.EAST, firstName);
-		springLayout.putConstraint(SpringLayout.EAST, city, 234, SpringLayout.EAST, firstName);
 		getContentPane().add(city);
 		city.setColumns(10);
 		
@@ -145,15 +145,16 @@ public class InscriptionUserUI extends JFrame implements ActionListener {
 		getContentPane().add(lblCity);
 		
 		postCode = new JTextField();
+		springLayout.putConstraint(SpringLayout.EAST, city, 0, SpringLayout.EAST, postCode);
 		springLayout.putConstraint(SpringLayout.WEST, postCode, 115, SpringLayout.EAST, lastName);
 		springLayout.putConstraint(SpringLayout.EAST, postCode, -9, SpringLayout.EAST, getContentPane());
 		getContentPane().add(postCode);
 		postCode.setColumns(10);
 		
 		JLabel lblPostcode = new JLabel("Postcode");
+		springLayout.putConstraint(SpringLayout.WEST, lblPostcode, 198, SpringLayout.EAST, lblLastName);
 		springLayout.putConstraint(SpringLayout.NORTH, postCode, 6, SpringLayout.SOUTH, lblPostcode);
 		springLayout.putConstraint(SpringLayout.NORTH, lblPostcode, 0, SpringLayout.NORTH, lblLastName);
-		springLayout.putConstraint(SpringLayout.WEST, lblPostcode, 0, SpringLayout.WEST, city);
 		getContentPane().add(lblPostcode);
 		
 		street = new JTextField();
@@ -203,9 +204,15 @@ public class InscriptionUserUI extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (this.formComplete()) {
-			this.pf.createUser(this.pseudo.getText(), this.lastName.getText(), this.firstName.getText(), this.description.getText(),
-					this.password.getText(), this.city.getText(), this.postCode.getText(), this.street.getText(), 
+			boolean res = this.pf.createUser(this.pseudo.getText(), this.lastName.getText(), this.firstName.getText(), this.description.getText(),
+					new String(this.password.getPassword()), this.city.getText(), this.postCode.getText(), this.street.getText(), 
 					this.houseNumber.getText(), this.email.getText());
+			if (!res) {
+				JOptionPane.showMessageDialog(this,
+						"Your pseudo already exist",
+					    "Error",
+					    JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
 
@@ -231,14 +238,14 @@ public class InscriptionUserUI extends JFrame implements ActionListener {
 				    JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
-		else if (this.password.getText().isEmpty()) {
+		else if ((new String(this.password.getPassword())).isEmpty()) {
 			JOptionPane.showMessageDialog(this,
 					"Your password is empty",
 				    "Error",
 				    JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
-		else if (!this.password.getText().equals(this.repeatPassword.getText())) {
+		else if (!(new String(this.password.getPassword())).equals(new String(this.repeatPassword.getPassword()))) {
 			JOptionPane.showMessageDialog(this,
 					"Your password is not equal",
 				    "Error",
