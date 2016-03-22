@@ -240,6 +240,11 @@ public class InscriptionSellerUI extends JFrame implements ActionListener {
 				    "Error",
 				    JOptionPane.ERROR_MESSAGE);
 			}
+			else {
+				LoginUI frame = new LoginUI();
+				frame.setVisible(true);
+				this.dispose();
+			}
 		}
 	}
 
