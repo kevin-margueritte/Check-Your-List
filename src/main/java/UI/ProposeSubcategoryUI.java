@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.*;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -129,11 +130,30 @@ public class ProposeSubcategoryUI extends JFrame implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent arg0) {
-		if (this.formComplete()) {		
-			this.cf.createSubcategory(this.categoryName.getText(), this.textShortDescription.getText(),
-					this.textDetailedDescription.getText(),(Category) this.comboBoxCategory.getSelectedItem());			
+		if (this.formComplete()) {
+			if(!cf.subcategoryExist(this.categoryName.getText())) {
+				if(!cf.categoryExist(this.categoryName.getText())) {
+					this.cf.createSubcategory(this.categoryName.getText(), this.textShortDescription.getText(),
+							this.textDetailedDescription.getText(),(Category) this.comboBoxCategory.getSelectedItem());	
+				}
+				else {
+					JOptionPane.showMessageDialog(this,
+							"This subcategory name is already the name of one category",
+						    "Error",
+						    JOptionPane.ERROR_MESSAGE);
+				}
+			}
+			else {
+				JOptionPane.showMessageDialog(this,
+						"This subcategory already exist",
+					    "Error",
+					    JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
+	
+	
+	
 	
 	public boolean formComplete() {
 		if (this.categoryName.getText().isEmpty()) {

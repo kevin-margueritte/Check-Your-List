@@ -109,8 +109,15 @@ public class ProposeCategoryUI extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		
 		if (this.formComplete()) {
-			//Category c = this.category.getCategory(categoryName.getText());			
-			this.cf.createCategory(this.categoryName.getText(), this.textShortDescription.getText(),this.textDetailedDescription.getText());			
+			if(!cf.categoryExist(this.categoryName.getText())) {
+				this.cf.createCategory(this.categoryName.getText(), this.textShortDescription.getText(),this.textDetailedDescription.getText());			
+			}
+			else {
+				JOptionPane.showMessageDialog(this,
+						"This category already exist",
+					    "Error",
+					    JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
 	

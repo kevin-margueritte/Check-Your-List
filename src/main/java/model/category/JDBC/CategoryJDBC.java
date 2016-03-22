@@ -5,7 +5,10 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+
+import javax.swing.JOptionPane;
 
 import database.ConnectionDB;
 import model.category.Category;
@@ -83,7 +86,40 @@ public class CategoryJDBC extends Category {
 		}
 		return list;
 	}
+	
+	public boolean categoryExist(String catName) {
+			List<Category> list = getAllCategories();
+			Iterator<Category> iterator = list.iterator();
+			while (iterator.hasNext()) {
+				if(iterator.next().toString().equals(catName)) {
+					return true;
+				}
+			}	
+			return false;
+	}
 
+	
+	/*
+	 * 
+	 * public boolean categoryExist(String catName) {
+		boolean exist = false;
+			List<Category> list = getAllCategories();
+			Iterator<Category> iterator = list.iterator();
+			while (iterator.hasNext()) {
+				if(iterator.next().toString().equals(this.comboBoxCategory.getSelectedItem().toString())) {
+					JOptionPane.showMessageDialog(this,
+							"This category already exist",
+						    "Error",
+						    JOptionPane.ERROR_MESSAGE);
+					exist = true;
+				}
+			}	
+	}
+	 * 
+	 * (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	
 	@Override
 	public String toString() {
 		return this.name;

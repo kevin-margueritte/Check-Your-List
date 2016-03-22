@@ -1,11 +1,16 @@
 package model.category;
 
-public class Subcategory {
+import java.util.List;
+
+public abstract class Subcategory {
 
 	protected String name;
 	protected String shortDescription;
 	protected String detailedDescription;
 	protected Category category;
+	
+	public Subcategory() {		
+	}
 	
 	public Subcategory(String name) {
 		this.name= name;
@@ -17,6 +22,9 @@ public class Subcategory {
 		this.detailedDescription = detailedDescription;
 		this.category = category;
 	}
+
+	public abstract List<Subcategory> getAllSubcategories();
+	public abstract boolean subcategoryExist(String subcatName);
 	
 	public String getName() {
 		return name;

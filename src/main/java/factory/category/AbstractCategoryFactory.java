@@ -14,5 +14,7 @@ public abstract class AbstractCategoryFactory {
 	public abstract Subcategory createSubcategory(String pseudo);
 	
 	public abstract Category createCategory();
+
+	public abstract Subcategory createSubcategory();
 	
 }

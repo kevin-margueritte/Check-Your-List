@@ -5,6 +5,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import database.ConnectionDB;
@@ -12,6 +13,10 @@ import model.category.Category;
 import model.category.Subcategory;
 
 public class SubcategoryJDBC extends Subcategory {
+	
+	public SubcategoryJDBC() {
+		super();
+	}
 	
 	public SubcategoryJDBC(String name, String shortDescription, String detailedDescription, Category category){
 		super(name, shortDescription, detailedDescription, category);	
@@ -55,7 +60,40 @@ public class SubcategoryJDBC extends Subcategory {
 		return false;
 	}
 	
-	public List<Category> readAllCategories() {
-		return new ArrayList<Category>();
+	@Override
+	public List<Subcategory> getAllSubcategories() {
+		String sql = ("SELECT * FROM subCategory");
+		List<Subcategory> list = new ArrayList<Subcategory>();
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while ( rs.next() ) {
+				Subcategory subcat = new SubcategoryJDBC();
+				ResultSetMetaData resultMeta = rs.getMetaData();
+				if (resultMeta.getTableName(1).equals("subCategory")) {
+					subcat.setName((String) rs.getObject("name"));
+					subcat.setDetailedDescription((String) rs.getObject("detailledDescription"));
+					subcat.setShortDescription((String) rs.getObject("shortDescription"));
+					list.add(subcat);
+				}
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	@Override
+	public boolean subcategoryExist(String subcatName) {
+			List<Subcategory> list = getAllSubcategories();
+			Iterator<Subcategory> iterator = list.iterator();
+			while (iterator.hasNext()) {
+				if(iterator.next().toString().equals(subcatName)) {
+					return true;
+				}
+			}	
+			return false;
 	}
 }

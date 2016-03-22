@@ -25,6 +25,7 @@ public abstract class Category {
 	}
 	
 	public abstract List<Category> getAllCategories();
+	public abstract boolean categoryExist(String catName);
 	
 	public String getName() {
 		return this.name;

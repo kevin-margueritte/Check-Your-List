@@ -47,5 +47,20 @@ public class CategoryManager {
 		Category cat = this.fact.createCategory();
 		return cat.getAllCategories();
 	}
+	
+	public boolean categoryExist(String catName) {
+		Category cat = this.fact.createCategory();
+		return cat.categoryExist(catName);
+	}
+	
+	public List<Subcategory> getAllSubcategories() {
+		Subcategory subcat = this.fact.createSubcategory();
+		return subcat.getAllSubcategories();
+	}
+	
+	public boolean subcategoryExist(String subcatName) {
+		Subcategory subcat = this.fact.createSubcategory();
+		return subcat.subcategoryExist(subcatName);
+	}
 
 }

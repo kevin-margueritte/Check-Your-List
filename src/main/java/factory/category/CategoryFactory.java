@@ -31,5 +31,10 @@ public class CategoryFactory extends AbstractCategoryFactory {
 	public Category createCategory() {
 		return new CategoryJDBC();
 	}
+	
+	@Override
+	public Subcategory createSubcategory() {
+		return new SubcategoryJDBC();
+	}
 
 }

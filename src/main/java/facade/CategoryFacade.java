@@ -4,6 +4,7 @@ import java.util.List;
 
 import manager.CategoryManager;
 import model.category.Category;
+import model.category.Subcategory;
 
 
 public class CategoryFacade {
@@ -41,4 +42,15 @@ public class CategoryFacade {
 		return this.cm.getAllCategories();
 	}
 	
+	public boolean categoryExist(String catName) {
+		return this.cm.categoryExist(catName);
+	}
+	
+	public List<Subcategory> getAllSubcategories() {
+		return this.cm.getAllSubcategories();
+	}
+	
+	public boolean subcategoryExist(String subcatName) {
+		return this.cm.subcategoryExist(subcatName);
+	}
 }
