@@ -13,7 +13,7 @@ public abstract class Activity {
 	protected String title;
 	protected String description;
 	protected boolean visible;
-	protected Date creationDate;
+	protected String creationDate;
 	protected List<Task> listTask;
 	protected Subcategory subcategory;
 	protected User user;
@@ -22,7 +22,7 @@ public abstract class Activity {
 		super();
 	}
 
-	public Activity(String title, String description, boolean visible, Date creationDate, Subcategory subcategory,
+	public Activity(String title, String description, boolean visible, String creationDate, Subcategory subcategory,
 			User user) {
 		super();
 		this.title = title;
@@ -33,7 +33,7 @@ public abstract class Activity {
 		this.user = user;
 	}
 	
-	public Activity(int id, String title, String description, boolean visible, Date creationDate,
+	public Activity(int id, String title, String description, boolean visible, String creationDate,
 			Subcategory subcategory, User user) {
 		super();
 		this.id = id;
@@ -69,10 +69,10 @@ public abstract class Activity {
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
-	public Date getCreationDate() {
+	public String getCreationDate() {
 		return creationDate;
 	}
-	public void setCreationDate(Date creationDate) {
+	public void setCreationDate(String creationDate) {
 		this.creationDate = creationDate;
 	}
 	public Subcategory getSubcategory() {

@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -22,12 +24,12 @@ public class ActivityJDBC extends Activity {
 		super();
 	}
 	
-	public ActivityJDBC(String title, String description, boolean visible, Date creationDate, 
+	public ActivityJDBC(String title, String description, boolean visible, String creationDate, 
 			Subcategory subcategory, User user) {
 		super(title, description, visible, creationDate, subcategory, user);
 	}
 	
-	public ActivityJDBC(int id, String title, String description, boolean visible, Date creationDate,
+	public ActivityJDBC(int id, String title, String description, boolean visible, String creationDate,
 			Subcategory subcategory, User user) {
 		super(id, title, description, visible, creationDate, subcategory, user);
 	}
@@ -61,7 +63,7 @@ public class ActivityJDBC extends Activity {
 					this.title = (String) rs.getObject("titre");
 					this.description = (String) rs.getObject("description");
 					this.visible = (Boolean) rs.getObject("visible");
-					this.creationDate = (Date) rs.getObject("creationdate");
+					this.creationDate = (String) rs.getObject("creationdate");
 					SubcategoryJDBC subcat = (SubcategoryJDBC) new Subcategory(((Subcategory) rs.getObject("name_subcategory")).getName());
 					this.subcategory = subcat.readByName();
 					UserJDBC user = (UserJDBC) new UserJDBC(((User) rs.getObject("pseudo_user")).getPseudo());
@@ -120,6 +122,15 @@ public class ActivityJDBC extends Activity {
 	public static void main(String args[]){
 		ActivityJDBC act= new ActivityJDBC(4, "act2");
 		act.delete();
+		Category cat =(Category) new CategoryJDBC("cat1", "bla", "blabla");
+		Subcategory sucat = new Subcategory("sscat1", "bla", "blabla", cat);
+		User user=(User) new UserJDBC("titi", "lastName", "firstName", "description", "password", "city", "postCode", "street", "houseNumber", "mail");
+		Date date = new Date();
+		SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+		
+		ActivityJDBC act1= new ActivityJDBC(1,"gio", "bla", true, ft.format(date) ,sucat, user);
+		act1.save();
+		System.out.println(ft.format(date)+" "+act1.title+" "+act1.description+" "+act1.visible+" "+act1.creationDate+" "+act1.subcategory.getName()+" "+act1.user.getPseudo());
 	}
 
 }

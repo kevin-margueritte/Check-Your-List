@@ -16,14 +16,14 @@ public class ActivityFactory extends AbstractActivityFactory{
 	}
 
 	@Override
-	public Activity createActivity(String title, String description, boolean visible, Date creationDate,
+	public Activity createActivity(String title, String description, boolean visible, String creationDate,
 			Subcategory subcategory, User user) {
 		// TODO Auto-generated method stub
 		return new ActivityJDBC(title, description, visible, creationDate, subcategory, user);
 	}
 
 	@Override
-	public Activity createActivity(int id, String title, String description, boolean visible, Date creationDate,
+	public Activity createActivity(int id, String title, String description, boolean visible, String creationDate,
 			Subcategory subcategory, User user) {
 		// TODO Auto-generated method stub
 		return new ActivityJDBC(id, title, description, visible, creationDate, subcategory, user);
