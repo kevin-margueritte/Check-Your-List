@@ -8,4 +8,5 @@ public abstract class AbstractProductFactory {
 
 	public abstract Product createProduct(String name, Seller seller,Subcategory subCategory);
 	
+	
 }

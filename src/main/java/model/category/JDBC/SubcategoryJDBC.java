@@ -27,18 +27,19 @@ public class SubcategoryJDBC extends Subcategory {
 	}
 	
 	public Subcategory readByName() {
-		String sql = ("SELECT * FROM subCategory WHERE name = '" +  this.name + "'");
+		String sql = ("SELECT * FROM subcategory WHERE name = '" +  this.name + "'");
 		Subcategory c = null;
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
 			ResultSet rs = stm.executeQuery(sql);
 			if ( rs.next() ) {
 				ResultSetMetaData resultMeta = rs.getMetaData();
-				if (resultMeta.getTableName(1).equals("subCategory")) {
+				if (resultMeta.getTableName(1).equals("subcategory")) {
 					this.name = (String) rs.getObject("name");
 					this.shortDescription = (String) rs.getObject("shortDescription");
-					this.detailedDescription = (String) rs.getObject("detailedDescription");
-					this.category = (Category) rs.getObject("name_category");
+					this.detailedDescription = (String) rs.getObject("detailledDescription");
+					String cat = (String) rs.getObject("name_category");
+					this.category = new CategoryJDBC("cat");
 					c = new SubcategoryJDBC(name, shortDescription, detailedDescription, category);
 				}
 				rs.close();
