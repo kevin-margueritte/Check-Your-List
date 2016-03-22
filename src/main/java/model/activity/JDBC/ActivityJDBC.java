@@ -68,7 +68,7 @@ public class ActivityJDBC extends Activity {
 					this.subcategory = subcat.readByName();
 					UserJDBC user = (UserJDBC) new UserJDBC(((User) rs.getObject("pseudo_user")).getPseudo());
 					this.user = user.readByPseudo();
-					c = new ActivityJDBC(title, description, visible, creationDate, subcategory, user);
+					c = new ActivityJDBC(title, description, visible, creationDate, subcategory, user); 
 				}
 				rs.close();
 			}
