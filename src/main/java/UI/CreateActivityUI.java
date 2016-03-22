@@ -1,5 +1,8 @@
 package UI;
 
+import java.awt.EventQueue;
+import java.util.List;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -7,14 +10,42 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import facade.CategoryFacade;
+import model.category.Category;
+
 @SuppressWarnings("serial")
 public class CreateActivityUI extends JFrame {
 	
 	private JTextField textActivity;
 	private JTextField textDescription;
+	private CategoryFacade cf;
+	private JComboBox comboSubcategory;
+	private JComboBox comboCategory;
+	
+	public static void main(String args[]) {
+		CreateActivityUI.launch();
+	}
+	
+	/**
+	 * Launch the application.
+	 */
+	public static void launch() {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					CreateActivityUI frame = new CreateActivityUI();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 	
 	
 	public CreateActivityUI() {
+		this.cf = new CategoryFacade();
+		setResizable(false);
 		getContentPane().setLayout(null);
 		
 		textActivity = new JTextField();
@@ -36,15 +67,16 @@ public class CreateActivityUI extends JFrame {
 		comboVisibility.setBounds(10, 121, 140, 20);
 		getContentPane().add(comboVisibility);
 		
-		JComboBox comboCategory = new JComboBox();
+		this.comboCategory = new JComboBox();
 		comboCategory.setBounds(236, 52, 140, 20);
 		getContentPane().add(comboCategory);
+		this.initComboBoxCategory();
 		
 		JLabel lblCategory = new JLabel("Category");
 		lblCategory.setBounds(236, 27, 46, 14);
 		getContentPane().add(lblCategory);
 		
-		JComboBox comboSubcategory = new JComboBox();
+		this.comboSubcategory = new JComboBox();
 		comboSubcategory.setBounds(236, 121, 140, 20);
 		getContentPane().add(comboSubcategory);
 		
@@ -64,8 +96,13 @@ public class CreateActivityUI extends JFrame {
 		JButton btnValidate = new JButton("Validate");
 		btnValidate.setBounds(148, 267, 89, 23);
 		getContentPane().add(btnValidate);
+		
+		this.setSize(395, 325);
 	}
 	
-	
-	
+	public void initComboBoxCategory() {
+		List<Category> list = cf.getAllCategories();
+		this.comboCategory.setModel(new DefaultComboBoxModel(list.toArray()));
+	}
+
 }
