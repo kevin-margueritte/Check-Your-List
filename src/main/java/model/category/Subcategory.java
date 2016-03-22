@@ -11,7 +11,10 @@ public abstract class Subcategory {
 	protected String detailedDescription;
 	protected Category category;
 	
-	public Subcategory() {		
+	public Subcategory() {}
+	
+	public Subcategory(Category c) {
+		this.category = c;
 	}
 	
 	public Subcategory(String name) {

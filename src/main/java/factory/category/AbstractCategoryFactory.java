@@ -17,4 +17,6 @@ public abstract class AbstractCategoryFactory {
 
 	public abstract Subcategory createSubcategory();
 	
+	public abstract Subcategory createSubcategory(Category c);
+	
 }

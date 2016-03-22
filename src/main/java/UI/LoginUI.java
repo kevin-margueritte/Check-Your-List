@@ -29,6 +29,7 @@ public class LoginUI extends JFrame implements ActionListener{
 	private JLabel labelPassword;
 	private JButton btnSignInSeller;
 	private JButton btnSignInUser;
+	private JButton btnConnect;
 	
 	public static void main(String args[]) {
 		LoginUI.launch();
@@ -57,16 +58,16 @@ public class LoginUI extends JFrame implements ActionListener{
 		getContentPane().setLayout(null);
 		
 		textPassword = new JPasswordField();
-		textPassword.setBounds(73, 85, 127, 20);
+		textPassword.setBounds(73, 152, 127, 20);
 		textPassword.setColumns(10);
 		getContentPane().add(textPassword);
 		
-		JButton buttonConnect = new JButton("Connect");
-		buttonConnect.setBounds(73, 183, 127, 23);
-		buttonConnect.addActionListener(this);
-		buttonConnect.setBackground(SystemColor.activeCaption);
-		buttonConnect.setFont(new Font("Times New Roman", Font.PLAIN, 12));
-		getContentPane().add(buttonConnect);
+		this.btnConnect = new JButton("Connect");
+		this.btnConnect.setBounds(73, 183, 127, 23);
+		this.btnConnect.addActionListener(this);
+		this.btnConnect.setBackground(SystemColor.activeCaption);
+		this.btnConnect.setFont(new Font("Times New Roman", Font.PLAIN, 12));
+		getContentPane().add(this.btnConnect);
 		
 		labelTitle = new JLabel("Check Your List");
 		labelTitle.setBounds(73, 11, 127, 26);
@@ -81,7 +82,7 @@ public class LoginUI extends JFrame implements ActionListener{
 		getContentPane().add(labelLogin);
 		
 		textLogin = new JTextField();
-		textLogin.setBounds(73, 149, 127, 20);
+		textLogin.setBounds(73, 86, 127, 20);
 		getContentPane().add(textLogin);
 		textLogin.setColumns(10);
 		
@@ -107,7 +108,7 @@ public class LoginUI extends JFrame implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == this.labelLogin) {
+		if (e.getSource() == this.btnConnect) {
 			if (!this.checkLoginIsEmpty()) {
 				if (!this.checkPasswordIsEmpty()) {
 					if (this.login.connect(textLogin.getText(),new String(textPassword.getPassword())) ) {

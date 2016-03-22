@@ -16,11 +16,10 @@ private AbstractActivityFactory fact;
 		this.fact = new ActivityFactory();
 	}
 	
-	public boolean createActivity(String title, String description, boolean visible, Date creationDate,
+	public boolean createActivity(String title, String description, boolean visible, String creationDate,
 			Subcategory subcategory, User user) {
 		Activity act = this.fact.createActivity(title, description, visible, creationDate, subcategory, user);
 		return act.save();
 	}
-	
 
 }

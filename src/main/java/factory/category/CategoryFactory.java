@@ -37,4 +37,9 @@ public class CategoryFactory extends AbstractCategoryFactory {
 		return new SubcategoryJDBC();
 	}
 
+	@Override
+	public Subcategory createSubcategory(Category c) {
+		return new SubcategoryJDBC(c);
+	}
+
 }

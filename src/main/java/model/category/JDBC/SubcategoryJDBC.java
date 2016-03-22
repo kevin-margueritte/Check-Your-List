@@ -26,6 +26,10 @@ public class SubcategoryJDBC extends Subcategory {
 		super(name);
 	}
 	
+	public SubcategoryJDBC(Category c) {
+		super(c);
+	}
+	
 	public Subcategory readByName() {
 		String sql = ("SELECT * FROM subcategory WHERE name = '" +  this.name + "'");
 		Subcategory c = null;
@@ -56,27 +60,27 @@ public class SubcategoryJDBC extends Subcategory {
 				this.detailedDescription + "','" + this.category +"')");
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
-			return stm.execute(sql);
-		} catch (SQLException e) {}
-		return false;
+			return true;
+		} catch (SQLException e) {
+			return false;
+		}
 	}
 	
 	@Override
 	public List<Subcategory> getAllSubcategories() {
-		String sql = ("SELECT * FROM subCategory");
+		String sql = ("SELECT * FROM subCategory WHERE name_category = '" + this.getCategory().getName() + "'");
+		System.out.println(sql);
 		List<Subcategory> list = new ArrayList<Subcategory>();
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
 			ResultSet rs = stm.executeQuery(sql);
 			while ( rs.next() ) {
 				Subcategory subcat = new SubcategoryJDBC();
-				ResultSetMetaData resultMeta = rs.getMetaData();
-				if (resultMeta.getTableName(1).equals("subCategory")) {
-					subcat.setName((String) rs.getObject("name"));
-					subcat.setDetailedDescription((String) rs.getObject("detailledDescription"));
-					subcat.setShortDescription((String) rs.getObject("shortDescription"));
-					list.add(subcat);
-				}
+				subcat.setName((String) rs.getObject("name"));
+				subcat.setDetailedDescription((String) rs.getObject("detailledDescription"));
+				subcat.setShortDescription((String) rs.getObject("shortDescription"));
+				subcat.setCategory(this.category);
+				list.add(subcat);
 			}
 			rs.close();
 		} catch (SQLException e) {
@@ -97,4 +101,11 @@ public class SubcategoryJDBC extends Subcategory {
 			}	
 			return false;
 	}
+
+	@Override
+	public String toString() {
+		return this.name;
+	}
+	
+	
 }
