@@ -1,12 +1,14 @@
 package model.person.JDBC;
 
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import database.ConnectionDB;
 import model.person.Person;
 import model.person.Seller;
+import model.person.User;
 
 public class SellerJDBC extends Seller {
 	
@@ -22,9 +24,35 @@ public class SellerJDBC extends Seller {
 	}
 
 	@Override
-	public Person readByPseudo() {
-		// TODO Auto-generated method stub
-		return null;
+	public Seller readByPseudo() {
+		String sql = ("SELECT * FROM seller WHERE pseudo = '" +  this.pseudo + "'");
+		Seller u = null;
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			if ( rs.next() ) {
+				ResultSetMetaData resultMeta = rs.getMetaData();
+				if (resultMeta.getTableName(1).equals("seller")) {
+					this.siret = (String) rs.getObject("siret");
+					this.phoneNumber = (String) rs.getObject("phoneNumber");
+					this.lastName = (String) rs.getObject("lastName");
+					this.firstName = (String) rs.getObject("firstName");
+					this.description = (String) rs.getObject("description");
+					this.password = (String) rs.getObject("pass");
+					this.city = (String) rs.getObject("city");
+					this.postCode = (String) rs.getObject("postCode");
+					this.street = (String) rs.getObject("street");
+					this.houseNumber = (String) rs.getObject("houseNumber");
+					this.mail = (String) rs.getObject("email");
+					u = new SellerJDBC(pseudo, lastName, firstName, description, password, siret, phoneNumber,houseNumber, street, postCode, mail, city);
+				}
+				rs.close();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return (Seller)u;
 	}
 
 	@Override
