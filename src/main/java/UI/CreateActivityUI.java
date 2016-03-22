@@ -1,6 +1,8 @@
 package UI;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -8,19 +10,23 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import facade.ActivityFacade;
 import facade.CategoryFacade;
 import model.category.Category;
+import model.category.Subcategory;
 
 @SuppressWarnings("serial")
-public class CreateActivityUI extends JFrame {
+public class CreateActivityUI extends JFrame implements ActionListener {
 	
 	private JTextField textActivity;
 	private JTextField textDescription;
-	private CategoryFacade cf;
+	private ActivityFacade af;
 	private JComboBox comboSubcategory;
 	private JComboBox comboCategory;
+	private JButton btnValidate;
 	
 	public static void main(String args[]) {
 		CreateActivityUI.launch();
@@ -44,7 +50,7 @@ public class CreateActivityUI extends JFrame {
 	
 	
 	public CreateActivityUI() {
-		this.cf = new CategoryFacade();
+		this.af = new ActivityFacade();
 		setResizable(false);
 		getContentPane().setLayout(null);
 		
@@ -69,6 +75,7 @@ public class CreateActivityUI extends JFrame {
 		
 		this.comboCategory = new JComboBox();
 		comboCategory.setBounds(236, 52, 140, 20);
+		this.comboCategory.addActionListener(this);
 		getContentPane().add(comboCategory);
 		this.initComboBoxCategory();
 		
@@ -78,6 +85,7 @@ public class CreateActivityUI extends JFrame {
 		
 		this.comboSubcategory = new JComboBox();
 		comboSubcategory.setBounds(236, 121, 140, 20);
+		this.initComboBoxSubCategory();
 		getContentPane().add(comboSubcategory);
 		
 		JLabel lblSubcategory = new JLabel("Subcategory");
@@ -93,16 +101,57 @@ public class CreateActivityUI extends JFrame {
 		getContentPane().add(textDescription);
 		textDescription.setColumns(10);
 		
-		JButton btnValidate = new JButton("Validate");
+		btnValidate = new JButton("Validate");
 		btnValidate.setBounds(148, 267, 89, 23);
+		btnValidate.addActionListener(this);
 		getContentPane().add(btnValidate);
 		
 		this.setSize(395, 325);
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void initComboBoxCategory() {
-		List<Category> list = cf.getAllCategories();
+		List<Category> list = af.getAllCategories();
 		this.comboCategory.setModel(new DefaultComboBoxModel(list.toArray()));
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void initComboBoxSubCategory() {
+		Category c = (Category) this.comboCategory.getSelectedItem();
+		List<Subcategory> list = af.getAllSubcategories(c);
+		this.comboSubcategory.setModel(new DefaultComboBoxModel(list.toArray()));
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == this.comboCategory) {
+			if (this.formComplete()) {
+				this.initComboBoxSubCategory();
+			}
+		}
+		else if(e.getSource() == this.btnValidate && this.formComplete()) {
+			
+		}
+	}
+	
+	private boolean formComplete() {
+		if (this.textActivity.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this,
+					"Activity name is empty",
+				    "Error",
+				    JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		else if (this.textDescription.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this,
+					"Description is empty",
+				    "Error",
+				    JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 
 }

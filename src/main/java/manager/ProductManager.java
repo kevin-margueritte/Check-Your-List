@@ -23,7 +23,7 @@ public class ProductManager {
 		Seller seller = factPers.createSeller(pseudo);
 		seller.readByPseudo();
 		//recupere la sub category
-		Subcategory subCategory = factCat.createSubCategory(nomSubCategory);
+		Subcategory subCategory = factCat.createSubcategory(nomSubCategory);
 		subCategory.readByName();
 		// Creation du produit 
 		Product prod = this.factProd.createProduct(name, seller,subCategory);

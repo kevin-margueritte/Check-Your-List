@@ -64,7 +64,7 @@ public class ActivityJDBC extends Activity {
 					this.description = (String) rs.getObject("description");
 					this.visible = (Boolean) rs.getObject("visible");
 					this.creationDate = (String) rs.getObject("creationdate");
-					SubcategoryJDBC subcat = (SubcategoryJDBC) new Subcategory(((Subcategory) rs.getObject("name_subcategory")).getName());
+					SubcategoryJDBC subcat = (SubcategoryJDBC) new SubcategoryJDBC(((Subcategory) rs.getObject("name_subcategory")).getName());
 					this.subcategory = subcat.readByName();
 					UserJDBC user = (UserJDBC) new UserJDBC(((User) rs.getObject("pseudo_user")).getPseudo());
 					this.user = user.readByPseudo();
@@ -123,7 +123,7 @@ public class ActivityJDBC extends Activity {
 		ActivityJDBC act= new ActivityJDBC(4, "act2");
 		act.delete();
 		Category cat =(Category) new CategoryJDBC("cat1", "bla", "blabla");
-		Subcategory sucat = new Subcategory("sscat1", "bla", "blabla", cat);
+		Subcategory sucat = new SubcategoryJDBC("sscat1", "bla", "blabla", cat);
 		User user=(User) new UserJDBC("titi", "lastName", "firstName", "description", "password", "city", "postCode", "street", "houseNumber", "mail");
 		Date date = new Date();
 		SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
