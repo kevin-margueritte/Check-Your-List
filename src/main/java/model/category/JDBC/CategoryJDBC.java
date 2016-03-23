@@ -8,12 +8,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import database.ConnectionDB;
 import model.category.Category;
-import model.person.User;
-import model.person.JDBC.UserJDBC;
 
 public class CategoryJDBC extends Category {
 	

@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import facade.LoginFacade;
+import model.person.Person;
 import model.person.User;
 
 @SuppressWarnings("serial")
@@ -112,9 +113,12 @@ public class LoginUI extends JFrame implements ActionListener{
 			if (!this.checkLoginIsEmpty()) {
 				if (!this.checkPasswordIsEmpty()) {
 					if (this.login.connect(textLogin.getText(),new String(textPassword.getPassword())) ) {
-						User u = (User) this.login.getPerson(textLogin.getText());
-						JOptionPane.showMessageDialog(this,
-							    "Welcome, " + u.getFirstName()+" "+u.getLastName()+" !");
+						Person p = (Person) this.login.getPerson(textLogin.getText());
+						if (p instanceof Person) {
+							MenuUserUI frame = new MenuUserUI((User) p);
+							frame.setVisible(true);
+							this.dispose();
+						}
 					}
 					else {
 						JOptionPane.showMessageDialog(this,
