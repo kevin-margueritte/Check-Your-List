@@ -93,7 +93,7 @@ public abstract class Activity {
 	}
 	
 	public abstract boolean save();
-	public abstract Activity readByID();
+	public abstract Activity readByTitle();
 	public abstract List<Activity> readAll();
 	public abstract List<Activity> readAllByUser();
 	public abstract boolean delete();

@@ -51,8 +51,8 @@ public class ActivityJDBC extends Activity {
 	}
 
 	@Override
-	public Activity readByID() {
-		String sql = ("SELECT * FROM activity WHERE id = '" +  this.id + "'");
+	public Activity readByTitle() {
+		String sql = ("SELECT * FROM activity WHERE titre = '" +  this.title + "'");
 		Activity c = null;
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
@@ -90,8 +90,8 @@ public class ActivityJDBC extends Activity {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
 			ResultSet rs = stm.executeQuery(sql);
 			while(rs.next()){
-				act = new ActivityJDBC((Integer.parseInt(rs.getString(1)))," ");
-				listAct.add(act.readByID());
+				act = new ActivityJDBC(1,rs.getString(2));
+				listAct.add(act.readByTitle());
 			}
 			rs.close();
 			return listAct;
@@ -112,8 +112,8 @@ public class ActivityJDBC extends Activity {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
 			ResultSet rs = stm.executeQuery(sql);
 			while(rs.next()){
-				act = new ActivityJDBC((Integer.parseInt(rs.getString(1)))," ");
-				listAct.add(act.readByID());
+				act = new ActivityJDBC(1,rs.getString(2));
+				listAct.add(act.readByTitle());
 			}
 			rs.close();
 			return listAct;
@@ -144,8 +144,7 @@ public class ActivityJDBC extends Activity {
 	
 	@Override
 	public boolean deleteByPseudoUserAndName() {
-		String sql = ("delete from activity where pseudo_user= '"+ this.getUser().getPseudo() +"' AND"
-				+ "title = '" + this.getTitle() + "'");
+		String sql = ("delete from activity where pseudo_user= '"+ this.getUser().getPseudo() +"' AND titre = '" + this.getTitle() + "'");
 		Activity c = null;
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();

@@ -18,6 +18,10 @@ public class SubcategoryJDBC extends Subcategory {
 		super();
 	}
 	
+	public SubcategoryJDBC(Category sub) {
+		super(sub);
+	}
+	
 	public SubcategoryJDBC(String name, String shortDescription, String detailedDescription, Category category){
 		super(name, shortDescription, detailedDescription, category);	
 	}
@@ -104,7 +108,26 @@ public class SubcategoryJDBC extends Subcategory {
 
 	@Override
 	public List<Subcategory> getAllSubcategoriesByCategoryName() {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = ("SELECT * FROM subcategory WHERE name_category = '" + this.getCategory().getName() + "'");
+		List<Subcategory> list = new ArrayList<Subcategory>();
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while ( rs.next() ) {
+				Subcategory subcat = new SubcategoryJDBC();
+				ResultSetMetaData resultMeta = rs.getMetaData();
+				if (resultMeta.getTableName(1).equals("subcategory")) {
+					subcat.setName((String) rs.getObject("name"));
+					subcat.setDetailedDescription((String) rs.getObject("detailleddescription"));
+					subcat.setShortDescription((String) rs.getObject("shortdescription"));
+					list.add(subcat);
+				}
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
 	}
 }
