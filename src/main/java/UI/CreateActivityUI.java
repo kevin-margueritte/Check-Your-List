@@ -1,6 +1,8 @@
 package UI;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -8,19 +10,26 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import facade.CategoryFacade;
+import facade.ActivityFacade;
 import model.category.Category;
+import model.category.Subcategory;
+import model.person.User;
+import model.person.JDBC.UserJDBC;
 
 @SuppressWarnings("serial")
-public class CreateActivityUI extends JFrame {
+public class CreateActivityUI extends JFrame implements ActionListener {
 	
 	private JTextField textActivity;
 	private JTextField textDescription;
-	private CategoryFacade cf;
+	private ActivityFacade af;
 	private JComboBox comboSubcategory;
 	private JComboBox comboCategory;
+	private JButton btnValidate;
+	private JComboBox comboVisibility;
+	private User u;
 	
 	public static void main(String args[]) {
 		CreateActivityUI.launch();
@@ -44,7 +53,13 @@ public class CreateActivityUI extends JFrame {
 	
 	
 	public CreateActivityUI() {
-		this.cf = new CategoryFacade();
+		/**
+		 * Set User
+		 */
+		this.u = new UserJDBC("titi");
+		this.u.readByPseudo();
+		
+		this.af = new ActivityFacade();
 		setResizable(false);
 		getContentPane().setLayout(null);
 		
@@ -61,7 +76,7 @@ public class CreateActivityUI extends JFrame {
 		lblNewLabel.setBounds(10, 96, 46, 14);
 		getContentPane().add(lblNewLabel);
 		
-		JComboBox comboVisibility = new JComboBox();
+		comboVisibility = new JComboBox();
 		comboVisibility.setModel(new DefaultComboBoxModel(new String[] {"True", "False"}));
 		comboVisibility.setMaximumRowCount(2);
 		comboVisibility.setBounds(10, 121, 140, 20);
@@ -69,6 +84,7 @@ public class CreateActivityUI extends JFrame {
 		
 		this.comboCategory = new JComboBox();
 		comboCategory.setBounds(236, 52, 140, 20);
+		this.comboCategory.addActionListener(this);
 		getContentPane().add(comboCategory);
 		this.initComboBoxCategory();
 		
@@ -78,6 +94,7 @@ public class CreateActivityUI extends JFrame {
 		
 		this.comboSubcategory = new JComboBox();
 		comboSubcategory.setBounds(236, 121, 140, 20);
+		this.initComboBoxSubCategory();
 		getContentPane().add(comboSubcategory);
 		
 		JLabel lblSubcategory = new JLabel("Subcategory");
@@ -93,16 +110,62 @@ public class CreateActivityUI extends JFrame {
 		getContentPane().add(textDescription);
 		textDescription.setColumns(10);
 		
-		JButton btnValidate = new JButton("Validate");
+		btnValidate = new JButton("Validate");
 		btnValidate.setBounds(148, 267, 89, 23);
+		btnValidate.addActionListener(this);
 		getContentPane().add(btnValidate);
 		
 		this.setSize(395, 325);
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void initComboBoxCategory() {
-		List<Category> list = cf.getAllCategories();
+		List<Category> list = af.getAllCategories();
 		this.comboCategory.setModel(new DefaultComboBoxModel(list.toArray()));
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void initComboBoxSubCategory() {
+		Category c = (Category) this.comboCategory.getSelectedItem();
+		List<Subcategory> list = af.getAllSubcategories(c);
+		this.comboSubcategory.setModel(new DefaultComboBoxModel(list.toArray()));
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == this.comboCategory) {
+			if (this.formComplete()) {
+				this.initComboBoxSubCategory();
+			}
+		}
+		else if(e.getSource() == this.btnValidate && this.formComplete()) {
+			boolean visibility = false;
+			if ( ((String) this.comboVisibility.getSelectedItem()).equals("true") ) {
+				visibility = true;
+			}
+			this.af.createActivity(this.textActivity.getText(), this.textDescription.getText(), visibility, 
+				(Subcategory) this.comboSubcategory.getSelectedItem(), this.u);
+		}
+	}
+	
+	private boolean formComplete() {
+		if (this.textActivity.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this,
+					"Activity name is empty",
+				    "Error",
+				    JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		else if (this.textDescription.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this,
+					"Description is empty",
+				    "Error",
+				    JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 
 }

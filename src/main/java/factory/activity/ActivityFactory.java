@@ -1,7 +1,5 @@
 package factory.activity;
 
-import java.util.Date;
-
 import model.activity.Activity;
 import model.activity.JDBC.ActivityJDBC;
 import model.category.Subcategory;

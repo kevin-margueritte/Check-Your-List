@@ -36,14 +36,15 @@ public class ProductJDBC extends Product{
 	  [...]
 	 */
 	public boolean save(){
-		String sql = ("INSERT INTO product VALUES ("
-				+ "'" +  this.name + ","
-				+ this.seller.getPseudo() + "," 
+		String sql = ("INSERT INTO  product (name,pseudo,name_subcategory)VALUES ("
+				+ "'" +  this.name + "','"
+				+ this.seller.getPseudo() + "','" 
 				+ this.subCategory.getName() + "')");
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
 			return stm.execute(sql);
-		} catch (SQLException e) {e.printStackTrace();}
+		} catch (SQLException e) 
+			{e.printStackTrace();}
 		return false;
 	}
 	
@@ -78,8 +79,7 @@ public class ProductJDBC extends Product{
 					this.idProd = (int) rs.getObject("id");	
 					this.name = (String) rs.getObject("name");	
 					String pseudo = (String) rs.getObject("pseudo");
-					sellerJDBC = new SellerJDBC(pseudo);
-					
+					sellerJDBC = new SellerJDBC(pseudo);			
 					this.seller = sellerJDBC.readByPseudo();
 					String nomCategory  = (String) rs.getObject("name_subcategory");
 					subCategoryJDBC = new SubcategoryJDBC(nomCategory);
@@ -102,10 +102,10 @@ public class ProductJDBC extends Product{
 	
 	
 	
-	public static void main(String args[]) {
+	/*public static void main(String args[]) {
 		//ProductJDBC prod = new ProductJDBC("whisky","jack","boisson");
 		//prod.save();
-	}
+	}*/
 
 	
 }

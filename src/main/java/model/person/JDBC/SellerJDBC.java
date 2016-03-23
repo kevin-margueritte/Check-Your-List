@@ -84,4 +84,20 @@ public class SellerJDBC extends Seller {
 		} catch (SQLException e) {}
 		return true;
 	}
+	
+	public boolean SellerExist() {
+			String sql1 = ("SELECT pseudo FROM seller WHERE pseudo='"+ this.pseudo + "'");
+		try {
+			Statement stm1 = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			ResultSet rs1 = stm1.executeQuery(sql1);
+
+			return (rs1.next()); 
+		} catch (SQLException e) {}
+		return true;
+	}
+	
+	
+	
+	
+	
 }

@@ -46,8 +46,8 @@ public class CategoryFacade {
 		return this.cm.categoryExist(catName);
 	}
 	
-	public List<Subcategory> getAllSubcategories() {
-		return this.cm.getAllSubcategories();
+	public List<Subcategory> getAllSubcategories(Category c) {
+		return this.cm.getAllSubcategories(c);
 	}
 	
 	public boolean subcategoryExist(String subcatName) {

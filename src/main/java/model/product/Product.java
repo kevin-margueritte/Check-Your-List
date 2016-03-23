@@ -71,7 +71,7 @@ public abstract class Product {
 		this.subCategory = subCategory;
 	}
 
-
-	
+	public abstract boolean save();
+	public abstract boolean delete();
 	
 }
