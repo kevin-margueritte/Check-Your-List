@@ -9,10 +9,14 @@ import java.util.List;
 
 import database.ConnectionDB;
 import model.activity.Activity;
+import model.category.Category;
 import model.category.Subcategory;
+import model.category.JDBC.CategoryJDBC;
 import model.category.JDBC.SubcategoryJDBC;
 import model.person.User;
 import model.person.JDBC.UserJDBC;
+import model.task.Task;
+import model.task.JDBC.TaskJDBC;
 
 public class ActivityJDBC extends Activity {
 	
@@ -174,6 +178,22 @@ public class ActivityJDBC extends Activity {
 	@Override
 	public String toString() {
 		return this.title;
+	}
+	
+	public static void main (String args[]){
+		/*public abstract boolean save();
+		public abstract Task readByName();
+		public abstract List<Task> readAll();
+		public abstract boolean delete();*/
+		Category cat = new CategoryJDBC("cat1");
+		cat= cat.readByName();
+		Subcategory sub = new SubcategoryJDBC("sscat1");
+		sub= sub.readByName();
+		User user = new UserJDBC("titi");
+		user =  (User) user.readByPseudo();
+		ActivityJDBC activity = new ActivityJDBC("agio", "a", false, "2016-03-23",(Subcategory) sub,(User) user);
+		//Task task = new TaskJDBC("name", "description", "frequency", false, "1993-10-05", "1993-10-05", activity);
+		activity.save();
 	}
 	
 

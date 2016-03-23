@@ -1,17 +1,19 @@
 package model.task.JDBC;
-import java.awt.List;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
-import java.util.ArrayList;
+import java.util.*;
 
 import database.ConnectionDB;
 import model.activity.Activity;
 import model.activity.JDBC.ActivityJDBC;
+import model.category.Subcategory;
+import model.category.JDBC.CategoryJDBC;
+import model.category.JDBC.SubcategoryJDBC;
+import model.person.User;
+import model.person.JDBC.UserJDBC;
 import model.task.Task;
-
 
 public class TaskJDBC extends Task {
 	
@@ -33,7 +35,7 @@ public class TaskJDBC extends Task {
 
 		@Override
 		public boolean save() {
-			String sql = ("INSERT INTO task (id, name, description, frequency, checked, startDate, endDate, titre_activity) VALUES ( '" +
+			String sql = ("INSERT INTO task (name, description, frequency, checked, startDate, endDate, titre_activity) VALUES ( '" +
 					this.name + "','" + this.description + "','" + this.frequency + "','" + this.startDate + "','" + this.endDate 
 					+ "','" + this.activity.getTitle() + "')");
 			try {
@@ -76,10 +78,10 @@ public class TaskJDBC extends Task {
 
 
 		@Override
-		public java.util.List<Task> readAll() {
+		public List<Task> readAll() {
 			String sql = ("select * from task ");
 			Task task = null;
-			java.util.List<Task> listAct= new ArrayList<Task>();
+			List<Task> listAct= new ArrayList<Task>();
 			try {
 				Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
 				ResultSet rs = stm.executeQuery(sql);
@@ -113,7 +115,21 @@ public class TaskJDBC extends Task {
 			return false;
 		}
 
-
+		public static void main (String args[]){
+			/*public abstract boolean save();
+			public abstract Task readByName();
+			public abstract List<Task> readAll();
+			public abstract boolean delete();*/
+			CategoryJDBC cat = new CategoryJDBC("cat1");
+			cat=(CategoryJDBC) cat.readByName();
+			SubcategoryJDBC sub = new SubcategoryJDBC("sscat1");
+			sub=(SubcategoryJDBC) sub.readByName();
+			UserJDBC user = new UserJDBC("titi");
+			user = (UserJDBC) user.readByPseudo();
+			ActivityJDBC activity = new ActivityJDBC("a", "a", false, "2016-03-23",(Subcategory) sub,(User) user);
+			Task task = new TaskJDBC("name", "description", "frequency", false, "1993-10-05", "1993-10-05", activity);
+			task.save();
+		}
 
 
 

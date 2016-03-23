@@ -101,4 +101,10 @@ public class SubcategoryJDBC extends Subcategory {
 	public String toString() {
 		return this.name;
 	}
+
+	@Override
+	public List<Subcategory> getAllSubcategoriesByCategoryName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
