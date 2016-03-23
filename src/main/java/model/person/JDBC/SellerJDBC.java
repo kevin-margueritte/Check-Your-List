@@ -85,7 +85,7 @@ public class SellerJDBC extends Seller {
 		return true;
 	}
 	
-	public boolean SellerExist() {
+	public boolean sellerExist() {
 			String sql1 = ("SELECT pseudo FROM seller WHERE pseudo='"+ this.pseudo + "'");
 		try {
 			Statement stm1 = ConnectionDB.creetConnectionDB().getConn().createStatement();

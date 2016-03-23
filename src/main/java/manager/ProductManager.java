@@ -25,17 +25,15 @@ public class ProductManager {
 	}
 	
 	public boolean createProduct(String name, String pseudo, String nomSubCategory){
-		//recupère le Seller a partir du pseudo
-		Seller seller = this.factPers.createSeller(pseudo);
-		seller.readByPseudo();
-		
+		Seller seller = recupereSeller(pseudo);
+		if (seller==null){
+			return false;
+		}
+			
 		//recupere la sub category
 		Subcategory subCategoryProd = this.factCat.createSubcategory(nomSubCategory);
 		subCategoryProd.readByName();
-		
-		
-		
-		
+
 		// Creation du produit 
 		Product prod = this.factProd.createProduct(name, seller,subCategoryProd);
 		
@@ -48,18 +46,44 @@ public class ProductManager {
 	
 	public boolean deleteProduct(Product prod){
 		return prod.delete();
-		
-		
+	}
+	
+	public boolean deleteProduct(String name, String pseudo, String nomSubCategory){
+				Seller seller = recupereSeller(pseudo);
+		if (seller==null){
+			return false;
+		}
+			
+		//recupere la sub category
+		Subcategory subCategoryProd = this.factCat.createSubcategory(nomSubCategory);
+		subCategoryProd.readByName();
+
+		// Creation du produit 
+		Product prod = this.factProd.createProduct(name, seller,subCategoryProd);
+		prod.readByNameAndSeller();
+		if(prod != null){
+			return prod.delete();
+		}
+		//return false;
 	}
 	
 	
-	public boolean setQuantity(int nbreajout){
-		return false;	
+	public Seller recupereSeller(String pseudo) {
+		//recupère le Seller a partir du pseudo
+		Seller seller = this.factPers.createSeller(pseudo);
+		//verifie que le seller existe
+		if (!seller.sellerExist()){
+			return null;
+		}
+		seller.readByPseudo();
+		return seller;
 	}
+	
 	
 	public static void main(String args[]) {
 		ProductManager p = new ProductManager();
-		//p.createProduct("Whisky","aezr","cat2");
+		//p.createProduct("Sac","aezr","cat2");
+		p.deleteProduct("Sac","aezr","cat2");
 	}
 
 }

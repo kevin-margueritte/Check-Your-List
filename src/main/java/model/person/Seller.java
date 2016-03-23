@@ -192,6 +192,6 @@ public abstract class Seller extends Person {
 	    this.city = newCity;
 	}
 
-
+	public abstract boolean sellerExist();
 
 }

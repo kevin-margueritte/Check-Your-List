@@ -73,5 +73,5 @@ public abstract class Product {
 
 	public abstract boolean save();
 	public abstract boolean delete();
-	
+	public abstract Product readByNameAndSeller();
 }

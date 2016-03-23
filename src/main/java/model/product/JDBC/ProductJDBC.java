@@ -51,7 +51,7 @@ public class ProductJDBC extends Product{
 	public boolean delete(){
 		// récupérer l'id du produit en fonction du nom et du seller
 		// int idProd = readByName();
-		String sql = ("delete from product where id="+ idProd +"");
+		String sql = ("delete from product where id="+ this.idProd +"");
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
 			
@@ -65,8 +65,11 @@ public class ProductJDBC extends Product{
 	}
 	
 	//récupère l'id d'un produit en fonction du nom et du vendeur
-	public Product readByName(){
-		String sql = ("SELECT * FROM product WHERE non  = '" +  this.name + "' AND seller = '" +this.seller.getPseudo() +"'");
+	public Product readByNameAndSeller(){
+		//si le nom ou le seller vide alors Erreur   <--------------------------
+		System.out.println(this.name);
+		System.out.println(this.seller.getPseudo());
+		String sql = ("SELECT * FROM product WHERE name  = '" +  this.name + "' AND pseudo = '" +this.seller.getPseudo() +"'");
 		Product u = null;
 		SellerJDBC sellerJDBC;
 		SubcategoryJDBC subCategoryJDBC;
