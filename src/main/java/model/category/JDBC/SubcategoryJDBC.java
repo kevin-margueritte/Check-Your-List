@@ -67,7 +67,7 @@ public class SubcategoryJDBC extends Subcategory {
 	}
 	
 	@Override
-	public List<Subcategory> getAllSubcategories() {
+	public List<Subcategory> getAllSubcategoriesByCategoryName() {
 		String sql = ("SELECT * FROM subCategory WHERE name_category = '" + this.getCategory().getName() + "'");
 		System.out.println(sql);
 		List<Subcategory> list = new ArrayList<Subcategory>();
@@ -105,6 +105,12 @@ public class SubcategoryJDBC extends Subcategory {
 	@Override
 	public String toString() {
 		return this.name;
+	}
+
+	@Override
+	public List<Subcategory> getAllSubcategories() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
