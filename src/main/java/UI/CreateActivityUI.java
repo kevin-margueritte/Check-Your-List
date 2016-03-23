@@ -89,6 +89,7 @@ public class CreateActivityUI extends JFrame implements ActionListener {
 		this.initComboBoxCategory();
 		
 		JLabel lblCategory = new JLabel("Category");
+		
 		lblCategory.setBounds(236, 27, 46, 14);
 		getContentPane().add(lblCategory);
 		
@@ -134,9 +135,7 @@ public class CreateActivityUI extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == this.comboCategory) {
-			if (this.formComplete()) {
-				this.initComboBoxSubCategory();
-			}
+			this.initComboBoxSubCategory();
 		}
 		else if(e.getSource() == this.btnValidate && this.formComplete()) {
 			boolean visibility = false;
