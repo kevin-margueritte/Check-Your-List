@@ -24,6 +24,7 @@ public class ProductManager {
 		this.factPers = new PersonFactory();
 	}
 	
+	/* obsolète
 	public boolean createProduct(String name, String pseudo, String nomSubCategory){
 		Seller seller = recupereSeller(pseudo);
 		if (seller==null){
@@ -44,10 +45,36 @@ public class ProductManager {
 	}
 	
 	
+		public Seller recupereSeller(String pseudo) {
+		//recupère le Seller a partir du pseudo
+		Seller seller = this.factPers.createSeller(pseudo);
+		//verifie que le seller existe
+		if (!seller.sellerExist()){
+			return null;
+		}
+		seller.readByPseudo();
+		return seller;
+	}
+	
+	*/
+	
+	public boolean createProduct(String name, Seller seller, float price, int quantity, Subcategory subCategory) {	
+		// Creation du produit 
+		Product prod = this.factProd.createProduct(name, seller, price, quantity,subCategory);
+		if(prod != null){
+			return prod.save();
+		}
+		return false;
+	}
+	
+	
+	
 	public boolean deleteProduct(Product prod){
 		return prod.delete();
 	}
 	
+	
+	/*
 	public boolean deleteProduct(String name, String pseudo, String nomSubCategory){
 				Seller seller = recupereSeller(pseudo);
 		if (seller==null){
@@ -65,25 +92,10 @@ public class ProductManager {
 			return prod.delete();
 		}
 		return false;
-	}
+	}*/
 	
 	
-	public Seller recupereSeller(String pseudo) {
-		//recupère le Seller a partir du pseudo
-		Seller seller = this.factPers.createSeller(pseudo);
-		//verifie que le seller existe
-		if (!seller.sellerExist()){
-			return null;
-		}
-		seller.readByPseudo();
-		return seller;
-	}
-	
-	
-	public static void main(String args[]) {
-		ProductManager p = new ProductManager();
-		//p.createProduct("Sac","aezr","cat2");
-		p.deleteProduct("Sac","aezr","cat2");
-	}
+
+
 
 }

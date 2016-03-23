@@ -8,10 +8,15 @@ import model.product.JDBC.ProductJDBC;
 
 public class ProductFactory extends AbstractProductFactory{
 	
-	
+/*	
 	@Override
 	public Product createProduct(String name, Seller seller, Subcategory subCategory) {
 		return new ProductJDBC(name,seller,subCategory);
+	}
+*/
+	@Override
+	public Product createProduct(String name, Seller seller, float price, int quantity, Subcategory subCategory) {
+		return new ProductJDBC(name,seller,price,quantity,subCategory);
 	}
 	
 
