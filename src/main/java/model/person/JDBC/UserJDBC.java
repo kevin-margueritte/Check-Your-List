@@ -4,8 +4,12 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import database.ConnectionDB;
+import model.activity.Activity;
+import model.activity.JDBC.ActivityJDBC;
 import model.person.User;
 
 public class UserJDBC extends User {
@@ -63,6 +67,28 @@ public class UserJDBC extends User {
 			}
 		}
 		return false;
+	}
+	
+	@Override
+	public List<Activity> readAllActivities() {
+		String sql = ("select * from activity where pseudo_user='"+this.getPseudo()+"' ");
+		Activity act = null;
+		List<Activity> listAct= new ArrayList<Activity>();
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while(rs.next()){
+				act = new ActivityJDBC(1,rs.getString(2));
+				listAct.add(act.readByTitle());
+			}
+			rs.close();
+			return listAct;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public boolean pseudoExist() {

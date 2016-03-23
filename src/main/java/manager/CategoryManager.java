@@ -54,8 +54,7 @@ public class CategoryManager {
 	}
 	
 	public List<Subcategory> getAllSubcategories(Category category) {
-		Subcategory subcat = this.fact.createSubcategory(category);
-		return subcat.getAllSubcategoriesByCategoryName();
+		return category.getAllSubcategories();
 	}
 	
 	public boolean subcategoryExist(String subcatName) {

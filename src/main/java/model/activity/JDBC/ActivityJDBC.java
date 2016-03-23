@@ -102,29 +102,6 @@ public class ActivityJDBC extends Activity {
 		}
 		return null;
 	}
-	
-	@Override
-	public List<Activity> readAllByUser() {
-		String sql = ("select * from activity where pseudo_user='"+this.user.getPseudo()+"' ");
-		Activity act = null;
-		List<Activity> listAct= new ArrayList<Activity>();
-		try {
-			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
-			ResultSet rs = stm.executeQuery(sql);
-			while(rs.next()){
-				act = new ActivityJDBC(1,rs.getString(2));
-				listAct.add(act.readByTitle());
-			}
-			rs.close();
-			return listAct;
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-
 
 	@Override
 	public boolean delete() {

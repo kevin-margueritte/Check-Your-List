@@ -10,6 +10,7 @@ import java.util.List;
 
 import database.ConnectionDB;
 import model.category.Category;
+import model.category.Subcategory;
 
 public class CategoryJDBC extends Category {
 	
@@ -93,7 +94,31 @@ public class CategoryJDBC extends Category {
 			}	
 			return false;
 	}
-
+	
+	@Override
+	public List<Subcategory> getAllSubcategories() {
+		String sql = ("SELECT * FROM subcategory WHERE name_category = '" + this.getName() + "'");
+		List<Subcategory> list = new ArrayList<Subcategory>();
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while ( rs.next() ) {
+				Subcategory subcat = new SubcategoryJDBC();
+				ResultSetMetaData resultMeta = rs.getMetaData();
+				if (resultMeta.getTableName(1).equals("subcategory")) {
+					subcat.setName((String) rs.getObject("name"));
+					subcat.setDetailedDescription((String) rs.getObject("detailleddescription"));
+					subcat.setShortDescription((String) rs.getObject("shortdescription"));
+					list.add(subcat);
+				}
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
 	
 	@Override
 	public String toString() {

@@ -31,14 +31,6 @@ public class ProductJDBC extends Product{
 		super(name,seller,price,quantity,subCategory);
 	}
 
-	/*CREATE TABLE product
-	(
-	  id serial NOT NULL,
-	  name character,
-	  id_sell serial NOT NULL,
-	  name_subcategory character,
-	  [...]
-	 */
 	public boolean save(){
 		String sql = ("INSERT INTO  product (name,pseudo,price,quantity,name_subcategory)VALUES ("
 				+ "'" +  this.name + "','"
@@ -105,13 +97,6 @@ public class ProductJDBC extends Product{
 		}
 		return (Product)u;
 	}
-	
-	
-	
-	
-	
-	
-	
 	
 	/*public static void main(String args[]) {
 		//ProductJDBC prod = new ProductJDBC("whisky","jack","boisson");

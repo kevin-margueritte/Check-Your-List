@@ -1,15 +1,16 @@
 package UI;
 
 import java.awt.Component;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import model.person.User;
 
 @SuppressWarnings("serial")
-public class MenuUserUI extends JFrame {
+public class MenuUserUI extends JFrame implements ChangeListener {
 	
 	private JTabbedPane tabbedPane;
 	private User user;
@@ -21,15 +22,40 @@ public class MenuUserUI extends JFrame {
 		this.user = p;
 		getContentPane().setLayout(null);
 		this.tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		this.tabbedPane.addChangeListener(this);
 		getContentPane().add(tabbedPane);
-		this.initProposeCategory();
+		this.initFrame();
 	}
 	
-	public void initProposeCategory() {
-		ProfilUserUI f = new ProfilUserUI(this.user);
-		Component comp = f.getContentPane();
-		this.setSize(f.getWidth() + 15, f.getHeight() + 30);
-		tabbedPane.setSize(f.getWidth(), f.getHeight());
+	public void initFrame() {
+		ProfilUserUI fp = new ProfilUserUI(this.user);
+		Component comp = fp.getContentPane();
+		this.setSize(fp.getWidth() + 15, fp.getHeight() + 30);
+		tabbedPane.setSize(fp.getWidth(), fp.getHeight());
 		tabbedPane.addTab("Profil", comp);
+		CreateActivityUI fc = new CreateActivityUI();
+		comp = fc.getContentPane();
+		//tabbedPane.setSize(fc.getWidth(), fc.getHeight());
+		tabbedPane.addTab("Create activity", comp);
+	}
+	
+	public void initCreateActivity() {
+		
+	}
+
+	@Override
+	public void stateChanged(ChangeEvent c) {
+		JTabbedPane pane = (JTabbedPane) c.getSource();
+		String panneName = pane.getTitleAt(pane.getSelectedIndex());
+		if (panneName.equals("Profil")) {
+			ProfilUserUI fp = new ProfilUserUI(this.user);
+			this.setSize(fp.getWidth() + 15, fp.getHeight() + 30);
+			tabbedPane.setSize(fp.getWidth(), fp.getHeight());
+		}
+		else if (panneName.equals("Create activity")) {
+			CreateActivityUI fc = new CreateActivityUI();
+			this.setSize(fc.getWidth() + 15, fc.getHeight() + 30);
+			tabbedPane.setSize(fc.getWidth(), fc.getHeight());
+		}
 	}
 }

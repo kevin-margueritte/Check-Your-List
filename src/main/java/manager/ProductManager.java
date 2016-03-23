@@ -1,4 +1,6 @@
 package manager;
+import java.util.List;
+
 import factory.category.AbstractCategoryFactory;
 import factory.category.CategoryFactory;
 import factory.person.AbstractPersonFactory;
@@ -7,9 +9,7 @@ import factory.product.AbstractProductFactory;
 import factory.product.ProductFactory;
 import model.category.Subcategory;
 import model.person.Seller;
-import model.person.User;
 import model.product.Product;
-import model.category.JDBC.SubcategoryJDBC;
 
 
 public class ProductManager {
@@ -22,6 +22,10 @@ public class ProductManager {
 		this.factProd = new ProductFactory();
 		this.factCat = new CategoryFactory();
 		this.factPers = new PersonFactory();
+	}
+	
+	public List<Product> getAllProductBySeller(Seller s) {
+		return null;
 	}
 	
 	/* obsolète

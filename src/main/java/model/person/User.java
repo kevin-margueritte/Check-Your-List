@@ -3,6 +3,10 @@
  *******************************************************************************/
 package model.person;
 
+import java.util.List;
+
+import model.activity.Activity;
+
 // Start of user code (user defined imports)
 
 // End of user code
@@ -151,5 +155,6 @@ public abstract class User extends Person {
 	}
 
 	public abstract boolean save();
+	public abstract List<Activity> readAllActivities();
 
 }

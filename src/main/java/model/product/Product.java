@@ -55,6 +55,14 @@ public abstract class Product {
 		this.subCategory=subCategory;
 	}
 
+	public int getIdProd() {
+		return idProd;
+	}
+
+	public void setIdProd(int idProd) {
+		this.idProd = idProd;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -86,4 +94,21 @@ public abstract class Product {
 	public abstract boolean save();
 	public abstract boolean delete();
 	public abstract Product readByNameAndSeller();
+
+	public float getPrice() {
+		return price;
+	}
+
+	public void setPrice(float price) {
+		this.price = price;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	
 }

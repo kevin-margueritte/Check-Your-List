@@ -58,7 +58,4 @@ public abstract class Subcategory {
 
 	public abstract Subcategory readByName();
 	public abstract boolean save();
-	public abstract List<Subcategory> getAllSubcategoriesByCategoryName();
-
-	
 }

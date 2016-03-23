@@ -1,20 +1,5 @@
 package UI;
 
-import javax.swing.JFrame;
-import javax.swing.JTextField;
-
-import facade.ActivityFacade;
-import facade.SellerFacade;
-import model.category.Category;
-import model.category.Subcategory;
-import model.person.Seller;
-import model.person.JDBC.SellerJDBC;
-import model.person.JDBC.UserJDBC;
-
-import javax.swing.JFormattedTextField;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JComboBox;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -24,8 +9,21 @@ import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+import facade.SellerFacade;
+import model.category.Category;
+import model.category.Subcategory;
+import model.person.Seller;
+import model.person.JDBC.SellerJDBC;
 
 public class CreateProductUI extends JFrame implements ActionListener {
+	
 	private JTextField nameProduct;
 	private JComboBox comboSubcategory;
 	private JComboBox comboCategory;
@@ -140,7 +138,7 @@ public class CreateProductUI extends JFrame implements ActionListener {
 		getContentPane().add(lblSubcategory);
 		
 		
-		this.setSize(392,323);
+		this.setSize(369,288);
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
