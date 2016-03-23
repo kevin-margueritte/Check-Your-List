@@ -40,5 +40,7 @@ public class LoginFacade {
 	public Person getPerson(String username) {
 		return this.mu.getPerson(username);
 	}
+	
+	
 
 }

@@ -99,5 +99,6 @@ public abstract class Activity {
 	public abstract boolean delete();
 	public abstract boolean addTask();
 	public abstract boolean deleteTask();
+	public abstract boolean deleteByPseudoUserAndName();
 	
 }

@@ -4,17 +4,12 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import database.ConnectionDB;
 import model.activity.Activity;
-import model.category.Category;
 import model.category.Subcategory;
-import model.category.JDBC.CategoryJDBC;
 import model.category.JDBC.SubcategoryJDBC;
 import model.person.User;
 import model.person.JDBC.UserJDBC;
@@ -146,6 +141,23 @@ public class ActivityJDBC extends Activity {
 		}
 		return false;
 	}
+	
+	@Override
+	public boolean deleteByPseudoUserAndName() {
+		String sql = ("delete from activity where pseudo_user= '"+ this.getUser().getPseudo() +"' AND"
+				+ "title = '" + this.getTitle() + "'");
+		Activity c = null;
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			
+			return stm.execute(sql);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
 
 	@Override
 	public boolean addTask() {
@@ -157,6 +169,11 @@ public class ActivityJDBC extends Activity {
 	public boolean deleteTask() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public String toString() {
+		return this.title;
 	}
 	
 

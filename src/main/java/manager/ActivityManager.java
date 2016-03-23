@@ -1,7 +1,8 @@
 package manager;
 
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
 
 import factory.activity.AbstractActivityFactory;
 import factory.activity.ActivityFactory;
@@ -28,6 +29,16 @@ public class ActivityManager {
 		java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 		Activity act = this.fact.createActivity(title, description, visible, date.toString(), subcategory, user);
 		return act.save();
+	}
+	
+	public List<Activity> getAllActivities(User u) {
+		Activity act = this.fact.createActivity(u);
+		return act.readAllByUser();
+	}
+	
+	public boolean deleteActivity(Activity act) {
+		System.out.println(act);
+		return act.delete();
 	}
 
 }
