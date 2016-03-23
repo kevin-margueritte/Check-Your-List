@@ -91,6 +91,7 @@ public abstract class Activity {
 	public abstract boolean save();
 	public abstract Activity readByID();
 	public abstract List<Activity> readAll();
+	public abstract List<Activity> readAllByUser();
 	public abstract boolean delete();
 	public abstract boolean addTask();
 	public abstract boolean deleteTask();

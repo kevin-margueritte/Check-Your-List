@@ -25,7 +25,7 @@ public class SubcategoryJDBC extends Subcategory {
 	public SubcategoryJDBC(String name) {
 		super(name);
 	}
-	
+
 	public SubcategoryJDBC(Category c) {
 		super(c);
 	}
