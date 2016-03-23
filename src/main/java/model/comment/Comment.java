@@ -5,7 +5,6 @@ import java.util.List;
 import model.activity.Activity;
 
 public abstract class Comment {
-	protected int id;
 	protected String content;
 	protected String postingDate;
 	protected Activity activity;
@@ -23,10 +22,6 @@ public abstract class Comment {
 		this.activity = activity;
 	}
 	
-	public int getId() {
-		return this.id;
-	}
-	
 	public String getContent() {
 		return this.content;
 	}
@@ -41,10 +36,6 @@ public abstract class Comment {
 	
 	public void setActivity(Activity activity) {
 		this.activity = activity;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
 	}
 	
 	public void setContent(String content) {
