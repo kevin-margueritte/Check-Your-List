@@ -5,6 +5,8 @@ import model.person.Seller;
 
 public abstract class Product {
 
+	
+	protected int idProd;
 	/***
 	 * name of product
 	 */
@@ -23,6 +25,16 @@ public abstract class Product {
 	 */
 	public Product(String name, Seller seller, Subcategory subCategory) {
 		// Start of user code constructor for User)
+		this.name=name;
+		this.seller=seller;
+		this.subCategory=subCategory;
+		
+		// End of user code
+	}
+
+	public Product(int id,String name, Seller seller, Subcategory subCategory) {
+		// Start of user code constructor for User)
+		this.idProd =id;
 		this.name=name;
 		this.seller=seller;
 		this.subCategory=subCategory;
@@ -59,7 +71,7 @@ public abstract class Product {
 		this.subCategory = subCategory;
 	}
 
-
-	
-	
+	public abstract boolean save();
+	public abstract boolean delete();
+	public abstract Product readByNameAndSeller();
 }

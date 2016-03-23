@@ -13,7 +13,7 @@ public class ProductFactory extends AbstractProductFactory{
 	public Product createProduct(String name, Seller seller, Subcategory subCategory) {
 		return new ProductJDBC(name,seller,subCategory);
 	}
-
+	
 
 	
 	

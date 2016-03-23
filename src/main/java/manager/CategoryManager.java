@@ -53,8 +53,8 @@ public class CategoryManager {
 		return cat.categoryExist(catName);
 	}
 	
-	public List<Subcategory> getAllSubcategories() {
-		Subcategory subcat = this.fact.createSubcategory();
+	public List<Subcategory> getAllSubcategories(Category category) {
+		Subcategory subcat = this.fact.createSubcategory(category);
 		return subcat.getAllSubcategories();
 	}
 	

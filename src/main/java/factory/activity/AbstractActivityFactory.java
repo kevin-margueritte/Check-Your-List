@@ -9,8 +9,13 @@ import model.person.User;
 public abstract class AbstractActivityFactory {
 
 	public abstract Activity createActivity();
-	public abstract Activity createActivity(String title, String description, boolean visible, Date creationDate, 
+	
+	public abstract Activity createActivity(String title, String description, boolean visible, String creationDate, 
 			Subcategory subcategory, User user);
-	public abstract Activity createActivity(int id, String title, String description, boolean visible, Date creationDate,
-			Subcategory subcategory, User user);	
+	
+	public abstract Activity createActivity(int id, String title, String description, boolean visible, String creationDate,
+			Subcategory subcategory, User user);
+	
+	public abstract Activity createActivity(User u);
+	
 }

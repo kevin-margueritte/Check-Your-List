@@ -19,9 +19,11 @@ public class PersonManager {
 	
 	public boolean connect(String username, String password) {
 		User u = this.fact.createUser(username);
+		Seller l = this.fact.createSeller(username);
+		l.readByPseudo();
 		u.readByPseudo();
 		try {
-			if (u.getPassword().equals(sha1(password))) {
+			if (u.getPassword().equals(sha1(password)) || l.getPassword().equals(sha1(password))) {
 				return true;
 			}
 		} catch (NoSuchAlgorithmException e) {

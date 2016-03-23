@@ -4,6 +4,9 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,12 +25,16 @@ public class ActivityJDBC extends Activity {
 		super();
 	}
 	
-	public ActivityJDBC(String title, String description, boolean visible, Date creationDate, 
+	public ActivityJDBC(User u) {
+		super(u);
+	}
+	
+	public ActivityJDBC(String title, String description, boolean visible, String creationDate, 
 			Subcategory subcategory, User user) {
 		super(title, description, visible, creationDate, subcategory, user);
 	}
 	
-	public ActivityJDBC(int id, String title, String description, boolean visible, Date creationDate,
+	public ActivityJDBC(int id, String title, String description, boolean visible, String creationDate,
 			Subcategory subcategory, User user) {
 		super(id, title, description, visible, creationDate, subcategory, user);
 	}
@@ -50,21 +57,23 @@ public class ActivityJDBC extends Activity {
 
 	@Override
 	public Activity readByID() {
-		String sql = ("SELECT * FROM activity WHERE name = '" +  this.id + "'");
+		String sql = ("SELECT * FROM activity WHERE id = '" +  this.id + "'");
 		Activity c = null;
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			
 			ResultSet rs = stm.executeQuery(sql);
+			
 			if ( rs.next() ) {
 				ResultSetMetaData resultMeta = rs.getMetaData();
 				if (resultMeta.getTableName(1).equals("activity")) {
 					this.title = (String) rs.getObject("titre");
 					this.description = (String) rs.getObject("description");
 					this.visible = (Boolean) rs.getObject("visible");
-					this.creationDate = (Date) rs.getObject("creationdate");
-					SubcategoryJDBC subcat = (SubcategoryJDBC) new Subcategory(((Subcategory) rs.getObject("name_subcategory")).getName());
+					this.creationDate = (String) rs.getObject("creationdate").toString();
+					SubcategoryJDBC subcat = new SubcategoryJDBC(rs.getObject("name_subcategory").toString());
 					this.subcategory = subcat.readByName();
-					UserJDBC user = (UserJDBC) new UserJDBC(((User) rs.getObject("pseudo_user")).getPseudo());
+					UserJDBC user = (UserJDBC) new UserJDBC((rs.getObject("pseudo_user")).toString());
 					this.user = user.readByPseudo();
 					c = new ActivityJDBC(title, description, visible, creationDate, subcategory, user);
 				}
@@ -78,16 +87,49 @@ public class ActivityJDBC extends Activity {
 	}
 
 	@Override
-	public boolean modify() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public List<Activity> readAll() {
-		// TODO Auto-generated method stub
+		String sql = ("select * from activity ");
+		Activity act = null;
+		List<Activity> listAct= new ArrayList<Activity>();
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while(rs.next()){
+				act = new ActivityJDBC((Integer.parseInt(rs.getString(1)))," ");
+				listAct.add(act.readByID());
+			}
+			rs.close();
+			return listAct;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
+	
+	@Override
+	public List<Activity> readAllByUser() {
+		String sql = ("select * from activity where pseudo_user='"+this.user.getPseudo()+"' ");
+		Activity act = null;
+		List<Activity> listAct= new ArrayList<Activity>();
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while(rs.next()){
+				act = new ActivityJDBC((Integer.parseInt(rs.getString(1)))," ");
+				listAct.add(act.readByID());
+			}
+			rs.close();
+			return listAct;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 
 	@Override
 	public boolean delete() {
@@ -117,9 +159,5 @@ public class ActivityJDBC extends Activity {
 		return false;
 	}
 	
-	public static void main(String args[]){
-		ActivityJDBC act= new ActivityJDBC(4, "act2");
-		act.delete();
-	}
 
 }

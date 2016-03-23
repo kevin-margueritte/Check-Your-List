@@ -1,12 +1,16 @@
 package manager;
 import factory.category.AbstractCategoryFactory;
+import factory.category.CategoryFactory;
 import factory.person.AbstractPersonFactory;
+import factory.person.PersonFactory;
 import factory.product.AbstractProductFactory;
 import factory.product.ProductFactory;
 import model.category.Subcategory;
 import model.person.Seller;
+import model.person.User;
 import model.product.Product;
-import model.product.JDBC.ProductJDBC;
+import model.category.JDBC.SubcategoryJDBC;
+
 
 public class ProductManager {
 	private AbstractPersonFactory factPers;
@@ -16,32 +20,70 @@ public class ProductManager {
 	
 	public ProductManager() {
 		this.factProd = new ProductFactory();
+		this.factCat = new CategoryFactory();
+		this.factPers = new PersonFactory();
 	}
 	
 	public boolean createProduct(String name, String pseudo, String nomSubCategory){
-		//recupère le Seller
-		Seller seller = factPers.createSeller(pseudo);
-		seller.readByPseudo();
+		Seller seller = recupereSeller(pseudo);
+		if (seller==null){
+			return false;
+		}
+			
 		//recupere la sub category
-		Subcategory subCategory = factCat.createSubCategory(nomSubCategory);
-		subCategory.readByName();
+		Subcategory subCategoryProd = this.factCat.createSubcategory(nomSubCategory);
+		subCategoryProd.readByName();
+
 		// Creation du produit 
-		Product prod = this.factProd.createProduct(name, seller,subCategory);
+		Product prod = this.factProd.createProduct(name, seller,subCategoryProd);
+		
 		if(prod != null){
-			return true;
+			return prod.save();
 		}
 		return false;
 	}
 	
 	
-	public boolean deleteProduct(){
+	public boolean deleteProduct(Product prod){
+		return prod.delete();
+	}
+	
+	public boolean deleteProduct(String name, String pseudo, String nomSubCategory){
+				Seller seller = recupereSeller(pseudo);
+		if (seller==null){
+			return false;
+		}
+			
+		//recupere la sub category
+		Subcategory subCategoryProd = this.factCat.createSubcategory(nomSubCategory);
+		subCategoryProd.readByName();
+
+		// Creation du produit 
+		Product prod = this.factProd.createProduct(name, seller,subCategoryProd);
+		prod.readByNameAndSeller();
+		if(prod != null){
+			return prod.delete();
+		}
 		return false;
-		
 	}
 	
 	
-	public boolean setQuantity(int nbreajout){
-		return false;	
+	public Seller recupereSeller(String pseudo) {
+		//recupère le Seller a partir du pseudo
+		Seller seller = this.factPers.createSeller(pseudo);
+		//verifie que le seller existe
+		if (!seller.sellerExist()){
+			return null;
+		}
+		seller.readByPseudo();
+		return seller;
+	}
+	
+	
+	public static void main(String args[]) {
+		ProductManager p = new ProductManager();
+		//p.createProduct("Sac","aezr","cat2");
+		p.deleteProduct("Sac","aezr","cat2");
 	}
 
 }
