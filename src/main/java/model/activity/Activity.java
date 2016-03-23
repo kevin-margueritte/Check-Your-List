@@ -21,6 +21,10 @@ public abstract class Activity {
 	public Activity() {
 		super();
 	}
+	
+	public Activity(User u) {
+		this.user = u;
+	}
 
 	public Activity(String title, String description, boolean visible, String creationDate, Subcategory subcategory,
 			User user) {

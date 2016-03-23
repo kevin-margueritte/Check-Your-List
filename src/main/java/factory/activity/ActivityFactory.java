@@ -27,4 +27,9 @@ public class ActivityFactory extends AbstractActivityFactory{
 		return new ActivityJDBC(id, title, description, visible, creationDate, subcategory, user);
 	}
 
+	@Override
+	public Activity createActivity(User u) {
+		return new ActivityJDBC(u);
+	}
+
 }

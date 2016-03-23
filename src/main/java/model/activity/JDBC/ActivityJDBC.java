@@ -25,6 +25,10 @@ public class ActivityJDBC extends Activity {
 		super();
 	}
 	
+	public ActivityJDBC(User u) {
+		super(u);
+	}
+	
 	public ActivityJDBC(String title, String description, boolean visible, String creationDate, 
 			Subcategory subcategory, User user) {
 		super(title, description, visible, creationDate, subcategory, user);
@@ -81,8 +85,6 @@ public class ActivityJDBC extends Activity {
 		}
 		return (Activity)c;
 	}
-
-
 
 	@Override
 	public List<Activity> readAll() {
