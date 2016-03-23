@@ -2,8 +2,6 @@ package model.category;
 
 import java.util.List;
 
-import model.person.Person;
-
 public abstract class Subcategory {
 
 	protected String name;

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import model.category.Subcategory;
+import model.comment.Comment;
 import model.person.User;
 import model.task.Task;
 
