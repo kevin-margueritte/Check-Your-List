@@ -2,16 +2,20 @@ package facade;
 
 import java.util.List;
 
+import manager.ActivityManager;
 import manager.CategoryManager;
 import model.category.Category;
 import model.category.Subcategory;
+import model.person.User;
 
 public class ActivityFacade {
 	
 	private CategoryManager cm;
+	private ActivityManager am;
 	
 	public ActivityFacade() {
 		this.cm = new CategoryManager();
+		this.am = new ActivityManager();
 	}
 
 	public List<Subcategory> getAllSubcategories(Category c) {
@@ -20,6 +24,11 @@ public class ActivityFacade {
 	
 	public List<Category> getAllCategories() {
 		return this.cm.getAllCategories();
+	}
+	
+	public boolean createActivity(String title, String description, boolean visible, Subcategory subcategory,
+			User user) {
+		return this.am.createActivity(title, description, visible, subcategory, user);
 	}
 	
 }

@@ -14,9 +14,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import facade.ActivityFacade;
-import facade.CategoryFacade;
 import model.category.Category;
 import model.category.Subcategory;
+import model.person.User;
+import model.person.JDBC.UserJDBC;
 
 @SuppressWarnings("serial")
 public class CreateActivityUI extends JFrame implements ActionListener {
@@ -27,6 +28,8 @@ public class CreateActivityUI extends JFrame implements ActionListener {
 	private JComboBox comboSubcategory;
 	private JComboBox comboCategory;
 	private JButton btnValidate;
+	private JComboBox comboVisibility;
+	private User u;
 	
 	public static void main(String args[]) {
 		CreateActivityUI.launch();
@@ -50,6 +53,12 @@ public class CreateActivityUI extends JFrame implements ActionListener {
 	
 	
 	public CreateActivityUI() {
+		/**
+		 * Set User
+		 */
+		this.u = new UserJDBC("titi");
+		this.u.readByPseudo();
+		
 		this.af = new ActivityFacade();
 		setResizable(false);
 		getContentPane().setLayout(null);
@@ -67,7 +76,7 @@ public class CreateActivityUI extends JFrame implements ActionListener {
 		lblNewLabel.setBounds(10, 96, 46, 14);
 		getContentPane().add(lblNewLabel);
 		
-		JComboBox comboVisibility = new JComboBox();
+		comboVisibility = new JComboBox();
 		comboVisibility.setModel(new DefaultComboBoxModel(new String[] {"True", "False"}));
 		comboVisibility.setMaximumRowCount(2);
 		comboVisibility.setBounds(10, 121, 140, 20);
@@ -130,7 +139,12 @@ public class CreateActivityUI extends JFrame implements ActionListener {
 			}
 		}
 		else if(e.getSource() == this.btnValidate && this.formComplete()) {
-			
+			boolean visibility = false;
+			if ( ((String) this.comboVisibility.getSelectedItem()).equals("true") ) {
+				visibility = true;
+			}
+			this.af.createActivity(this.textActivity.getText(), this.textDescription.getText(), visibility, 
+				(Subcategory) this.comboSubcategory.getSelectedItem(), this.u);
 		}
 	}
 	
