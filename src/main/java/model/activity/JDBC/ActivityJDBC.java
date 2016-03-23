@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -52,21 +53,23 @@ public class ActivityJDBC extends Activity {
 
 	@Override
 	public Activity readByID() {
-		String sql = ("SELECT * FROM activity WHERE name = '" +  this.id + "'");
+		String sql = ("SELECT * FROM activity WHERE id = '" +  this.id + "'");
 		Activity c = null;
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			
 			ResultSet rs = stm.executeQuery(sql);
+			
 			if ( rs.next() ) {
 				ResultSetMetaData resultMeta = rs.getMetaData();
 				if (resultMeta.getTableName(1).equals("activity")) {
 					this.title = (String) rs.getObject("titre");
 					this.description = (String) rs.getObject("description");
 					this.visible = (Boolean) rs.getObject("visible");
-					this.creationDate = (String) rs.getObject("creationdate");
-					SubcategoryJDBC subcat = new SubcategoryJDBC(((Subcategory) rs.getObject("name_subcategory")).getName());
+					this.creationDate = (String) rs.getObject("creationdate").toString();
+					SubcategoryJDBC subcat = new SubcategoryJDBC(rs.getObject("name_subcategory").toString());
 					this.subcategory = subcat.readByName();
-					UserJDBC user = (UserJDBC) new UserJDBC(((User) rs.getObject("pseudo_user")).getPseudo());
+					UserJDBC user = (UserJDBC) new UserJDBC((rs.getObject("pseudo_user")).toString());
 					this.user = user.readByPseudo();
 					c = new ActivityJDBC(title, description, visible, creationDate, subcategory, user);
 				}
@@ -79,15 +82,28 @@ public class ActivityJDBC extends Activity {
 		return (Activity)c;
 	}
 
-	@Override
-	public boolean modify() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+
 
 	@Override
 	public List<Activity> readAll() {
-		// TODO Auto-generated method stub
+		String sql = ("select * from activity ");
+		Activity c = null;
+		Activity act = null;
+		List<Activity> listAct= new ArrayList<Activity>();
+		int i=0;
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while(rs.next()){
+				act = new ActivityJDBC((Integer.parseInt(rs.getString(1)))," ");
+				listAct.add(act.readByID());
+			}
+			return listAct;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 
@@ -119,18 +135,5 @@ public class ActivityJDBC extends Activity {
 		return false;
 	}
 	
-	public static void main(String args[]){
-		ActivityJDBC act= new ActivityJDBC(4, "act2");
-		act.delete();
-		Category cat =(Category) new CategoryJDBC("cat1", "bla", "blabla");
-		Subcategory sucat = new SubcategoryJDBC("sscat1", "bla", "blabla", cat);
-		User user=(User) new UserJDBC("titi", "lastName", "firstName", "description", "password", "city", "postCode", "street", "houseNumber", "mail");
-		Date date = new Date();
-		SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
-		
-		ActivityJDBC act1= new ActivityJDBC(1,"gio", "bla", true, ft.format(date) ,sucat, user);
-		act1.save();
-		System.out.println(ft.format(date)+" "+act1.title+" "+act1.description+" "+act1.visible+" "+act1.creationDate+" "+act1.subcategory.getName()+" "+act1.user.getPseudo());
-	}
 
 }

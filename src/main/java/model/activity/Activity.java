@@ -90,7 +90,6 @@ public abstract class Activity {
 	
 	public abstract boolean save();
 	public abstract Activity readByID();
-	public abstract boolean modify();
 	public abstract List<Activity> readAll();
 	public abstract boolean delete();
 	public abstract boolean addTask();
