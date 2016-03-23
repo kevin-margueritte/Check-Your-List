@@ -144,8 +144,7 @@ public class ActivityJDBC extends Activity {
 	
 	@Override
 	public boolean deleteByPseudoUserAndName() {
-		String sql = ("delete from activity where pseudo_user= '"+ this.getUser().getPseudo() +"' AND"
-				+ "title = '" + this.getTitle() + "'");
+		String sql = ("delete from activity where pseudo_user= '"+ this.getUser().getPseudo() +"' AND titre = '" + this.getTitle() + "'");
 		Activity c = null;
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();

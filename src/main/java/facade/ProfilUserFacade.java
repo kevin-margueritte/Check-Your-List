@@ -19,7 +19,7 @@ public class ProfilUserFacade {
 	}
 	
 	public boolean deleteActivity(Activity act) {
-		return this.am.deleteActivity(act);
+		return this.am.deleteByPseudoUserAndName(act);
 	}
 
 }

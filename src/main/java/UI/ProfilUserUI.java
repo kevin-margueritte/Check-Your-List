@@ -1,12 +1,12 @@
 package UI;
 
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.DefaultButtonModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -93,9 +93,11 @@ public class ProfilUserUI extends JFrame implements ActionListener {
 			System.out.println("See : " + button.getClientProperty("activity") );
 		}
 		else {
-			System.out.println("Delete : " + button.getClientProperty("activity"));
 			this.pf.deleteActivity((Activity) button.getClientProperty("activity"));
-			this.initFrame();
+			Component[] com = button.getParent().getComponents();
+			for (int a = 0; a < com.length; a++) {
+			     com[a].setEnabled(false);
+			}
 		}
 	}
 	

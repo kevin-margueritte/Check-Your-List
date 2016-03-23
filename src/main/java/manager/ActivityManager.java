@@ -36,9 +36,8 @@ public class ActivityManager {
 		return act.readAllByUser();
 	}
 	
-	public boolean deleteActivity(Activity act) {
-		System.out.println(act);
-		return act.delete();
+	public boolean deleteByPseudoUserAndName(Activity act) {
+		return act.deleteByPseudoUserAndName();
 	}
 
 }
