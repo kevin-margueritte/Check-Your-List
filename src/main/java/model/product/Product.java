@@ -17,7 +17,10 @@ public abstract class Product {
 	protected Seller seller;
 	
 	protected Subcategory subCategory;
-
+	
+	protected float price;
+	
+	protected int quantity;
 	
 	
 	/**
@@ -42,6 +45,15 @@ public abstract class Product {
 		// End of user code
 	}
 
+
+	public Product(String name, Seller seller, float price, int quantity, Subcategory subCategory) {
+		// TODO Auto-generated constructor stub
+		this.name=name;
+		this.seller=seller;
+		this.price=price;
+		this.quantity=quantity;
+		this.subCategory=subCategory;
+	}
 
 	public String getName() {
 		return name;

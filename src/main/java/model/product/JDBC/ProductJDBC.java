@@ -27,6 +27,10 @@ public class ProductJDBC extends Product{
 		super(id,name,seller,subCategory);
 	}
 	
+	public ProductJDBC(String name, Seller seller, float price, int quantity, Subcategory subCategory) {
+		super(name,seller,price,quantity,subCategory);
+	}
+
 	/*CREATE TABLE product
 	(
 	  id serial NOT NULL,
@@ -36,9 +40,11 @@ public class ProductJDBC extends Product{
 	  [...]
 	 */
 	public boolean save(){
-		String sql = ("INSERT INTO  product (name,pseudo,name_subcategory)VALUES ("
+		String sql = ("INSERT INTO  product (name,pseudo,price,quantity,name_subcategory)VALUES ("
 				+ "'" +  this.name + "','"
-				+ this.seller.getPseudo() + "','" 
+				+ this.seller.getPseudo() + "','"
+				+ this.price + "','" 
+				+ this.quantity + "','" 
 				+ this.subCategory.getName() + "')");
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
@@ -84,6 +90,8 @@ public class ProductJDBC extends Product{
 					String pseudo = (String) rs.getObject("pseudo");
 					sellerJDBC = new SellerJDBC(pseudo);			
 					this.seller = sellerJDBC.readByPseudo();
+					this.price = (float) rs.getObject("price");
+					this.quantity = (int) rs.getObject("quantity");
 					String nomCategory  = (String) rs.getObject("name_subcategory");
 					subCategoryJDBC = new SubcategoryJDBC(nomCategory);
 					this.subCategory = subCategoryJDBC.readByName();

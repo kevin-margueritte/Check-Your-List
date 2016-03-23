@@ -100,5 +100,7 @@ public abstract class Activity {
 	public abstract boolean addTask();
 	public abstract boolean deleteTask();
 	public abstract boolean deleteByPseudoUserAndName();
+	public abstract List<Task> readTaskByActivity();
+
 	
 }

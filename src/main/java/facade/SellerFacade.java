@@ -17,16 +17,21 @@ public class SellerFacade {
 	//initialisation du manager
 	public SellerFacade() {
 		this.manProd = new ProductManager();
+		this.cm = new CategoryManager();
 	}
 	
+	
+	/* obsolète
 	public boolean createProduct(String name, String nomSeller ,String nomSubCategory) {
 		return this.manProd.createProduct(name,  nomSeller, nomSubCategory);
 	}
+	*/
 	
+	/*
 	public boolean deleteProduct(String name, String nomSeller ,String nomSubCategory) {
 		return this.manProd.deleteProduct(name,  nomSeller, nomSubCategory);
 	}
-	
+	*/
 	
 	public List<Subcategory> getAllSubcategories(Category c) {
 		return this.cm.getAllSubcategories(c);
@@ -34,5 +39,11 @@ public class SellerFacade {
 	
 	public List<Category> getAllCategories() {
 		return this.cm.getAllCategories();
+	}
+
+	public boolean createProduct(String name, Seller seller, float price, int quantity,
+			Subcategory subCategory) {
+			return this.manProd.createProduct(name, seller, price, quantity, subCategory);
+		
 	}
 }

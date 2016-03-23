@@ -148,8 +148,7 @@ public class ActivityJDBC extends Activity {
 	
 	@Override
 	public boolean deleteByPseudoUserAndName() {
-		String sql = ("delete from activity where pseudo_user= '"+ this.getUser().getPseudo() +"' AND"
-				+ "title = '" + this.getTitle() + "'");
+		String sql = ("delete from activity where pseudo_user= '"+ this.getUser().getPseudo() +"' AND titre = '" + this.getTitle() + "'");
 		Activity c = null;
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
@@ -180,21 +179,33 @@ public class ActivityJDBC extends Activity {
 		return this.title;
 	}
 	
-	public static void main (String args[]){
-		/*public abstract boolean save();
-		public abstract Task readByName();
-		public abstract List<Task> readAll();
-		public abstract boolean delete();*/
-		Category cat = new CategoryJDBC("cat1");
-		cat= cat.readByName();
-		Subcategory sub = new SubcategoryJDBC("sscat1");
-		sub= sub.readByName();
-		User user = new UserJDBC("titi");
-		user =  (User) user.readByPseudo();
-		ActivityJDBC activity = new ActivityJDBC("agio", "a", false, "2016-03-23",(Subcategory) sub,(User) user);
-		//Task task = new TaskJDBC("name", "description", "frequency", false, "1993-10-05", "1993-10-05", activity);
-		activity.save();
+	@Override
+	public List<Task> readTaskByActivity() {
+		String sql = ("SELECT * FROM task WHERE titre_activity = '" +  this.title + "'");
+		Task c = null;
+		int i=0;
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			
+			ResultSet rs = stm.executeQuery(sql);
+			
+			while(rs.next()){
+					this.listTask.get(i).setName((String) rs.getObject("name"));
+					this.listTask.get(i).setDescription((String) rs.getObject("description"));
+					this.listTask.get(i).setFrequency((String) rs.getObject("frequency"));
+					this.listTask.get(i).setChecked((Boolean) rs.getObject("checked"));
+					this.listTask.get(i).setStartDate((String) rs.getObject("startdate").toString());		
+					this.listTask.get(i).setActivity(this);
+					i++;
+			}
+				rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return this.listTask;
 	}
+
 	
 
 }
