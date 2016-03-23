@@ -64,7 +64,7 @@ public class ProductManager {
 		if(prod != null){
 			return prod.delete();
 		}
-		//return false;
+		return false;
 	}
 	
 	
