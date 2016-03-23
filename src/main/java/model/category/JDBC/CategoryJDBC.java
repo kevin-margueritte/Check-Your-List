@@ -37,7 +37,7 @@ public class CategoryJDBC extends Category {
 				if (resultMeta.getTableName(1).equals("category")) {
 					this.name = (String) rs.getObject("name");
 					this.shortDescription = (String) rs.getObject("shortDescription");
-					this.detailedDescription = (String) rs.getObject("detailedDescription");
+					this.detailedDescription = (String) rs.getObject("detailledDescription");
 					c = new CategoryJDBC(name, shortDescription, detailedDescription);
 				}
 				rs.close();
@@ -84,6 +84,7 @@ public class CategoryJDBC extends Category {
 		return list;
 	}
 	
+	@Override
 	public boolean categoryExist(String catName) {
 			List<Category> list = getAllCategories();
 			Iterator<Category> iterator = list.iterator();
@@ -124,7 +125,8 @@ public class CategoryJDBC extends Category {
 	public String toString() {
 		return this.name;
 	}
-	
+
+
 	
 	
 }

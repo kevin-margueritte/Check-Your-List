@@ -64,6 +64,12 @@ public abstract class Task {
 		public void setDescription(String description) {
 			this.description = description;
 		}
+		public String getFrequency() {
+			return frequency;
+		}
+		public void setFrequency(String frequency) {
+			this.frequency = frequency;
+		}
 		public boolean isChecked() {
 			return checked;
 		}
@@ -90,7 +96,5 @@ public abstract class Task {
 		}
 		
 		public abstract boolean save();
-		public abstract Task readByName();
-		public abstract List<Task> readAll();
 		public abstract boolean delete();
 }

@@ -9,10 +9,14 @@ import java.util.List;
 
 import database.ConnectionDB;
 import model.activity.Activity;
+import model.category.Category;
 import model.category.Subcategory;
+import model.category.JDBC.CategoryJDBC;
 import model.category.JDBC.SubcategoryJDBC;
 import model.person.User;
 import model.person.JDBC.UserJDBC;
+import model.task.Task;
+import model.task.JDBC.TaskJDBC;
 
 public class ActivityJDBC extends Activity {
 	
@@ -151,6 +155,34 @@ public class ActivityJDBC extends Activity {
 	public String toString() {
 		return this.title;
 	}
+	
+	@Override
+	public List<Task> readTaskByActivity() {
+		String sql = ("SELECT * FROM task WHERE titre_activity = '" +  this.title + "'");
+		Task c = null;
+		int i=0;
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			
+			ResultSet rs = stm.executeQuery(sql);
+			
+			while(rs.next()){
+					this.listTask.get(i).setName((String) rs.getObject("name"));
+					this.listTask.get(i).setDescription((String) rs.getObject("description"));
+					this.listTask.get(i).setFrequency((String) rs.getObject("frequency"));
+					this.listTask.get(i).setChecked((Boolean) rs.getObject("checked"));
+					this.listTask.get(i).setStartDate((String) rs.getObject("startdate").toString());		
+					this.listTask.get(i).setActivity(this);
+					i++;
+			}
+				rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return this.listTask;
+	}
+
 	
 
 }
