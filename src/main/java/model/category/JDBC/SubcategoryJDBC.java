@@ -62,7 +62,7 @@ public class SubcategoryJDBC extends Subcategory {
 	
 	@Override
 	public List<Subcategory> getAllSubcategories() {
-		String sql = ("SELECT * FROM subCategory");
+		String sql = ("SELECT * FROM subcategory");
 		List<Subcategory> list = new ArrayList<Subcategory>();
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
@@ -70,10 +70,10 @@ public class SubcategoryJDBC extends Subcategory {
 			while ( rs.next() ) {
 				Subcategory subcat = new SubcategoryJDBC();
 				ResultSetMetaData resultMeta = rs.getMetaData();
-				if (resultMeta.getTableName(1).equals("subCategory")) {
+				if (resultMeta.getTableName(1).equals("subcategory")) {
 					subcat.setName((String) rs.getObject("name"));
-					subcat.setDetailedDescription((String) rs.getObject("detailledDescription"));
-					subcat.setShortDescription((String) rs.getObject("shortDescription"));
+					subcat.setDetailedDescription((String) rs.getObject("detailleddescription"));
+					subcat.setShortDescription((String) rs.getObject("shortdescription"));
 					list.add(subcat);
 				}
 			}
@@ -95,5 +95,10 @@ public class SubcategoryJDBC extends Subcategory {
 				}
 			}	
 			return false;
+	}
+	
+	@Override
+	public String toString() {
+		return this.name;
 	}
 }
