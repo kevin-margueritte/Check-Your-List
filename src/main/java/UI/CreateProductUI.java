@@ -93,7 +93,7 @@ public class CreateProductUI extends JFrame implements ActionListener {
 		lblQuantity.setBounds(10, 146, 58, 14);
 		getContentPane().add(lblQuantity);
 		
-		this.quantity = new JFormattedTextField();
+		this.quantity = new JFormattedTextField(new Integer(0));
 		this.quantity.setBounds(10, 171, 138, 20);
 		getContentPane().add(this.quantity);
 	
@@ -167,11 +167,10 @@ public class CreateProductUI extends JFrame implements ActionListener {
 			boolean bool;
 			bool = this.sellface.createProduct(this.nameProduct.getText(),this.seller,Float.parseFloat(this.price.getText()),Integer.parseInt(this.quantity.getText()), 
 				(Subcategory) this.comboSubcategory.getSelectedItem());
+			System.out.println(bool);
 			if(bool){
 				JOptionPane.showMessageDialog(this,
-						"Product validate",
-					    "Validate",
-					    JOptionPane.YES_NO_OPTION);
+					    "You have created your product.");
 			}
 		}
 	}

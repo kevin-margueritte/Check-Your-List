@@ -40,18 +40,22 @@ public class ProductJDBC extends Product{
 	  [...]
 	 */
 	public boolean save(){
-		String sql = ("INSERT INTO  product (name,pseudo,price,quantity,name_subcategory)VALUES ("
-				+ "'" +  this.name + "','"
-				+ this.seller.getPseudo() + "','"
-				+ this.price + "','" 
-				+ this.quantity + "','" 
-				+ this.subCategory.getName() + "')");
-		try {
-			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
-			return stm.execute(sql);
-		} catch (SQLException e) 
-			{e.printStackTrace();}
+		if (!checkProductExist()){
+			String sql = ("INSERT INTO  product (name,pseudo,price,quantity,name_subcategory)VALUES ("
+					+ "'" +  this.name + "','"
+					+ this.seller.getPseudo() + "','"
+					+ this.price + "','" 
+					+ this.quantity + "','" 
+					+ this.subCategory.getName() + "')");
+			try {
+				Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+				return stm.execute(sql);
+			} catch (SQLException e) 
+				{e.printStackTrace();}
+		}
+		System.out.println("produit exist");
 		return false;
+		
 	}
 	
 	public boolean delete(){
@@ -106,7 +110,21 @@ public class ProductJDBC extends Product{
 		return (Product)u;
 	}
 	
+	public boolean checkProductExist(){
+		String sql1 = ("SELECT * FROM product "
+				+ "WHERE name = '" + this.name + "' AND"
+				+ " pseudo = '" + this.seller.getPseudo() +"' AND"
+				+ " name_subcategory = '"+ this.subCategory.getName() +"'");
+		try {
+			
+			Statement stm1 = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			ResultSet rs1 = stm1.executeQuery(sql1);
+			return rs1.next();
+		} catch (SQLException e) {e.printStackTrace();}
+		return true;
+	}
 	
+}
 	
 	
 	
@@ -119,6 +137,5 @@ public class ProductJDBC extends Product{
 	}*/
 
 	
-}
 
 
