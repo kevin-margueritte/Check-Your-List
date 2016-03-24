@@ -3,6 +3,10 @@
  *******************************************************************************/
 package model.person;
 
+import java.util.List;
+
+import model.product.Product;
+
 // Start of user code (user defined imports)
 
 // End of user code
@@ -13,39 +17,13 @@ package model.person;
  * @author kevine2710
  */
 public abstract class Seller extends Person {
-	/**
-	 * Description of the property siret.
-	 */
+
 	protected String siret;
-	
-	/**
-	 * Description of the property phoneNumber.
-	 */
 	protected String phoneNumber;
-	
-	/**
-	 * Description of the property houseNumber.
-	 */
 	protected String houseNumber;
-	
-	/**
-	 * Description of the property street.
-	 */
 	protected String street;
-	
-	/**
-	 * Description of the property postCode.
-	 */
 	protected String postCode;
-	
-	/**
-	 * Description of the property mail.
-	 */
 	protected String mail;
-	
-	/**
-	 * Description of the property city.
-	 */
 	protected String city;
 	
 	// Start of user code (user defined attributes for Seller)
@@ -193,5 +171,5 @@ public abstract class Seller extends Person {
 	}
 
 	public abstract boolean sellerExist();
-
+	public abstract List<Product> readAllProducts();
 }

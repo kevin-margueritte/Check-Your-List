@@ -32,8 +32,7 @@ public class ActivityManager {
 	}
 	
 	public List<Activity> getAllActivities(User u) {
-		Activity act = this.fact.createActivity(u);
-		return act.readAllByUser();
+		return u.readAllActivities();
 	}
 	
 	public boolean deleteByPseudoUserAndName(Activity act) {

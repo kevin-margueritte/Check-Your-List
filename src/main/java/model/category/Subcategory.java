@@ -2,8 +2,6 @@ package model.category;
 
 import java.util.List;
 
-import model.person.Person;
-
 public abstract class Subcategory {
 
 	protected String name;
@@ -58,7 +56,4 @@ public abstract class Subcategory {
 
 	public abstract Subcategory readByName();
 	public abstract boolean save();
-	public abstract List<Subcategory> getAllSubcategoriesByCategoryName();
-
-	
 }

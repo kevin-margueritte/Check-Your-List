@@ -4,11 +4,16 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import database.ConnectionDB;
-import model.person.Person;
+import model.activity.Activity;
+import model.activity.JDBC.ActivityJDBC;
+import model.category.JDBC.SubcategoryJDBC;
 import model.person.Seller;
-import model.person.User;
+import model.product.Product;
+import model.product.JDBC.ProductJDBC;
 
 public class SellerJDBC extends Seller {
 	
@@ -96,8 +101,37 @@ public class SellerJDBC extends Seller {
 		return true;
 	}
 	
-	
-	
-	
-	
+	@Override
+	public List<Product> readAllProducts() {
+		String sql = ("select * from product where pseudo='"+this.getPseudo()+"' ");
+		Product prod = null;
+		List<Product> listProd= new ArrayList<Product>();
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			SubcategoryJDBC subCategory;
+			ResultSetMetaData resultMeta;
+			String nameSubcategory;
+			while(rs.next()){
+				resultMeta = rs.getMetaData();
+				prod.setName((String) rs.getObject("name"));
+				prod.setIdProd((int) rs.getObject("id"));
+				prod.setSeller(this);
+				prod.setPrice((float) rs.getObject("price"));
+				prod.setQuantity((int) rs.getObject("quantity"));
+				nameSubcategory  = (String) rs.getObject("name_subcategory");
+				subCategory = new SubcategoryJDBC(nameSubcategory);
+				subCategory.readByName();
+				prod.setSubCategory(subCategory);
+				listProd.add(prod);
+			}
+			rs.close();
+			return listProd;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

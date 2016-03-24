@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import model.category.Subcategory;
+import model.comment.Comment;
 import model.person.User;
 import model.task.Task;
 
@@ -95,10 +96,12 @@ public abstract class Activity {
 	public abstract boolean save();
 	public abstract Activity readByTitle();
 	public abstract List<Activity> readAll();
-	public abstract List<Activity> readAllByUser();
 	public abstract boolean delete();
 	public abstract boolean addTask();
 	public abstract boolean deleteTask();
 	public abstract boolean deleteByPseudoUserAndName();
+	public abstract List<Task> readTaskByActivity();
+	public abstract List<Comment> readAllComments();
+
 	
 }

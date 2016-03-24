@@ -8,12 +8,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import database.ConnectionDB;
 import model.category.Category;
-import model.person.User;
-import model.person.JDBC.UserJDBC;
+import model.category.Subcategory;
 
 public class CategoryJDBC extends Category {
 	
@@ -40,7 +37,7 @@ public class CategoryJDBC extends Category {
 				if (resultMeta.getTableName(1).equals("category")) {
 					this.name = (String) rs.getObject("name");
 					this.shortDescription = (String) rs.getObject("shortDescription");
-					this.detailedDescription = (String) rs.getObject("detailedDescription");
+					this.detailedDescription = (String) rs.getObject("detailledDescription");
 					c = new CategoryJDBC(name, shortDescription, detailedDescription);
 				}
 				rs.close();
@@ -87,6 +84,7 @@ public class CategoryJDBC extends Category {
 		return list;
 	}
 	
+	@Override
 	public boolean categoryExist(String catName) {
 			List<Category> list = getAllCategories();
 			Iterator<Category> iterator = list.iterator();
@@ -97,13 +95,38 @@ public class CategoryJDBC extends Category {
 			}	
 			return false;
 	}
-
+	
+	@Override
+	public List<Subcategory> getAllSubcategories() {
+		String sql = ("SELECT * FROM subcategory WHERE name_category = '" + this.getName() + "'");
+		List<Subcategory> list = new ArrayList<Subcategory>();
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while ( rs.next() ) {
+				Subcategory subcat = new SubcategoryJDBC();
+				ResultSetMetaData resultMeta = rs.getMetaData();
+				if (resultMeta.getTableName(1).equals("subcategory")) {
+					subcat.setName((String) rs.getObject("name"));
+					subcat.setDetailedDescription((String) rs.getObject("detailleddescription"));
+					subcat.setShortDescription((String) rs.getObject("shortdescription"));
+					list.add(subcat);
+				}
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
 	
 	@Override
 	public String toString() {
 		return this.name;
 	}
-	
+
+
 	
 	
 }
