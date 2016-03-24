@@ -36,7 +36,7 @@ public class CommentJDBC extends Comment {
 		} catch (SQLException e) {}
 		return false;
 	}
-	
+	/*
 	@Override
 	public List<Comment> getAllCommentsByActivity() {
 		String sql = ("SELECT * FROM commentActivity WHERE titre_activity = '" + this.activity.getTitle() + "'");
@@ -60,7 +60,7 @@ public class CommentJDBC extends Comment {
 		}
 		return list;
 	}
-
+	*/
 	
 	
 	

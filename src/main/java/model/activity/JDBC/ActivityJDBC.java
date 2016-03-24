@@ -13,6 +13,8 @@ import model.category.Category;
 import model.category.Subcategory;
 import model.category.JDBC.CategoryJDBC;
 import model.category.JDBC.SubcategoryJDBC;
+import model.comment.Comment;
+import model.comment.JDBC.CommentJDBC;
 import model.person.User;
 import model.person.JDBC.UserJDBC;
 import model.task.Task;
@@ -181,6 +183,31 @@ public class ActivityJDBC extends Activity {
 			e.printStackTrace();
 		}
 		return this.listTask;
+	}
+	
+	
+	@Override
+	public List<Comment> readAllComments() {
+		String sql = ("SELECT * FROM commentActivity WHERE titre_activity = '" + this.getTitle() + "'");
+		List<Comment> list = new ArrayList<Comment>();
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while ( rs.next() ) {
+				Comment comment = new CommentJDBC();
+				ResultSetMetaData resultMeta = rs.getMetaData();
+				if (resultMeta.getTableName(1).equals("commentactivity")) {
+					comment.setContent((String) rs.getObject("content"));
+					comment.setPostingDate((String) rs.getObject("postingdate"));
+					list.add(comment);
+				}
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 	

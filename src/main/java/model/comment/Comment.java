@@ -47,6 +47,6 @@ public abstract class Comment {
 	}
 
 	public abstract boolean addComment();
-	public abstract List<Comment> getAllCommentsByActivity();
+	//public abstract List<Comment> getAllCommentsByActivity();
 	
 }

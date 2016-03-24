@@ -101,6 +101,7 @@ public abstract class Activity {
 	public abstract boolean deleteTask();
 	public abstract boolean deleteByPseudoUserAndName();
 	public abstract List<Task> readTaskByActivity();
+	public abstract List<Comment> readAllComments();
 
 	
 }

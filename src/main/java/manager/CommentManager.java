@@ -23,10 +23,15 @@ public class CommentManager {
 		return res;
 	}
 	
-	public List<Comment> getAllCommentsByActivity() {
+	public List<Comment> getAllComments(Activity a) {
+		/*
 		Comment comment = this.fact.createComment(); // a vérifier !
 		return comment.getAllCommentsByActivity();
+		*/
+		return a.readAllComments();
 	}
+	
+	
 	
 	
 }
