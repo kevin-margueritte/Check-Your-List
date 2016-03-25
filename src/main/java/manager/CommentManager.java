@@ -1,5 +1,6 @@
 package manager;
 
+import java.util.Calendar;
 import java.util.List;
 
 import factory.comment.AbstractCommentFactory;
@@ -16,11 +17,10 @@ public class CommentManager {
 		this.fact = new CommentFactory();
 	}
 	
-	public boolean createComment(String content, String postingDate, Activity activity) {
-		boolean res = false;
-		Comment c = this.fact.createComment(content,postingDate,activity);
-		res = ((CommentJDBC)c).addComment();
-		return res;
+	public boolean createComment(String content, Activity activity) {
+		java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());			
+		Comment c = this.fact.createComment(content,date.toString(),activity);		
+		return c.addComment();
 	}
 	
 	public List<Comment> getAllComments(Activity a) {

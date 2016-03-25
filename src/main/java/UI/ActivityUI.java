@@ -1,27 +1,35 @@
 package UI;
 
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Iterator;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
+import facade.ActivityFacade;
 import model.activity.Activity;
 import model.activity.JDBC.ActivityJDBC;
 import model.person.User;
 import model.person.JDBC.UserJDBC;
 
 @SuppressWarnings("serial")
-public class ActivityUI extends JFrame {
+public class ActivityUI extends JFrame implements ActionListener {
 	
 	private Activity activity;
 	private User user;
+	private ActivityFacade af;
+	private JTextPane textPaneCommentContent;
+	
 	
 	public static void main(String args[]) {
 		ActivityUI.launch();
@@ -50,6 +58,8 @@ public class ActivityUI extends JFrame {
 	public ActivityUI(User u, Activity act) {
 		this.activity = act;
 		this.user = u;
+		this.af = new ActivityFacade();
+		
 		getContentPane().setLayout(null);
 		
 		JLabel lblActivityName = new JLabel(this.activity.getTitle());
@@ -104,6 +114,55 @@ public class ActivityUI extends JFrame {
 		JButton btnAddTask = new JButton("Add task");
 		btnAddTask.setBounds(218, 301, 89, 23);
 		getContentPane().add(btnAddTask);
-		setSize(547,462);
+		
+		textPaneCommentContent = new JTextPane();
+		textPaneCommentContent.setBounds(10, 494, 500, 103);
+		getContentPane().add(textPaneCommentContent);
+		
+		JLabel lblAddComment = new JLabel("Add comment ");
+		lblAddComment.setBounds(10, 458, 105, 20);
+		getContentPane().add(lblAddComment);
+		
+		JButton btnAddComment = new JButton("Add comment");
+		btnAddComment.addActionListener(this);
+		btnAddComment.setBounds(178, 630, 162, 29);
+		getContentPane().add(btnAddComment);
+		setSize(547,731);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JButton button = (JButton) e.getSource();		
+		if ( button.getText().equals("Add comment") ) {
+			if (this.formComplete()) {
+				this.af.createComment(this.textPaneCommentContent.getText(), activity);
+				JOptionPane.showMessageDialog(this,
+						"Your comment has been added, it will appears the next time you'll see this activity.");
+			}
+			
+			//this.cf.createCategory(this.categoryName.getText(), this.textShortDescription.getText(),this.textDetailedDescription.getText());
+			//ActivityUI frame = new ActivityUI(this.u, (Activity) button.getClientProperty("activity"));
+		 	//frame.setVisible(true);
+		}		
+		/*
+		else {
+			this.pf.deleteActivity((Activity) button.getClientProperty("activity"));
+			Component[] com = button.getParent().getComponents();
+			for (int a = 0; a < com.length; a++) {
+			     com[a].setEnabled(false);
+			}
+		}	
+		*/ 		
+	}
+	
+	public boolean formComplete() {
+		if (this.textPaneCommentContent.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this,
+					"Please enter your comment to add it",
+				    "Error",
+				    JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		return true;
 	}
 }

@@ -68,7 +68,7 @@ public class ActivityJDBC extends Activity {
 			if ( rs.next() ) {
 				ResultSetMetaData resultMeta = rs.getMetaData();
 				if (resultMeta.getTableName(1).equals("activity")) {
-					this.title = (String) rs.getObject("titre");
+				this.title = (String) rs.getObject("titre");
 					this.description = (String) rs.getObject("description");
 					this.visible = (Boolean) rs.getObject("visible");
 					this.creationDate = (String) rs.getObject("creationdate").toString();
