@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -82,7 +83,7 @@ public class CreateProductUI extends JFrame implements ActionListener {
 		lblNewLabel.setBounds(10, 78, 138, 14);
 		getContentPane().add(lblNewLabel);
 		// <--------------- Obligé en float
-		this.price = new JFormattedTextField(new Float(0.00));
+		this.price = new JFormattedTextField(new DecimalFormat("####.##"));
 		this.price.setBounds(10, 103, 138, 20);
 		getContentPane().add(this.price);
 		
@@ -174,6 +175,10 @@ public class CreateProductUI extends JFrame implements ActionListener {
 	}
 	
 	private boolean formComplete() {
+		String str3 = this.price.getText(); 
+    	float f1 = Float.parseFloat(str3);
+    	System.out.println(str3);
+    	System.out.println(f1);
 		if (this.nameProduct.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(this,
 					"Product name is empty",
@@ -193,12 +198,26 @@ public class CreateProductUI extends JFrame implements ActionListener {
 				    "Error",
 				    JOptionPane.ERROR_MESSAGE);
 			return false;	
+		}else{ 
+			String str = this.price.getText(); 
+        	float f = Float.parseFloat(str);
+        	String str2 = this.quantity.getText();
+        	int i = Integer.parseInt(str2);
+			if(f == 0.0){
+				JOptionPane.showMessageDialog(this,
+						"Price need to be a Number",
+					    "Error",
+					    JOptionPane.ERROR_MESSAGE);
+				return false;	
+			}else if(i == 0){
+				JOptionPane.showMessageDialog(this,
+						"Quantity need to be a Number",
+					    "Error",
+					    JOptionPane.ERROR_MESSAGE);
+				return false;	
+			}
 		}
-		else {
-			return true;
-		}
-		
+		return true;	
 	}
-	
 	
 }
