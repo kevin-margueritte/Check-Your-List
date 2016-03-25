@@ -1,12 +1,10 @@
 package manager;
 
 import java.util.Calendar;
-import java.util.List;
 
 import factory.task.AbstractTaskFactory;
 import factory.task.TaskFactory;
 import model.activity.Activity;
-import model.task.JDBC.TaskJDBC;
 import model.task.Task;
 
 

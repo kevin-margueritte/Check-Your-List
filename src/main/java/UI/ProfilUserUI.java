@@ -41,7 +41,7 @@ public class ProfilUserUI extends JFrame implements ActionListener {
 		setResizable(false);
 		getContentPane().setLayout(null);
 		
-		JLabel lblPseudo = new JLabel("Welcolm, " + u.getPseudo());
+		JLabel lblPseudo = new JLabel("Welcolme, " + u.getPseudo());
 		lblPseudo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPseudo.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblPseudo.setBounds(10, 11, 427, 14);

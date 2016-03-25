@@ -104,25 +104,26 @@ public class SellerJDBC extends Seller {
 	@Override
 	public List<Product> readAllProducts() {
 		String sql = ("select * from product where pseudo='"+this.getPseudo()+"' ");
-		Product prod = null;
+		Product prod = new ProductJDBC();
 		List<Product> listProd= new ArrayList<Product>();
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
 			ResultSet rs = stm.executeQuery(sql);
 			SubcategoryJDBC subCategory;
-			ResultSetMetaData resultMeta;
+			//ResultSetMetaData resultMeta;
 			String nameSubcategory;
 			while(rs.next()){
-				resultMeta = rs.getMetaData();
+				//resultMeta = rs.getMetaData();
 				prod.setName((String) rs.getObject("name"));
 				prod.setIdProd((int) rs.getObject("id"));
 				prod.setSeller(this);
-				prod.setPrice((float) rs.getObject("price"));
+				prod.setPrice(rs.getFloat("price"));
 				prod.setQuantity((int) rs.getObject("quantity"));
 				nameSubcategory  = (String) rs.getObject("name_subcategory");
 				subCategory = new SubcategoryJDBC(nameSubcategory);
 				subCategory.readByName();
 				prod.setSubCategory(subCategory);
+				prod = new ProductJDBC();
 				listProd.add(prod);
 			}
 			rs.close();

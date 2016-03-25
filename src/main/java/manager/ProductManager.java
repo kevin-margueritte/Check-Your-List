@@ -25,7 +25,7 @@ public class ProductManager {
 	}
 	
 	public List<Product> getAllProductBySeller(Seller s) {
-		return null;
+		return s.readAllProducts();
 	}
 	
 	/* obsolète

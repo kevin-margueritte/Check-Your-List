@@ -34,6 +34,10 @@ public abstract class Product {
 		
 		// End of user code
 	}
+	
+	public Product(){
+		super();
+	}
 
 	public Product(int id,String name, Seller seller, Subcategory subCategory) {
 		// Start of user code constructor for User)

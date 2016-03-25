@@ -5,19 +5,19 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import UI.LoginUI;
 import database.ConnectionDB;
-import model.activity.Activity;
 import model.category.Subcategory;
 import model.category.JDBC.SubcategoryJDBC;
 import model.person.Seller;
-import model.person.User;
 import model.person.JDBC.SellerJDBC;
-import model.person.JDBC.UserJDBC;
 import model.product.Product;
 
 
-public class ProductJDBC extends Product{
+public class ProductJDBC extends Product {
+	
+	public ProductJDBC() {
+		super();
+	}
 	
 	public ProductJDBC(String name, Seller seller, Subcategory subCategory){
 		super(name,seller,subCategory);

@@ -1,6 +1,5 @@
 package manager;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -31,6 +30,12 @@ public class ActivityManager {
 		return act.save();
 	}
 	
-
+	public List<Activity> getAllActivities(User u) {
+		return u.readAllActivities();
+	}
+	
+	public boolean deleteByPseudoUserAndName(Activity act) {
+		return act.deleteByPseudoUserAndName();
+	}
 
 }

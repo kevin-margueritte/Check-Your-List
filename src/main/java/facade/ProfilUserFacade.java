@@ -14,6 +14,7 @@ public class ProfilUserFacade {
 	
 	public ProfilUserFacade() {
 		this.am = new ActivityManager();
+		this.pm = new PersonManager();
 	}
 	
 	public List<Activity> getAllActivities(User u) {
