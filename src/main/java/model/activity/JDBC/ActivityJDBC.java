@@ -40,8 +40,8 @@ public class ActivityJDBC extends Activity {
 		super(id, title, description, visible, creationDate, subcategory, user);
 	}
 	
-	public ActivityJDBC(int id, String title) {
-		super(id, title);
+	public ActivityJDBC(String title) {
+		super(title);
 	}
 
 	@Override
@@ -96,7 +96,7 @@ public class ActivityJDBC extends Activity {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
 			ResultSet rs = stm.executeQuery(sql);
 			while(rs.next()){
-				act = new ActivityJDBC(1,rs.getString(2));
+				act = new ActivityJDBC(rs.getString(2));
 				listAct.add(act.readByTitle());
 			}
 			rs.close();

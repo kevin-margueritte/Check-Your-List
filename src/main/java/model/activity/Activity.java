@@ -50,8 +50,7 @@ public abstract class Activity {
 		this.user = user;
 	}
 
-	public Activity(int id2, String title2) {
-		this.id = id2;
+	public Activity(String title2) {
 		this.title = title2;
 
 	}

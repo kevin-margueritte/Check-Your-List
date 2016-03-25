@@ -32,7 +32,8 @@ public class TaskJDBC extends Task {
 			try {
 				Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
 				return stm.execute(sql);
-			} catch (SQLException e) {}
+			} catch (SQLException e) 
+			{e.printStackTrace();}
 			return false;
 		}
 
@@ -48,7 +49,6 @@ public class TaskJDBC extends Task {
 				return stm.execute(sql);
 
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return false;

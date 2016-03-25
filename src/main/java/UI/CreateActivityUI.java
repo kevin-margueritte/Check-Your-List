@@ -89,7 +89,6 @@ public class CreateActivityUI extends JFrame implements ActionListener {
 		this.initComboBoxCategory();
 		
 		JLabel lblCategory = new JLabel("Category");
-		
 		lblCategory.setBounds(236, 27, 46, 14);
 		getContentPane().add(lblCategory);
 		
