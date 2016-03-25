@@ -1,7 +1,4 @@
 package model.task;
-import java.util.Date;
-import java.util.List;
-
 import model.activity.Activity;
 
 
