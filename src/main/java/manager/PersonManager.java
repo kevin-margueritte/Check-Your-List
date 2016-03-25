@@ -2,9 +2,11 @@ package manager;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import factory.person.AbstractPersonFactory;
 import factory.person.PersonFactory;
+import model.activity.Activity;
 import model.person.Person;
 import model.person.Seller;
 import model.person.User;
@@ -71,6 +73,14 @@ public class PersonManager {
 		}
 
 		return sb.toString();
+	}
+	
+	public List<Activity> getAllActivities(User u) {
+		return u.readAllActivities();
+	}
+	
+	public boolean deleteByPseudoUserAndName(Activity act) {
+		return act.deleteByPseudoUserAndName();
 	}
 
 }

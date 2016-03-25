@@ -31,12 +31,6 @@ public class ActivityManager {
 		return act.save();
 	}
 	
-	public List<Activity> getAllActivities(User u) {
-		return u.readAllActivities();
-	}
-	
-	public boolean deleteByPseudoUserAndName(Activity act) {
-		return act.deleteByPseudoUserAndName();
-	}
+
 
 }
