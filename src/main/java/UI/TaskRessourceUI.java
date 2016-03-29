@@ -17,9 +17,7 @@ import facade.RessourceFacade;
 import model.activity.Activity;
 import model.activity.JDBC.ActivityJDBC;
 import model.category.Category;
-import model.category.Subcategory;
-import model.person.*;
-import javax.swing.JPanel;
+import model.person.User;
 
 @SuppressWarnings("serial")
 public class TaskRessourceUI extends JFrame implements ActionListener{
@@ -44,11 +42,12 @@ public class TaskRessourceUI extends JFrame implements ActionListener{
 	 * Launch the application.
 	 */
 	public static void launch() {
-		System.out.print("launch");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TaskRessourceUI frame = new TaskRessourceUI();
+					Activity a = new ActivityJDBC("a");
+					a.readByTitle();
+					TaskRessourceUI frame = new TaskRessourceUI(a);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -57,13 +56,8 @@ public class TaskRessourceUI extends JFrame implements ActionListener{
 		});
 	}
 	
-	public TaskRessourceUI() {
-		System.out.print("UI");
-		/**
-		 * Set Activity
-		 */
-		this.a= new ActivityJDBC("a");
-		this.a.readByTitle();
+	public TaskRessourceUI(Activity act) {
+		this.a= act;
 		
 		this.rf = new RessourceFacade();
 		setResizable(false);
@@ -159,12 +153,12 @@ public class TaskRessourceUI extends JFrame implements ActionListener{
 		}else */
 		if(e.getSource() == this.btnValidate && this.formComplete()) {
 			boolean visibility = false;
-			if ( ((String) this.comboVisibility.getSelectedItem()).equals("true") ) {
+			if ( ((String) this.comboVisibility.getSelectedItem()).equals("True") ) {
 				visibility = true;
 			}
 			System.out.print("create");
-			this.rf.createTask(this.textNameTask.getText(), this.textDescription.getText(),this.textFrequency.getText(), visibility, this.textStartDate.getText(), this.textEndDate.getText(),
-				 this.a);
+			this.rf.createTask(this.textNameTask.getText(), this.textDescription.getText(),
+					this.textFrequency.getText(), visibility, this.textStartDate.getText(), this.textEndDate.getText(), this.a);
 		}
 	}
 	

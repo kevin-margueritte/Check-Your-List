@@ -60,7 +60,7 @@ public class ProfilSellerUI extends JFrame implements ActionListener {
 			this.addPanelProduct(pr, idx);
 			idx ++;
 		}
-		setSize(453, (38 * (list.size() + 1)) + 50);
+		setSize(453, (38 * (list.size() + 1)) + 60);
 	}
 	
 	public void addPanelProduct(Product prod, int idx) {

@@ -1,11 +1,13 @@
 package UI;
 
-import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -21,6 +23,8 @@ import model.activity.Activity;
 import model.activity.JDBC.ActivityJDBC;
 import model.person.User;
 import model.person.JDBC.UserJDBC;
+import model.product.Product;
+import model.task.Task;
 
 @SuppressWarnings("serial")
 public class ActivityUI extends JFrame implements ActionListener {
@@ -29,6 +33,8 @@ public class ActivityUI extends JFrame implements ActionListener {
 	private User user;
 	private ActivityFacade af;
 	private JTextPane textPaneCommentContent;
+	private JButton btnAddTask;
+	private JLabel lblAddComment;
 	
 	
 	public static void main(String args[]) {
@@ -81,10 +87,6 @@ public class ActivityUI extends JFrame implements ActionListener {
 		lblTaskToDo.setBounds(10, 171, 153, 14);
 		getContentPane().add(lblTaskToDo);
 		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("New check box");
-		chckbxNewCheckBox.setBounds(31, 201, 97, 23);
-		getContentPane().add(chckbxNewCheckBox);
-		
 		JLabel lblTaskList = new JLabel("Task list");
 		lblTaskList.setBounds(10, 331, 46, 14);
 		getContentPane().add(lblTaskList);
@@ -111,7 +113,8 @@ public class ActivityUI extends JFrame implements ActionListener {
 		btnNewButton_1.setBounds(315, 14, 89, 23);
 		panel.add(btnNewButton_1);
 		
-		JButton btnAddTask = new JButton("Add task");
+		btnAddTask = new JButton("Add task");
+		btnAddTask.addActionListener(this);
 		btnAddTask.setBounds(218, 301, 89, 23);
 		getContentPane().add(btnAddTask);
 		
@@ -119,7 +122,7 @@ public class ActivityUI extends JFrame implements ActionListener {
 		textPaneCommentContent.setBounds(10, 494, 500, 103);
 		getContentPane().add(textPaneCommentContent);
 		
-		JLabel lblAddComment = new JLabel("Add comment ");
+		lblAddComment = new JLabel("Add comment ");
 		lblAddComment.setBounds(10, 458, 105, 20);
 		getContentPane().add(lblAddComment);
 		
@@ -128,12 +131,39 @@ public class ActivityUI extends JFrame implements ActionListener {
 		btnAddComment.setBounds(178, 630, 162, 29);
 		getContentPane().add(btnAddComment);
 		setSize(547,731);
+		
+		this.initActivities();
+	}
+	
+	public void initActivities() {
+		List<Task> list = this.af.getAllTasks(this.activity);
+		int idx = 1;
+		for (Task t : list) {
+			this.addCheckBox(t, idx);
+			idx ++;
+		}
+	}
+	
+	public void addCheckBox(Task t, int idx) {
+		JCheckBox chckbxNewCheckBox = new JCheckBox(t.getName());
+		chckbxNewCheckBox.putClientProperty("task", t);
+		chckbxNewCheckBox.addActionListener(this);
+		chckbxNewCheckBox.setSelected(t.isChecked());
+		if (idx == 1) {
+			chckbxNewCheckBox.setBounds(31, 200, 97, 23);
+		}
+		else if (idx%2 == 1) {
+			chckbxNewCheckBox.setBounds(31, (175 + (25 * ((idx + 1)/2) )), 97, 23);
+		}
+		else {
+			chckbxNewCheckBox.setBounds(370, 175 + (25 * (idx/2) ), 97, 23);
+		}
+		getContentPane().add(chckbxNewCheckBox);
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		JButton button = (JButton) e.getSource();		
-		if ( button.getText().equals("Add comment") ) {
+	public void actionPerformed(ActionEvent e) {	
+		if ( e.getSource() == this.lblAddComment ) {
 			if (this.formComplete()) {
 				this.af.createComment(this.textPaneCommentContent.getText(), activity);
 				JOptionPane.showMessageDialog(this,
@@ -143,7 +173,16 @@ public class ActivityUI extends JFrame implements ActionListener {
 			//this.cf.createCategory(this.categoryName.getText(), this.textShortDescription.getText(),this.textDetailedDescription.getText());
 			//ActivityUI frame = new ActivityUI(this.u, (Activity) button.getClientProperty("activity"));
 		 	//frame.setVisible(true);
-		}		
+		}
+		else if (e.getSource() == this.btnAddTask) {
+			TaskRessourceUI tr = new TaskRessourceUI(this.activity);
+			tr.setVisible(true);
+		}
+		else if (e.getSource() instanceof JCheckBox) {
+			JCheckBox check = (JCheckBox) e.getSource();
+			Task t = (Task) check.getClientProperty("task");
+			this.af.updateChecked(t, check.isSelected());
+		}
 		/*
 		else {
 			this.pf.deleteActivity((Activity) button.getClientProperty("activity"));

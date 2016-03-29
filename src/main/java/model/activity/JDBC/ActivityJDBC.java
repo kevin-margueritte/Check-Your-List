@@ -68,7 +68,7 @@ public class ActivityJDBC extends Activity {
 			if ( rs.next() ) {
 				ResultSetMetaData resultMeta = rs.getMetaData();
 				if (resultMeta.getTableName(1).equals("activity")) {
-				this.title = (String) rs.getObject("titre");
+					this.title = (String) rs.getObject("titre");
 					this.description = (String) rs.getObject("description");
 					this.visible = (Boolean) rs.getObject("visible");
 					this.creationDate = (String) rs.getObject("creationdate").toString();
@@ -96,7 +96,17 @@ public class ActivityJDBC extends Activity {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
 			ResultSet rs = stm.executeQuery(sql);
 			while(rs.next()){
-				act = new ActivityJDBC(rs.getString(2));
+				act = new ActivityJDBC();
+				act.setTitle(rs.getString("titre"));
+				act.setDescription(rs.getString("description"));
+				act.setVisible(rs.getBoolean("visible"));
+				act.setCreationDate(rs.getString("creationdate"));
+				User u = (UserJDBC) new UserJDBC(rs.getString("pseudo_user"));
+				u.readByPseudo();
+				act.setUser(u);
+				SubcategoryJDBC subcat = new SubcategoryJDBC(rs.getString("name_subcategory"));
+				subcat.readByName();
+				act.setSubcategory(subcat);
 				listAct.add(act.readByTitle());
 			}
 			rs.close();
@@ -128,7 +138,6 @@ public class ActivityJDBC extends Activity {
 	@Override
 	public boolean deleteByPseudoUserAndName() {
 		String sql = ("delete from activity where pseudo_user= '"+ this.getUser().getPseudo() +"' AND titre = '" + this.getTitle() + "'");
-		Activity c = null;
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
 			
@@ -159,36 +168,35 @@ public class ActivityJDBC extends Activity {
 	}
 	
 	@Override
-	public List<Task> readTaskByActivity() {
-		String sql = ("SELECT * FROM task WHERE titre_activity = '" +  this.title + "'");
-		Task c = null;
-		int i=0;
+	public List<Task> readAllTask() {
+		String sql = ("select * from task where titre_activity='"+ this.getTitle() +"' and pseudo_customer='"+ this.getUser().getPseudo() +"'");
+		Task t = null;
+		List<Task> listTask= new ArrayList<Task>();
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
-			
 			ResultSet rs = stm.executeQuery(sql);
-			
 			while(rs.next()){
-					this.listTask.get(i).setName((String) rs.getObject("name"));
-					this.listTask.get(i).setDescription((String) rs.getObject("description"));
-					this.listTask.get(i).setFrequency((String) rs.getObject("frequency"));
-					this.listTask.get(i).setChecked((Boolean) rs.getObject("checked"));
-					this.listTask.get(i).setStartDate((String) rs.getObject("startdate").toString());		
-					this.listTask.get(i).setActivity(this);
-					i++;
+				t = new TaskJDBC();
+				t.setName(rs.getString("name"));
+				t.setDescription(rs.getString("description"));
+				t.setFrequency(rs.getString("frequency"));
+				t.setChecked(rs.getBoolean("checked"));
+				t.setStartDate(rs.getString("startdate"));
+				t.setEndDate(rs.getString("enddate"));
+				t.setActivity(this);
+				listTask.add(t);
 			}
-				rs.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return this.listTask;
+			rs.close();
+			return listTask;
+		} catch (SQLException e) {}
+		return new ArrayList<Task>();
 	}
 	
 	
 	@Override
 	public List<Comment> readAllComments() {
-		String sql = ("SELECT * FROM commentActivity WHERE titre_activity = '" + this.getTitle() + "'");
+		String sql = ("SELECT * FROM commentActivity WHERE titre_activity = '" + this.getTitle() + 
+				"' and pseudo_customer='"+ this.getUser().getPseudo() +"'");
 		List<Comment> list = new ArrayList<Comment>();
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
@@ -209,7 +217,5 @@ public class ActivityJDBC extends Activity {
 		}
 		return list;
 	}
-
-	
 
 }

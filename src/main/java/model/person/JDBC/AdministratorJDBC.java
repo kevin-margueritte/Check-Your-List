@@ -25,4 +25,10 @@ public class AdministratorJDBC extends Administrator {
 		return false;
 	}
 
+	@Override
+	public boolean pseudoExist() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

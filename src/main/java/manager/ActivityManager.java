@@ -8,6 +8,7 @@ import factory.activity.ActivityFactory;
 import model.activity.Activity;
 import model.category.Subcategory;
 import model.person.User;
+import model.task.Task;
 
 public class ActivityManager {
 	
@@ -38,4 +39,7 @@ public class ActivityManager {
 		return act.deleteByPseudoUserAndName();
 	}
 
+	public List<Task> getAllTasks(Activity act) {
+		return act.readAllTask();
+	}
 }

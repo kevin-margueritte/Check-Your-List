@@ -1,4 +1,6 @@
 package model.task;
+import java.util.List;
+
 import model.activity.Activity;
 
 
@@ -94,4 +96,5 @@ public abstract class Task {
 		
 		public abstract boolean save();
 		public abstract boolean delete();
+		public abstract boolean update();
 }
