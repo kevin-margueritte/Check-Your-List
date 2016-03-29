@@ -36,5 +36,9 @@ public class TaskManager {
 		task.setChecked(check);
 		return task.update();
 	}
+	
+	public boolean deleteTask(Task t) {
+		return t.delete();
+	}
 
 }
