@@ -203,7 +203,9 @@ public class ActivityJDBC extends Activity {
 				ResultSetMetaData resultMeta = rs.getMetaData();
 				if (resultMeta.getTableName(1).equals("commentactivity")) {
 					comment.setContent((String) rs.getObject("content"));
-					comment.setPostingDate((String) rs.getObject("postingdate"));
+					comment.setPostingDate((String) rs.getObject("postingdate").toString());
+					User u = (User) new UserJDBC((String) rs.getObject("pseudo_sender"));
+					comment.setUser(u);
 					list.add(comment);
 				}
 			}

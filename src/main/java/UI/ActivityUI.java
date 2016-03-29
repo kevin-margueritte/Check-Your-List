@@ -1,11 +1,10 @@
 package UI;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,15 +14,16 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
 import facade.ActivityFacade;
 import model.activity.Activity;
 import model.activity.JDBC.ActivityJDBC;
+import model.comment.Comment;
 import model.person.User;
 import model.person.JDBC.UserJDBC;
-import model.product.Product;
 import model.task.Task;
 
 @SuppressWarnings("serial")
@@ -34,6 +34,7 @@ public class ActivityUI extends JFrame implements ActionListener {
 	private ActivityFacade af;
 	private JTextPane textPaneCommentContent;
 	private JButton btnAddTask;
+	private JButton btnAddComment;
 	private JLabel lblAddComment;
 	
 	
@@ -65,6 +66,8 @@ public class ActivityUI extends JFrame implements ActionListener {
 		this.activity = act;
 		this.user = u;
 		this.af = new ActivityFacade();
+		
+		
 		
 		getContentPane().setLayout(null);
 		
@@ -126,13 +129,18 @@ public class ActivityUI extends JFrame implements ActionListener {
 		lblAddComment.setBounds(10, 458, 105, 20);
 		getContentPane().add(lblAddComment);
 		
-		JButton btnAddComment = new JButton("Add comment");
+		btnAddComment = new JButton("Add comment");
 		btnAddComment.addActionListener(this);
 		btnAddComment.setBounds(178, 630, 162, 29);
 		getContentPane().add(btnAddComment);
 		setSize(547,731);
 		
 		this.initActivities();
+		this.initComments();
+		//JScrollPane js = new JScrollPane(this.getContentPane());
+		//maFenetre.setPreferredSize(new Dimension(200,300))
+		//this.getContentPane().add(js);
+		//this.setPreferredSize(new Dimension(200,300));
 	}
 	
 	public void initActivities() {
@@ -160,10 +168,47 @@ public class ActivityUI extends JFrame implements ActionListener {
 		}
 		getContentPane().add(chckbxNewCheckBox);
 	}
+	
+	public void initComments() {
+		List<Comment> list = this.af.getAllComments(this.activity);			
+		int idx = 19; // ??
+		boolean firstComment = true;
+		for (Comment comment : list) {
+			if (firstComment) {
+				JLabel lblComments = new JLabel("Comments");
+				lblComments.setBounds(10, 690, 105, 20);
+				getContentPane().add(lblComments);	
+				firstComment = false;
+			}
+			this.addPanelComment(comment, idx);
+			idx ++;
+		}
+		setSize(547, (100 * (list.size() + 1)) + 648); // à modifier
+	}
+	
+	public void addPanelComment(Comment comment, int idx) {					
+		JPanel panel = new JPanel();
+		panel.setBounds(10, idx * 38, 414, 40);
+		getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblDateComment = new JLabel(comment.getPostingDate());
+		lblDateComment.setBounds(23, 7, 99, 20);
+		panel.add(lblDateComment);
+		
+		JLabel lblPseudoComment = new JLabel(comment.getUser().getPseudo());
+		lblPseudoComment.setBounds(175, 7, 99, 20);
+		panel.add(lblPseudoComment);
+		
+		JLabel lblContentComment = new JLabel(comment.getContent());
+		lblContentComment.setBounds(294, 7, 99, 20);
+		panel.add(lblContentComment);		
+		
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {	
-		if ( e.getSource() == this.lblAddComment ) {
+		if ( e.getSource() == this.btnAddComment ) {
 			if (this.formComplete()) {
 				this.af.createComment(this.textPaneCommentContent.getText(), activity, user);
 				JOptionPane.showMessageDialog(this,
