@@ -6,6 +6,7 @@ package model.person;
 import java.util.List;
 
 import model.activity.Activity;
+import model.comment.Comment;
 
 // Start of user code (user defined imports)
 
@@ -156,5 +157,6 @@ public abstract class User extends Person {
 
 	public abstract boolean save();
 	public abstract List<Activity> readAllActivities();
+	public abstract List<Comment> readAllComments();
 
 }

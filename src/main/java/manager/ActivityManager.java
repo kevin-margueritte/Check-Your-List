@@ -37,5 +37,9 @@ public class ActivityManager {
 	public boolean deleteByPseudoUserAndName(Activity act) {
 		return act.deleteByPseudoUserAndName();
 	}
+	
+	public static List<Activity> readAllActivities(Activity act) {
+		return act.readAllActivities();
+	}
 
 }

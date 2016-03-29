@@ -8,6 +8,7 @@ import manager.CommentManager;
 import model.activity.Activity;
 import model.category.Category;
 import model.category.Subcategory;
+import model.comment.Comment;
 import model.person.User;
 
 public class ActivityFacade {
@@ -35,8 +36,16 @@ public class ActivityFacade {
 		return this.am.createActivity(title, description, visible, subcategory, user);
 	}
 	
-	public boolean createComment(String content, Activity activity) {
-		return this.ctm.createComment(content, activity);
+	public boolean createComment(String content, Activity activity, User user) {
+		return this.ctm.createCommentActivity(content, activity, user);
+	}
+	
+	public List<Comment> getAllComments(Activity a) {
+		return this.ctm.getAllCommentsActivity(a);
+	}
+	
+	public List<Activity> getAllActivities(Activity act) {
+		return this.am.readAllActivities(act);
 	}
 	
 }

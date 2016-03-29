@@ -10,6 +10,8 @@ import java.util.List;
 import database.ConnectionDB;
 import model.activity.Activity;
 import model.activity.JDBC.ActivityJDBC;
+import model.comment.Comment;
+import model.comment.JDBC.CommentJDBC;
 import model.person.User;
 
 public class UserJDBC extends User {
@@ -102,5 +104,31 @@ public class UserJDBC extends User {
 			return (rs1.next() || rs2.next()); 
 		} catch (SQLException e) {}
 		return true;
+	}
+	
+	@Override
+	public List<Comment> readAllComments() {
+		String sql = ("SELECT * FROM commentProfil WHERE pseudoreceiver = '" + this.getPseudo() + "'");
+		List<Comment> list = new ArrayList<Comment>();
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while ( rs.next() ) {
+				Comment comment = new CommentJDBC();
+				ResultSetMetaData resultMeta = rs.getMetaData();
+				if (resultMeta.getTableName(1).equals("commentprofil")) {
+					comment.setContent((String) rs.getObject("content"));
+					comment.setPostingDate((String) rs.getObject("postingdate").toString());
+					User u = (User) new UserJDBC((String) rs.getObject("pseudosender"));
+					comment.setUser(u);
+					list.add(comment);
+				}
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
 	}
 }

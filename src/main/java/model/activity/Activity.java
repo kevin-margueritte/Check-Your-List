@@ -1,6 +1,5 @@
 package model.activity;
 
-import java.util.Date;
 import java.util.List;
 
 import model.category.Subcategory;
@@ -101,6 +100,7 @@ public abstract class Activity {
 	public abstract boolean deleteByPseudoUserAndName();
 	public abstract List<Task> readTaskByActivity();
 	public abstract List<Comment> readAllComments();
+	public abstract List<Activity> readAllActivities();
 
 	
 }

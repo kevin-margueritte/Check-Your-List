@@ -198,7 +198,9 @@ public class ActivityJDBC extends Activity {
 				ResultSetMetaData resultMeta = rs.getMetaData();
 				if (resultMeta.getTableName(1).equals("commentactivity")) {
 					comment.setContent((String) rs.getObject("content"));
-					comment.setPostingDate((String) rs.getObject("postingdate"));
+					comment.setPostingDate((String) rs.getObject("postingdate").toString());
+					User u = (User) new UserJDBC((String) rs.getObject("pseudo_sender"));
+					comment.setUser(u);
 					list.add(comment);
 				}
 			}
@@ -210,6 +212,27 @@ public class ActivityJDBC extends Activity {
 		return list;
 	}
 
-	
 
+	@Override
+	public List<Activity> readAllActivities() {
+		String sql = ("select * from activity");
+		Activity act = null;
+		List<Activity> listAct= new ArrayList<Activity>();
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while(rs.next()){
+				act = new ActivityJDBC(1,rs.getString(2));
+				listAct.add(act.readByTitle());
+			}
+			rs.close();
+			return listAct;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 }

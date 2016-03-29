@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -19,6 +20,7 @@ import javax.swing.SwingConstants;
 import facade.ActivityFacade;
 import model.activity.Activity;
 import model.activity.JDBC.ActivityJDBC;
+import model.comment.Comment;
 import model.person.User;
 import model.person.JDBC.UserJDBC;
 
@@ -42,7 +44,7 @@ public class ActivityUI extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					User u = new UserJDBC("titi");
+					User u = new UserJDBC("titi"); // a modifier non ?
 					u.readByPseudo();
 					Activity a = new ActivityJDBC(u);
 					Iterator<Activity> it = a.readAll().iterator();
@@ -59,6 +61,7 @@ public class ActivityUI extends JFrame implements ActionListener {
 		this.activity = act;
 		this.user = u;
 		this.af = new ActivityFacade();
+		this.initFrame();
 		
 		getContentPane().setLayout(null);
 		
@@ -127,7 +130,45 @@ public class ActivityUI extends JFrame implements ActionListener {
 		btnAddComment.addActionListener(this);
 		btnAddComment.setBounds(178, 630, 162, 29);
 		getContentPane().add(btnAddComment);
-		setSize(547,731);
+		
+		//setSize(547,848);
+	}
+	
+	public void initFrame() {
+		List<Comment> list = this.af.getAllComments(this.activity);			
+		int idx = 19; // ??
+		boolean firstComment = true;
+		for (Comment comment : list) {
+			if (firstComment) {
+				JLabel lblComments = new JLabel("Comments");
+				lblComments.setBounds(10, 690, 105, 20);
+				getContentPane().add(lblComments);	
+				firstComment = false;
+			}
+			this.addPanelComment(comment, idx);
+			idx ++;
+		}
+		setSize(547, (100 * (list.size() + 1)) + 648); // à modifier
+	}
+	
+	public void addPanelComment(Comment comment, int idx) {					
+		JPanel panel = new JPanel();
+		panel.setBounds(10, idx * 38, 414, 40);
+		getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblDateComment = new JLabel(comment.getPostingDate());
+		lblDateComment.setBounds(23, 7, 99, 20);
+		panel.add(lblDateComment);
+		
+		JLabel lblPseudoComment = new JLabel(comment.getUser().getPseudo());
+		lblPseudoComment.setBounds(175, 7, 99, 20);
+		panel.add(lblPseudoComment);
+		
+		JLabel lblContentComment = new JLabel(comment.getContent());
+		lblContentComment.setBounds(294, 7, 99, 20);
+		panel.add(lblContentComment);		
+		
 	}
 
 	@Override
@@ -135,7 +176,7 @@ public class ActivityUI extends JFrame implements ActionListener {
 		JButton button = (JButton) e.getSource();		
 		if ( button.getText().equals("Add comment") ) {
 			if (this.formComplete()) {
-				this.af.createComment(this.textPaneCommentContent.getText(), activity);
+				this.af.createComment(this.textPaneCommentContent.getText(), activity, user);
 				JOptionPane.showMessageDialog(this,
 						"Your comment has been added, it will appears the next time you'll see this activity.");
 			}
