@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.DecimalFormat;
@@ -53,6 +54,7 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 					Seller s = new SellerJDBC("aezr");
 					s.readByPseudo();
 					CreateProductUI frame = new CreateProductUI(s);
+					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -163,9 +165,7 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == this.comboCategory) {
 			this.initComboBoxSubCategory();
-		}
-		else if(e.getSource() == this.btnValidate && this.formComplete()) {
-			
+		}else if(e.getSource() == this.btnValidate && this.formComplete()) {	
 			//nom product seller price quantity subcategory
 			boolean bool;
 			bool = this.sellface.createProduct(this.nameProduct.getText(),this.seller,Float.parseFloat(this.price.getText()),Integer.parseInt(this.quantity.getText()), 

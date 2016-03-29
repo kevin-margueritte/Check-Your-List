@@ -4,9 +4,13 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import database.ConnectionDB;
+import model.category.Category;
 import model.category.Subcategory;
+import model.category.JDBC.CategoryJDBC;
 import model.category.JDBC.SubcategoryJDBC;
 import model.person.Seller;
 import model.person.JDBC.SellerJDBC;
@@ -78,8 +82,6 @@ public class ProductJDBC extends Product {
 	//récupère l'id d'un produit en fonction du nom et du vendeur
 	public Product readByNameAndSeller(){
 		//si le nom ou le seller vide alors Erreur   <--------------------------
-		System.out.println(this.name);
-		System.out.println(this.seller.getPseudo());
 		String sql = ("SELECT * FROM product WHERE name  = '" +  this.name + "' AND pseudo = '" +this.seller.getPseudo() +"'");
 		Product u = null;
 		SellerJDBC sellerJDBC;
@@ -110,6 +112,45 @@ public class ProductJDBC extends Product {
 		}
 		return (Product)u;
 	}
+	
+	public List<Product> ProductFromCategory(){
+		//si le nom ou le seller vide alors Erreur   <--------------------------
+		List<Product> list = new ArrayList<Product>();
+		String sql = ("SELECT * FROM product WHERE name_subcategory  = '" +  this.subCategory.getName()+"'");
+		Product u = null;
+		SellerJDBC sellerJDBC;
+		SubcategoryJDBC subCategoryJDBC;
+		Product prod = new ProductJDBC();
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while( rs.next() ) {	
+			ResultSetMetaData resultMeta = rs.getMetaData();
+				if (resultMeta.getTableName(1).equals("product")) {
+					prod.setIdProd((int) rs.getObject("id"));	
+					prod.setName((String) rs.getObject("name"));	
+					String pseudo = (String) rs.getObject("pseudo");
+					sellerJDBC = new SellerJDBC(pseudo);			
+					prod.setSeller(sellerJDBC.readByPseudo());
+					prod.setPrice((float) rs.getObject("price"));
+					prod.setQuantity((int) rs.getObject("quantity"));
+					String nomCategory  = (String) rs.getObject("name_subcategory");
+					subCategoryJDBC = new SubcategoryJDBC(nomCategory);
+					prod.setSubCategory(subCategoryJDBC.readByName());
+					u = new ProductJDBC(this.idProd,this.name,this.seller,this.subCategory);
+				}
+			}
+				rs.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	
+
 	
 	public boolean checkProductExist(){
 		String sql1 = ("SELECT * FROM product "
