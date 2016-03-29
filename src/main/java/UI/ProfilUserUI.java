@@ -97,7 +97,7 @@ public class ProfilUserUI extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JButton button = (JButton) e.getSource();
 		if ( button.getText().equals("See") ) {
-			ActivityUI frame = new ActivityUI(this.u, (Activity) button.getClientProperty("activity"));
+			ActivityPrivateUI frame = new ActivityPrivateUI(this.u, (Activity) button.getClientProperty("activity"));
 			frame.setVisible(true);
 		}
 		else {
