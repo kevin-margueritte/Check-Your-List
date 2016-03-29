@@ -26,7 +26,7 @@ import model.person.JDBC.UserJDBC;
 import model.task.Task;
 
 @SuppressWarnings("serial")
-public class ActivityPrivateUI extends JFrame implements ActionListener {
+public class ActivityUI extends JFrame implements ActionListener {
 	
 	private Activity activity;
 	private User user;
@@ -38,7 +38,7 @@ public class ActivityPrivateUI extends JFrame implements ActionListener {
 	
 	
 	public static void main(String args[]) {
-		ActivityPrivateUI.launch();
+		ActivityUI.launch();
 	}
 	
 	/**
@@ -52,7 +52,7 @@ public class ActivityPrivateUI extends JFrame implements ActionListener {
 					u.readByPseudo();
 					Activity a = new ActivityJDBC(u);
 					Iterator<Activity> it = a.readAll().iterator();
-					ActivityPrivateUI frame = new ActivityPrivateUI(u,it.next());
+					ActivityUI frame = new ActivityUI(u,it.next());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -61,7 +61,7 @@ public class ActivityPrivateUI extends JFrame implements ActionListener {
 		});
 	}
 	
-	public ActivityPrivateUI(User u, Activity act) {
+	public ActivityUI(User u, Activity act) {
 		this.activity = act;
 		this.user = u;
 		this.af = new ActivityFacade();
@@ -74,44 +74,68 @@ public class ActivityPrivateUI extends JFrame implements ActionListener {
 		lblActivityName.setBounds(178, 11, 162, 14);
 		getContentPane().add(lblActivityName);
 		
-		JTextPane textPane = new JTextPane();
+		JLabel textPane = new JLabel();
 		textPane.setText(this.activity.getDescription());
 		textPane.setBounds(10, 58, 513, 89);
 		getContentPane().add(textPane);
 		
-		JLabel lblDescription = new JLabel("Description");
+		JLabel lblDescription = new JLabel("Description :");
 		lblDescription.setBounds(10, 38, 118, 14);
 		getContentPane().add(lblDescription);
 		
-		JLabel lblTaskToDo = new JLabel("Task to do today");
-		lblTaskToDo.setBounds(10, 171, 153, 14);
-		getContentPane().add(lblTaskToDo);
+		if(user.getPseudo().equals(activity.getUser().getPseudo())) { 
+			JLabel lblTaskToDo = new JLabel("Task to do today");
+			lblTaskToDo.setBounds(10, 171, 153, 14);
+			getContentPane().add(lblTaskToDo);
+		}
 		
 		JLabel lblTaskList = new JLabel("Task list");
-		lblTaskList.setBounds(10, 331, 68, 14);
-		getContentPane().add(lblTaskList);
 		
-		btnAddTask = new JButton("Add task");
-		btnAddTask.addActionListener(this);
-		btnAddTask.setBounds(218, 301, 89, 23);
-		getContentPane().add(btnAddTask);
+		if(user.getPseudo().equals(activity.getUser().getPseudo())) { 
+			lblTaskList.setBounds(10, 331, 68, 14);
+		}
+		else {
+			lblTaskList.setBounds(10, 171, 153, 14);
+		}
+		getContentPane().add(lblTaskList);
+		if(user.getPseudo().equals(activity.getUser().getPseudo())) {			
+			btnAddTask = new JButton("Add task");
+			btnAddTask.addActionListener(this);
+			btnAddTask.setBounds(218, 301, 89, 23);
+			getContentPane().add(btnAddTask);
+		}
 		
 		List<Task> list = this.af.getAllTasks(this.activity);
 		lblAddComment = new JLabel("Add comment ");
-		lblAddComment.setBounds(10, 325 +(35*list.size() + 50), 105, 20);
+		if(user.getPseudo().equals(activity.getUser().getPseudo())) {
+			lblAddComment.setBounds(10, 325 +(35*list.size() + 50), 105, 20);
+		}
+		else {
+			lblAddComment.setBounds(10, 150 + (35*list.size() + 50), 105, 20);			
+		}
 		getContentPane().add(lblAddComment);
 		
 		this.initActivities(list);
 		textPaneCommentContent = new JTextPane();
-		textPaneCommentContent.setBounds(10, 325 +(35*list.size() + 100), 500, 103);
+		if(user.getPseudo().equals(activity.getUser().getPseudo())) {
+			textPaneCommentContent.setBounds(10, 325 +(35*list.size() + 100), 500, 103);
+		}
+		else {
+			textPaneCommentContent.setBounds(10, 150 +(35*list.size() + 100), 500, 103);
+		}
 		getContentPane().add(textPaneCommentContent);
 		
 		
 		btnAddComment = new JButton("Add comment");
 		btnAddComment.addActionListener(this);
-		btnAddComment.setBounds(178, 325 +(35*list.size() + 220), 162, 29);
+		if(user.getPseudo().equals(activity.getUser().getPseudo())) {
+			btnAddComment.setBounds(178, 325 +(35*list.size() + 220), 162, 29);
+		}
+		else {
+			btnAddComment.setBounds(178, 150 +(35*list.size() + 220), 162, 29);
+		}
 		getContentPane().add(btnAddComment);
-
+		
 		this.initComments();
 	}
 	
@@ -124,27 +148,34 @@ public class ActivityPrivateUI extends JFrame implements ActionListener {
 	}
 	
 	public void addCheckBox(Task t, int idx) {
-		JCheckBox chckbxNewCheckBox = new JCheckBox(t.getName());
-		chckbxNewCheckBox.putClientProperty("task", t);
-		chckbxNewCheckBox.addActionListener(this);
-		chckbxNewCheckBox.setSelected(t.isChecked());
-		if (idx == 1) {
-			chckbxNewCheckBox.setBounds(31, 200, 97, 23);
+		if(user.getPseudo().equals(activity.getUser().getPseudo())) { 
+			JCheckBox chckbxNewCheckBox = new JCheckBox(t.getName());
+			chckbxNewCheckBox.putClientProperty("task", t);
+			chckbxNewCheckBox.addActionListener(this);
+			chckbxNewCheckBox.setSelected(t.isChecked());
+			if (idx == 1) {
+				chckbxNewCheckBox.setBounds(31, 200, 97, 23);
+			}
+			else if (idx%2 == 1) {
+				chckbxNewCheckBox.setBounds(31, (175 + (25 * ((idx + 1)/2) )), 97, 23);
+			}
+			else {
+				chckbxNewCheckBox.setBounds(370, 175 + (25 * (idx/2) ), 97, 23);
+			}
+			getContentPane().add(chckbxNewCheckBox);
 		}
-		else if (idx%2 == 1) {
-			chckbxNewCheckBox.setBounds(31, (175 + (25 * ((idx + 1)/2) )), 97, 23);
-		}
-		else {
-			chckbxNewCheckBox.setBounds(370, 175 + (25 * (idx/2) ), 97, 23);
-		}
-		getContentPane().add(chckbxNewCheckBox);
 		this.addPanelTask(t, idx);
 	}
 	
 	public void addPanelTask(Task t, int idx) {
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 325 +(35 * idx), 513, 46);
+		if(user.getPseudo().equals(activity.getUser().getPseudo())) { 
+			panel.setBounds(10, 325 +(35 * idx), 513, 46);
+		}
+		else {
+			panel.setBounds(10, 150 +(35 * idx), 513, 46);
+		}
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -153,11 +184,13 @@ public class ActivityPrivateUI extends JFrame implements ActionListener {
 		lblTaskName.setBounds(10, 11, 143, 24);
 		panel.add(lblTaskName);
 		
-		JButton btnNewButton = new JButton("Delete");
-		btnNewButton.addActionListener(this);
-		btnNewButton.putClientProperty("task", t);
-		btnNewButton.setBounds(414, 14, 89, 23);
-		panel.add(btnNewButton);
+		if(user.getPseudo().equals(activity.getUser().getPseudo())) { 
+			JButton btnNewButton = new JButton("Delete");
+			btnNewButton.addActionListener(this);
+			btnNewButton.putClientProperty("task", t);
+			btnNewButton.setBounds(414, 14, 89, 23);
+			panel.add(btnNewButton);
+		}
 		
 		JLabel lblNewLabel = new JLabel(t.getStartDate() + "/" + t.getEndDate());
 		lblNewLabel.setBounds(140, 18, 140, 14);
@@ -177,7 +210,12 @@ public class ActivityPrivateUI extends JFrame implements ActionListener {
 		for (Comment comment : list) {
 			if (firstComment) {
 				JLabel lblComments = new JLabel("Comments");
-				lblComments.setBounds(10, 690, 105, 20);
+				if(user.getPseudo().equals(activity.getUser().getPseudo())) {  
+					lblComments.setBounds(10, 200 + (35*list.size() + 220), 105, 20);
+				}
+				else {
+					lblComments.setBounds(10, (35*list.size() + 220), 105, 20);
+				}
 				getContentPane().add(lblComments);	
 				firstComment = false;
 			}
@@ -189,7 +227,12 @@ public class ActivityPrivateUI extends JFrame implements ActionListener {
 	
 	public void addPanelComment(Comment comment, int idx) {					
 		JPanel panel = new JPanel();
-		panel.setBounds(10, idx * 38, 414, 40);
+		if(user.getPseudo().equals(activity.getUser().getPseudo())) { 
+			panel.setBounds(10, idx * 38, 414, 40);
+		}
+		else {
+			panel.setBounds(10, idx * 28, 414, 40);
+		}
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		

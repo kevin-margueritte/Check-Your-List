@@ -67,7 +67,7 @@ public class UserJDBC extends User {
 	
 	@Override
 	public List<Activity> readAllActivities() {
-		String sql = ("select * from activity where pseudo_user='"+this.getPseudo()+"' ");
+		String sql = ("select * from activity where pseudo_user='"+this.pseudo+"' ");
 		Activity act = null;
 		List<Activity> listAct= new ArrayList<Activity>();
 		try {
