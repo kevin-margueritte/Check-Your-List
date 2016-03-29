@@ -65,6 +65,7 @@ public class ActivityUI extends JFrame implements ActionListener {
 		this.activity = act;
 		this.user = u;
 		this.af = new ActivityFacade();
+		
 		getContentPane().setLayout(null);
 		
 		JLabel lblActivityName = new JLabel(this.activity.getTitle());
