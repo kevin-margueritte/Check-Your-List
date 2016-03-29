@@ -1,6 +1,6 @@
 package UI;
 
-import java.awt.Dimension;
+import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -67,7 +67,9 @@ public class ActivityUI extends JFrame implements ActionListener {
 		this.user = u;
 		this.af = new ActivityFacade();
 		
-		
+		JPanel container = new JPanel();
+        JScrollPane scrPane = new JScrollPane(container);
+        getContentPane().add(scrPane);
 		
 		getContentPane().setLayout(null);
 		
@@ -75,12 +77,12 @@ public class ActivityUI extends JFrame implements ActionListener {
 		lblActivityName.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblActivityName.setHorizontalAlignment(SwingConstants.CENTER);
 		lblActivityName.setBounds(178, 11, 162, 14);
-		getContentPane().add(lblActivityName);
+		container.add(lblActivityName);
 		
 		JTextPane textPane = new JTextPane();
 		textPane.setText(this.activity.getDescription());
 		textPane.setBounds(10, 58, 513, 89);
-		getContentPane().add(textPane);
+		container.add(textPane);
 		
 		JLabel lblDescription = new JLabel("Description");
 		lblDescription.setBounds(10, 38, 118, 14);
@@ -91,60 +93,33 @@ public class ActivityUI extends JFrame implements ActionListener {
 		getContentPane().add(lblTaskToDo);
 		
 		JLabel lblTaskList = new JLabel("Task list");
-		lblTaskList.setBounds(10, 331, 46, 14);
+		lblTaskList.setBounds(10, 331, 68, 14);
 		getContentPane().add(lblTaskList);
-		
-		JPanel panel = new JPanel();
-		panel.setBounds(10, 359, 513, 46);
-		getContentPane().add(panel);
-		panel.setLayout(null);
-		
-		JLabel lblTaskName = new JLabel("task name");
-		lblTaskName.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblTaskName.setBounds(10, 11, 143, 24);
-		panel.add(lblTaskName);
-		
-		JButton btnNewButton = new JButton("Delete");
-		btnNewButton.setBounds(414, 14, 89, 23);
-		panel.add(btnNewButton);
-		
-		JLabel lblNewLabel = new JLabel("start date / end date");
-		lblNewLabel.setBounds(154, 18, 112, 14);
-		panel.add(lblNewLabel);
-		
-		JButton btnNewButton_1 = new JButton("See");
-		btnNewButton_1.setBounds(315, 14, 89, 23);
-		panel.add(btnNewButton_1);
 		
 		btnAddTask = new JButton("Add task");
 		btnAddTask.addActionListener(this);
 		btnAddTask.setBounds(218, 301, 89, 23);
 		getContentPane().add(btnAddTask);
 		
+		List<Task> list = this.af.getAllTasks(this.activity);
+		lblAddComment = new JLabel("Add comment ");
+		lblAddComment.setBounds(10, 325 +(35*list.size() + 50), 105, 20);
+		getContentPane().add(lblAddComment);
+		
+		this.initActivities(list);
 		textPaneCommentContent = new JTextPane();
-		textPaneCommentContent.setBounds(10, 494, 500, 103);
+		textPaneCommentContent.setBounds(10, 325 +(35*list.size() + 100), 500, 103);
 		getContentPane().add(textPaneCommentContent);
 		
-		lblAddComment = new JLabel("Add comment ");
-		lblAddComment.setBounds(10, 458, 105, 20);
-		getContentPane().add(lblAddComment);
 		
 		btnAddComment = new JButton("Add comment");
 		btnAddComment.addActionListener(this);
-		btnAddComment.setBounds(178, 630, 162, 29);
+		btnAddComment.setBounds(178, 325 +(35*list.size() + 150), 162, 29);
 		getContentPane().add(btnAddComment);
-		setSize(547,731);
-		
-		this.initActivities();
 		this.initComments();
-		//JScrollPane js = new JScrollPane(this.getContentPane());
-		//maFenetre.setPreferredSize(new Dimension(200,300))
-		//this.getContentPane().add(js);
-		//this.setPreferredSize(new Dimension(200,300));
 	}
 	
-	public void initActivities() {
-		List<Task> list = this.af.getAllTasks(this.activity);
+	public void initActivities(List<Task> list) {
 		int idx = 1;
 		for (Task t : list) {
 			this.addCheckBox(t, idx);
@@ -167,6 +142,36 @@ public class ActivityUI extends JFrame implements ActionListener {
 			chckbxNewCheckBox.setBounds(370, 175 + (25 * (idx/2) ), 97, 23);
 		}
 		getContentPane().add(chckbxNewCheckBox);
+		this.addPanelTask(t, idx);
+	}
+	
+	public void addPanelTask(Task t, int idx) {
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(10, 325 +(35 * idx), 513, 46);
+		getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblTaskName = new JLabel(t.getName());
+		lblTaskName.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblTaskName.setBounds(10, 11, 143, 24);
+		panel.add(lblTaskName);
+		
+		JButton btnNewButton = new JButton("Delete");
+		btnNewButton.addActionListener(this);
+		btnNewButton.putClientProperty("task", t);
+		btnNewButton.setBounds(414, 14, 89, 23);
+		panel.add(btnNewButton);
+		
+		JLabel lblNewLabel = new JLabel(t.getStartDate() + "/" + t.getEndDate());
+		lblNewLabel.setBounds(140, 18, 140, 14);
+		panel.add(lblNewLabel);
+		
+		JButton btnNewButton_1 = new JButton("See");
+		btnNewButton_1.addActionListener(this);
+		btnNewButton_1.putClientProperty("task", t);
+		btnNewButton_1.setBounds(315, 14, 89, 23);
+		panel.add(btnNewButton_1);
 	}
 	
 	public void initComments() {
@@ -227,6 +232,21 @@ public class ActivityUI extends JFrame implements ActionListener {
 			JCheckBox check = (JCheckBox) e.getSource();
 			Task t = (Task) check.getClientProperty("task");
 			this.af.updateChecked(t, check.isSelected());
+		}
+		else if (e.getSource() instanceof JButton) {
+			JButton button = (JButton) e.getSource();
+			if ( button.getText().equals("See") ) {
+				//ActivityUI frame = new ActivityUI(this.u, (Activity) button.getClientProperty("activity"));
+				//frame.setVisible(true);
+				System.out.println("see");
+			}
+			else {
+				this.af.deleteTask((Task) button.getClientProperty("task"));
+				Component[] com = button.getParent().getComponents();
+				for (int a = 0; a < com.length; a++) {
+				     com[a].setEnabled(false);
+				}
+			}
 		}
 		/*
 		else {
