@@ -9,16 +9,13 @@ import java.util.List;
 
 import database.ConnectionDB;
 import model.activity.Activity;
-import model.category.Category;
 import model.category.Subcategory;
-import model.category.JDBC.CategoryJDBC;
 import model.category.JDBC.SubcategoryJDBC;
 import model.comment.Comment;
 import model.comment.JDBC.CommentJDBC;
 import model.person.User;
 import model.person.JDBC.UserJDBC;
 import model.task.Task;
-import model.task.JDBC.TaskJDBC;
 
 public class ActivityJDBC extends Activity {
 	
@@ -211,7 +208,6 @@ public class ActivityJDBC extends Activity {
 		}
 		return list;
 	}
-
 
 	@Override
 	public List<Activity> readAllActivities() {

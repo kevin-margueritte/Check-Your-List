@@ -11,6 +11,11 @@ import model.category.Subcategory;
 import model.comment.Comment;
 import model.person.User;
 
+/**
+ * 
+ * @author Gaetan
+ *
+ */
 public class ActivityFacade {
 	
 	private CategoryManager cm;
