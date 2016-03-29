@@ -69,7 +69,6 @@ public class ProductJDBC extends Product {
 		String sql = ("delete from product where id="+ this.idProd +"");
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
-			
 			return stm.execute(sql);
 
 		} catch (SQLException e) {
@@ -167,17 +166,3 @@ public class ProductJDBC extends Product {
 	}
 	
 }
-	
-	
-	
-	
-	
-	
-	/*public static void main(String args[]) {
-		//ProductJDBC prod = new ProductJDBC("whisky","jack","boisson");
-		//prod.save();
-	}*/
-
-	
-
-
