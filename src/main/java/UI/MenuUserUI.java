@@ -37,6 +37,10 @@ public class MenuUserUI extends JFrame implements ChangeListener {
 		comp = fc.getContentPane();
 		//tabbedPane.setSize(fc.getWidth(), fc.getHeight());
 		tabbedPane.addTab("Create activity", comp);
+		
+		AllActivitiesUI fa = new AllActivitiesUI(this.user);
+		comp = fa.getContentPane();
+		tabbedPane.addTab("All activities", comp);
 	}
 	
 	public void initCreateActivity() {
@@ -56,6 +60,11 @@ public class MenuUserUI extends JFrame implements ChangeListener {
 			CreateActivityUI fc = new CreateActivityUI();
 			this.setSize(fc.getWidth() + 15, fc.getHeight() + 30);
 			tabbedPane.setSize(fc.getWidth(), fc.getHeight());
+		}
+		else if (panneName.equals("All activities")) {
+			AllActivitiesUI fa = new AllActivitiesUI(this.user);
+			this.setSize(fa.getWidth() + 15, fa.getHeight() + 30);
+			tabbedPane.setSize(fa.getWidth(), fa.getHeight());
 		}
 	}
 }

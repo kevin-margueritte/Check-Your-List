@@ -10,6 +10,7 @@ import java.util.List;
 import database.ConnectionDB;
 import model.activity.Activity;
 import model.comment.Comment;
+import model.person.User;
 
 public class CommentJDBC extends Comment {
 	
@@ -25,11 +26,19 @@ public class CommentJDBC extends Comment {
 		super(content, postingDate, activity);
 	}
 	
+	public CommentJDBC(String content, String postingDate, User user) {
+		super(content, postingDate, user);
+	}
+	
+	public CommentJDBC(String content, String postingDate, Activity activity, User user) {
+		super(content, postingDate, activity, user);
+	}
+		
 	@Override
-	public boolean addComment() {
+	public boolean addCommentActivity() {
 		String sql = ("INSERT INTO commentActivity ("
 				+ "content, postingdate, pseudo_sender, titre_activity) VALUES ( '" +
-				this.content + "','" + this.postingDate + "','" + this.activity.getUser().getPseudo() + "','" + this.activity.getTitle() + "')");
+				this.content + "','" + this.postingDate + "','" + this.user.getPseudo() + "','" + this.activity.getTitle() + "')");
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
 			return stm.execute(sql);
@@ -61,6 +70,18 @@ public class CommentJDBC extends Comment {
 		return list;
 	}
 	*/
+
+	@Override
+	public boolean addCommentProfil() {
+		String sql = ("INSERT INTO commentProfil ("
+				+ "content, postingdate, pseudosender, pseudoreceiver) VALUES ( '" +
+				this.content + "','" + this.postingDate + "','" + this.user.getPseudo() + "','" + this.activity.getTitle() + "')");
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			return stm.execute(sql);
+		} catch (SQLException e) {}
+		return false;
+	}
 	
 	
 	
