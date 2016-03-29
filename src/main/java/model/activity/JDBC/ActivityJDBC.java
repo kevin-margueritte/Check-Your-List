@@ -186,6 +186,7 @@ public class ActivityJDBC extends Activity {
 	@Override
 	public List<Comment> readAllComments() {
 		String sql = ("SELECT * FROM commentActivity WHERE titre_activity = '" + this.getTitle() + "'");
+		
 		List<Comment> list = new ArrayList<Comment>();
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();

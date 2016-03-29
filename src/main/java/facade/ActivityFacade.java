@@ -13,7 +13,7 @@ import model.person.User;
 
 /**
  * 
- * @author Gaetan
+ * @author JHJJJJJJJJ
  *
  */
 public class ActivityFacade {
