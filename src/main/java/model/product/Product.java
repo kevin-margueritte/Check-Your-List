@@ -1,5 +1,7 @@
 package model.product;
 
+import java.util.List;
+
 import model.category.Subcategory;
 import model.person.Seller;
 
@@ -37,6 +39,11 @@ public abstract class Product {
 	
 	public Product(){
 		super();
+	}
+	
+	public Product(Subcategory sub){
+		super();
+		this.subCategory = sub;
 	}
 
 	public Product(int id,String name, Seller seller, Subcategory subCategory) {
@@ -98,6 +105,7 @@ public abstract class Product {
 	public abstract boolean save();
 	public abstract boolean delete();
 	public abstract Product readByNameAndSeller();
+	public abstract List<Product> getAllProductFromSubCategory();
 
 	public float getPrice() {
 		return price;

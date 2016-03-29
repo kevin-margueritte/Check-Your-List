@@ -14,7 +14,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
@@ -27,7 +26,7 @@ import model.person.JDBC.UserJDBC;
 import model.task.Task;
 
 @SuppressWarnings("serial")
-public class ActivityUI extends JFrame implements ActionListener {
+public class ActivityPrivateUI extends JFrame implements ActionListener {
 	
 	private Activity activity;
 	private User user;
@@ -39,7 +38,7 @@ public class ActivityUI extends JFrame implements ActionListener {
 	
 	
 	public static void main(String args[]) {
-		ActivityUI.launch();
+		ActivityPrivateUI.launch();
 	}
 	
 	/**
@@ -53,7 +52,7 @@ public class ActivityUI extends JFrame implements ActionListener {
 					u.readByPseudo();
 					Activity a = new ActivityJDBC(u);
 					Iterator<Activity> it = a.readAll().iterator();
-					ActivityUI frame = new ActivityUI(u,it.next());
+					ActivityPrivateUI frame = new ActivityPrivateUI(u,it.next());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -62,15 +61,10 @@ public class ActivityUI extends JFrame implements ActionListener {
 		});
 	}
 	
-	public ActivityUI(User u, Activity act) {
+	public ActivityPrivateUI(User u, Activity act) {
 		this.activity = act;
 		this.user = u;
 		this.af = new ActivityFacade();
-		
-
-		JPanel container = new JPanel();
-        JScrollPane scrPane = new JScrollPane(container);
-        getContentPane().add(scrPane);
 		
 		getContentPane().setLayout(null);
 		
@@ -78,12 +72,12 @@ public class ActivityUI extends JFrame implements ActionListener {
 		lblActivityName.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblActivityName.setHorizontalAlignment(SwingConstants.CENTER);
 		lblActivityName.setBounds(178, 11, 162, 14);
-		container.add(lblActivityName);
+		getContentPane().add(lblActivityName);
 		
 		JTextPane textPane = new JTextPane();
 		textPane.setText(this.activity.getDescription());
 		textPane.setBounds(10, 58, 513, 89);
-		container.add(textPane);
+		getContentPane().add(textPane);
 		
 		JLabel lblDescription = new JLabel("Description");
 		lblDescription.setBounds(10, 38, 118, 14);
@@ -115,7 +109,7 @@ public class ActivityUI extends JFrame implements ActionListener {
 		
 		btnAddComment = new JButton("Add comment");
 		btnAddComment.addActionListener(this);
-		btnAddComment.setBounds(178, 325 +(35*list.size() + 150), 162, 29);
+		btnAddComment.setBounds(178, 325 +(35*list.size() + 220), 162, 29);
 		getContentPane().add(btnAddComment);
 
 		this.initComments();

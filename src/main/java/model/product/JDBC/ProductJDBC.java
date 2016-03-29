@@ -34,6 +34,10 @@ public class ProductJDBC extends Product {
 	public ProductJDBC(String name, Seller seller, float price, int quantity, Subcategory subCategory) {
 		super(name,seller,price,quantity,subCategory);
 	}
+	
+	public ProductJDBC(Subcategory sub){
+		super(sub);
+	}
 
 	/*CREATE TABLE product
 	(
@@ -69,7 +73,6 @@ public class ProductJDBC extends Product {
 		String sql = ("delete from product where id="+ this.idProd +"");
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
-			
 			return stm.execute(sql);
 
 		} catch (SQLException e) {
@@ -113,44 +116,35 @@ public class ProductJDBC extends Product {
 		return (Product)u;
 	}
 	
-	public List<Product> ProductFromCategory(){
+	public List<Product> getAllProductFromSubCategory(){
 		//si le nom ou le seller vide alors Erreur   <--------------------------
 		List<Product> list = new ArrayList<Product>();
 		String sql = ("SELECT * FROM product WHERE name_subcategory  = '" +  this.subCategory.getName()+"'");
-		Product u = null;
 		SellerJDBC sellerJDBC;
 		SubcategoryJDBC subCategoryJDBC;
-		Product prod = new ProductJDBC();
+		Product prod = null;
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
 			ResultSet rs = stm.executeQuery(sql);
 			while( rs.next() ) {	
-			ResultSetMetaData resultMeta = rs.getMetaData();
-				if (resultMeta.getTableName(1).equals("product")) {
-					prod.setIdProd((int) rs.getObject("id"));	
-					prod.setName((String) rs.getObject("name"));	
-					String pseudo = (String) rs.getObject("pseudo");
-					sellerJDBC = new SellerJDBC(pseudo);			
-					prod.setSeller(sellerJDBC.readByPseudo());
-					prod.setPrice((float) rs.getObject("price"));
-					prod.setQuantity((int) rs.getObject("quantity"));
-					String nomCategory  = (String) rs.getObject("name_subcategory");
-					subCategoryJDBC = new SubcategoryJDBC(nomCategory);
-					prod.setSubCategory(subCategoryJDBC.readByName());
-					u = new ProductJDBC(this.idProd,this.name,this.seller,this.subCategory);
-				}
+				prod = new ProductJDBC();
+				prod.setIdProd((int) rs.getObject("id"));	
+				prod.setName((String) rs.getObject("name"));	
+				String pseudo = (String) rs.getObject("pseudo");
+				sellerJDBC = new SellerJDBC(pseudo);			
+				prod.setSeller(sellerJDBC.readByPseudo());
+				prod.setPrice((float) rs.getObject("price"));
+				prod.setQuantity((int) rs.getObject("quantity"));
+				prod.setSubCategory(this.subCategory);
+				list.add(prod);
 			}
-				rs.close();
-			
+			rs.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return list;
 	}
-
-	
-
 	
 	public boolean checkProductExist(){
 		String sql1 = ("SELECT * FROM product "
@@ -167,17 +161,3 @@ public class ProductJDBC extends Product {
 	}
 	
 }
-	
-	
-	
-	
-	
-	
-	/*public static void main(String args[]) {
-		//ProductJDBC prod = new ProductJDBC("whisky","jack","boisson");
-		//prod.save();
-	}*/
-
-	
-
-
