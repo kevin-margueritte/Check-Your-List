@@ -13,6 +13,11 @@ import model.comment.Comment;
 import model.person.User;
 import model.task.Task;
 
+/**
+ * 
+ * @author Gaetan
+ *
+ */
 public class ActivityFacade {
 	
 	private CategoryManager cm;

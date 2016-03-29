@@ -9,9 +9,7 @@ import java.util.List;
 
 import database.ConnectionDB;
 import model.activity.Activity;
-import model.category.Category;
 import model.category.Subcategory;
-import model.category.JDBC.CategoryJDBC;
 import model.category.JDBC.SubcategoryJDBC;
 import model.comment.Comment;
 import model.comment.JDBC.CommentJDBC;

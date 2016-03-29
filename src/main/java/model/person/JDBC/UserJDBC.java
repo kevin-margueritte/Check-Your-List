@@ -10,6 +10,7 @@ import java.util.List;
 import database.ConnectionDB;
 import model.activity.Activity;
 import model.activity.JDBC.ActivityJDBC;
+import model.comment.Comment;
 import model.person.User;
 
 public class UserJDBC extends User {
@@ -94,6 +95,12 @@ public class UserJDBC extends User {
 			return rs1.next(); 
 		} catch (SQLException e) {}
 		return true;
+	}
+
+	@Override
+	public List<Comment> readAllComments() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 //	public boolean pseudoExist() {
