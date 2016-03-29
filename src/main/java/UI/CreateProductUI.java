@@ -179,10 +179,6 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 	}
 	
 	private boolean formComplete() {
-		String str3 = this.price.getText(); 
-    	float f1 = Float.parseFloat(str3);
-    	System.out.println(str3);
-    	System.out.println(f1);
 		if (this.nameProduct.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(this,
 					"Product name is empty",

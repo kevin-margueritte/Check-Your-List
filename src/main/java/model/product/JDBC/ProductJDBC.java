@@ -49,7 +49,8 @@ public class ProductJDBC extends Product {
 					+ this.subCategory.getName() + "')");
 			try {
 				Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
-				return stm.execute(sql);
+				stm.execute(sql);
+				return true;
 			} catch (SQLException e) 
 				{e.printStackTrace();}
 		}
