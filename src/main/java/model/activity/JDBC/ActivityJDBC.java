@@ -193,8 +193,7 @@ public class ActivityJDBC extends Activity {
 	
 	@Override
 	public List<Comment> readAllComments() {
-		String sql = ("SELECT * FROM commentActivity WHERE titre_activity = '" + this.getTitle() + 
-				"' and pseudo_customer='"+ this.getUser().getPseudo() +"'");
+		String sql = ("SELECT * FROM commentActivity WHERE titre_activity = '" + this.getTitle() + "'");
 		List<Comment> list = new ArrayList<Comment>();
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
@@ -204,7 +203,9 @@ public class ActivityJDBC extends Activity {
 				ResultSetMetaData resultMeta = rs.getMetaData();
 				if (resultMeta.getTableName(1).equals("commentactivity")) {
 					comment.setContent((String) rs.getObject("content"));
-					comment.setPostingDate((String) rs.getObject("postingdate"));
+					comment.setPostingDate((String) rs.getObject("postingdate").toString());
+					User u = (User) new UserJDBC((String) rs.getObject("pseudo_sender"));
+					comment.setUser(u);
 					list.add(comment);
 				}
 			}

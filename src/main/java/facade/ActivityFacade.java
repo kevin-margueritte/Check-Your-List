@@ -15,7 +15,7 @@ import model.task.Task;
 
 /**
  * 
- * @author Gaetan
+ * @author JHJJJJJJJJ
  *
  */
 public class ActivityFacade {
@@ -63,5 +63,9 @@ public class ActivityFacade {
 	
 	public boolean updateChecked(Task task, boolean check) {
 		return tm.updateChecked(task, check);
+	}
+	
+	public boolean deleteTask(Task t) {
+		return tm.deleteTask(t);
 	}
 }

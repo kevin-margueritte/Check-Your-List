@@ -172,4 +172,5 @@ public abstract class Seller extends Person {
 
 	public abstract boolean sellerExist();
 	public abstract List<Product> readAllProducts();
+	public abstract boolean pseudoExist();
 }

@@ -158,5 +158,6 @@ public abstract class User extends Person {
 	public abstract boolean save();
 	public abstract List<Activity> readAllActivities();
 	public abstract List<Comment> readAllComments();
+	public abstract boolean pseudoExist();
 
 }
