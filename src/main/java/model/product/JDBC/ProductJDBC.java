@@ -133,7 +133,7 @@ public class ProductJDBC extends Product {
 				String pseudo = (String) rs.getObject("pseudo");
 				sellerJDBC = new SellerJDBC(pseudo);			
 				prod.setSeller(sellerJDBC.readByPseudo());
-				prod.setPrice((float) rs.getObject("price"));
+				prod.setPrice(rs.getFloat("price"));
 				prod.setQuantity((int) rs.getObject("quantity"));
 				prod.setSubCategory(this.subCategory);
 				list.add(prod);

@@ -3,11 +3,13 @@ package UI;
 import javax.swing.JFrame;
 import javax.swing.JToolBar;
 
+import facade.ActivityFacade;
 import facade.SellerFacade;
 import model.category.Category;
 import model.category.Subcategory;
 import model.person.Seller;
 import model.person.JDBC.SellerJDBC;
+import model.product.Product;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -30,12 +32,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 
-public class AllProductsUI extends JFrame implements ActionListener, MouseListener {
+public class AllProductsUI extends JFrame implements ActionListener {
 	
 	private JComboBox comboCategory;
 	private JComboBox comboSubcategory;
-	private SellerFacade sellface;
-	
+	private ActivityFacade activityFace;
 	
 	public static void main(String args[]) {
 		AllProductsUI.launch();
@@ -63,7 +64,7 @@ public class AllProductsUI extends JFrame implements ActionListener, MouseListen
 	
 	
 	public AllProductsUI() {
-		this.sellface = new SellerFacade();
+		this.activityFace = new ActivityFacade();
 		getContentPane().setLayout(null);
 		
 		
@@ -77,6 +78,7 @@ public class AllProductsUI extends JFrame implements ActionListener, MouseListen
 		this.comboSubcategory = new JComboBox();
 		this.comboSubcategory.setBounds(136, 71, 144, 20);
 		this.initComboBoxSubCategory();
+		this.comboSubcategory.addActionListener(this);
 		getContentPane().add(comboSubcategory);
 	
 
@@ -146,51 +148,34 @@ public class AllProductsUI extends JFrame implements ActionListener, MouseListen
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void initComboBoxCategory() {
-		List<Category> list = sellface.getAllCategories();
+		List<Category> list = activityFace.getAllCategories();
 		this.comboCategory.setModel(new DefaultComboBoxModel(list.toArray()));
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void initComboBoxSubCategory() {
 		Category c = (Category) this.comboCategory.getSelectedItem();
-		List<Subcategory> list = sellface.getAllSubcategories(c);
+		List<Subcategory> list = activityFace.getAllSubcategories(c);
 		this.comboSubcategory.setModel(new DefaultComboBoxModel(list.toArray()));
 	}
-
-	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+	
+	public void AfficheProduct(List list){
 		
 	}
 
-	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		System.out.println("ntm");
 		if (e.getSource() == this.comboCategory) {
 			this.initComboBoxSubCategory();
 		}
+		if (e.getSource() == this.comboCategory || e.getSource() == this.comboSubcategory){
+			List<Product> list = this.activityFace.getAllProductsFromSubCategory((Subcategory) this.comboSubcategory.getSelectedItem());
+			System.out.println(list);
+			AfficheProduct(list);
+		}
+		
+		
 	}
 }
