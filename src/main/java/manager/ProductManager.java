@@ -10,6 +10,7 @@ import factory.product.ProductFactory;
 import model.category.Subcategory;
 import model.person.Seller;
 import model.product.Product;
+import model.product.JDBC.ProductJDBC;
 
 
 public class ProductManager {
@@ -71,35 +72,13 @@ public class ProductManager {
 		return false;
 	}
 	
-	
-	
 	public boolean deleteProduct(Product prod){
 		return prod.delete();
 	}
 	
-	
-	/*
-	public boolean deleteProduct(String name, String pseudo, String nomSubCategory){
-				Seller seller = recupereSeller(pseudo);
-		if (seller==null){
-			return false;
-		}
-			
-		//recupere la sub category
-		Subcategory subCategoryProd = this.factCat.createSubcategory(nomSubCategory);
-		subCategoryProd.readByName();
-
-		// Creation du produit 
-		Product prod = this.factProd.createProduct(name, seller,subCategoryProd);
-		prod.readByNameAndSeller();
-		if(prod != null){
-			return prod.delete();
-		}
-		return false;
-	}*/
-	
-	
-
-
+	public List<Product> getAllProductsFromSubCategory(Subcategory sub) {
+		Product prod = new ProductJDBC(sub);
+		return prod.getAllProductFromSubCategory();
+	}
 
 }
