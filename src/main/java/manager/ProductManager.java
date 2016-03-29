@@ -1,4 +1,5 @@
 package manager;
+import java.util.ArrayList;
 import java.util.List;
 
 import factory.category.AbstractCategoryFactory;
@@ -78,7 +79,12 @@ public class ProductManager {
 	
 	public List<Product> getAllProductsFromSubCategory(Subcategory sub) {
 		Product prod = new ProductJDBC(sub);
-		return prod.getAllProductFromSubCategory();
+		try {
+			return prod.getAllProductFromSubCategory();
+		}
+		catch (NullPointerException n) {
+			return new ArrayList<Product>();
+		}
 	}
 
 }
