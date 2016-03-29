@@ -169,4 +169,4 @@ public class AllProductsUI extends JFrame implements ActionListener, MouseListen
 			this.initComboBoxSubCategory();
 		}
 	}
-} //test
+}
