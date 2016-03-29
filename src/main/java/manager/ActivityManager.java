@@ -8,6 +8,7 @@ import factory.activity.ActivityFactory;
 import model.activity.Activity;
 import model.category.Subcategory;
 import model.person.User;
+import model.task.Task;
 
 public class ActivityManager {
 	
@@ -39,7 +40,10 @@ public class ActivityManager {
 	}
 	
 	public static List<Activity> readAllActivities(Activity act) {
-		return act.readAllActivities();
+		return act.readAll();
 	}
 
+	public List<Task> getAllTasks(Activity act) {
+		return act.readAllTask();
+	}
 }

@@ -17,6 +17,7 @@ import javax.swing.SwingConstants;
 
 import facade.LoginFacade;
 import model.person.Person;
+import model.person.Seller;
 import model.person.User;
 
 @SuppressWarnings("serial")
@@ -114,8 +115,13 @@ public class LoginUI extends JFrame implements ActionListener{
 				if (!this.checkPasswordIsEmpty()) {
 					if (this.login.connect(textLogin.getText(),new String(textPassword.getPassword())) ) {
 						Person p = (Person) this.login.getPerson(textLogin.getText());
-						if (p instanceof Person) {
+						if (p instanceof User) {
 							MenuUserUI frame = new MenuUserUI((User) p);
+							frame.setVisible(true);
+							this.dispose();
+						}
+						else if (p instanceof Seller) {
+							MenuSellerUI frame = new MenuSellerUI((Seller) p);
 							frame.setVisible(true);
 							this.dispose();
 						}

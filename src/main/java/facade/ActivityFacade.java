@@ -5,11 +5,13 @@ import java.util.List;
 import manager.ActivityManager;
 import manager.CategoryManager;
 import manager.CommentManager;
+import manager.TaskManager;
 import model.activity.Activity;
 import model.category.Category;
 import model.category.Subcategory;
 import model.comment.Comment;
 import model.person.User;
+import model.task.Task;
 
 /**
  * 
@@ -21,11 +23,13 @@ public class ActivityFacade {
 	private CategoryManager cm;
 	private ActivityManager am;
 	private CommentManager ctm;
+	private TaskManager tm;
 	
 	public ActivityFacade() {
 		this.cm = new CategoryManager();
 		this.am = new ActivityManager();
 		this.ctm = new CommentManager();
+		this.tm = new TaskManager();
 	}
 
 	public List<Subcategory> getAllSubcategories(Category c) {
@@ -53,4 +57,11 @@ public class ActivityFacade {
 		return this.am.readAllActivities(act);
 	}
 	
+	public List<Task> getAllTasks(Activity act) {
+		return am.getAllTasks(act);
+	}
+	
+	public boolean updateChecked(Task task, boolean check) {
+		return tm.updateChecked(task, check);
+	}
 }

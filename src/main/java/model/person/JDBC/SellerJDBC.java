@@ -78,14 +78,11 @@ public class SellerJDBC extends Seller {
 	}
 	
 	public boolean pseudoExist() {
-		String sql1 = ("SELECT pseudo FROM customer WHERE pseudo='"+ this.pseudo + "'");
 		String sql2 = ("SELECT pseudo FROM seller WHERE pseudo='"+ this.pseudo + "'");
 		try {
-			Statement stm1 = ConnectionDB.creetConnectionDB().getConn().createStatement();
 			Statement stm2 = ConnectionDB.creetConnectionDB().getConn().createStatement();
-			ResultSet rs1 = stm1.executeQuery(sql1);
 			ResultSet rs2 = stm2.executeQuery(sql2);
-			return (rs1.next() || rs2.next()); 
+			return rs2.next(); 
 		} catch (SQLException e) {}
 		return true;
 	}
@@ -135,4 +132,5 @@ public class SellerJDBC extends Seller {
 		}
 		return null;
 	}
+	
 }

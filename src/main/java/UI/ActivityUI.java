@@ -1,10 +1,11 @@
 package UI;
 
-import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,9 +21,10 @@ import javax.swing.SwingConstants;
 import facade.ActivityFacade;
 import model.activity.Activity;
 import model.activity.JDBC.ActivityJDBC;
-import model.comment.Comment;
 import model.person.User;
 import model.person.JDBC.UserJDBC;
+import model.product.Product;
+import model.task.Task;
 
 @SuppressWarnings("serial")
 public class ActivityUI extends JFrame implements ActionListener {
@@ -31,6 +33,8 @@ public class ActivityUI extends JFrame implements ActionListener {
 	private User user;
 	private ActivityFacade af;
 	private JTextPane textPaneCommentContent;
+	private JButton btnAddTask;
+	private JLabel lblAddComment;
 	
 	
 	public static void main(String args[]) {
@@ -44,7 +48,7 @@ public class ActivityUI extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					User u = new UserJDBC("titi"); // a modifier non ?
+					User u = new UserJDBC("titi");
 					u.readByPseudo();
 					Activity a = new ActivityJDBC(u);
 					Iterator<Activity> it = a.readAll().iterator();
@@ -61,7 +65,6 @@ public class ActivityUI extends JFrame implements ActionListener {
 		this.activity = act;
 		this.user = u;
 		this.af = new ActivityFacade();
-		this.initFrame();
 		
 		getContentPane().setLayout(null);
 		
@@ -83,10 +86,6 @@ public class ActivityUI extends JFrame implements ActionListener {
 		JLabel lblTaskToDo = new JLabel("Task to do today");
 		lblTaskToDo.setBounds(10, 171, 153, 14);
 		getContentPane().add(lblTaskToDo);
-		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("New check box");
-		chckbxNewCheckBox.setBounds(31, 201, 97, 23);
-		getContentPane().add(chckbxNewCheckBox);
 		
 		JLabel lblTaskList = new JLabel("Task list");
 		lblTaskList.setBounds(10, 331, 46, 14);
@@ -114,7 +113,8 @@ public class ActivityUI extends JFrame implements ActionListener {
 		btnNewButton_1.setBounds(315, 14, 89, 23);
 		panel.add(btnNewButton_1);
 		
-		JButton btnAddTask = new JButton("Add task");
+		btnAddTask = new JButton("Add task");
+		btnAddTask.addActionListener(this);
 		btnAddTask.setBounds(218, 301, 89, 23);
 		getContentPane().add(btnAddTask);
 		
@@ -122,7 +122,7 @@ public class ActivityUI extends JFrame implements ActionListener {
 		textPaneCommentContent.setBounds(10, 494, 500, 103);
 		getContentPane().add(textPaneCommentContent);
 		
-		JLabel lblAddComment = new JLabel("Add comment ");
+		lblAddComment = new JLabel("Add comment ");
 		lblAddComment.setBounds(10, 458, 105, 20);
 		getContentPane().add(lblAddComment);
 		
@@ -130,51 +130,40 @@ public class ActivityUI extends JFrame implements ActionListener {
 		btnAddComment.addActionListener(this);
 		btnAddComment.setBounds(178, 630, 162, 29);
 		getContentPane().add(btnAddComment);
+		setSize(547,731);
 		
-		//setSize(547,848);
+		this.initActivities();
 	}
 	
-	public void initFrame() {
-		List<Comment> list = this.af.getAllComments(this.activity);			
-		int idx = 19; // ??
-		boolean firstComment = true;
-		for (Comment comment : list) {
-			if (firstComment) {
-				JLabel lblComments = new JLabel("Comments");
-				lblComments.setBounds(10, 690, 105, 20);
-				getContentPane().add(lblComments);	
-				firstComment = false;
-			}
-			this.addPanelComment(comment, idx);
+	public void initActivities() {
+		List<Task> list = this.af.getAllTasks(this.activity);
+		int idx = 1;
+		for (Task t : list) {
+			this.addCheckBox(t, idx);
 			idx ++;
 		}
-		setSize(547, (100 * (list.size() + 1)) + 648); // à modifier
 	}
 	
-	public void addPanelComment(Comment comment, int idx) {					
-		JPanel panel = new JPanel();
-		panel.setBounds(10, idx * 38, 414, 40);
-		getContentPane().add(panel);
-		panel.setLayout(null);
-		
-		JLabel lblDateComment = new JLabel(comment.getPostingDate());
-		lblDateComment.setBounds(23, 7, 99, 20);
-		panel.add(lblDateComment);
-		
-		JLabel lblPseudoComment = new JLabel(comment.getUser().getPseudo());
-		lblPseudoComment.setBounds(175, 7, 99, 20);
-		panel.add(lblPseudoComment);
-		
-		JLabel lblContentComment = new JLabel(comment.getContent());
-		lblContentComment.setBounds(294, 7, 99, 20);
-		panel.add(lblContentComment);		
-		
+	public void addCheckBox(Task t, int idx) {
+		JCheckBox chckbxNewCheckBox = new JCheckBox(t.getName());
+		chckbxNewCheckBox.putClientProperty("task", t);
+		chckbxNewCheckBox.addActionListener(this);
+		chckbxNewCheckBox.setSelected(t.isChecked());
+		if (idx == 1) {
+			chckbxNewCheckBox.setBounds(31, 200, 97, 23);
+		}
+		else if (idx%2 == 1) {
+			chckbxNewCheckBox.setBounds(31, (175 + (25 * ((idx + 1)/2) )), 97, 23);
+		}
+		else {
+			chckbxNewCheckBox.setBounds(370, 175 + (25 * (idx/2) ), 97, 23);
+		}
+		getContentPane().add(chckbxNewCheckBox);
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		JButton button = (JButton) e.getSource();		
-		if ( button.getText().equals("Add comment") ) {
+	public void actionPerformed(ActionEvent e) {	
+		if ( e.getSource() == this.lblAddComment ) {
 			if (this.formComplete()) {
 				this.af.createComment(this.textPaneCommentContent.getText(), activity, user);
 				JOptionPane.showMessageDialog(this,
@@ -184,7 +173,16 @@ public class ActivityUI extends JFrame implements ActionListener {
 			//this.cf.createCategory(this.categoryName.getText(), this.textShortDescription.getText(),this.textDetailedDescription.getText());
 			//ActivityUI frame = new ActivityUI(this.u, (Activity) button.getClientProperty("activity"));
 		 	//frame.setVisible(true);
-		}		
+		}
+		else if (e.getSource() == this.btnAddTask) {
+			TaskRessourceUI tr = new TaskRessourceUI(this.activity);
+			tr.setVisible(true);
+		}
+		else if (e.getSource() instanceof JCheckBox) {
+			JCheckBox check = (JCheckBox) e.getSource();
+			Task t = (Task) check.getClientProperty("task");
+			this.af.updateChecked(t, check.isSelected());
+		}
 		/*
 		else {
 			this.pf.deleteActivity((Activity) button.getClientProperty("activity"));

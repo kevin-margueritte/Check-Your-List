@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -23,7 +25,7 @@ import model.category.Subcategory;
 import model.person.Seller;
 import model.person.JDBC.SellerJDBC;
 
-public class CreateProductUI extends JFrame implements ActionListener {
+public class CreateProductUI extends JFrame implements ActionListener, MouseListener {
 	
 	private JTextField nameProduct;
 	private JComboBox comboSubcategory;
@@ -34,6 +36,8 @@ public class CreateProductUI extends JFrame implements ActionListener {
 	private JFormattedTextField price;
 	private JFormattedTextField quantity;
 	private Seller seller;
+	private JLabel lblProposeCategory;
+	private JLabel lblProposeSubcategory;
 	
 	public static void main(String args[]) {
 		CreateProductUI.launch();
@@ -46,7 +50,9 @@ public class CreateProductUI extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CreateProductUI frame = new CreateProductUI();
+					Seller s = new SellerJDBC("aezr");
+					s.readByPseudo();
+					CreateProductUI frame = new CreateProductUI(s);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -56,12 +62,8 @@ public class CreateProductUI extends JFrame implements ActionListener {
 	}
 	
 	
-	public CreateProductUI() {
-		// A VIRER 
-		this.seller = new SellerJDBC("aezr");
-		this.seller.readByPseudo();
-		
-		
+	public CreateProductUI(Seller s) {
+		this.seller = s;
 		this.sellface = new SellerFacade();
 		
 		
@@ -112,13 +114,15 @@ public class CreateProductUI extends JFrame implements ActionListener {
 		
 
 		
-		JLabel lblProposeCategory = new JLabel("Propose category");
+		lblProposeCategory = new JLabel("Propose category");
+		lblProposeCategory.addMouseListener(this);
 		lblProposeCategory.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblProposeCategory.setForeground(Color.BLUE);
 		lblProposeCategory.setBounds(212, 146, 138, 20);
 		getContentPane().add(lblProposeCategory);
 		
-		JLabel lblProposeSubcategory = new JLabel("Propose subcategory");
+		lblProposeSubcategory = new JLabel("Propose subcategory");
+		lblProposeSubcategory.addMouseListener(this);
 		lblProposeSubcategory.setForeground(Color.BLUE);
 		lblProposeSubcategory.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblProposeSubcategory.setBounds(212, 177, 138, 20);
@@ -219,5 +223,39 @@ public class CreateProductUI extends JFrame implements ActionListener {
 		}
 		return true;	
 	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		if (arg0.getSource() == this.lblProposeCategory) {
+			System.out.println("toto");
+			ProposeCategoryUI frame = new ProposeCategoryUI();
+			frame.setVisible(true);
+		}
+		else {
+			ProposeSubcategoryUI frame = new ProposeSubcategoryUI();
+			frame.setVisible(true);
+		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {}
 	
 }

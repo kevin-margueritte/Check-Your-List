@@ -11,7 +11,6 @@ import database.ConnectionDB;
 import model.activity.Activity;
 import model.activity.JDBC.ActivityJDBC;
 import model.comment.Comment;
-import model.comment.JDBC.CommentJDBC;
 import model.person.User;
 
 public class UserJDBC extends User {
@@ -56,19 +55,14 @@ public class UserJDBC extends User {
 
 	@Override
 	public boolean save() {
-		if (this.pseudoExist() == false) {
-			String sql = ("INSERT INTO customer VALUES ( '" +  this.firstName + "','" + this.lastName + "','" + 
-					this.pseudo + "','" + this.password + "','" + this.description + "','" + this.city + "','" + this.postCode + "','" +
-					this.street + "','" + this.houseNumber + "','" + this.mail +"')");
-			try {
-				Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
-				stm.executeQuery(sql);
-				return true;
-			} catch (SQLException e) {
-				return true;
-			}
-		}
-		return false;
+		String sql = ("INSERT INTO customer VALUES ( '" +  this.firstName + "','" + this.lastName + "','" + 
+				this.pseudo + "','" + this.password + "','" + this.description + "','" + this.city + "','" + this.postCode + "','" +
+				this.street + "','" + this.houseNumber + "','" + this.mail +"')");
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			stm.executeQuery(sql);
+		} catch (SQLException e) {}
+		return true;
 	}
 	
 	@Override
@@ -95,40 +89,30 @@ public class UserJDBC extends User {
 	
 	public boolean pseudoExist() {
 		String sql1 = ("SELECT pseudo FROM customer WHERE pseudo='"+ this.pseudo + "'");
-		String sql2 = ("SELECT pseudo FROM seller WHERE pseudo='"+ this.pseudo + "'");
 		try {
 			Statement stm1 = ConnectionDB.creetConnectionDB().getConn().createStatement();
-			Statement stm2 = ConnectionDB.creetConnectionDB().getConn().createStatement();
 			ResultSet rs1 = stm1.executeQuery(sql1);
-			ResultSet rs2 = stm2.executeQuery(sql2);
-			return (rs1.next() || rs2.next()); 
+			return rs1.next(); 
 		} catch (SQLException e) {}
 		return true;
 	}
-	
+
 	@Override
 	public List<Comment> readAllComments() {
-		String sql = ("SELECT * FROM commentProfil WHERE pseudoreceiver = '" + this.getPseudo() + "'");
-		List<Comment> list = new ArrayList<Comment>();
-		try {
-			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
-			ResultSet rs = stm.executeQuery(sql);
-			while ( rs.next() ) {
-				Comment comment = new CommentJDBC();
-				ResultSetMetaData resultMeta = rs.getMetaData();
-				if (resultMeta.getTableName(1).equals("commentprofil")) {
-					comment.setContent((String) rs.getObject("content"));
-					comment.setPostingDate((String) rs.getObject("postingdate").toString());
-					User u = (User) new UserJDBC((String) rs.getObject("pseudosender"));
-					comment.setUser(u);
-					list.add(comment);
-				}
-			}
-			rs.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return list;
+		// TODO Auto-generated method stub
+		return null;
 	}
+	
+//	public boolean pseudoExist() {
+//		String sql1 = ("SELECT pseudo FROM customer WHERE pseudo='"+ this.pseudo + "'");
+//		String sql2 = ("SELECT pseudo FROM seller WHERE pseudo='"+ this.pseudo + "'");
+//		try {
+//			Statement stm1 = ConnectionDB.creetConnectionDB().getConn().createStatement();
+//			Statement stm2 = ConnectionDB.creetConnectionDB().getConn().createStatement();
+//			ResultSet rs1 = stm1.executeQuery(sql1);
+//			ResultSet rs2 = stm2.executeQuery(sql2);
+//			return (rs1.next() || rs2.next()); 
+//		} catch (SQLException e) {}
+//		return true;
+//	}
 }

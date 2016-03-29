@@ -25,7 +25,7 @@ public class PersonManager {
 		l.readByPseudo();
 		u.readByPseudo();
 		try {
-			if (u.getPassword().equals(sha1(password)) || l.getPassword().equals(sha1(password))) {
+			if ( u.getPassword().equals(sha1(password)) || l.getPassword().equals(sha1(password))) {
 				return true;
 			}
 		} catch (NoSuchAlgorithmException e) {
@@ -37,8 +37,14 @@ public class PersonManager {
 	
 	public Person getPerson(String username) {
 		User u = this.fact.createUser(username);
-		u.readByPseudo();
-		return u;
+		if (u.pseudoExist()) {
+			return u;
+		}
+		Seller s = this.fact.createSeller(username);
+		if (s.pseudoExist()) {
+			return s;
+		}
+		return null;
 	}
 	
 	public boolean createUser(String pseudo, String lastName, String firstName, String description, String password,

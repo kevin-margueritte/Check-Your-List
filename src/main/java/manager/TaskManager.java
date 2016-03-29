@@ -32,5 +32,9 @@ public class TaskManager {
 		return task.save();
 	}
 	
+	public boolean updateChecked(Task task, boolean check) {
+		task.setChecked(check);
+		return task.update();
+	}
 
 }
