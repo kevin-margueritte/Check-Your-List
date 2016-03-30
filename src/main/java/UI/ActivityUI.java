@@ -208,20 +208,8 @@ public class ActivityUI extends JFrame implements ActionListener {
 	
 	public void initComments() {
 		List<Comment> list = this.af.getAllComments(this.activity);			
-		int idx = 19; // ??
-		boolean firstComment = true;
+		int idx = 17; // ??
 		for (Comment comment : list) {
-			if (firstComment) {
-				JLabel lblComments = new JLabel("Comments");
-				if(user.getPseudo().equals(activity.getUser().getPseudo())) {  
-					lblComments.setBounds(10, 200 + (35*list.size() + 220), 105, 20);
-				}
-				else {
-					lblComments.setBounds(10, (35*list.size() + 220), 105, 20);
-				}
-				getContentPane().add(lblComments);	
-				firstComment = false;
-			}
 			this.addPanelComment(comment, idx);
 			idx ++;
 		}
@@ -265,6 +253,7 @@ public class ActivityUI extends JFrame implements ActionListener {
 				this.af.createComment(this.textPaneCommentContent.getText(), activity, user);
 				JOptionPane.showMessageDialog(this,
 						"Your comment has been added, it will appears the next time you'll see this activity.");
+				initComments();
 			}
 			
 			//this.cf.createCategory(this.categoryName.getText(), this.textShortDescription.getText(),this.textDetailedDescription.getText());
