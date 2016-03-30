@@ -26,7 +26,7 @@ import model.person.JDBC.SellerJDBC;
 import model.product.Product;
 import javax.swing.SwingConstants;
 
-public class AllProductsUI extends JFrame implements ActionListener {
+public class AddRessourcesTask extends JFrame implements ActionListener {
 	
 	private JComboBox comboCategory;
 	private JComboBox comboSubcategory;
@@ -34,7 +34,7 @@ public class AllProductsUI extends JFrame implements ActionListener {
 	private JPanel panelProducts;
 	
 	public static void main(String args[]) {
-		AllProductsUI.launch();
+		AddRessourcesTask.launch();
 	}
 	
 	/**
@@ -46,7 +46,7 @@ public class AllProductsUI extends JFrame implements ActionListener {
 				try {
 					Seller s = new SellerJDBC("aezr");
 					s.readByPseudo();
-					AllProductsUI frame = new AllProductsUI();
+					AddRessourcesTask frame = new AddRessourcesTask();
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -58,7 +58,7 @@ public class AllProductsUI extends JFrame implements ActionListener {
 
 	
 	
-	public AllProductsUI() {
+	public AddRessourcesTask() {
 		this.activityFace = new ActivityFacade();
 		getContentPane().setLayout(null);
 		
@@ -128,7 +128,6 @@ public class AllProductsUI extends JFrame implements ActionListener {
 	}
 
 	public void addPanelProduct(Product p, int idx){
-		System.out.println(p);
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(0, 0 + (50 * idx), 482, 31);
 		panelProducts.add(panel_1);
