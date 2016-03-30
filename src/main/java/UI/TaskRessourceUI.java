@@ -33,31 +33,35 @@ public class TaskRessourceUI extends JFrame implements ActionListener{
 	private JComboBox comboVisibility;
 	private JComboBox comboActivity;
 	private JTextField textNameTask;
+	private ActivityUI actUI;
 	
+	/*
 	public static void main(String args[]) {
 		TaskRessourceUI.launch();
-	}
+	}*/
 	
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void launch() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					Activity a = new ActivityJDBC("a");
 					a.readByTitle();
-					TaskRessourceUI frame = new TaskRessourceUI(a);
+					TaskRessourceUI frame = new TaskRessourceUI(a,actUI);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
-	}
+	}*/
 	
-	public TaskRessourceUI(Activity act) {
+	public TaskRessourceUI(Activity act, ActivityUI actUI) {
 		this.a= act;
+		this.actUI = actUI;
 		
 		this.rf = new RessourceFacade();
 		setResizable(false);
@@ -156,9 +160,10 @@ public class TaskRessourceUI extends JFrame implements ActionListener{
 			if ( ((String) this.comboVisibility.getSelectedItem()).equals("True") ) {
 				visibility = true;
 			}
-			System.out.print("create");
 			this.rf.createTask(this.textNameTask.getText(), this.textDescription.getText(),
 					this.textFrequency.getText(), visibility, this.textStartDate.getText(), this.textEndDate.getText(), this.a);
+			this.actUI.detectTaskRessourceUIClose();
+			this.dispose();
 		}
 	}
 	
