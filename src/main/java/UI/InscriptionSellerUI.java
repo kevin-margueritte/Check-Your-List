@@ -241,6 +241,8 @@ public class InscriptionSellerUI extends JFrame implements ActionListener {
 				    JOptionPane.ERROR_MESSAGE);
 			}
 			else {
+				JOptionPane.showMessageDialog(this,
+						"Congratulations, you are now a seller of Check Your List ! Please Login");
 				LoginUI frame = new LoginUI();
 				frame.setVisible(true);
 				this.dispose();
