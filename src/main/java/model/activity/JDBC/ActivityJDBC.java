@@ -181,6 +181,7 @@ public class ActivityJDBC extends Activity {
 				t.setChecked(rs.getBoolean("checked"));
 				t.setStartDate(rs.getString("startdate"));
 				t.setEndDate(rs.getString("enddate"));
+				t.setVisibility(rs.getBoolean("visibility"));
 				t.setActivity(this);
 				listTask.add(t);
 			}

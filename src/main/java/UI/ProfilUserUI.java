@@ -65,29 +65,29 @@ public class ProfilUserUI extends JFrame implements ActionListener {
 			idx ++;
 		}
 		
-		setSize(453, (100 * (list.size() + 1)) + 50);
+		setSize(550, (50 * (list.size() + 1)) + 50);
 	}
 	
 	public void addPanelActivity(Activity act, int idx) {
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, idx * 38, 414, 40);
+		panel.setBounds(10, idx * 38, 520, 40);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblNameActivity = new JLabel(act.getTitle());
 		lblNameActivity.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNameActivity.setBounds(23, 18, 99, 20);
+		lblNameActivity.setBounds(23, 18, 250, 20);
 		panel.add(lblNameActivity);
 		
 		JButton btnSee = new JButton("See");
 		btnSee.putClientProperty("activity", act);
-		btnSee.setBounds(175, 17, 89, 23);
+		btnSee.setBounds(300, 17, 89, 23);
 		btnSee.addActionListener(this);
 		panel.add(btnSee);
 		
 		JButton btnDelete = new JButton("Delete");
-		btnDelete.setBounds(294, 17, 89, 23);
+		btnDelete.setBounds(400, 17, 89, 23);
 		btnDelete.putClientProperty("activity", act);
 		btnDelete.addActionListener(this);
 		panel.add(btnDelete);

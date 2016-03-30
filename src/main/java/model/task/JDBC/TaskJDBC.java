@@ -17,12 +17,12 @@ public class TaskJDBC extends Task {
 		super();
 	}
 	
-	public TaskJDBC(String name, String description, String frequency, boolean checked, String startDate, String endDate, Activity activity) {
-		super(name, description, frequency, checked, startDate, endDate, activity);
+	public TaskJDBC(String name, String description, String frequency, boolean checked, String startDate, String endDate, Activity activity, boolean visibility) {
+		super(name, description, frequency, checked, startDate, endDate, activity, visibility);
 	}
 	
-	public TaskJDBC(int id, String name, String description, String frequency, boolean checked, String startDate, String endDate, Activity activity) {
-		super(id, name, description, frequency, checked, startDate, endDate, activity);
+	public TaskJDBC(int id, String name, String description, String frequency, boolean checked, String startDate, String endDate, Activity activity, boolean visibility) {
+		super(id, name, description, frequency, checked, startDate, endDate, activity, visibility);
 	}
 	
 	public TaskJDBC(int id, String name) {
@@ -35,8 +35,8 @@ public class TaskJDBC extends Task {
 	
 	@Override
 	public boolean save() {
-		String sql = ("insert into task (name, description, frequency,checked,startdate,enddate, titre_activity, pseudo_customer) values ( '" + this.name + "','" + this.description + "','" + this.frequency + "','"+this.checked+"','" + this.startDate + "','" + this.endDate 
-				+ "','" + this.activity.getTitle() + "','"+ activity.getUser().getPseudo() + "')");
+		String sql = ("insert into task (name, description, frequency,checked,startdate,enddate, titre_activity, pseudo_customer,visibility) values ( '" + this.getName() + "','" + this.getDescription() + "','" + this.getFrequency() + "','"+this.getChecked() +"','" + this.startDate + "','" + this.endDate 
+				+ "','" + this.activity.getTitle() + "','"+ activity.getUser().getPseudo() + "','" + this.getVisibility() + "')");
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
 			return stm.execute(sql);

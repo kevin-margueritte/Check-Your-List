@@ -13,6 +13,7 @@ public abstract class Task {
 		protected String startDate;
 		protected String endDate;
 		protected Activity activity;
+		protected boolean visibility;
 
 		
 		public Task() {
@@ -24,7 +25,7 @@ public abstract class Task {
 			this.activity = act;
 		}
 
-		public Task(String name, String description, String frequency, boolean checked, String startDate, String endDate, Activity activity) {
+		public Task(String name, String description, String frequency, boolean checked, String startDate, String endDate, Activity activity, boolean visibility) {
 			super();
 			this.name = name;
 			this.description = description;
@@ -33,11 +34,11 @@ public abstract class Task {
 			this.startDate = startDate;
 			this.endDate = endDate;
 			this.activity = activity;
-			
+			this.visibility = visibility;
 	
 		}
 		
-		public Task(int id, String name, String description, String frequency, boolean checked, String startDate, String endDate, Activity activity) {
+		public Task(int id, String name, String description, String frequency, boolean checked, String startDate, String endDate, Activity activity, boolean visibility) {
 			super();
 			this.id=id;
 			this.name = name;
@@ -47,6 +48,7 @@ public abstract class Task {
 			this.startDate = startDate;
 			this.endDate = endDate;
 			this.activity = activity;	
+			this.visibility = visibility;
 		}
 		
 		public Task(int id, String name) {
@@ -97,6 +99,20 @@ public abstract class Task {
 		public void setActivity(Activity activity) {
 			this.activity = activity;
 		}
+		
+		public boolean getVisibility() {
+			return this.visibility;
+		}
+		
+		public boolean getChecked() {
+			return this.checked;
+		}
+		
+		public void setVisibility(boolean visibility) {
+			this.visibility = visibility;
+		}
+		
+		
 		
 		public abstract Task readByName();
 		public abstract boolean save();

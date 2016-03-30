@@ -137,6 +137,8 @@ public class ProposeSubcategoryUI extends JFrame implements ActionListener {
 							this.textDetailedDescription.getText(),(Category) this.comboBoxCategory.getSelectedItem());
 					this.createProductUI.detectCategoryClose();
 					this.dispose();
+					JOptionPane.showMessageDialog(this,
+						    "You have created your product.");
 				}
 				else {
 					JOptionPane.showMessageDialog(this,
