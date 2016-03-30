@@ -1,5 +1,6 @@
 package UI;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -8,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -16,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
 import facade.ActivityFacade;
 import model.activity.Activity;
@@ -228,7 +231,10 @@ public class ActivityUI extends JFrame implements ActionListener {
 	public void addPanelComment(Comment comment, int idx) {					
 		JPanel panel = new JPanel();
 		if(user.getPseudo().equals(activity.getUser().getPseudo())) { 
-			panel.setBounds(10, idx * 38, 414, 40);
+			//panel.setBounds(10, idx * 38, 414, 40);
+			panel.setBounds(10, (idx * 38), 494,48);
+			//Border blackline = BorderFactory.createLineBorder(Color.black);
+			//panel.setBorder(blackline);
 		}
 		else {
 			panel.setBounds(10, idx * 28, 414, 40);
@@ -236,17 +242,26 @@ public class ActivityUI extends JFrame implements ActionListener {
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblDateComment = new JLabel(comment.getPostingDate());
-		lblDateComment.setBounds(23, 7, 99, 20);
+		JLabel lblDateComment = new JLabel("Posted the " + comment.getPostingDate());
+		lblDateComment.setBounds(23, 7, 209, 20);
 		panel.add(lblDateComment);
 		
-		JLabel lblPseudoComment = new JLabel(comment.getUser().getPseudo());
-		lblPseudoComment.setBounds(175, 7, 99, 20);
+		JLabel lblPseudoComment = new JLabel("By : " + comment.getUser().getPseudo());
+		lblPseudoComment.setBounds(175, 7, 209, 20);
 		panel.add(lblPseudoComment);
 		
+		
+		/*
 		JLabel lblContentComment = new JLabel(comment.getContent());
 		lblContentComment.setBounds(294, 7, 99, 20);
-		panel.add(lblContentComment);		
+		panel.add(lblContentComment);
+		*/
+		
+		JTextPane textPaneContentComment = new JTextPane();
+		textPaneContentComment.setText(comment.getContent());
+		textPaneContentComment.setBounds(23, 30, 494, 60);
+		textPaneContentComment.setEditable(false);
+		panel.add(textPaneContentComment);		
 		
 	}
 	
