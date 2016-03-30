@@ -57,7 +57,7 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 					Seller s = new SellerJDBC("aezr");
 					s.readByPseudo();
 					CreateProductUI frame = new CreateProductUI(s);
-					frame.setLocationRelativeTo(null);
+					
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -70,7 +70,7 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 	public CreateProductUI(Seller s)  {
 		this.seller = s;
 		this.sellface = new SellerFacade();
-		
+		this.setLocationRelativeTo(null);
 		setResizable(false);
 		getContentPane().setLayout(null);
 		

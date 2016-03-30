@@ -54,6 +54,7 @@ public class LoginUI extends JFrame implements ActionListener{
 	}
 	
 	public LoginUI() {
+		
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.login = new LoginFacade();
@@ -107,6 +108,7 @@ public class LoginUI extends JFrame implements ActionListener{
 		setSize(285,343);
 		setMinimumSize(new Dimension(294, 270));
 		setTitle("Login");
+		this.setLocationRelativeTo(null);
 	}
 	
 	public void actionPerformed(ActionEvent e) {

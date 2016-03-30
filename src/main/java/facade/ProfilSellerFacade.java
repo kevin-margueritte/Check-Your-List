@@ -22,4 +22,10 @@ public class ProfilSellerFacade {
 		return pm.deleteProduct(prod);
 	}
 
+	public boolean majQuantity(Product prod, int qty) {
+		System.out.println("facadeOK");
+		return pm.majQuantity(prod,qty);
+		
+	}
+
 }

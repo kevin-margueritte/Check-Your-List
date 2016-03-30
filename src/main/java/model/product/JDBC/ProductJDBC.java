@@ -7,6 +7,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 import database.ConnectionDB;
 import model.category.Category;
 import model.category.Subcategory;
@@ -158,6 +160,12 @@ public class ProductJDBC extends Product {
 			return rs1.next();
 		} catch (SQLException e) {e.printStackTrace();}
 		return true;
+	}
+
+	@Override
+	public boolean majQuantity(int qty) {
+		System.out.println(this.name);
+		return false;
 	}
 	
 }

@@ -1,6 +1,7 @@
 package UI;
 
 import java.awt.Component;
+import java.awt.Dimension;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
@@ -22,20 +23,26 @@ public class MenuSellerUI extends JFrame implements ChangeListener {
 		getContentPane().setLayout(null);
 		this.tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		this.tabbedPane.addChangeListener(this);
+		this.setMinimumSize(new Dimension(400, 300));
+		this.setLocationRelativeTo(null);
 		getContentPane().add(tabbedPane);
 		this.initFrame();
+		
+		
+		
 	}
 	
 	public void initFrame() {
 		ProfilSellerUI fs = new ProfilSellerUI(this.seller);
+		
 		Component comp = fs.getContentPane();
 		this.setSize(fs.getWidth() + 15, fs.getHeight() + 40);
 		tabbedPane.setSize(fs.getWidth(), fs.getHeight());
 		tabbedPane.addTab("Profil", comp);
 		CreateProductUI cp = new CreateProductUI(this.seller);
-		comp = cp.getContentPane();
+		Component compCreateProd = cp.getContentPane();
 		//tabbedPane.setSize(fc.getWidth(), fc.getHeight());
-		tabbedPane.addTab("Create product", comp);
+		tabbedPane.addTab("Create product", compCreateProd);
 	}
 
 	@Override

@@ -106,7 +106,7 @@ public abstract class Product {
 	public abstract boolean delete();
 	public abstract Product readByNameAndSeller();
 	public abstract List<Product> getAllProductFromSubCategory();
-
+	public abstract boolean majQuantity(int qty);
 	public float getPrice() {
 		return price;
 	}
@@ -122,5 +122,7 @@ public abstract class Product {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+
+	
 	
 }

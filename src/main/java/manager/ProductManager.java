@@ -87,4 +87,10 @@ public class ProductManager {
 		}
 	}
 
+
+
+	public boolean majQuantity(Product prod, int qty) {
+		return prod.majQuantity(qty);
+	}
+
 }
