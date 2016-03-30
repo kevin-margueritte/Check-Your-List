@@ -143,6 +143,10 @@ public class CreateActivityUI extends JFrame implements ActionListener {
 			}
 			this.af.createActivity(this.textActivity.getText(), this.textDescription.getText(), visibility, 
 				(Subcategory) this.comboSubcategory.getSelectedItem(), this.u);
+			JOptionPane.showMessageDialog(this,
+					"Your activty has been created",
+				    "Congratulation",
+				    JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 	

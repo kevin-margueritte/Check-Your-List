@@ -112,7 +112,7 @@ public class ShopUI extends JFrame implements ActionListener {
 		JLabel lblStock = new JLabel("Stock");
 		lblStock.setBounds(281, 110, 53, 14);
 		getContentPane().add(lblStock);
-		this.initFrame();
+		//this.initFrame();
 		setSize(600,381);
 	}
 	

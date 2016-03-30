@@ -75,9 +75,9 @@ public class UserJDBC extends User {
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
 			ResultSet rs = stm.executeQuery(sql);
+			Activity act = null;
 			while(rs.next()){
-				
-				Activity act = new ActivityJDBC();
+				act = new ActivityJDBC();
 				act.setTitle((String) rs.getObject("titre"));
 				act.setDescription((String) rs.getObject("description"));
 				act.setVisible((Boolean) rs.getObject("visible"));
@@ -86,11 +86,9 @@ public class UserJDBC extends User {
 				act.setSubcategory(subcat.readByName());
 				act.setUser(this);
 				listAct.add(act);
-			
 			}
 			rs.close();
 			return listAct;
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

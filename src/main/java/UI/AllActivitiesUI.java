@@ -3,6 +3,7 @@ package UI;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -21,6 +22,7 @@ public class AllActivitiesUI extends JFrame implements ActionListener {
 	//private JPanel contentPane;
 	private ActivityFacade af;
 	private User u;
+	private List<JPanel> panelActivity;
 
 	/**
 	 * Launch the application.
@@ -45,6 +47,7 @@ public class AllActivitiesUI extends JFrame implements ActionListener {
 	 */
 	public AllActivitiesUI(User u) {
 		setResizable(false);
+		this.panelActivity = new ArrayList<JPanel>();
 		getContentPane().setLayout(null);
 		
 		JLabel lblTitle = new JLabel("Activities");
@@ -55,12 +58,15 @@ public class AllActivitiesUI extends JFrame implements ActionListener {
 		
 		this.u = u;
 		this.af = new ActivityFacade();
-		this.initFrame();
+		//this.initFrame();
 	}
 	
 	public void initFrame() {
 		Activity a = (Activity) new ActivityJDBC();
 		List<Activity> list = this.af.getAllActivities(a);
+		for (JPanel p : this.panelActivity) {
+			this.remove(p);
+		}
 		int idx = 1;
 		for (Activity act : list) {
 			this.addPanelActivity(act, idx);
@@ -72,6 +78,7 @@ public class AllActivitiesUI extends JFrame implements ActionListener {
 	
 	public void addPanelActivity(Activity act, int idx) {		
 		JPanel panel = new JPanel();
+		this.panelActivity.add(panel);
 		panel.setBounds(10, idx * 38, 414, 40);
 		getContentPane().add(panel);
 		panel.setLayout(null);
