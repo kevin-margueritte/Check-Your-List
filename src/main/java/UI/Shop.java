@@ -19,6 +19,7 @@ import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 
 import facade.ActivityFacade;
+import facade.ShopFacade;
 import model.category.Category;
 import model.category.Subcategory;
 import model.person.Seller;
@@ -30,7 +31,7 @@ public class Shop extends JFrame implements ActionListener {
 	
 	private JComboBox comboCategory;
 	private JComboBox comboSubcategory;
-	private ActivityFacade activityFace;
+	private ShopFacade ShopFace;
 	private JPanel panelProducts;
 	
 	public static void main(String args[]) {
@@ -59,7 +60,7 @@ public class Shop extends JFrame implements ActionListener {
 	
 	
 	public Shop() {
-		this.activityFace = new ActivityFacade();
+		this.ShopFace = new ShopFacade();
 		getContentPane().setLayout(null);
 		
 		this.comboCategory = new JComboBox();
@@ -112,7 +113,7 @@ public class Shop extends JFrame implements ActionListener {
 		getContentPane().add(lblStock);
 		
 		setSize(600,381);
-		List<Product> list = this.activityFace.getAllProductsFromSubCategory((Subcategory) this.comboSubcategory.getSelectedItem());
+		List<Product> list = this.ShopFace.getAllProductsFromSubCategory((Subcategory) this.comboSubcategory.getSelectedItem());
 		this.initProducts(list);
 	}
 	
@@ -162,14 +163,14 @@ public class Shop extends JFrame implements ActionListener {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void initComboBoxCategory() {
-		List<Category> list = activityFace.getAllCategories();
+		List<Category> list = ShopFace.getAllCategories();
 		this.comboCategory.setModel(new DefaultComboBoxModel(list.toArray()));
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void initComboBoxSubCategory() {
 		Category c = (Category) this.comboCategory.getSelectedItem();
-		List<Subcategory> list = activityFace.getAllSubcategories(c);
+		List<Subcategory> list = ShopFace.getAllSubcategories(c);
 		this.comboSubcategory.setModel(new DefaultComboBoxModel(list.toArray()));
 	}
 	
@@ -179,7 +180,7 @@ public class Shop extends JFrame implements ActionListener {
 			this.initComboBoxSubCategory();
 		}
 		if (e.getSource() == this.comboCategory || e.getSource() == this.comboSubcategory){
-			List<Product> list = this.activityFace.getAllProductsFromSubCategory((Subcategory) this.comboSubcategory.getSelectedItem());
+			List<Product> list = this.ShopFace.getAllProductsFromSubCategory((Subcategory) this.comboSubcategory.getSelectedItem());
 			this.initProducts(list);
 		}
 	}

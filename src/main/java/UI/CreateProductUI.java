@@ -9,9 +9,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -19,6 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 
 import facade.SellerFacade;
 import model.category.Category;
@@ -64,10 +67,9 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 	}
 	
 	
-	public CreateProductUI(Seller s) {
+	public CreateProductUI(Seller s)  {
 		this.seller = s;
 		this.sellface = new SellerFacade();
-		
 		
 		setResizable(false);
 		getContentPane().setLayout(null);
@@ -87,7 +89,8 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 		lblNewLabel.setBounds(10, 78, 138, 14);
 		getContentPane().add(lblNewLabel);
 		// <--------------- Obligé en float
-		this.price = new JFormattedTextField(new DecimalFormat("####.##"));
+		
+		this.price = new JFormattedTextField(new Float(0));
 		this.price.setBounds(10, 103, 138, 20);
 		getContentPane().add(this.price);
 		
@@ -96,6 +99,7 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 		lblQuantity.setBounds(10, 146, 58, 14);
 		getContentPane().add(lblQuantity);
 		
+		JFormattedTextField field = new JFormattedTextField(new Integer(0));
 		this.quantity = new JFormattedTextField(new Integer(0));
 		this.quantity.setBounds(10, 171, 138, 20);
 		getContentPane().add(this.quantity);
@@ -168,7 +172,7 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 		}else if(e.getSource() == this.btnValidate && this.formComplete()) {	
 			//nom product seller price quantity subcategory
 			boolean bool;
-			bool = this.sellface.createProduct(this.nameProduct.getText(),this.seller,Float.parseFloat(this.price.getText()),Integer.parseInt(this.quantity.getText()), 
+			bool = this.sellface.createProduct(this.nameProduct.getText(),this.seller,Float.parseFloat(price.getText().replaceAll("" , "")),Integer.parseInt(quantity.getText().replaceAll(" ", "")), 
 				(Subcategory) this.comboSubcategory.getSelectedItem());
 			System.out.println(bool);
 			if(bool){
@@ -198,11 +202,13 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 				    "Error",
 				    JOptionPane.ERROR_MESSAGE);
 			return false;	
-		}else{ 
-			String str = this.price.getText(); 
-        	float f = Float.parseFloat(str);
-        	String str2 = this.quantity.getText();
-        	int i = Integer.parseInt(str2);
+		}else{
+			System.out.println(price.getText());
+        	System.out.println(quantity.getText());
+        	float f = Float.parseFloat(price.getText().replaceAll(" ", ""));
+        	String s = quantity.getText().replaceAll(" ", "");
+        	System.out.println(s);
+        	int i = Integer.parseInt(s);
 			if(f == 0.0){
 				JOptionPane.showMessageDialog(this,
 						"Price need to be a Number",
