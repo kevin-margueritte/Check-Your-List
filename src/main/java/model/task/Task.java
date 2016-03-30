@@ -103,4 +103,5 @@ public abstract class Task {
 		public abstract boolean delete();
 		public abstract boolean update();
 		public abstract boolean addRessource(Product p);
+		public abstract boolean exist();
 }

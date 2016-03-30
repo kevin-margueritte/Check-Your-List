@@ -21,7 +21,7 @@ import model.category.Category;
 import model.person.User;
 
 @SuppressWarnings("serial")
-public class CreateTaskRessourceUI extends JFrame implements ActionListener{
+public class CreateTaskUI extends JFrame implements ActionListener{
 	
 	private RessourceFacade rf;
 	private JTextField textDescription;
@@ -41,7 +41,7 @@ public class CreateTaskRessourceUI extends JFrame implements ActionListener{
 	private JComboBox comboFreq;
 	
 	public static void main(String args[]) {
-		CreateTaskRessourceUI.launch();
+		CreateTaskUI.launch();
 	}
 	
 	/**
@@ -51,9 +51,9 @@ public class CreateTaskRessourceUI extends JFrame implements ActionListener{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Activity a = new ActivityJDBC("a");
+					Activity a = new ActivityJDBC("aze");
 					a.readByTitle();
-					CreateTaskRessourceUI frame = new CreateTaskRessourceUI(a);
+					CreateTaskUI frame = new CreateTaskUI(a);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -62,7 +62,7 @@ public class CreateTaskRessourceUI extends JFrame implements ActionListener{
 		});
 	}
 	
-	public CreateTaskRessourceUI(Activity act) {
+	public CreateTaskUI(Activity act) {
 		setTitle("Create task");
 		this.a= act;
 		
@@ -175,24 +175,42 @@ public class CreateTaskRessourceUI extends JFrame implements ActionListener{
 				visibility = true;
 			}
 			if ( (int) this.spinnerFreq.getValue() <= 0 ){
-				this.rf.createTask(this.textNameTask.getText(), this.textDescription.getText(),
+				boolean code = this.rf.createTask(this.textNameTask.getText(), this.textDescription.getText(),
 						"", 
 						visibility, this.startYear.getSelectedItem() + "-" + this.startMonth.getSelectedItem() + "-" + this.startDay.getSelectedItem(),
 						this.endYear.getSelectedItem() + "-" + this.endMonth.getSelectedItem() + "-" + this.endDay.getSelectedItem(), this.a);
+				if (!code) {
+					JOptionPane.showMessageDialog(this,
+							"This task already exist",
+						    "Error",
+						    JOptionPane.ERROR_MESSAGE);
+				}
+				else {
+					AddRessourcesTaskUI tui = new AddRessourcesTaskUI(this.textNameTask.getText(), this.a);
+					tui.setVisible(true);
+					this.dispose();
+				}
 			}
 			else {
-				this.rf.createTask(this.textNameTask.getText(), this.textDescription.getText(),
+				boolean code = this.rf.createTask(this.textNameTask.getText(), this.textDescription.getText(),
 					(int) this.spinnerFreq.getValue() +" "+ (String) this.comboFreq.getSelectedItem(), visibility, this.startYear.getSelectedItem() + "-" + this.startMonth.getSelectedItem() + "-" + this.startDay.getSelectedItem(),
 					this.endYear.getSelectedItem() + "-" + this.endMonth.getSelectedItem() + "-" + this.endDay.getSelectedItem(), this.a);
+				if (!code) {
+					JOptionPane.showMessageDialog(this,
+							"This task already exist",
+						    "Error",
+						    JOptionPane.ERROR_MESSAGE);
+				}
+				else {
+					AddRessourcesTaskUI tui = new AddRessourcesTaskUI(this.textNameTask.getText(), this.a);
+					tui.setVisible(true);
+					this.dispose();
+				}
 			}
-			AddRessourcesTaskUI tui = new AddRessourcesTaskUI(this.textNameTask.getText(), this.a);
-			tui.setVisible(true);
-			this.dispose();
 		}
 	}
 	
 	private boolean formComplete() {
-		System.out.print("formComplete");
 		if (this.textNameTask.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(this,
 					"Task name is empty",

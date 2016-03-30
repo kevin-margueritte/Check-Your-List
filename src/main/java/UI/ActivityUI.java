@@ -261,7 +261,7 @@ public class ActivityUI extends JFrame implements ActionListener {
 		 	//frame.setVisible(true);
 		}
 		else if (e.getSource() == this.btnAddTask) {
-			CreateTaskRessourceUI tr = new CreateTaskRessourceUI(this.activity);
+			CreateTaskUI tr = new CreateTaskUI(this.activity);
 			tr.setVisible(true);
 		}
 		else if (e.getSource() instanceof JCheckBox) {

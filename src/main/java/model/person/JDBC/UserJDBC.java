@@ -92,9 +92,14 @@ public class UserJDBC extends User {
 		try {
 			Statement stm1 = ConnectionDB.creetConnectionDB().getConn().createStatement();
 			ResultSet rs1 = stm1.executeQuery(sql1);
-			return rs1.next(); 
+			if (rs1.next()) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		} catch (SQLException e) {}
-		return true;
+		return false;
 	}
 
 	@Override

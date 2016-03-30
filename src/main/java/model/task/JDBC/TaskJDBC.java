@@ -40,8 +40,7 @@ public class TaskJDBC extends Task {
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
 			return stm.execute(sql);
-		} catch (SQLException e) 
-		{e.printStackTrace();}
+		} catch (SQLException e) {}
 		return false;
 	}
 	
@@ -112,6 +111,22 @@ public class TaskJDBC extends Task {
 			return this;
 		} catch (SQLException e) {}
 		return new TaskJDBC();
+	}
+
+	@Override
+	public boolean exist() {
+		String sql1 = ("SELECT 1 FROM task WHERE name='"+ this.name + "'");
+		try {
+			Statement stm1 = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			ResultSet rs1 = stm1.executeQuery(sql1);
+			if (rs1.next()) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		} catch (SQLException e) {}
+		return false;
 	}
 
 }

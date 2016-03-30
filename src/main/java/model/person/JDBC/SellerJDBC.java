@@ -82,9 +82,14 @@ public class SellerJDBC extends Seller {
 		try {
 			Statement stm2 = ConnectionDB.creetConnectionDB().getConn().createStatement();
 			ResultSet rs2 = stm2.executeQuery(sql2);
-			return rs2.next(); 
+			if (rs2.next()) {
+				return true;
+			}
+			else {
+				return false;
+			} 
 		} catch (SQLException e) {}
-		return true;
+		return false;
 	}
 	
 	public boolean sellerExist() {

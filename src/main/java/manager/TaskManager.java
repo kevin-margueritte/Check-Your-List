@@ -19,18 +19,30 @@ public class TaskManager {
 	
 	public boolean createTask(String name, String description, String frequency, boolean checked, String startDate, String endDate, Activity activity) {
 		Task task = this.fact.createTask(name, description, frequency, checked, startDate, endDate, activity);
-		return task.save();
+		if (!task.exist()) {
+			task.save();
+			return true;
+		}
+		return false;
 	}
 		
 	public boolean createTask(int id, String name, String description, String frequency, boolean checked, String startDate, String endDate, Activity activity) {
 		java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 		Task task = this.fact.createTask(id, name, description, frequency, checked, date.toString(), endDate, activity);
-		return task.save();
+		if (!task.exist()) {
+			task.save();
+			return true;
+		}
+		return false;
 	}
 	
 	public boolean createTask(int id, String name) {
 		Task task = this.fact.createTask(id, name);
-		return task.save();
+		if (task.exist()) {
+			task.save();
+			return true;
+		}
+		return false;
 	}
 	
 	public boolean updateChecked(Task task, boolean check) {
