@@ -25,6 +25,10 @@ public class UserJDBC extends User {
 	public UserJDBC(String pseudo) {
 		super(pseudo);
 	}
+	
+	public UserJDBC() {
+		super();
+	}
 
 	@Override
 	public User readByPseudo() {
