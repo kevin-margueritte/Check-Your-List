@@ -23,11 +23,12 @@ public class ProposeCategoryUI extends JFrame implements ActionListener {
 	private JTextField categoryName;
 	private JTextPane textShortDescription;
 	private JTextPane textDetailedDescription;
+	private CreateProductUI createProductUI;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -38,13 +39,13 @@ public class ProposeCategoryUI extends JFrame implements ActionListener {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
 	 */
-	public ProposeCategoryUI() {
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public ProposeCategoryUI(CreateProductUI createProductUI) {
+		this.createProductUI = createProductUI;
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -103,10 +104,11 @@ public class ProposeCategoryUI extends JFrame implements ActionListener {
 	
 	
 	public void actionPerformed(ActionEvent e) {
-		
 		if (this.formComplete()) {
 			if(!cf.categoryExist(this.categoryName.getText())) {
-				this.cf.createCategory(this.categoryName.getText(), this.textShortDescription.getText(),this.textDetailedDescription.getText());			
+				this.cf.createCategory(this.categoryName.getText(), this.textShortDescription.getText(),this.textDetailedDescription.getText());	
+				this.createProductUI.detectCategoryClose();
+				this.dispose();
 			}
 			else {
 				JOptionPane.showMessageDialog(this,

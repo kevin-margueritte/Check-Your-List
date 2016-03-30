@@ -14,6 +14,8 @@ public class MenuSellerUI extends JFrame implements ChangeListener {
 	
 	private JTabbedPane tabbedPane;
 	private Seller seller;
+	private ProfilSellerUI fs;
+	private CreateProductUI cp;
 
 	/**
 	 * Create the frame.
@@ -33,13 +35,12 @@ public class MenuSellerUI extends JFrame implements ChangeListener {
 	}
 	
 	public void initFrame() {
-		ProfilSellerUI fs = new ProfilSellerUI(this.seller);
-		
+		this.fs = new ProfilSellerUI(this.seller);	
 		Component comp = fs.getContentPane();
 		this.setSize(fs.getWidth() + 15, fs.getHeight() + 40);
 		tabbedPane.setSize(fs.getWidth(), fs.getHeight());
 		tabbedPane.addTab("Profil", comp);
-		CreateProductUI cp = new CreateProductUI(this.seller);
+		this.cp = new CreateProductUI(this.seller);
 		Component compCreateProd = cp.getContentPane();
 		//tabbedPane.setSize(fc.getWidth(), fc.getHeight());
 		tabbedPane.addTab("Create product", compCreateProd);
@@ -50,12 +51,14 @@ public class MenuSellerUI extends JFrame implements ChangeListener {
 		JTabbedPane pane = (JTabbedPane) c.getSource();
 		String panneName = pane.getTitleAt(pane.getSelectedIndex());
 		if (panneName.equals("Profil")) {
-			ProfilSellerUI fs = new ProfilSellerUI(this.seller);
-			this.setSize(fs.getWidth() + 15, fs.getHeight() + 40);
+			this.fs.dispose();
+			this.fs.initFrame();
+			this.setSize(fs.getWidth(), fs.getHeight() + 40);
 			tabbedPane.setSize(fs.getWidth(), fs.getHeight());
 		}
 		else if (panneName.equals("Create product")) {
-			CreateProductUI cp = new CreateProductUI(this.seller);
+			this.cp.dispose();
+			//this.cp.initFrame();
 			this.setSize(cp.getWidth() + 15, cp.getHeight() + 30);
 			tabbedPane.setSize(cp.getWidth(), cp.getHeight());
 		}

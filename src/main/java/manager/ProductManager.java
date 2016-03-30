@@ -97,10 +97,16 @@ public class ProductManager {
 		}
 	}
 
-
-
 	public boolean majQuantity(Product prod, int qty) {
 		return prod.majQuantity(qty);
+	}
+	
+	public boolean majPrice(Product prod, float price) {
+		return prod.majPrice(price);	
+	}
+	
+	public boolean majName(Product prod, String name) {
+		return prod.majName(name);
 	}
 
 }

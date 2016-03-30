@@ -108,6 +108,8 @@ public abstract class Product {
 	public abstract List<Product> getAllProductFromSubCategory();
 	public abstract boolean majQuantity(int qty);
 	public abstract List<Product> getAllProductFromSubCategoryAndNoPresentTask();
+	public abstract boolean majPrice(float price);
+	public abstract boolean majName(String name);
 
 	public float getPrice() {
 		return price;
@@ -124,7 +126,5 @@ public abstract class Product {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-
-	
 	
 }

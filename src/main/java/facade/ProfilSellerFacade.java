@@ -23,9 +23,15 @@ public class ProfilSellerFacade {
 	}
 
 	public boolean majQuantity(Product prod, int qty) {
-		System.out.println("facadeOK");
-		return pm.majQuantity(prod,qty);
-		
+		return pm.majQuantity(prod,qty);	
 	}
 
+	public boolean majPrice(Product prod, float price) {
+		return pm.majPrice(prod,price);	
+	}
+	
+	public boolean majName(Product prod, String name) {
+		return pm.majName(prod,name);	
+	}
+	
 }

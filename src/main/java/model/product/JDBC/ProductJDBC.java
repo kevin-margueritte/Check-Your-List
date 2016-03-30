@@ -41,6 +41,11 @@ public class ProductJDBC extends Product {
 		super(sub);
 	}
 
+	@Override
+	public String toString() {
+		return "ProductJDBC [name=" + name + "]";
+	}
+
 	/*CREATE TABLE product
 	(
 	  id serial NOT NULL,
@@ -196,7 +201,44 @@ public class ProductJDBC extends Product {
 
 	@Override
 	public boolean majQuantity(int qty) {
-		System.out.println(this.name);
+		this.quantity = qty;
+		String sql = ("update product "
+				+ "set quantity =" + this.quantity + " where id='"+ this.idProd +"'");
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			return stm.execute(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean majPrice(float price) {
+		this.price = price;
+		String sql = ("update product "
+				+ "set price =" + this.price + " where id='"+ this.idProd +"'");
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			return stm.execute(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean majName(String name) {
+		this.name = name;
+		String sql = ("update product "
+				+ "set name = '" + this.name + "' where id='"+ this.idProd +"'");
+		System.out.println(sql);
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			return stm.execute(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
 	
