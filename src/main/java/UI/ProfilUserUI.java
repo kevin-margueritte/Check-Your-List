@@ -72,7 +72,7 @@ public class ProfilUserUI extends JFrame implements ActionListener {
 			idx ++;
 		}
 		
-		setSize(550, (50 * (list.size() + 1)) + 50);
+		setSize(550, (40 * (list.size() + 1)) + 50 );
 	}
 	
 	public void addPanelActivity(Activity act, int idx) {

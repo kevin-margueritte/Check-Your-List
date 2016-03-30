@@ -218,4 +218,36 @@ public class ActivityJDBC extends Activity {
 		return list;
 	}
 
+	@Override
+	public List<Activity> readAllPrivate() {
+		String sql = ("select * from activity where visible = true ");
+		Activity act = null;
+		List<Activity> listAct= new ArrayList<Activity>();
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while(rs.next()){
+				act = new ActivityJDBC();
+				act.setTitle(rs.getString("titre"));
+				act.setDescription(rs.getString("description"));
+				act.setVisible(rs.getBoolean("visible"));
+				act.setCreationDate(rs.getString("creationdate"));
+				User u = (UserJDBC) new UserJDBC(rs.getString("pseudo_user"));
+				u.readByPseudo();
+				act.setUser(u);
+				SubcategoryJDBC subcat = new SubcategoryJDBC(rs.getString("name_subcategory"));
+				subcat.readByName();
+				act.setSubcategory(subcat);
+				listAct.add(act.readByTitle());
+			}
+			rs.close();
+			return listAct;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

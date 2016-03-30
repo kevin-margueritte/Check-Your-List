@@ -138,7 +138,7 @@ public class CreateActivityUI extends JFrame implements ActionListener {
 		}
 		else if(e.getSource() == this.btnValidate && this.formComplete()) {
 			boolean visibility = false;
-			if ( ((String) this.comboVisibility.getSelectedItem()).equals("true") ) {
+			if ( ((String) this.comboVisibility.getSelectedItem()).equals("True") ) {
 				visibility = true;
 			}
 			this.af.createActivity(this.textActivity.getText(), this.textDescription.getText(), visibility, 

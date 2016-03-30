@@ -40,7 +40,7 @@ public class ActivityManager {
 	}
 	
 	public static List<Activity> readAllActivities(Activity act) {
-		return act.readAll();
+		return act.readAllPrivate();
 	}
 
 	public List<Task> getAllTasks(Activity act) {

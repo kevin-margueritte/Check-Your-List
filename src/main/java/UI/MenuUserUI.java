@@ -53,10 +53,6 @@ public class MenuUserUI extends JFrame implements ChangeListener {
 		this.setLocationRelativeTo(null);
 		
 	}
-	
-	public void initCreateActivity() {
-		
-	}
 
 	@Override
 	public void stateChanged(ChangeEvent c) {
