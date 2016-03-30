@@ -250,13 +250,6 @@ public class ActivityUI extends JFrame implements ActionListener {
 		lblPseudoComment.setBounds(175, 7, 209, 20);
 		panel.add(lblPseudoComment);
 		
-		
-		/*
-		JLabel lblContentComment = new JLabel(comment.getContent());
-		lblContentComment.setBounds(294, 7, 99, 20);
-		panel.add(lblContentComment);
-		*/
-		
 		JTextPane textPaneContentComment = new JTextPane();
 		textPaneContentComment.setText(comment.getContent());
 		textPaneContentComment.setBounds(23, 30, 494, 60);
