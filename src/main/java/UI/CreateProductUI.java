@@ -5,23 +5,24 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.text.ParseException;
+import java.text.NumberFormat;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JFormattedTextField.AbstractFormatter;
+import javax.swing.JFormattedTextField.AbstractFormatterFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.text.MaskFormatter;
+import javax.swing.text.InternationalFormatter;
 
 import facade.SellerFacade;
 import model.category.Category;
@@ -89,8 +90,23 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 		lblNewLabel.setBounds(10, 78, 138, 14);
 		getContentPane().add(lblNewLabel);
 		// <--------------- Obligé en float
-		
-		this.price = new JFormattedTextField(new Float(0));
+		this.price = new JFormattedTextField();
+		this.price.setFormatterFactory(new AbstractFormatterFactory() {
+
+	        @Override
+	        public AbstractFormatter getFormatter(JFormattedTextField tf) {
+	            NumberFormat format = DecimalFormat.getInstance();
+	            format.setMinimumFractionDigits(2);
+	            format.setMaximumFractionDigits(2);
+	            format.setRoundingMode(RoundingMode.HALF_UP);
+	            InternationalFormatter formatter = new InternationalFormatter(format);
+	            formatter.setAllowsInvalid(false);
+	            formatter.setMinimum(0.0);
+	            formatter.setMaximum(1000.00);
+	            return formatter;
+	        }
+	    });
+		this.price.setValue(00.00);
 		this.price.setBounds(10, 103, 138, 20);
 		getContentPane().add(this.price);
 		
@@ -99,8 +115,19 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 		lblQuantity.setBounds(10, 146, 58, 14);
 		getContentPane().add(lblQuantity);
 		
-		JFormattedTextField field = new JFormattedTextField(new Integer(0));
-		this.quantity = new JFormattedTextField(new Integer(0));
+		this.quantity = new JFormattedTextField();
+		this.quantity.setFormatterFactory(new AbstractFormatterFactory() {
+
+	        @Override
+	        public AbstractFormatter getFormatter(JFormattedTextField tf) {
+	            NumberFormat format = DecimalFormat.getInstance();
+	            InternationalFormatter formatter = new InternationalFormatter(format);
+	            formatter.setAllowsInvalid(false);
+	            formatter.setMinimum(0);
+	            return formatter;
+	        }
+	    });
+		this.quantity.setValue(0);
 		this.quantity.setBounds(10, 171, 138, 20);
 		getContentPane().add(this.quantity);
 	
@@ -116,9 +143,6 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 		this.comboSubcategory.setBounds(212, 103, 138, 20);
 		this.initComboBoxSubCategory();
 		getContentPane().add(comboSubcategory);
-		
-		
-
 		
 		lblProposeCategory = new JLabel("Propose category");
 		lblProposeCategory.addMouseListener(this);
@@ -148,7 +172,6 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 		lblSubcategory.setBounds(212, 78, 138, 14);
 		getContentPane().add(lblSubcategory);
 		
-		
 		this.setSize(369,288);
 	}
 	
@@ -172,9 +195,10 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 		}else if(e.getSource() == this.btnValidate && this.formComplete()) {	
 			//nom product seller price quantity subcategory
 			boolean bool;
-			bool = this.sellface.createProduct(this.nameProduct.getText(),this.seller,Float.parseFloat(price.getText().replaceAll("" , "")),Integer.parseInt(quantity.getText().replaceAll(" ", "")), 
+			System.out.println(price.getValue().getClass().getName());
+			bool = this.sellface.createProduct(this.nameProduct.getText(),this.seller, ((Number) price.getValue()).floatValue()
+					,((Number) quantity.getValue()).intValue(), 
 				(Subcategory) this.comboSubcategory.getSelectedItem());
-			System.out.println(bool);
 			if(bool){
 				JOptionPane.showMessageDialog(this,
 					    "You have created your product.");
@@ -202,26 +226,6 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 				    "Error",
 				    JOptionPane.ERROR_MESSAGE);
 			return false;	
-		}else{
-			System.out.println(price.getText());
-        	System.out.println(quantity.getText());
-        	float f = Float.parseFloat(price.getText().replaceAll(" ", ""));
-        	String s = quantity.getText().replaceAll(" ", "");
-        	System.out.println(s);
-        	int i = Integer.parseInt(s);
-			if(f == 0.0){
-				JOptionPane.showMessageDialog(this,
-						"Price need to be a Number",
-					    "Error",
-					    JOptionPane.ERROR_MESSAGE);
-				return false;	
-			}else if(i == 0){
-				JOptionPane.showMessageDialog(this,
-						"Quantity need to be a Number",
-					    "Error",
-					    JOptionPane.ERROR_MESSAGE);
-				return false;	
-			}
 		}
 		return true;	
 	}
@@ -229,7 +233,6 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		if (arg0.getSource() == this.lblProposeCategory) {
-			System.out.println("toto");
 			ProposeCategoryUI frame = new ProposeCategoryUI();
 			frame.setVisible(true);
 		}
