@@ -1,7 +1,6 @@
 package model.task;
-import java.util.List;
-
 import model.activity.Activity;
+import model.product.Product;
 
 
 public abstract class Task {
@@ -19,6 +18,11 @@ public abstract class Task {
 		public Task() {
 			super();
 		}
+		
+		public Task(String name, Activity act) {
+			this.name = name;
+			this.activity = act;
+		}
 
 		public Task(String name, String description, String frequency, boolean checked, String startDate, String endDate, Activity activity) {
 			super();
@@ -29,10 +33,11 @@ public abstract class Task {
 			this.startDate = startDate;
 			this.endDate = endDate;
 			this.activity = activity;
+			
 	
 		}
 		
-		public Task(int id, String name, String description, String frequency, boolean checked, String startDate, String enDate, Activity activity) {
+		public Task(int id, String name, String description, String frequency, boolean checked, String startDate, String endDate, Activity activity) {
 			super();
 			this.id=id;
 			this.name = name;
@@ -41,8 +46,7 @@ public abstract class Task {
 			this.checked = checked;
 			this.startDate = startDate;
 			this.endDate = endDate;
-			this.activity = activity;
-	
+			this.activity = activity;	
 		}
 		
 		public Task(int id, String name) {
@@ -94,7 +98,10 @@ public abstract class Task {
 			this.activity = activity;
 		}
 		
+		public abstract Task readByName();
 		public abstract boolean save();
 		public abstract boolean delete();
 		public abstract boolean update();
+		public abstract boolean addRessource(Product p);
+		public abstract boolean exist();
 }

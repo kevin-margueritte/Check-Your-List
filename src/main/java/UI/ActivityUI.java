@@ -204,24 +204,13 @@ public class ActivityUI extends JFrame implements ActionListener {
 		btnNewButton_1.putClientProperty("task", t);
 		btnNewButton_1.setBounds(315, 14, 89, 23);
 		panel.add(btnNewButton_1);
+		
 	}
 	
 	public void initComments() {
 		List<Comment> list = this.af.getAllComments(this.activity);			
-		int idx = 19; // ??
-		boolean firstComment = true;
+		int idx = 17; // ??
 		for (Comment comment : list) {
-			if (firstComment) {
-				JLabel lblComments = new JLabel("Comments");
-				if(user.getPseudo().equals(activity.getUser().getPseudo())) {  
-					lblComments.setBounds(10, 200 + (35*list.size() + 220), 105, 20);
-				}
-				else {
-					lblComments.setBounds(10, (35*list.size() + 220), 105, 20);
-				}
-				getContentPane().add(lblComments);	
-				firstComment = false;
-			}
 			this.addPanelComment(comment, idx);
 			idx ++;
 		}
@@ -258,13 +247,18 @@ public class ActivityUI extends JFrame implements ActionListener {
 		
 	}
 	
+	public void detectTaskRessourceUIClose() {
+		ActivityUI myActUI = new ActivityUI(this.user, this.activity);
+		myActUI.setVisible(true);
+		this.dispose();
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {	
 		if ( e.getSource() == this.btnAddComment ) {
 			if (this.formComplete()) {
 				this.af.createComment(this.textPaneCommentContent.getText(), activity, user);
-				JOptionPane.showMessageDialog(this,
-						"Your comment has been added, it will appears the next time you'll see this activity.");
+				initComments();
 			}
 			
 			//this.cf.createCategory(this.categoryName.getText(), this.textShortDescription.getText(),this.textDetailedDescription.getText());
@@ -272,8 +266,9 @@ public class ActivityUI extends JFrame implements ActionListener {
 		 	//frame.setVisible(true);
 		}
 		else if (e.getSource() == this.btnAddTask) {
-			TaskRessourceUI tr = new TaskRessourceUI(this.activity);
+			CreateTaskUI tr = new CreateTaskUI(this.activity,this);
 			tr.setVisible(true);
+
 		}
 		else if (e.getSource() instanceof JCheckBox) {
 			JCheckBox check = (JCheckBox) e.getSource();
@@ -285,7 +280,6 @@ public class ActivityUI extends JFrame implements ActionListener {
 			if ( button.getText().equals("See") ) {
 				//ActivityUI frame = new ActivityUI(this.u, (Activity) button.getClientProperty("activity"));
 				//frame.setVisible(true);
-				System.out.println("see");
 			}
 			else {
 				this.af.deleteTask((Task) button.getClientProperty("task"));

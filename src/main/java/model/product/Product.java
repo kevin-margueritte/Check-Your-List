@@ -107,6 +107,8 @@ public abstract class Product {
 	public abstract Product readByNameAndSeller();
 	public abstract List<Product> getAllProductFromSubCategory();
 	public abstract boolean majQuantity(int qty);
+	public abstract List<Product> getAllProductFromSubCategoryAndNoPresentTask();
+
 	public float getPrice() {
 		return price;
 	}

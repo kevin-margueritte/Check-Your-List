@@ -148,6 +148,38 @@ public class ProductJDBC extends Product {
 		return list;
 	}
 	
+	public List<Product> getAllProductFromSubCategoryAndNoPresentTask(){
+		//si le nom ou le seller vide alors Erreur   <--------------------------
+		List<Product> list = new ArrayList<Product>();
+		String sql = ("SELECT * FROM product p WHERE name_subcategory  = '" +  this.subCategory.getName()+"' AND NOT EXISTS ("+
+				"SELECT 1 FROM lineRessource l WHERE name_subcategory  = '" +  this.subCategory.getName()+
+				"' AND p.id = l.id_product)" );
+		SellerJDBC sellerJDBC;
+		SubcategoryJDBC subCategoryJDBC;
+		Product prod = null;
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while( rs.next() ) {	
+				prod = new ProductJDBC();
+				prod.setIdProd((int) rs.getObject("id"));	
+				prod.setName((String) rs.getObject("name"));	
+				String pseudo = (String) rs.getObject("pseudo");
+				sellerJDBC = new SellerJDBC(pseudo);			
+				prod.setSeller(sellerJDBC.readByPseudo());
+				prod.setPrice(rs.getFloat("price"));
+				prod.setQuantity((int) rs.getObject("quantity"));
+				prod.setSubCategory(this.subCategory);
+				list.add(prod);
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 	public boolean checkProductExist(){
 		String sql1 = ("SELECT * FROM product "
 				+ "WHERE name = '" + this.name + "' AND"

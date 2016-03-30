@@ -86,6 +86,16 @@ public class ProductManager {
 			return new ArrayList<Product>();
 		}
 	}
+	
+	public List<Product> getAllProductFromSubCategoryAndNoPresentTask(Subcategory sub) {
+		Product prod = new ProductJDBC(sub);
+		try {
+			return prod.getAllProductFromSubCategoryAndNoPresentTask();
+		}
+		catch (NullPointerException n) {
+			return new ArrayList<Product>();
+		}
+	}
 
 
 

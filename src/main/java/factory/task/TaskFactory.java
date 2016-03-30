@@ -24,4 +24,9 @@ public class TaskFactory extends AbstractTaskFactory{
 	public Task createTask(int id, String name){
 		return new TaskJDBC(id, name);
 	}
+
+	@Override
+	public Task createTask(String name, Activity act) {
+		return new TaskJDBC(name, act);
+	}
 }
