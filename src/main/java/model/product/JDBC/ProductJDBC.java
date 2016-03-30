@@ -7,12 +7,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
 import database.ConnectionDB;
-import model.category.Category;
 import model.category.Subcategory;
-import model.category.JDBC.CategoryJDBC;
 import model.category.JDBC.SubcategoryJDBC;
 import model.person.Seller;
 import model.person.JDBC.SellerJDBC;

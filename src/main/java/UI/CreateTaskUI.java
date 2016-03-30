@@ -71,6 +71,7 @@ public class CreateTaskUI extends JFrame implements ActionListener{
 	
 	public CreateTaskUI(Activity act, ActivityUI actUI) {
 		setTitle("Create task");
+		setResizable(false);
 		this.a= act;
 		this.actUI = actUI;
 		

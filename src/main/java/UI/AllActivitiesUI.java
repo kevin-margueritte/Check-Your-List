@@ -67,7 +67,7 @@ public class AllActivitiesUI extends JFrame implements ActionListener {
 			idx ++;
 		}
 		
-		setSize(453, (100 * (list.size() + 1)) + 50);
+		setSize(453, (38 * (list.size() + 1)) + 50);
 	}
 	
 	public void addPanelActivity(Activity act, int idx) {		
@@ -78,12 +78,12 @@ public class AllActivitiesUI extends JFrame implements ActionListener {
 		
 		JLabel lblNameActivity = new JLabel(act.getTitle());
 		lblNameActivity.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNameActivity.setBounds(23, 18, 99, 20);
+		lblNameActivity.setBounds(23, 18, 250, 20);
 		panel.add(lblNameActivity);
 		
 		JButton btnSee = new JButton("See");
 		btnSee.putClientProperty("activity", act);
-		btnSee.setBounds(175, 17, 89, 23);
+		btnSee.setBounds(275, 17, 89, 23);
 		btnSee.addActionListener(this);
 		panel.add(btnSee);
 	}

@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,6 +16,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import database.ConnectionDB;
 import facade.LoginFacade;
 import model.person.Person;
 import model.person.Seller;
@@ -109,6 +111,12 @@ public class LoginUI extends JFrame implements ActionListener{
 		setMinimumSize(new Dimension(294, 270));
 		setTitle("Login");
 		this.setLocationRelativeTo(null);
+		try {
+			ConnectionDB.creetConnectionDB().getConn().createStatement();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -140,12 +148,12 @@ public class LoginUI extends JFrame implements ActionListener{
 		else if (e.getSource() == this.btnSignInSeller) {
 			InscriptionSellerUI frame = new InscriptionSellerUI();
 			frame.setVisible(true);
-			this.dispose();
+			//this.dispose();
 		}
 		else if (e.getSource() == this.btnSignInUser) {
 			InscriptionUserUI frame = new InscriptionUserUI();
 			frame.setVisible(true);
-			this.dispose();
+			//this.dispose();
 		}
 	}
 	
