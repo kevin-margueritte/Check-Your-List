@@ -22,6 +22,7 @@ public class MenuSellerUI extends JFrame implements ChangeListener {
 	 * Create the frame.
 	 */
 	public MenuSellerUI(Seller s) {
+		setResizable(false);
 		this.seller = s;
 		getContentPane().setLayout(null);
 		this.tabbedPane = new JTabbedPane(JTabbedPane.TOP);

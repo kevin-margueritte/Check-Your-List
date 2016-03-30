@@ -60,6 +60,7 @@ public class ShopUI extends JFrame implements ActionListener {
 	
 	
 	public ShopUI() {
+		setResizable(false);
 		setTitle("Shop");
 		this.ShopFace = new ShopFacade();
 		getContentPane().setLayout(null);

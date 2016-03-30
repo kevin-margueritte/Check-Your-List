@@ -107,7 +107,7 @@ public class LoginUI extends JFrame implements ActionListener{
 		btnSignInUser.setBounds(73, 217, 127, 23);
 		getContentPane().add(btnSignInUser);
 		
-		setSize(285,343);
+		setSize(227,343);
 		setMinimumSize(new Dimension(294, 270));
 		setTitle("Login");
 		this.setLocationRelativeTo(null);

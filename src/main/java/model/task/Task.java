@@ -1,4 +1,6 @@
 package model.task;
+import java.util.List;
+
 import model.activity.Activity;
 import model.product.Product;
 
@@ -112,12 +114,11 @@ public abstract class Task {
 			this.visibility = visibility;
 		}
 		
-		
-		
 		public abstract Task readByName();
 		public abstract boolean save();
 		public abstract boolean delete();
 		public abstract boolean update();
 		public abstract boolean addRessource(Product p);
 		public abstract boolean exist();
+		public abstract List<Product> getAllRessourceTask();
 }
