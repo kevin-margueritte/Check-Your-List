@@ -23,8 +23,8 @@ public class RessourceFacade {
 		this.fact = new TaskManager();
 	}
 	
-	public boolean createTask(String name, String description, String frequency, boolean checked, String startDate, String endDate, Activity activity) {
-		return this.fact.createTask(name, description, frequency, checked, startDate, endDate, activity);
+	public boolean createTask(String name, String description, String frequency, boolean checked, String startDate, String endDate, Activity activity, boolean visibility) {
+		return this.fact.createTask(name, description, frequency, checked, startDate, endDate, activity,visibility);
 	}
 	
 

@@ -181,8 +181,8 @@ public class CreateTaskUI extends JFrame implements ActionListener{
 			if ( (int) this.spinnerFreq.getValue() <= 0 ){
 				boolean code = this.rf.createTask(this.textNameTask.getText(), this.textDescription.getText(),
 						"", 
-						visibility, this.startYear.getSelectedItem() + "-" + this.startMonth.getSelectedItem() + "-" + this.startDay.getSelectedItem(),
-						this.endYear.getSelectedItem() + "-" + this.endMonth.getSelectedItem() + "-" + this.endDay.getSelectedItem(), this.a);
+						false, this.startYear.getSelectedItem() + "-" + this.startMonth.getSelectedItem() + "-" + this.startDay.getSelectedItem(),
+						this.endYear.getSelectedItem() + "-" + this.endMonth.getSelectedItem() + "-" + this.endDay.getSelectedItem(), this.a,visibility);
 				if (!code) {
 					JOptionPane.showMessageDialog(this,
 							"This task already exist",
@@ -198,7 +198,7 @@ public class CreateTaskUI extends JFrame implements ActionListener{
 			else {
 				boolean code = this.rf.createTask(this.textNameTask.getText(), this.textDescription.getText(),
 					(int) this.spinnerFreq.getValue() +" "+ (String) this.comboFreq.getSelectedItem(), visibility, this.startYear.getSelectedItem() + "-" + this.startMonth.getSelectedItem() + "-" + this.startDay.getSelectedItem(),
-					this.endYear.getSelectedItem() + "-" + this.endMonth.getSelectedItem() + "-" + this.endDay.getSelectedItem(), this.a);
+					this.endYear.getSelectedItem() + "-" + this.endMonth.getSelectedItem() + "-" + this.endDay.getSelectedItem(), this.a, visibility);
 				if (!code) {
 					JOptionPane.showMessageDialog(this,
 							"This task already exist",
