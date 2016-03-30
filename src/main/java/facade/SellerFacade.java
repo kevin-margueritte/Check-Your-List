@@ -44,6 +44,5 @@ public class SellerFacade {
 	public boolean createProduct(String name, Seller seller, float price, int quantity,
 			Subcategory subCategory) {
 			return this.manProd.createProduct(name, seller, price, quantity, subCategory);
-		
 	}
 }

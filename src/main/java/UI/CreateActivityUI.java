@@ -56,7 +56,7 @@ public class CreateActivityUI extends JFrame implements ActionListener {
 		/**
 		 * Set User
 		 */
-		this.u = new UserJDBC("titi");
+		this.u = new UserJDBC("titi"); // à modifier => faire passer le user connecté par la vue
 		this.u.readByPseudo();
 		
 		this.af = new ActivityFacade();

@@ -1,42 +1,37 @@
 package UI;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JToolBar;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
 
 import facade.ActivityFacade;
-import facade.SellerFacade;
 import model.category.Category;
 import model.category.Subcategory;
 import model.person.Seller;
 import model.person.JDBC.SellerJDBC;
 import model.product.Product;
-
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.List;
-
-import javax.swing.JComboBox;
-import javax.swing.JPanel;
-import javax.swing.JFormattedTextField;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JTable;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JSpinner;
+import javax.swing.SwingConstants;
 
 public class AllProductsUI extends JFrame implements ActionListener {
 	
 	private JComboBox comboCategory;
 	private JComboBox comboSubcategory;
 	private ActivityFacade activityFace;
+	private JPanel panelProducts;
 	
 	public static void main(String args[]) {
 		AllProductsUI.launch();
@@ -67,83 +62,103 @@ public class AllProductsUI extends JFrame implements ActionListener {
 		this.activityFace = new ActivityFacade();
 		getContentPane().setLayout(null);
 		
-		
 		this.comboCategory = new JComboBox();
-		this.comboCategory.setBounds(136, 27, 144, 20);
+		this.comboCategory.setBounds(178, 27, 144, 20);
 		this.comboCategory.addActionListener(this);
 		getContentPane().add(this.comboCategory);
 		this.initComboBoxCategory();
 		
-		
 		this.comboSubcategory = new JComboBox();
-		this.comboSubcategory.setBounds(136, 71, 144, 20);
+		this.comboSubcategory.setBounds(178, 79, 144, 20);
 		this.initComboBoxSubCategory();
 		this.comboSubcategory.addActionListener(this);
 		getContentPane().add(comboSubcategory);
 	
-
+		panelProducts = new JPanel();
+		panelProducts.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setPreferredSize(new Dimension(380, 20));
-		
-		panel.setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(10, 9, 86, 14);
-		panel.add(lblNewLabel);
-		
-		JLabel label = new JLabel("New label");
-		label.setBounds(106, 9, 58, 14);
-		panel.add(label);
-		
-		JButton btnNewButton = new JButton("Add");
-		btnNewButton.setBounds(390, 5, 58, 23);
-		panel.add(btnNewButton);
-		
-		
-		JScrollPane scrollPane_1 = new JScrollPane(panel);
-		
-		JLabel label_1 = new JLabel("New label");
-		label_1.setBounds(182, 9, 77, 14);
-		panel.add(label_1);
-		
-		JLabel label_2 = new JLabel("New label");
-		label_2.setBounds(266, 9, 46, 14);
-		panel.add(label_2);
-		
-		JSpinner spinner = new JSpinner();
-		spinner.setBounds(334, 6, 46, 20);
-		panel.add(spinner);
-		scrollPane_1.setBounds(22, 135, 484, 187);
+		JScrollPane scrollPane_1 = new JScrollPane(panelProducts);
+		scrollPane_1.setBounds(22, 135, 500, 187);
 		getContentPane().add(scrollPane_1);
 		
 		JLabel lblNewLabel_1 = new JLabel("Category");
-		lblNewLabel_1.setBounds(136, 11, 144, 14);
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setBounds(178, 11, 144, 14);
 		getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblSubcategory = new JLabel("SubCategory");
-		lblSubcategory.setBounds(136, 58, 144, 14);
+		lblSubcategory.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSubcategory.setBounds(178, 58, 144, 14);
 		getContentPane().add(lblSubcategory);
 		
 		JLabel lblName = new JLabel("Name");
-		lblName.setBounds(39, 110, 46, 14);
+		lblName.setBounds(22, 110, 46, 14);
 		getContentPane().add(lblName);
 		
 		JLabel lblPrix = new JLabel("Price");
-		lblPrix.setBounds(132, 110, 46, 14);
+		lblPrix.setBounds(125, 110, 46, 14);
 		getContentPane().add(lblPrix);
 		
 		JLabel lblSeller = new JLabel("Seller");
-		lblSeller.setBounds(210, 110, 46, 14);
+		lblSeller.setBounds(203, 110, 46, 14);
 		getContentPane().add(lblSeller);
 		
 		JLabel lblQuantity = new JLabel("Quantity");
-		lblQuantity.setBounds(360, 110, 46, 14);
+		lblQuantity.setBounds(360, 110, 62, 14);
 		getContentPane().add(lblQuantity);
 		
 		JLabel lblStock = new JLabel("Stock");
-		lblStock.setBounds(288, 110, 53, 14);
+		lblStock.setBounds(281, 110, 53, 14);
 		getContentPane().add(lblStock);
+		
+		setSize(551,381);
+		List<Product> list = this.activityFace.getAllProductsFromSubCategory((Subcategory) this.comboSubcategory.getSelectedItem());
+		this.initProducts(list);
+	}
+	
+	public void initProducts(List<Product> list){
+		int idx =0;
+		panelProducts.removeAll();
+		for (Product p : list){
+			addPanelProduct(p,idx);
+			idx++;
+		}
+		panelProducts.setPreferredSize(new Dimension(400, 50 * (list.size() + 1 )));
+		panelProducts.repaint();
+	}
+
+	public void addPanelProduct(Product p, int idx){
+		System.out.println(p);
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(0, 0 + (50 * idx), 482, 31);
+		panelProducts.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel(p.getName());
+		lblNewLabel.setBackground(Color.BLUE);
+		lblNewLabel.setBounds(10, 11, 86, 14);
+		panel_1.add(lblNewLabel);
+		
+		JLabel label = new JLabel(p.getPrice() + " €");
+		label.setBounds(106, 11, 58, 14);
+		panel_1.add(label);
+		
+		JLabel label_1 = new JLabel(p.getSeller().getPseudo());
+		label_1.setBounds(186, 11, 77, 14);
+		panel_1.add(label_1);
+		
+		JLabel label_2 = new JLabel(p.getQuantity() +" pcs");
+		label_2.setBounds(264, 11, 46, 14);
+		panel_1.add(label_2);
+		
+		SpinnerModel model = new SpinnerNumberModel(1, 1, p.getQuantity(), 1);
+		JSpinner spinner = new JSpinner(model);
+		spinner.setBounds(339, 8, 46, 20);
+		panel_1.add(spinner);
+		
+		JButton btnNewButton = new JButton("Add");
+		btnNewButton.setBounds(397, 7, 75, 23);
+		panel_1.add(btnNewButton);
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -159,23 +174,14 @@ public class AllProductsUI extends JFrame implements ActionListener {
 		this.comboSubcategory.setModel(new DefaultComboBoxModel(list.toArray()));
 	}
 	
-	public void AfficheProduct(List list){
-		
-	}
-
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("ntm");
 		if (e.getSource() == this.comboCategory) {
 			this.initComboBoxSubCategory();
 		}
 		if (e.getSource() == this.comboCategory || e.getSource() == this.comboSubcategory){
 			List<Product> list = this.activityFace.getAllProductsFromSubCategory((Subcategory) this.comboSubcategory.getSelectedItem());
-			System.out.println(list);
-			AfficheProduct(list);
+			this.initProducts(list);
 		}
-		
-		
 	}
 }
