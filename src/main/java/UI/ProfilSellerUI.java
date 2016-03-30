@@ -54,7 +54,7 @@ public class ProfilSellerUI extends JFrame implements ActionListener {
 		});
 	}
 	
-	public ProfilSellerUI() {}
+	//public ProfilSellerUI() {}
 	
 	public ProfilSellerUI(Seller s) {
 		this.pf = new ProfilSellerFacade();
@@ -65,6 +65,7 @@ public class ProfilSellerUI extends JFrame implements ActionListener {
 		panelActivity.setLayout(null);
 		
 		JScrollPane scrollPane_1 = new JScrollPane(panelActivity);
+		
 		scrollPane_1.setBounds(22, 45, 650, 300);
 		getContentPane().add(scrollPane_1);
 		
@@ -89,6 +90,13 @@ public class ProfilSellerUI extends JFrame implements ActionListener {
 		panelActivity.setPreferredSize(new Dimension(620, 50 * (list.size() + 1 )));
 		panelActivity.repaint();
 		this.setLocationRelativeTo(null);
+		if (list.size() == 0) {
+			JLabel lblNoProduct = new JLabel("No product");
+			lblNoProduct.setHorizontalAlignment(SwingConstants.CENTER);
+			lblNoProduct.setFont(new Font("Tahoma", Font.BOLD, 18));
+			lblNoProduct.setBounds(259, 123, 132, 34);
+			panelActivity.add(lblNoProduct);
+		}
 	}
 	
 	public void addPanelProduct(Product prod, int idx) {
@@ -198,5 +206,4 @@ public class ProfilSellerUI extends JFrame implements ActionListener {
 			}
 		}
 	}
-	
 }

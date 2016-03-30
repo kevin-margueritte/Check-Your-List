@@ -16,6 +16,7 @@ public class MenuSellerUI extends JFrame implements ChangeListener {
 	private Seller seller;
 	private ProfilSellerUI fs;
 	private CreateProductUI cp;
+	private ShopUI shop;
 
 	/**
 	 * Create the frame.
@@ -40,10 +41,14 @@ public class MenuSellerUI extends JFrame implements ChangeListener {
 		this.setSize(fs.getWidth() + 15, fs.getHeight() + 40);
 		tabbedPane.setSize(fs.getWidth(), fs.getHeight());
 		tabbedPane.addTab("Profil", comp);
+		
 		this.cp = new CreateProductUI(this.seller);
 		Component compCreateProd = cp.getContentPane();
-		//tabbedPane.setSize(fc.getWidth(), fc.getHeight());
 		tabbedPane.addTab("Create product", compCreateProd);
+		
+		this.shop = new ShopUI();
+		Component compShop = shop.getContentPane();
+		tabbedPane.addTab("Shop", compShop);
 	}
 
 	@Override
@@ -61,6 +66,12 @@ public class MenuSellerUI extends JFrame implements ChangeListener {
 			//this.cp.initFrame();
 			this.setSize(cp.getWidth() + 15, cp.getHeight() + 30);
 			tabbedPane.setSize(cp.getWidth(), cp.getHeight());
+		}
+		else if (panneName.equals("Shop")) {
+			this.shop.dispose();
+			this.shop.initFrame();
+			this.setSize(shop.getWidth() + 15, shop.getHeight() + 30);
+			tabbedPane.setSize(shop.getWidth(), shop.getHeight());
 		}
 	}
 

@@ -27,7 +27,7 @@ import model.person.JDBC.SellerJDBC;
 import model.product.Product;
 import javax.swing.SwingConstants;
 
-public class Shop extends JFrame implements ActionListener {
+public class ShopUI extends JFrame implements ActionListener {
 	
 	private JComboBox comboCategory;
 	private JComboBox comboSubcategory;
@@ -35,7 +35,7 @@ public class Shop extends JFrame implements ActionListener {
 	private JPanel panelProducts;
 	
 	public static void main(String args[]) {
-		Shop.launch();
+		ShopUI.launch();
 	}
 	
 	/**
@@ -47,7 +47,7 @@ public class Shop extends JFrame implements ActionListener {
 				try {
 					Seller s = new SellerJDBC("aezr");
 					s.readByPseudo();
-					Shop frame = new Shop();
+					ShopUI frame = new ShopUI();
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -59,18 +59,19 @@ public class Shop extends JFrame implements ActionListener {
 
 	
 	
-	public Shop() {
+	public ShopUI() {
+		setTitle("Shop");
 		this.ShopFace = new ShopFacade();
 		getContentPane().setLayout(null);
 		
 		this.comboCategory = new JComboBox();
-		this.comboCategory.setBounds(178, 27, 144, 20);
+		this.comboCategory.setBounds(219, 27, 144, 20);
 		this.comboCategory.addActionListener(this);
 		getContentPane().add(this.comboCategory);
 		this.initComboBoxCategory();
 		
 		this.comboSubcategory = new JComboBox();
-		this.comboSubcategory.setBounds(178, 79, 144, 20);
+		this.comboSubcategory.setBounds(219, 72, 144, 20);
 		this.initComboBoxSubCategory();
 		this.comboSubcategory.addActionListener(this);
 		getContentPane().add(comboSubcategory);
@@ -84,12 +85,12 @@ public class Shop extends JFrame implements ActionListener {
 		
 		JLabel lblNewLabel_1 = new JLabel("Category");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(178, 11, 144, 14);
+		lblNewLabel_1.setBounds(10, 11, 562, 14);
 		getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblSubcategory = new JLabel("SubCategory");
 		lblSubcategory.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSubcategory.setBounds(178, 58, 144, 14);
+		lblSubcategory.setBounds(22, 58, 550, 14);
 		getContentPane().add(lblSubcategory);
 		
 		JLabel lblName = new JLabel("Name");
@@ -111,8 +112,11 @@ public class Shop extends JFrame implements ActionListener {
 		JLabel lblStock = new JLabel("Stock");
 		lblStock.setBounds(281, 110, 53, 14);
 		getContentPane().add(lblStock);
-		
+		this.initFrame();
 		setSize(600,381);
+	}
+	
+	public void initFrame(){
 		List<Product> list = this.ShopFace.getAllProductsFromSubCategory((Subcategory) this.comboSubcategory.getSelectedItem());
 		this.initProducts(list);
 	}
@@ -151,7 +155,7 @@ public class Shop extends JFrame implements ActionListener {
 		label_2.setBounds(264, 11, 46, 14);
 		panel_1.add(label_2);
 		
-		SpinnerModel model = new SpinnerNumberModel(1, 1, p.getQuantity(), 1);
+		SpinnerModel model = new SpinnerNumberModel(0, 0, p.getQuantity(), 1);
 		JSpinner spinner = new JSpinner(model);
 		spinner.setBounds(339, 8, 46, 20);
 		panel_1.add(spinner);
