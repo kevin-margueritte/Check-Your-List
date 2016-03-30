@@ -51,7 +51,7 @@ public class ActivityUI extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					User u = new UserJDBC("gaetan");
+					User u = new UserJDBC("titi");
 					u.readByPseudo();
 					Activity a = new ActivityJDBC(u);
 					Iterator<Activity> it = a.readAll().iterator();
@@ -166,10 +166,6 @@ public class ActivityUI extends JFrame implements ActionListener {
 				chckbxNewCheckBox.setBounds(370, 175 + (25 * (idx/2) ), 97, 23);
 			}
 			getContentPane().add(chckbxNewCheckBox);
-		}
-		System.out.println(t.getVisibility());
-		if(t.getVisibility() == true) {
-			System.out.println("visib true");
 		}
 		if(user.getPseudo().equals(activity.getUser().getPseudo()) || t.getVisibility() == true) { 
 			this.addPanelTask(t, idx);

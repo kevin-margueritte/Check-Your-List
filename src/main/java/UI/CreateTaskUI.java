@@ -1,8 +1,12 @@
 package UI;
 
 import java.awt.EventQueue;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -174,47 +178,119 @@ public class CreateTaskUI extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnValidate && this.formComplete()) {
+			String date1 = this.startYear.getSelectedItem() + "-" + this.startMonth.getSelectedItem() + "-" + this.startDay.getSelectedItem();
+			String date2 = this.endYear.getSelectedItem() + "-" + this.endMonth.getSelectedItem() + "-" + this.endDay.getSelectedItem();
+			
 			boolean visibility = false;
 			if ( ((String) this.comboVisibility.getSelectedItem()).equals("True") ) {
 				visibility = true;
 			}
 			if ( (int) this.spinnerFreq.getValue() <= 0 ){
-				boolean code = this.rf.createTask(this.textNameTask.getText(), this.textDescription.getText(),
-						"", 
-						false, this.startYear.getSelectedItem() + "-" + this.startMonth.getSelectedItem() + "-" + this.startDay.getSelectedItem(),
-						this.endYear.getSelectedItem() + "-" + this.endMonth.getSelectedItem() + "-" + this.endDay.getSelectedItem(), this.a,visibility);
-				if (!code) {
-					JOptionPane.showMessageDialog(this,
-							"This task already exist",
-						    "Error",
-						    JOptionPane.ERROR_MESSAGE);
-				}
-				else {
-					AddRessourcesTaskUI tui = new AddRessourcesTaskUI(this.textNameTask.getText(), this.a, this.actUI);
-					tui.setVisible(true);
-					this.dispose();
+				try {
+					if(checkDatesValid(date1,date2)) {
+						boolean code = this.rf.createTask(this.textNameTask.getText(), this.textDescription.getText(),
+								"",false, date1,date2, this.a,visibility);
+						if (!code) {
+							JOptionPane.showMessageDialog(this,
+									"This task already exist",
+								    "Error",
+								    JOptionPane.ERROR_MESSAGE);
+						}
+						else {	
+							try {
+								if(checkDatesValid(date1,date2)) {
+									AddRessourcesTaskUI tui = new AddRessourcesTaskUI(this.textNameTask.getText(), this.a, this.actUI);
+									tui.setVisible(true);
+									this.dispose();
+								}
+								else {
+									JOptionPane.showMessageDialog(this,
+											"The start date should be before the end date",
+										    "Error",
+										    JOptionPane.ERROR_MESSAGE);
+								}
+							} catch (ParseException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}					
+						}
+					}
+					else {
+						JOptionPane.showMessageDialog(this,
+								"The start date should be before the end date",
+							    "Error",
+							    JOptionPane.ERROR_MESSAGE);
+					}
+				} catch (HeadlessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 			else {
-				boolean code = this.rf.createTask(this.textNameTask.getText(), this.textDescription.getText(),
-					(int) this.spinnerFreq.getValue() +" "+ (String) this.comboFreq.getSelectedItem(), visibility, this.startYear.getSelectedItem() + "-" + this.startMonth.getSelectedItem() + "-" + this.startDay.getSelectedItem(),
-					this.endYear.getSelectedItem() + "-" + this.endMonth.getSelectedItem() + "-" + this.endDay.getSelectedItem(), this.a, visibility);
-				if (!code) {
-					JOptionPane.showMessageDialog(this,
-							"This task already exist",
-						    "Error",
-						    JOptionPane.ERROR_MESSAGE);
-				}
-				else {
-					AddRessourcesTaskUI tui = new AddRessourcesTaskUI(this.textNameTask.getText(), this.a, this.actUI);
-					tui.setVisible(true);
-					this.dispose();
+				try {
+					if(checkDatesValid(date1,date2)) {
+						boolean code = this.rf.createTask(this.textNameTask.getText(), this.textDescription.getText(),
+							(int) this.spinnerFreq.getValue() +" "+ (String) this.comboFreq.getSelectedItem(), visibility, this.startYear.getSelectedItem() + "-" + this.startMonth.getSelectedItem() + "-" + this.startDay.getSelectedItem(),
+							this.endYear.getSelectedItem() + "-" + this.endMonth.getSelectedItem() + "-" + this.endDay.getSelectedItem(), this.a, visibility);
+						if (!code) {
+							JOptionPane.showMessageDialog(this,
+									"This task already exist",
+								    "Error",
+								    JOptionPane.ERROR_MESSAGE);
+						}
+						else {
+							try {
+								if(checkDatesValid(date1,date2)) {
+									AddRessourcesTaskUI tui = new AddRessourcesTaskUI(this.textNameTask.getText(), this.a, this.actUI);
+									tui.setVisible(true);
+									this.dispose();
+								}
+								else {
+									JOptionPane.showMessageDialog(this,
+											"The start date should be before the end date",
+										    "Error",
+										    JOptionPane.ERROR_MESSAGE);
+								}
+							} catch (ParseException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						}
+					}
+					else {
+						JOptionPane.showMessageDialog(this,
+								"The start date should be before the end date",
+							    "Error",
+							    JOptionPane.ERROR_MESSAGE);
+					}
+				} catch (HeadlessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 		}
 	}
 	
-	private boolean formComplete() {
+	public boolean checkDatesValid(String date1, String date2) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+		Date dateBegin = sdf.parse(date1);
+		Date dateEnd = sdf.parse(date2);
+		
+		boolean datesValid = true;
+        if(dateBegin.compareTo(dateEnd)>0){
+        	datesValid = false;
+        }
+        return datesValid;
+	}
+	
+	public boolean formComplete() {
 		if (this.textNameTask.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(this,
 					"Task name is empty",
