@@ -41,6 +41,7 @@ public class MenuUserUI extends JFrame implements ChangeListener {
 		AllActivitiesUI fa = new AllActivitiesUI(this.user);
 		comp = fa.getContentPane();
 		tabbedPane.addTab("All activities", comp);
+		this.setLocationRelativeTo(null);
 	}
 	
 	public void initCreateActivity() {
