@@ -106,7 +106,9 @@ public class ProposeCategoryUI extends JFrame implements ActionListener {
 		
 		if (this.formComplete()) {
 			if(!cf.categoryExist(this.categoryName.getText())) {
-				this.cf.createCategory(this.categoryName.getText(), this.textShortDescription.getText(),this.textDetailedDescription.getText());			
+				this.cf.createCategory(this.categoryName.getText(), this.textShortDescription.getText(),this.textDetailedDescription.getText());
+				JOptionPane.showMessageDialog(this,
+					    "You have created your category.");
 			}
 			else {
 				JOptionPane.showMessageDialog(this,

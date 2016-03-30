@@ -133,7 +133,9 @@ public class ProposeSubcategoryUI extends JFrame implements ActionListener {
 			if(!cf.subcategoryExist(this.categoryName.getText())) {
 				if(!cf.categoryExist(this.categoryName.getText())) {
 					this.cf.createSubcategory(this.categoryName.getText(), this.textShortDescription.getText(),
-							this.textDetailedDescription.getText(),(Category) this.comboBoxCategory.getSelectedItem());	
+					this.textDetailedDescription.getText(),(Category) this.comboBoxCategory.getSelectedItem());	
+					JOptionPane.showMessageDialog(this,
+						    "You have created your product.");
 				}
 				else {
 					JOptionPane.showMessageDialog(this,
