@@ -74,6 +74,14 @@ public class ActivityFacade {
 	}
 	
 	public List<Product> getAllProductsFromSubCategory(Subcategory sub) {
-		return this.pm.getAllProductsFromSubCategory(sub);
+		return this.pm.getAllProductFromSubCategoryAndNoPresentTask(sub);
+	}
+	
+	public boolean addRessource(Product p, Task t, int quantity) {
+		return this.tm.addRessource(p, t, quantity);
+	}
+	
+	public Task getTask(String name, Activity act) {
+		return this.tm.getTask(name, act);
 	}
 }

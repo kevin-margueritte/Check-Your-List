@@ -5,6 +5,7 @@ import java.util.Calendar;
 import factory.task.AbstractTaskFactory;
 import factory.task.TaskFactory;
 import model.activity.Activity;
+import model.product.Product;
 import model.task.Task;
 
 
@@ -40,5 +41,14 @@ public class TaskManager {
 	public boolean deleteTask(Task t) {
 		return t.delete();
 	}
+	
+	public boolean addRessource(Product p, Task t, int quantity) {
+		p.setQuantity(quantity);
+		return t.addRessource(p);
+	}
 
+	public Task getTask(String name, Activity act) {
+		Task task = this.fact.createTask(name, act);
+		return task.readByName();
+	}
 }

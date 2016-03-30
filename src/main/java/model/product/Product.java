@@ -106,6 +106,7 @@ public abstract class Product {
 	public abstract boolean delete();
 	public abstract Product readByNameAndSeller();
 	public abstract List<Product> getAllProductFromSubCategory();
+	public abstract List<Product> getAllProductFromSubCategoryAndNoPresentTask();
 
 	public float getPrice() {
 		return price;

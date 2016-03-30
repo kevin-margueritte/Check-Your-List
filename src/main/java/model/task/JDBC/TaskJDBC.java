@@ -1,10 +1,14 @@
 package model.task.JDBC;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import database.ConnectionDB;
 import model.activity.Activity;
+import model.product.Product;
 import model.task.Task;
 
 public class TaskJDBC extends Task {
@@ -23,6 +27,10 @@ public class TaskJDBC extends Task {
 	
 	public TaskJDBC(int id, String name) {
 		super(id, name);
+	}
+	
+	public TaskJDBC(String name, Activity act) {
+		super(name, act);
 	}
 	
 	@Override
@@ -59,7 +67,6 @@ public class TaskJDBC extends Task {
 
 	@Override
 	public boolean update() {
-		System.out.println(this.activity.getTitle());
 		String sql = ("update task "
 				+ "set name ='" + this.getName() + "', description ='" +this.getDescription()+"', frequency = '" + this.getFrequency()
 				+ "', checked = '" + this.isChecked() + "', startdate ='" + this.getStartDate() + "', enddate ='" + this.getEndDate() 
@@ -68,11 +75,43 @@ public class TaskJDBC extends Task {
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
 			return stm.execute(sql);
-	
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return false;
 	}
-	
+
+	@Override
+	public boolean addRessource(Product p) {
+		String sql = ("insert into lineRessource (quantity, visible, id_product, name_task) values ( '" + p.getQuantity() 
+		+ "','" + true + "','" + p.getIdProd() + "','"+this.getName()+"')");
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			return stm.execute(sql);
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	@Override
+	public Task readByName() {
+		String sql = ("select * from task where name='"+ this.getName() +"'");
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			if(rs.next()){
+				this.setName(rs.getString("name"));
+				this.setDescription(rs.getString("description"));
+				this.setFrequency(rs.getString("frequency"));
+				this.setChecked(rs.getBoolean("checked"));
+				this.setStartDate(rs.getString("startdate"));
+				this.setEndDate(rs.getString("enddate"));
+			}
+			rs.close();
+			return this;
+		} catch (SQLException e) {}
+		return new TaskJDBC();
+	}
+
 }

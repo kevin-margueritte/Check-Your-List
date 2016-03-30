@@ -1,8 +1,8 @@
 package UI;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -17,36 +17,40 @@ import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
-
-import facade.ActivityFacade;
-import model.category.Category;
-import model.category.Subcategory;
-import model.person.Seller;
-import model.person.JDBC.SellerJDBC;
-import model.product.Product;
 import javax.swing.SwingConstants;
 
-public class AddRessourcesTask extends JFrame implements ActionListener {
+import facade.ActivityFacade;
+import model.activity.Activity;
+import model.category.Category;
+import model.category.Subcategory;
+import model.product.Product;
+import model.task.Task;
+
+public class AddRessourcesTaskUI extends JFrame implements ActionListener {
 	
 	private JComboBox comboCategory;
 	private JComboBox comboSubcategory;
 	private ActivityFacade activityFace;
 	private JPanel panelProducts;
+	private Task task;
+	private JButton btnTerminated;
 	
-	public static void main(String args[]) {
-		AddRessourcesTask.launch();
+	/*public static void main(String args[]) {
+		AddRessourcesTaskUI.launch();
 	}
 	
 	/**
 	 * Launch the application.
 	 */
-	public static void launch() {
+	/*public static void launch() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Seller s = new SellerJDBC("aezr");
-					s.readByPseudo();
-					AddRessourcesTask frame = new AddRessourcesTask();
+					User u = new UserJDBC("titi");
+					u.readByPseudo();
+					Activity act = new ActivityJDBC(u);
+					act.setTitle("a");
+					AddRessourcesTaskUI frame = new AddRessourcesTaskUI(act.readAllTask().get(0));
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -54,22 +58,22 @@ public class AddRessourcesTask extends JFrame implements ActionListener {
 				}
 			}
 		});
-	}
-
+	}*/
 	
-	
-	public AddRessourcesTask() {
+	public AddRessourcesTaskUI(String nameActivity, Activity act) {
+		
 		this.activityFace = new ActivityFacade();
+		this.task = this.activityFace.getTask(nameActivity, act);
 		getContentPane().setLayout(null);
 		
 		this.comboCategory = new JComboBox();
-		this.comboCategory.setBounds(178, 27, 144, 20);
+		this.comboCategory.setBounds(203, 27, 144, 20);
 		this.comboCategory.addActionListener(this);
 		getContentPane().add(this.comboCategory);
 		this.initComboBoxCategory();
 		
 		this.comboSubcategory = new JComboBox();
-		this.comboSubcategory.setBounds(178, 79, 144, 20);
+		this.comboSubcategory.setBounds(203, 72, 144, 20);
 		this.initComboBoxSubCategory();
 		this.comboSubcategory.addActionListener(this);
 		getContentPane().add(comboSubcategory);
@@ -83,12 +87,12 @@ public class AddRessourcesTask extends JFrame implements ActionListener {
 		
 		JLabel lblNewLabel_1 = new JLabel("Category");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setBounds(178, 11, 144, 14);
+		lblNewLabel_1.setBounds(203, 11, 144, 14);
 		getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblSubcategory = new JLabel("SubCategory");
 		lblSubcategory.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSubcategory.setBounds(178, 58, 144, 14);
+		lblSubcategory.setBounds(203, 58, 144, 14);
 		getContentPane().add(lblSubcategory);
 		
 		JLabel lblName = new JLabel("Name");
@@ -111,7 +115,12 @@ public class AddRessourcesTask extends JFrame implements ActionListener {
 		lblStock.setBounds(281, 110, 53, 14);
 		getContentPane().add(lblStock);
 		
-		setSize(551,381);
+		btnTerminated = new JButton("Terminated");
+		btnTerminated.addActionListener(this);
+		btnTerminated.setBounds(224, 333, 89, 23);
+		getContentPane().add(btnTerminated);
+		
+		setSize(560,408);
 		List<Product> list = this.activityFace.getAllProductsFromSubCategory((Subcategory) this.comboSubcategory.getSelectedItem());
 		this.initProducts(list);
 	}
@@ -150,12 +159,14 @@ public class AddRessourcesTask extends JFrame implements ActionListener {
 		label_2.setBounds(264, 11, 46, 14);
 		panel_1.add(label_2);
 		
-		SpinnerModel model = new SpinnerNumberModel(1, 1, p.getQuantity(), 1);
+		SpinnerModel model = new SpinnerNumberModel(1, 1, Integer.MAX_VALUE, 1);
 		JSpinner spinner = new JSpinner(model);
 		spinner.setBounds(339, 8, 46, 20);
 		panel_1.add(spinner);
 		
 		JButton btnNewButton = new JButton("Add");
+		btnNewButton.putClientProperty("product", p);
+		btnNewButton.addActionListener(this);
 		btnNewButton.setBounds(397, 7, 75, 23);
 		panel_1.add(btnNewButton);
 	}
@@ -181,6 +192,22 @@ public class AddRessourcesTask extends JFrame implements ActionListener {
 		if (e.getSource() == this.comboCategory || e.getSource() == this.comboSubcategory){
 			List<Product> list = this.activityFace.getAllProductsFromSubCategory((Subcategory) this.comboSubcategory.getSelectedItem());
 			this.initProducts(list);
+		}
+		else if (e.getSource() == this.btnTerminated) {
+			this.dispose();
+		}
+		else if (e.getSource() instanceof JButton) {
+			JButton button = (JButton) e.getSource();
+			Component[] com = button.getParent().getComponents();
+			int quantity = 0;
+			for (int a = 0; a < com.length; a++) {
+				if (com[a] instanceof JSpinner) {
+					quantity = (int) ((JSpinner) com[a]).getValue();
+				}
+			     com[a].setEnabled(false);
+			}
+			Product p = (Product) button.getClientProperty("product");
+			this.activityFace.addRessource(p, this.task, quantity);
 		}
 	}
 }
