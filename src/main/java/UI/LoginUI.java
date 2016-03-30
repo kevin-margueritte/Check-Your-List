@@ -125,6 +125,7 @@ public class LoginUI extends JFrame implements ActionListener{
 				if (!this.checkPasswordIsEmpty()) {
 					if (this.login.connect(textLogin.getText(),new String(textPassword.getPassword())) ) {
 						Person p = (Person) this.login.getPerson(textLogin.getText());
+						System.out.println("co");
 						if (p instanceof User) {
 							MenuUserUI frame = new MenuUserUI((User) p);
 							frame.setVisible(true);

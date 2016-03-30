@@ -38,6 +38,7 @@ public class ProfilUserUI extends JFrame implements ActionListener {
 	}*/
 	
 	public ProfilUserUI(User u) {
+		System.out.println("open activity");
 		setResizable(false);
 		getContentPane().setLayout(null);
 		
