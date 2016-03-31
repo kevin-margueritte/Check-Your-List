@@ -31,7 +31,6 @@ public class TestSellerJDBC {
 		assertEquals(sellerReturn.getFirstname(),"TESTFirstname");
 		assertEquals(sellerReturn.getLastname(),"TESTLastname");
 		assertEquals(sellerReturn.getPseudo(),"TESTSeller");
-		assertEquals(sellerReturn.getPass(),"TESTPassword");
 		assertEquals(sellerReturn.getDescription(),"TESTDescription");
 		assertEquals(sellerReturn.getSiret(),"TESTSiret");
 		assertEquals(sellerReturn.getPhoneNumber(),"TESTPhonenumber");

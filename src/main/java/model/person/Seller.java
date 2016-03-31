@@ -18,10 +18,7 @@ import model.product.Product;
  */
 public abstract class Seller extends Person {
 
-	protected String firstname;
-	protected String lastname;
-	protected String pass;
-	protected String description;
+	
 	protected String siret;
 	protected String phoneNumber;
 	protected String houseNumber;
@@ -29,7 +26,6 @@ public abstract class Seller extends Person {
 	protected String postCode;
 	protected String mail;
 	protected String city;
-	protected String pseudo;
 	
 	
 	// Start of user code (user defined attributes for Seller)
@@ -176,23 +172,34 @@ public abstract class Seller extends Person {
 	    this.city = newCity;
 	}
 	
-	
+	/**
+	 * Returns lastname
+	 * @return lastname
+	 */
 	public String getLastname() {
-		return this.lastname;
+		return this.lastName;
 	}	
 	
 	public void setLastname(String lastname) {
-	    this.lastname = lastname;
+	    this.lastName = lastname;
 	}
 	
+	/**
+	 * Returns firstname
+	 * @return firstname
+	 */
 	public String getFirstname() {
-		return this.firstname;
+		return this.firstName;
 	}	
 	
 	public void setFirstname(String firstname) {
-	    this.firstname = firstname;
+	    this.firstName = firstname;
 	}
 	
+	/**
+	 * Returns lastname
+	 * @return lastname
+	 */
 	public String getPseudo() {
 		return this.pseudo;
 	}	
@@ -201,16 +208,16 @@ public abstract class Seller extends Person {
 	    this.pseudo = pseudo;
 	}
 	
-	public String getPass() {
-		return this.pseudo;
+	public String getPassword() {
+		return this.password;
 	}	
 	
-	public void setPass(String pass) {
-	    this.pass = pass;
+	public void setPass(String password) {
+	    this.password = password;
 	}
 	
 	public String getDescription() {
-		return this.pseudo;
+		return this.description;
 	}	
 	
 	public void setDescription(String description) {
