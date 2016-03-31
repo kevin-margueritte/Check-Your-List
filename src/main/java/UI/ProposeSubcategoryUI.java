@@ -1,6 +1,5 @@
 package UI;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -21,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 import facade.CategoryFacade;
 import model.category.Category;
 
+@SuppressWarnings("serial")
 public class ProposeSubcategoryUI extends JFrame implements ActionListener {
 
 	private CategoryFacade cf;
@@ -28,29 +28,21 @@ public class ProposeSubcategoryUI extends JFrame implements ActionListener {
 	private JTextField categoryName;
 	private JTextPane textShortDescription;
 	private JTextPane textDetailedDescription;
+	@SuppressWarnings("rawtypes")
 	private JComboBox comboBoxCategory;
+	@SuppressWarnings("unused")
 	private List<Category> listCategory;
 	private CreateProductUI createProductUI;
 
 	/**
 	 * Launch the application.
 	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ProposeSubcategoryUI frame = new ProposeSubcategoryUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
+
 
 	/**
 	 * Create the frame.
 	 */
+	@SuppressWarnings("rawtypes")
 	public ProposeSubcategoryUI(CreateProductUI createProductUI) {
 		this.cf = new CategoryFacade();
 		this.createProductUI = createProductUI;
@@ -106,6 +98,7 @@ public class ProposeSubcategoryUI extends JFrame implements ActionListener {
 		this.comboBoxCategory = new JComboBox();
 		sl_contentPane.putConstraint(SpringLayout.WEST, comboBoxCategory, 0, SpringLayout.WEST, lblCategoryName);
 		sl_contentPane.putConstraint(SpringLayout.EAST, comboBoxCategory, 0, SpringLayout.EAST, categoryName);
+		@SuppressWarnings("unused")
 		List<String> ls = new ArrayList<String>();
 		contentPane.add(comboBoxCategory);
 		this.initComboBoxCategory();

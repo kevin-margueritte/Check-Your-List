@@ -52,6 +52,4 @@ public class TestSellerJDBC {
 		assertEquals(false, this.seller.pseudoExist());
 	}
 	
-	
-
 }
