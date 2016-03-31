@@ -27,6 +27,10 @@ public class SellerJDBC extends Seller {
 	public SellerJDBC(String pseudo) {
 		super(pseudo);
 	}
+	
+	public SellerJDBC() {
+		super();
+	}
 
 	@Override
 	public Seller readByPseudo() {
