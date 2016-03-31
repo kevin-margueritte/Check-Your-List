@@ -19,11 +19,26 @@ import model.person.JDBC.UserJDBC;
 import model.product.Product;
 import model.task.Task;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TaskUI.
+ */
 public class TaskUI extends JFrame {
 	
+	/** The task. */
 	private Task task;
+	
+	/** The tf. */
 	private TaskFacade tf;
+	
+	/** The panel products. */
 	private JPanel panelProducts;
+	
+	/**
+	 * Instantiates a new task ui.
+	 *
+	 * @param task the task
+	 */
 	/*
 	public static void main(String args[]) {
 		TaskUI.launch();
@@ -97,6 +112,11 @@ public class TaskUI extends JFrame {
 		this.initRessources(this.tf.getAllProductFromTask(this.task));
 	}
 	
+	/**
+	 * Inits the ressources.
+	 *
+	 * @param list the list
+	 */
 	public void initRessources(List<Product> list){
 		int idx =0;
 		panelProducts.removeAll();
@@ -108,6 +128,12 @@ public class TaskUI extends JFrame {
 		panelProducts.repaint();
 	}
 
+	/**
+	 * Adds the panel product.
+	 *
+	 * @param p the p
+	 * @param idx the idx
+	 */
 	public void addPanelProduct(Product p, int idx){
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(0, 0 + (30 * idx), 412, 41);

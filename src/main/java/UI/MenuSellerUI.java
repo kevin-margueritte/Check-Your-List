@@ -10,16 +10,31 @@ import javax.swing.event.ChangeListener;
 
 import model.person.Seller;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MenuSellerUI.
+ */
 public class MenuSellerUI extends JFrame implements ChangeListener {
 	
+	/** The tabbed pane. */
 	private JTabbedPane tabbedPane;
+	
+	/** The seller. */
 	private Seller seller;
+	
+	/** The fs. */
 	private ProfilSellerUI fs;
+	
+	/** The cp. */
 	private CreateProductUI cp;
+	
+	/** The shop. */
 	private ShopUI shop;
 
 	/**
 	 * Create the frame.
+	 *
+	 * @param s the s
 	 */
 	public MenuSellerUI(Seller s) {
 		setResizable(false);
@@ -36,6 +51,9 @@ public class MenuSellerUI extends JFrame implements ChangeListener {
 		
 	}
 	
+	/**
+	 * Inits the frame.
+	 */
 	public void initFrame() {
 		this.fs = new ProfilSellerUI(this.seller);	
 		Component comp = fs.getContentPane();
@@ -52,6 +70,9 @@ public class MenuSellerUI extends JFrame implements ChangeListener {
 		tabbedPane.addTab("Shop", compShop);
 	}
 
+	/* (non-Javadoc)
+	 * @see javax.swing.event.ChangeListener#stateChanged(javax.swing.event.ChangeEvent)
+	 */
 	@Override
 	public void stateChanged(ChangeEvent c) {
 		JTabbedPane pane = (JTabbedPane) c.getSource();

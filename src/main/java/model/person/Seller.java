@@ -210,53 +210,81 @@ public abstract class Seller extends Person {
 	}
 	
 	/**
-	 * Returns lastname
+	 * get lastname of seller
 	 * @return lastname
 	 */
 	public String getLastname() {
 		return this.lastName;
 	}	
 	
+	/**
+	 * set lastname of seller
+	 * @param lastname
+	 */
 	public void setLastname(String lastname) {
 	    this.lastName = lastname;
 	}
 	
 	/**
-	 * Returns firstname
+	 * get firstname of seller
 	 * @return firstname
 	 */
 	public String getFirstname() {
 		return this.firstName;
 	}	
 	
+	/**
+	 * set firstname of seller
+	 * @param firstname 
+	 */
 	public void setFirstname(String firstname) {
 	    this.firstName = firstname;
 	}
 	
 	/**
-	 * Returns lastname
-	 * @return lastname
+	 * get pseudo of seller
+	 * @return pseudo
 	 */
 	public String getPseudo() {
 		return this.pseudo;
 	}	
 	
+	/**
+	 * set pseudo of seller
+	 * @param pseudo
+	 */
 	public void setPseudo(String pseudo) {
 	    this.pseudo = pseudo;
 	}
 	
+	/**
+	 * get password of seller
+	 * @return password
+	 */
 	public String getPassword() {
 		return this.password;
 	}	
 	
+	/**
+	 * set password of seller
+	 * @param password
+	 */
 	public void setPass(String password) {
 	    this.password = password;
 	}
 	
+	/**
+	 * get description of seller
+	 * @return description
+	 */
 	public String getDescription() {
 		return this.description;
 	}	
 	
+	/**
+	 * set description of seller 
+	 * @param description
+	 */
 	public void setDescription(String description) {
 	    this.description = description;
 	}

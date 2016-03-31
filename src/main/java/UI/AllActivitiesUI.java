@@ -18,15 +18,26 @@ import model.activity.Activity;
 import model.activity.JDBC.ActivityJDBC;
 import model.person.User;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AllActivitiesUI.
+ */
 public class AllActivitiesUI extends JFrame implements ActionListener {
 
+	/** The af. */
 	//private JPanel contentPane;
 	private ActivityFacade af;
+	
+	/** The u. */
 	private User u;
+	
+	/** The panel activity. */
 	private List<JPanel> panelActivity;
 
 	/**
 	 * Launch the application.
+	 *
+	 * @param u the u
 	 */
 	
 	/*public static void main(String[] args) {
@@ -63,6 +74,9 @@ public class AllActivitiesUI extends JFrame implements ActionListener {
 		this.initFrame();
 	}
 	
+	/**
+	 * Inits the frame.
+	 */
 	public void initFrame() {
 		Activity a = (Activity) new ActivityJDBC();
 		List<Activity> list = this.af.getAllActivities(a);
@@ -80,6 +94,12 @@ public class AllActivitiesUI extends JFrame implements ActionListener {
 		this.setLocationRelativeTo(null);
 	}
 	
+	/**
+	 * Adds the panel activity.
+	 *
+	 * @param act the act
+	 * @param idx the idx
+	 */
 	public void addPanelActivity(Activity act, int idx) {		
 		JPanel panel = new JPanel();
 
@@ -105,6 +125,9 @@ public class AllActivitiesUI extends JFrame implements ActionListener {
 		panel.add(btnSee);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton button = (JButton) e.getSource();

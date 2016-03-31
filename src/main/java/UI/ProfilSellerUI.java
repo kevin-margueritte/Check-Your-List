@@ -32,13 +32,27 @@ import model.person.Seller;
 import model.person.JDBC.SellerJDBC;
 import model.product.Product;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ProfilSellerUI.
+ */
 @SuppressWarnings("serial")
 public class ProfilSellerUI extends JFrame implements ActionListener {
 	
+	/** The pf. */
 	private ProfilSellerFacade pf;
+	
+	/** The seller. */
 	private Seller seller;
+	
+	/** The panel activity. */
 	private JPanel panelActivity;
 	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -56,6 +70,11 @@ public class ProfilSellerUI extends JFrame implements ActionListener {
 	
 	//public ProfilSellerUI() {}
 	
+	/**
+	 * Instantiates a new profil seller ui.
+	 *
+	 * @param s the s
+	 */
 	public ProfilSellerUI(Seller s) {
 		this.pf = new ProfilSellerFacade();
 		this.seller = s;
@@ -78,6 +97,9 @@ public class ProfilSellerUI extends JFrame implements ActionListener {
 	
 	}
 	
+	/**
+	 * Inits the frame.
+	 */
 	public void initFrame() {
 		List<Product> list = this.pf.getAllProduct(this.seller);
 		int idx = 1;
@@ -99,6 +121,12 @@ public class ProfilSellerUI extends JFrame implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Adds the panel product.
+	 *
+	 * @param prod the prod
+	 * @param idx the idx
+	 */
 	public void addPanelProduct(Product prod, int idx) {
 		JPanel panel = new JPanel();
 		panel.setBounds(10, (idx-1) * 45, 650, 56);
@@ -160,6 +188,9 @@ public class ProfilSellerUI extends JFrame implements ActionListener {
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton button = (JButton) e.getSource();

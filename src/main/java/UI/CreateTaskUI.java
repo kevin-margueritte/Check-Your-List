@@ -24,25 +24,62 @@ import model.activity.JDBC.ActivityJDBC;
 import model.category.Category;
 import model.person.User;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CreateTaskUI.
+ */
 @SuppressWarnings("serial")
 public class CreateTaskUI extends JFrame implements ActionListener{
 	
+	/** The rf. */
 	private RessourceFacade rf;
+	
+	/** The text description. */
 	private JTextField textDescription;
+	
+	/** The btn validate. */
 	private JButton btnValidate;
+	
+	/** The a. */
 	private Activity a;
+	
+	/** The u. */
 	private User u;
+	
+	/** The combo visibility. */
 	private JComboBox comboVisibility;
+	
+	/** The combo activity. */
 	private JComboBox comboActivity;
+	
+	/** The text name task. */
 	private JTextField textNameTask;
+	
+	/** The start day. */
 	private JComboBox startDay;
+	
+	/** The start month. */
 	private JComboBox startMonth;
+	
+	/** The start year. */
 	private JComboBox startYear;
+	
+	/** The end day. */
 	private JComboBox endDay;
+	
+	/** The end month. */
 	private JComboBox endMonth;
+	
+	/** The end year. */
 	private JComboBox endYear;
+	
+	/** The spinner freq. */
 	private JSpinner spinnerFreq;
+	
+	/** The combo freq. */
 	private JComboBox comboFreq;
+	
+	/** The act ui. */
 	private ActivityUI actUI;
 	
 	/*
@@ -52,6 +89,9 @@ public class CreateTaskUI extends JFrame implements ActionListener{
 	
 	/**
 	 * Launch the application.
+	 *
+	 * @param act the act
+	 * @param actUI the act ui
 	 */
 	/*
 	public static void launch() {
@@ -168,6 +208,9 @@ public class CreateTaskUI extends JFrame implements ActionListener{
 		
 	}
 	
+	/**
+	 * Inits the combo box activity.
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void initComboBoxActivity() {
 		System.out.print("initComboBoxActivity");
@@ -176,6 +219,9 @@ public class CreateTaskUI extends JFrame implements ActionListener{
 		this.comboActivity.setModel(new DefaultComboBoxModel(list.toArray()));
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == this.btnValidate && this.formComplete()) {
@@ -278,6 +324,14 @@ public class CreateTaskUI extends JFrame implements ActionListener{
 		}
 	}
 	
+	/**
+	 * Check dates valid.
+	 *
+	 * @param date1 the date1
+	 * @param date2 the date2
+	 * @return true, if successful
+	 * @throws ParseException the parse exception
+	 */
 	public boolean checkDatesValid(String date1, String date2) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -291,6 +345,11 @@ public class CreateTaskUI extends JFrame implements ActionListener{
         return datesValid;
 	}
 	
+	/**
+	 * Form complete.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean formComplete() {
 		if (this.textNameTask.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(this,

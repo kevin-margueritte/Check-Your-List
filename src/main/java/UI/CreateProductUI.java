@@ -30,20 +30,50 @@ import model.category.Subcategory;
 import model.person.Seller;
 import model.person.JDBC.SellerJDBC;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CreateProductUI.
+ */
 public class CreateProductUI extends JFrame implements ActionListener, MouseListener {
 	
+	/** The name product. */
 	private JTextField nameProduct;
+	
+	/** The combo subcategory. */
 	private JComboBox comboSubcategory;
+	
+	/** The combo category. */
 	private JComboBox comboCategory;
+	
+	/** The sellface. */
 	private SellerFacade sellface;
+	
+	/** The btn validate. */
 	private JButton btnValidate;
+	
+	/** The combo visibility. */
 	private JComboBox comboVisibility;
+	
+	/** The price. */
 	private JFormattedTextField price;
+	
+	/** The quantity. */
 	private JFormattedTextField quantity;
+	
+	/** The seller. */
 	private Seller seller;
+	
+	/** The lbl propose category. */
 	private JLabel lblProposeCategory;
+	
+	/** The lbl propose subcategory. */
 	private JLabel lblProposeSubcategory;
 	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String args[]) {
 		CreateProductUI.launch();
 	}
@@ -67,20 +97,34 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 		});
 	}
 	
+	/**
+	 * Detect category close.
+	 */
 	public void detectCategoryClose() {
 		CreateProductUI myUI = new CreateProductUI(this.seller);
 		myUI.setVisible(true);
 		this.dispose();
 	}
 	
+	/**
+	 * Instantiates a new creates the product ui.
+	 */
 	public CreateProductUI()  {}
 	
+	/**
+	 * Instantiates a new creates the product ui.
+	 *
+	 * @param s the s
+	 */
 	public CreateProductUI(Seller s)  {
 		this.seller = s;
 		this.sellface = new SellerFacade();
 		this.initFrame();
 	}
 	
+	/**
+	 * Inits the frame.
+	 */
 	public void initFrame() {
 		this.setLocationRelativeTo(null);
 		setResizable(false);
@@ -186,12 +230,18 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 		this.setSize(369,288);
 	}
 	
+	/**
+	 * Inits the combo box category.
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void initComboBoxCategory() {
 		List<Category> list = sellface.getAllCategories();
 		this.comboCategory.setModel(new DefaultComboBoxModel(list.toArray()));
 	}
 	
+	/**
+	 * Inits the combo box sub category.
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void initComboBoxSubCategory() {
 		Category c = (Category) this.comboCategory.getSelectedItem();
@@ -199,6 +249,9 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 		this.comboSubcategory.setModel(new DefaultComboBoxModel(list.toArray()));
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == this.comboCategory) {
@@ -217,6 +270,11 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 		}
 	}
 	
+	/**
+	 * Form complete.
+	 *
+	 * @return true, if successful
+	 */
 	private boolean formComplete() {
 		if (this.nameProduct.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(this,
@@ -241,6 +299,9 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 		return true;	
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseClicked(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		if (arg0.getSource() == this.lblProposeCategory) {
@@ -253,24 +314,36 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseEntered(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseExited(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mousePressed(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.MouseListener#mouseReleased(java.awt.event.MouseEvent)
+	 */
 	@Override
 	public void mouseReleased(MouseEvent arg0) {}
 	

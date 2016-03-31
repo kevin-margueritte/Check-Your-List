@@ -17,14 +17,25 @@ import facade.ProfilUserFacade;
 import model.activity.Activity;
 import model.person.User;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ProfilUserUI.
+ */
 public class ProfilUserUI extends JFrame implements ActionListener {
 	
+	/** The pf. */
 	private ProfilUserFacade pf;
+	
+	/** The u. */
 	private User u;
+	
+	/** The panel activity. */
 	private List<JPanel> panelActivity;
 	
 	/**
 	 * Launch the application.
+	 *
+	 * @param u the u
 	 */
 	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -60,6 +71,9 @@ public class ProfilUserUI extends JFrame implements ActionListener {
 		//this.initFrame();
 	}
 	
+	/**
+	 * Inits the frame.
+	 */
 	public void initFrame() {
 		List<Activity> list = this.pf.getAllActivities(this.u);
 		for (JPanel p : this.panelActivity) {
@@ -75,6 +89,12 @@ public class ProfilUserUI extends JFrame implements ActionListener {
 		setSize(550, (40 * (list.size() + 1)) + 50 );
 	}
 	
+	/**
+	 * Adds the panel activity.
+	 *
+	 * @param act the act
+	 * @param idx the idx
+	 */
 	public void addPanelActivity(Activity act, int idx) {
 		JPanel panel = new JPanel();
 		this.panelActivity.add(panel);
@@ -100,6 +120,9 @@ public class ProfilUserUI extends JFrame implements ActionListener {
 		panel.add(btnDelete);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton button = (JButton) e.getSource();

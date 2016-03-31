@@ -175,23 +175,42 @@ public abstract class User extends Person {
 	    this.mail = newMail;
 	}
 	
-
+	/**
+	 * get description of an user
+	 * @return description
+	 */
 	public String getDescription() {
 		return this.description;
 	}
 	
+	/**
+	 * set description of an user
+	 * @param description
+	 */
 	public void setDescription(String description) {
 	    this.description = description;
 	}
 	
+	/**
+	 * get password of an user
+	 * @return password
+	 */
 	public String getPassword() {
 		return this.password;
 	}
 	
+	/**
+	 * set password of an user
+	 * @param password
+	 */
 	public void setPassword(String password) {
 	    this.password = password;
 	}
 
+	/**
+	 * save an user
+	 * @return true if the user is created else false
+	 */
 	public abstract boolean save();
 	
 	/**

@@ -16,17 +16,34 @@ import javax.swing.border.EmptyBorder;
 
 import facade.CategoryFacade;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ProposeCategoryUI.
+ */
 public class ProposeCategoryUI extends JFrame implements ActionListener {
 
+	/** The cf. */
 	private CategoryFacade cf;
+	
+	/** The content pane. */
 	private JPanel contentPane;
+	
+	/** The category name. */
 	private JTextField categoryName;
+	
+	/** The text short description. */
 	private JTextPane textShortDescription;
+	
+	/** The text detailed description. */
 	private JTextPane textDetailedDescription;
+	
+	/** The create product ui. */
 	private CreateProductUI createProductUI;
 
 	/**
 	 * Launch the application.
+	 *
+	 * @param createProductUI the create product ui
 	 */
 	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -103,6 +120,9 @@ public class ProposeCategoryUI extends JFrame implements ActionListener {
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if (this.formComplete()) {
 			if(!cf.categoryExist(this.categoryName.getText())) {
@@ -122,6 +142,11 @@ public class ProposeCategoryUI extends JFrame implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Form complete.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean formComplete() {
 		if (this.categoryName.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(this,

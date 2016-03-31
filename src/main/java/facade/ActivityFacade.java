@@ -159,6 +159,12 @@ public class ActivityFacade {
 		return this.tm.getTask(name, act);
 	}
 	
+	/**
+	 * find if an activity exist
+	 * @param a activity
+	 * @param title 
+	 * @return true if the activity exist else false
+	 */
 	public boolean activityExist(Activity a, String title) {
 		return this.am.activityExist(a, title);
 	}

@@ -48,14 +48,14 @@ public abstract class Task {
 		protected boolean visibility;
 
 		/**
-		 * construtor of task
+		 * constructor of task
 		 */
 		public Task() {
 			super();
 		}
 		
 		/**
-		 * construtor of task
+		 * constructor of task
 		 * @param name
 		 * @param act
 		 */
@@ -65,7 +65,7 @@ public abstract class Task {
 		}
 
 		/**
-		 * construtor of task
+		 * constructor of task
 		 * @param name
 		 * @param description
 		 * @param frequency
@@ -89,7 +89,7 @@ public abstract class Task {
 		}
 		
 		/**
-		 * construtor of task
+		 * constructor of task
 		 * @param id
 		 * @param name
 		 * @param description
@@ -114,7 +114,7 @@ public abstract class Task {
 		}
 		
 		/**
-		 * construtor of task
+		 * constructor of task
 		 * @param id
 		 * @param name
 		 */

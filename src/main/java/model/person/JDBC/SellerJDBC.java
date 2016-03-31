@@ -51,6 +51,9 @@ public class SellerJDBC extends Seller {
 		super(pseudo);
 	}
 	
+	/**
+	 * constructor of SellerJDBC
+	 */
 	public SellerJDBC() {
 		super();
 	}

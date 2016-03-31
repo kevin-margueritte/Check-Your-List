@@ -93,6 +93,12 @@ public class ActivityManager {
 		return act.readAllTask();
 	}
 	
+	/**
+	 * find if the activity exist
+	 * @param act activity
+	 * @param title of activity
+	 * @return true if the activity exist else false
+	 */
 	public boolean activityExist(Activity act,String title) {
 		return act.activityExist(title);
 	}

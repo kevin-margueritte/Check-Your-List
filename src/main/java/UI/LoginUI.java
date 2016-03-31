@@ -22,19 +22,45 @@ import model.person.Person;
 import model.person.Seller;
 import model.person.User;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LoginUI.
+ */
 @SuppressWarnings("serial")
 public class LoginUI extends JFrame implements ActionListener{
 	
+	/** The login. */
 	private LoginFacade login;
+	
+	/** The text login. */
 	private JTextField textLogin;
+	
+	/** The text password. */
 	private JPasswordField textPassword;
+	
+	/** The label title. */
 	private JLabel labelTitle;
+	
+	/** The label login. */
 	private JLabel labelLogin;
+	
+	/** The label password. */
 	private JLabel labelPassword;
+	
+	/** The btn sign in seller. */
 	private JButton btnSignInSeller;
+	
+	/** The btn sign in user. */
 	private JButton btnSignInUser;
+	
+	/** The btn connect. */
 	private JButton btnConnect;
 	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String args[]) {
 		LoginUI.launch();
 	}
@@ -55,6 +81,9 @@ public class LoginUI extends JFrame implements ActionListener{
 		});
 	}
 	
+	/**
+	 * Instantiates a new login ui.
+	 */
 	public LoginUI() {
 		
 		setResizable(false);
@@ -119,6 +148,9 @@ public class LoginUI extends JFrame implements ActionListener{
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == this.btnConnect) {
 			if (!this.checkLoginIsEmpty()) {
@@ -158,6 +190,11 @@ public class LoginUI extends JFrame implements ActionListener{
 		}
 	}
 	
+	/**
+	 * Check login is empty.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean checkLoginIsEmpty() {
 		if (this.textLogin.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(this,
@@ -169,6 +206,11 @@ public class LoginUI extends JFrame implements ActionListener{
 		return false;
 	}
 	
+	/**
+	 * Check password is empty.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean checkPasswordIsEmpty() {
 		if ((new String(textPassword.getPassword())).isEmpty()) {
 			JOptionPane.showMessageDialog(this,

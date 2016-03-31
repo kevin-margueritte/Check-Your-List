@@ -21,19 +21,40 @@ import javax.swing.border.EmptyBorder;
 import facade.CategoryFacade;
 import model.category.Category;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ProposeSubcategoryUI.
+ */
 public class ProposeSubcategoryUI extends JFrame implements ActionListener {
 
+	/** The cf. */
 	private CategoryFacade cf;
+	
+	/** The content pane. */
 	private JPanel contentPane;
+	
+	/** The category name. */
 	private JTextField categoryName;
+	
+	/** The text short description. */
 	private JTextPane textShortDescription;
+	
+	/** The text detailed description. */
 	private JTextPane textDetailedDescription;
+	
+	/** The combo box category. */
 	private JComboBox comboBoxCategory;
+	
+	/** The list category. */
 	private List<Category> listCategory;
+	
+	/** The create product ui. */
 	private CreateProductUI createProductUI;
 
 	/**
 	 * Launch the application.
+	 *
+	 * @param createProductUI the create product ui
 	 */
 	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -123,12 +144,18 @@ public class ProposeSubcategoryUI extends JFrame implements ActionListener {
 		setTitle("Propose new subcategory");
 	}
 	
+	/**
+	 * Inits the combo box category.
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void initComboBoxCategory() {
 		List<Category> list = cf.getAllCategories();
 		this.comboBoxCategory.setModel(new DefaultComboBoxModel(list.toArray()));
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	public void actionPerformed(ActionEvent arg0) {
 		if (this.formComplete()) {
 			if(!cf.subcategoryExist(this.categoryName.getText())) {
@@ -156,6 +183,11 @@ public class ProposeSubcategoryUI extends JFrame implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Form complete.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean formComplete() {
 		if (this.categoryName.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(this,

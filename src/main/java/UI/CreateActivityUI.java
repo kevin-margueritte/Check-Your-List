@@ -21,20 +21,44 @@ import model.category.Subcategory;
 import model.person.User;
 import model.person.JDBC.UserJDBC;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CreateActivityUI.
+ */
 @SuppressWarnings("serial")
 public class CreateActivityUI extends JFrame implements ActionListener {
 	
+	/** The text activity. */
 	private JTextField textActivity;
+	
+	/** The text description. */
 	private JTextField textDescription;
+	
+	/** The af. */
 	private ActivityFacade af;
+	
+	/** The combo subcategory. */
 	private JComboBox comboSubcategory;
+	
+	/** The combo category. */
 	private JComboBox comboCategory;
+	
+	/** The btn validate. */
 	private JButton btnValidate;
+	
+	/** The combo visibility. */
 	private JComboBox comboVisibility;
+	
+	/** The u. */
 	private User u;
 	
 	
 	
+	/**
+	 * Instantiates a new creates the activity ui.
+	 *
+	 * @param u the u
+	 */
 	/*
 	public static void main(String args[]) {
 		CreateActivityUI.launch();
@@ -120,12 +144,18 @@ public class CreateActivityUI extends JFrame implements ActionListener {
 		this.setSize(395, 325);
 	}
 	
+	/**
+	 * Inits the combo box category.
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void initComboBoxCategory() {
 		List<Category> list = af.getAllCategories();
 		this.comboCategory.setModel(new DefaultComboBoxModel(list.toArray()));
 	}
 	
+	/**
+	 * Inits the combo box sub category.
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void initComboBoxSubCategory() {
 		Category c = (Category) this.comboCategory.getSelectedItem();
@@ -133,6 +163,9 @@ public class CreateActivityUI extends JFrame implements ActionListener {
 		this.comboSubcategory.setModel(new DefaultComboBoxModel(list.toArray()));
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == this.comboCategory) {
@@ -160,6 +193,11 @@ public class CreateActivityUI extends JFrame implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Form complete.
+	 *
+	 * @return true, if successful
+	 */
 	private boolean formComplete() {
 		if (this.textActivity.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(this,

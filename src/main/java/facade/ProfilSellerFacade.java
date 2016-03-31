@@ -43,19 +43,31 @@ public class ProfilSellerFacade {
 	}
 
 	/**
-	 * find the name of a product with his quantity
+	 * update quantity of product
 	 * @param product
 	 * @param quantity
-	 * @return false
+	 * @return true if the quantity is updated else false
 	 */
 	public boolean majQuantity(Product prod, int qty) {
 		return pm.majQuantity(prod,qty);	
 	}
 
+	/**
+	 * update price of product
+	 * @param prod product
+	 * @param price
+	 * @return true if the price is updated else false
+	 */
 	public boolean majPrice(Product prod, float price) {
 		return pm.majPrice(prod,price);	
 	}
 	
+	/**
+	 * update name of product
+	 * @param prod
+	 * @param name
+	 * @return true if the name is updated else false
+	 */
 	public boolean majName(Product prod, String name) {
 		return pm.majName(prod,name);	
 	}

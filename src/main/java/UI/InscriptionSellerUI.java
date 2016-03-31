@@ -15,24 +15,60 @@ import javax.swing.SpringLayout;
 
 import facade.PersonFacade;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class InscriptionSellerUI.
+ */
 @SuppressWarnings("serial")
 public class InscriptionSellerUI extends JFrame implements ActionListener {
 	
+	/** The first name. */
 	private JTextField firstName;
+	
+	/** The last name. */
 	private JTextField lastName;
+	
+	/** The pseudo. */
 	private JTextField pseudo;
+	
+	/** The password. */
 	private JPasswordField password;
+	
+	/** The repeat password. */
 	private JPasswordField repeatPassword;
+	
+	/** The email. */
 	private JTextField email;
+	
+	/** The city. */
 	private JTextField city;
+	
+	/** The post code. */
 	private JTextField postCode;
+	
+	/** The street. */
 	private JTextField street;
+	
+	/** The house number. */
 	private JTextField houseNumber;
+	
+	/** The description. */
 	private JTextPane description;
+	
+	/** The pf. */
 	private PersonFacade pf;
+	
+	/** The phone number. */
 	private JTextField phoneNumber;
+	
+	/** The siret. */
 	private JTextField siret;
 	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String args[]) {
 		InscriptionSellerUI.launch();
 	}
@@ -53,6 +89,9 @@ public class InscriptionSellerUI extends JFrame implements ActionListener {
 		});
 	}
 	
+	/**
+	 * Instantiates a new inscription seller ui.
+	 */
 	public InscriptionSellerUI() {
 		this.pf = new PersonFacade();
 		setResizable(false);
@@ -182,6 +221,9 @@ public class InscriptionSellerUI extends JFrame implements ActionListener {
 		this.setLocationRelativeTo(null);
 	}
 
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (this.formComplete()) {
@@ -202,6 +244,11 @@ public class InscriptionSellerUI extends JFrame implements ActionListener {
 		}
 	}
 
+	/**
+	 * Form complete.
+	 *
+	 * @return true, if successful
+	 */
 	private boolean formComplete() {
 		if (this.firstName.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(this,

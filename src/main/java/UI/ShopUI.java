@@ -27,13 +27,29 @@ import model.person.JDBC.SellerJDBC;
 import model.product.Product;
 import javax.swing.SwingConstants;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ShopUI.
+ */
 public class ShopUI extends JFrame implements ActionListener {
 	
+	/** The combo category. */
 	private JComboBox comboCategory;
+	
+	/** The combo subcategory. */
 	private JComboBox comboSubcategory;
+	
+	/** The Shop face. */
 	private ShopFacade ShopFace;
+	
+	/** The panel products. */
 	private JPanel panelProducts;
 	
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String args[]) {
 		ShopUI.launch();
 	}
@@ -59,6 +75,9 @@ public class ShopUI extends JFrame implements ActionListener {
 
 	
 	
+	/**
+	 * Instantiates a new shop ui.
+	 */
 	public ShopUI() {
 		setResizable(false);
 		setTitle("Shop");
@@ -117,11 +136,19 @@ public class ShopUI extends JFrame implements ActionListener {
 		setSize(600,381);
 	}
 	
+	/**
+	 * Inits the frame.
+	 */
 	public void initFrame(){
 		List<Product> list = this.ShopFace.getAllProductsFromSubCategory((Subcategory) this.comboSubcategory.getSelectedItem());
 		this.initProducts(list);
 	}
 	
+	/**
+	 * Inits the products.
+	 *
+	 * @param list the list
+	 */
 	public void initProducts(List<Product> list){
 		int idx =0;
 		panelProducts.removeAll();
@@ -133,6 +160,12 @@ public class ShopUI extends JFrame implements ActionListener {
 		panelProducts.repaint();
 	}
 
+	/**
+	 * Adds the panel product.
+	 *
+	 * @param p the p
+	 * @param idx the idx
+	 */
 	public void addPanelProduct(Product p, int idx){
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(0, 0 + (50 * idx), 530, 31);
@@ -166,12 +199,18 @@ public class ShopUI extends JFrame implements ActionListener {
 		panel_1.add(btnNewButton);
 	}
 
+	/**
+	 * Inits the combo box category.
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void initComboBoxCategory() {
 		List<Category> list = ShopFace.getAllCategories();
 		this.comboCategory.setModel(new DefaultComboBoxModel(list.toArray()));
 	}
 	
+	/**
+	 * Inits the combo box sub category.
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void initComboBoxSubCategory() {
 		Category c = (Category) this.comboCategory.getSelectedItem();
@@ -179,6 +218,9 @@ public class ShopUI extends JFrame implements ActionListener {
 		this.comboSubcategory.setModel(new DefaultComboBoxModel(list.toArray()));
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == this.comboCategory) {

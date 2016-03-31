@@ -31,47 +31,59 @@ import model.person.JDBC.UserJDBC;
 import model.task.Task;
 import javax.swing.ScrollPaneConstants;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ActivityUI.
+ */
 @SuppressWarnings("serial")
 public class ActivityUI extends JFrame implements ActionListener {
 	
+	/** The activity. */
 	private Activity activity;
+	
+	/** The user. */
 	private User user;
+	
+	/** The af. */
 	private ActivityFacade af;
+	
+	/** The text pane comment content. */
 	private JTextPane textPaneCommentContent;
+	
+	/** The btn add task. */
 	private JButton btnAddTask;
+	
+	/** The btn add comment. */
 	private JButton btnAddComment;
+	
+	/** The lbl add comment. */
 	private JLabel lblAddComment;
+	
+	/** The panel activity. */
 	private JPanel panelActivity;
+	
+	/** The heigth. */
 	private double heigth;
+	
+	/** The panel top description. */
 	private JPanel panelTopDescription;
+	
+	/** The panel task list. */
 	private JPanel panelTaskList;
+	
+	/** The panel task. */
 	private JPanel panelTask;
+	
+	/** The panel comment. */
 	private JPanel panelComment;
-	/*
-	public static void main(String args[]) {
-		ActivityUI.launch();
-	}*/
+
 	
 	/**
 	 * Launch the application.
-	 *//*
-	public static void launch() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					User u = new UserJDBC("titi");
-					u.readByPseudo();
-					Activity a = new ActivityJDBC(u);
-					Iterator<Activity> it = a.readAll().iterator();
-					ActivityUI frame = new ActivityUI(u,it.next());
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-	
+	 *
+	 * @param u the u
+	 * @param act the act
+	 */
 	public ActivityUI(User u, Activity act) {
 		this.activity = act;
 		this.user = u;
@@ -200,6 +212,11 @@ public class ActivityUI extends JFrame implements ActionListener {
 		this.setLocationRelativeTo(null);
 	}
 	
+	/**
+	 * Inits the activities.
+	 *
+	 * @param list the list
+	 */
 	public void initActivities(List<Task> list) {
 		int idx = 1;	
 		panelTaskList.removeAll();
@@ -219,6 +236,12 @@ public class ActivityUI extends JFrame implements ActionListener {
 		panelTaskList.repaint();
 	}
 	
+	/**
+	 * Adds the check box.
+	 *
+	 * @param t the t
+	 * @param idx the idx
+	 */
 	public void addCheckBox(Task t, int idx) {
 		
 		if(user.getPseudo().equals(activity.getUser().getPseudo())) { 
@@ -244,6 +267,12 @@ public class ActivityUI extends JFrame implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Adds the panel task.
+	 *
+	 * @param t the t
+	 * @param idx the idx
+	 */
 	public void addPanelTask(Task t, int idx) {
 		
 		JPanel panel = new JPanel();
@@ -279,6 +308,9 @@ public class ActivityUI extends JFrame implements ActionListener {
 		
 	}
 	
+	/**
+	 * Inits the comments.
+	 */
 	public void initComments() {
 		//this.panelComment.removeAll();
 		//panelComment.removeAll();
@@ -300,6 +332,12 @@ public class ActivityUI extends JFrame implements ActionListener {
 		panelActivity.repaint();
 	}
 	
+	/**
+	 * Adds the panel comment.
+	 *
+	 * @param comment the comment
+	 * @param idx the idx
+	 */
 	public void addPanelComment(Comment comment, int idx) {					
 		JPanel panel = new JPanel();
 		/*if(user.getPseudo().equals(activity.getUser().getPseudo())) { 
@@ -331,12 +369,18 @@ public class ActivityUI extends JFrame implements ActionListener {
 		this.panelComment.add(panel);
 	}
 	
+	/**
+	 * Detect task ressource ui close.
+	 */
 	public void detectTaskRessourceUIClose() {
 		ActivityUI myActUI = new ActivityUI(this.user, this.activity);
 		myActUI.setVisible(true);
 		this.dispose();
 	}
 	
+	/* (non-Javadoc)
+	 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {	
 		if ( e.getSource() == this.btnAddComment ) {
@@ -387,6 +431,11 @@ public class ActivityUI extends JFrame implements ActionListener {
 		*/ 		
 	}
 	
+	/**
+	 * Form complete.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean formComplete() {
 		if (this.textPaneCommentContent.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(this,

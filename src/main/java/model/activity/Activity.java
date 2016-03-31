@@ -55,7 +55,7 @@ public abstract class Activity {
 	
 	/**
 	 * constructor of activity
-	 * @param u user`ËËË‡ooooolllllllllllllllllllllllllllllllllmmlmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmkkkkkkkmkkm!:
+	 * @param u user
 	 */
 	public Activity(User u) {
 		this.user = u;
@@ -251,7 +251,7 @@ public abstract class Activity {
 	public abstract boolean deleteTask();
 	
 	/**
-	 * delete activity with its name of an user
+	 * delete activity of an user with name of activity
 	 * @return true if the activity is deleted else false
 	 */
 	public abstract boolean deleteByPseudoUserAndName();

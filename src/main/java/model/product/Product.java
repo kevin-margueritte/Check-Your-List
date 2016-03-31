@@ -38,7 +38,7 @@ public abstract class Product {
 	
 	
 	/**
-	 * The constructor of product.
+	 *constructor of product.
 	 */
 	public Product(String name, Seller seller, Subcategory subCategory) {
 		// Start of user code constructor for User)
@@ -50,14 +50,14 @@ public abstract class Product {
 	}
 	
 	/**
-	 * The constructor of product
+	 * constructor of product
 	 */
 	public Product(){
 		super();
 	}
 	
 	/**
-	 * The constructor of product
+	 * constructor of product
 	 * @param sub
 	 */
 	public Product(Subcategory sub){
@@ -66,7 +66,7 @@ public abstract class Product {
 	}
 
 	/**
-	 * The constructor of product
+	 * constructor of product
 	 * @param id
 	 * @param name
 	 * @param seller
@@ -83,7 +83,7 @@ public abstract class Product {
 	}
 
 	/**
-	 * The constructor of product
+	 * constructor of product
 	 * @param name
 	 * @param seller
 	 * @param price
