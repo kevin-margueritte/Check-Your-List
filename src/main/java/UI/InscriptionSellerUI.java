@@ -56,174 +56,127 @@ public class InscriptionSellerUI extends JFrame implements ActionListener {
 	public InscriptionSellerUI() {
 		this.pf = new PersonFacade();
 		setResizable(false);
-		SpringLayout springLayout = new SpringLayout();
-		getContentPane().setLayout(springLayout);
+		getContentPane().setLayout(null);
 		
 		firstName = new JTextField();
-		springLayout.putConstraint(SpringLayout.NORTH, firstName, 39, SpringLayout.NORTH, getContentPane());
-		springLayout.putConstraint(SpringLayout.WEST, firstName, 10, SpringLayout.WEST, getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, firstName, 142, SpringLayout.WEST, getContentPane());
+		firstName.setBounds(10, 39, 132, 20);
 		getContentPane().add(firstName);
 		firstName.setColumns(10);
 		
 		JLabel lblFirstName = new JLabel("First name");
-		springLayout.putConstraint(SpringLayout.WEST, lblFirstName, 0, SpringLayout.WEST, firstName);
-		springLayout.putConstraint(SpringLayout.SOUTH, lblFirstName, -6, SpringLayout.NORTH, firstName);
+		lblFirstName.setBounds(10, 19, 132, 14);
 		getContentPane().add(lblFirstName);
 		
 		lastName = new JTextField();
-		springLayout.putConstraint(SpringLayout.NORTH, lastName, 103, SpringLayout.NORTH, getContentPane());
-		springLayout.putConstraint(SpringLayout.WEST, lastName, 0, SpringLayout.WEST, firstName);
-		springLayout.putConstraint(SpringLayout.EAST, lastName, 0, SpringLayout.EAST, firstName);
+		lastName.setBounds(10, 103, 132, 20);
 		lastName.setColumns(10);
 		getContentPane().add(lastName);
 		
 		JLabel lblLastName = new JLabel("Last name");
-		springLayout.putConstraint(SpringLayout.WEST, lblLastName, 0, SpringLayout.WEST, firstName);
-		springLayout.putConstraint(SpringLayout.SOUTH, lblLastName, -6, SpringLayout.NORTH, lastName);
+		lblLastName.setBounds(10, 83, 132, 14);
 		getContentPane().add(lblLastName);
 		
 		pseudo = new JTextField();
-		springLayout.putConstraint(SpringLayout.NORTH, pseudo, 43, SpringLayout.SOUTH, lastName);
-		springLayout.putConstraint(SpringLayout.WEST, pseudo, 0, SpringLayout.WEST, firstName);
-		springLayout.putConstraint(SpringLayout.SOUTH, pseudo, 63, SpringLayout.SOUTH, lastName);
-		springLayout.putConstraint(SpringLayout.EAST, pseudo, 0, SpringLayout.EAST, firstName);
+		pseudo.setBounds(10, 166, 132, 20);
 		getContentPane().add(pseudo);
 		pseudo.setColumns(10);
 		
 		JLabel lblPseudo = new JLabel("Pseudo");
-		springLayout.putConstraint(SpringLayout.WEST, lblPseudo, 0, SpringLayout.WEST, firstName);
-		springLayout.putConstraint(SpringLayout.SOUTH, lblPseudo, -6, SpringLayout.NORTH, pseudo);
+		lblPseudo.setBounds(10, 146, 132, 14);
 		getContentPane().add(lblPseudo);
 		
 		password = new JPasswordField();
-		springLayout.putConstraint(SpringLayout.NORTH, password, 36, SpringLayout.SOUTH, pseudo);
-		springLayout.putConstraint(SpringLayout.WEST, password, 0, SpringLayout.WEST, firstName);
-		springLayout.putConstraint(SpringLayout.SOUTH, password, 56, SpringLayout.SOUTH, pseudo);
-		springLayout.putConstraint(SpringLayout.EAST, password, 0, SpringLayout.EAST, firstName);
+		password.setBounds(10, 222, 132, 20);
 		getContentPane().add(password);
 		password.setColumns(10);
 		
 		JLabel lblPassword = new JLabel("Password");
-		springLayout.putConstraint(SpringLayout.WEST, lblPassword, 0, SpringLayout.WEST, firstName);
-		springLayout.putConstraint(SpringLayout.SOUTH, lblPassword, -6, SpringLayout.NORTH, password);
+		lblPassword.setBounds(10, 202, 132, 14);
 		getContentPane().add(lblPassword);
 		
 		repeatPassword = new JPasswordField();
-		springLayout.putConstraint(SpringLayout.NORTH, repeatPassword, 39, SpringLayout.SOUTH, password);
-		springLayout.putConstraint(SpringLayout.WEST, repeatPassword, 0, SpringLayout.WEST, firstName);
-		springLayout.putConstraint(SpringLayout.SOUTH, repeatPassword, 59, SpringLayout.SOUTH, password);
-		springLayout.putConstraint(SpringLayout.EAST, repeatPassword, 0, SpringLayout.EAST, firstName);
+		repeatPassword.setBounds(10, 281, 132, 20);
 		getContentPane().add(repeatPassword);
 		repeatPassword.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Repeat password");
-		springLayout.putConstraint(SpringLayout.WEST, lblNewLabel, 0, SpringLayout.WEST, firstName);
-		springLayout.putConstraint(SpringLayout.SOUTH, lblNewLabel, -6, SpringLayout.NORTH, repeatPassword);
+		lblNewLabel.setBounds(10, 261, 132, 14);
 		getContentPane().add(lblNewLabel);
 		
 		email = new JTextField();
-		springLayout.putConstraint(SpringLayout.NORTH, email, 41, SpringLayout.SOUTH, repeatPassword);
-		springLayout.putConstraint(SpringLayout.WEST, email, 0, SpringLayout.WEST, firstName);
-		springLayout.putConstraint(SpringLayout.SOUTH, email, 61, SpringLayout.SOUTH, repeatPassword);
-		springLayout.putConstraint(SpringLayout.EAST, email, 0, SpringLayout.EAST, firstName);
+		email.setBounds(10, 342, 132, 20);
 		email.setColumns(10);
 		getContentPane().add(email);
 		
 		JLabel lblMail = new JLabel("Email");
-		springLayout.putConstraint(SpringLayout.WEST, lblMail, 0, SpringLayout.WEST, firstName);
-		springLayout.putConstraint(SpringLayout.SOUTH, lblMail, -6, SpringLayout.NORTH, email);
+		lblMail.setBounds(10, 322, 132, 14);
 		getContentPane().add(lblMail);
 		
 		city = new JTextField();
-		springLayout.putConstraint(SpringLayout.NORTH, city, 0, SpringLayout.NORTH, pseudo);
+		city.setBounds(254, 166, 141, 20);
 		getContentPane().add(city);
 		city.setColumns(10);
 		
 		JLabel lblCity = new JLabel("City");
-		springLayout.putConstraint(SpringLayout.WEST, city, 0, SpringLayout.WEST, lblCity);
-		springLayout.putConstraint(SpringLayout.EAST, city, 141, SpringLayout.WEST, lblCity);
-		springLayout.putConstraint(SpringLayout.WEST, lblCity, 209, SpringLayout.EAST, lblPseudo);
-		springLayout.putConstraint(SpringLayout.NORTH, lblCity, 0, SpringLayout.NORTH, lblPseudo);
+		lblCity.setBounds(254, 146, 141, 14);
 		getContentPane().add(lblCity);
 		
 		postCode = new JTextField();
-		springLayout.putConstraint(SpringLayout.NORTH, postCode, 0, SpringLayout.NORTH, password);
-		springLayout.putConstraint(SpringLayout.WEST, postCode, 115, SpringLayout.EAST, lastName);
+		postCode.setBounds(257, 222, 138, 20);
 		getContentPane().add(postCode);
 		postCode.setColumns(10);
 		
 		JLabel lblPostcode = new JLabel("Postcode");
-		springLayout.putConstraint(SpringLayout.NORTH, lblPostcode, 0, SpringLayout.NORTH, lblPassword);
-		springLayout.putConstraint(SpringLayout.EAST, lblPostcode, -102, SpringLayout.EAST, getContentPane());
+		lblPostcode.setBounds(258, 202, 137, 14);
 		getContentPane().add(lblPostcode);
 		
 		street = new JTextField();
-		springLayout.putConstraint(SpringLayout.WEST, street, 115, SpringLayout.EAST, repeatPassword);
-		springLayout.putConstraint(SpringLayout.EAST, street, -9, SpringLayout.EAST, getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, postCode, 0, SpringLayout.EAST, street);
-		springLayout.putConstraint(SpringLayout.NORTH, street, 0, SpringLayout.NORTH, repeatPassword);
+		street.setBounds(257, 281, 138, 20);
 		getContentPane().add(street);
 		street.setColumns(10);
 		
 		JLabel lblStreet = new JLabel("Street");
-		springLayout.putConstraint(SpringLayout.NORTH, lblStreet, 0, SpringLayout.NORTH, lblNewLabel);
-		springLayout.putConstraint(SpringLayout.WEST, lblStreet, 163, SpringLayout.EAST, lblNewLabel);
+		lblStreet.setBounds(257, 261, 138, 14);
 		getContentPane().add(lblStreet);
 		
 		houseNumber = new JTextField();
-		springLayout.putConstraint(SpringLayout.NORTH, houseNumber, 0, SpringLayout.NORTH, email);
-		springLayout.putConstraint(SpringLayout.WEST, houseNumber, 115, SpringLayout.EAST, email);
-		springLayout.putConstraint(SpringLayout.EAST, houseNumber, -9, SpringLayout.EAST, getContentPane());
+		houseNumber.setBounds(257, 342, 138, 20);
 		getContentPane().add(houseNumber);
 		houseNumber.setColumns(10);
 		
 		JLabel lblHouseNumber = new JLabel("House number");
-		springLayout.putConstraint(SpringLayout.NORTH, lblHouseNumber, 0, SpringLayout.NORTH, lblMail);
-		springLayout.putConstraint(SpringLayout.WEST, lblHouseNumber, 223, SpringLayout.EAST, lblMail);
+		lblHouseNumber.setBounds(257, 322, 138, 14);
 		getContentPane().add(lblHouseNumber);
 		
 		JLabel lblDescription = new JLabel("Description");
-		springLayout.putConstraint(SpringLayout.SOUTH, lblDescription, -177, SpringLayout.SOUTH, getContentPane());
-		springLayout.putConstraint(SpringLayout.WEST, lblDescription, 0, SpringLayout.WEST, firstName);
+		lblDescription.setBounds(10, 396, 375, 14);
 		getContentPane().add(lblDescription);
 		
 		JButton btnValidate = new JButton("Sign up");
+		btnValidate.setBounds(157, 554, 90, 23);
 		btnValidate.addActionListener(this);
-		springLayout.putConstraint(SpringLayout.WEST, btnValidate, 157, SpringLayout.WEST, getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, btnValidate, -10, SpringLayout.SOUTH, getContentPane());
 		getContentPane().add(btnValidate);
 		
 		this.description = new JTextPane();
-		springLayout.putConstraint(SpringLayout.NORTH, description, 6, SpringLayout.SOUTH, lblDescription);
-		springLayout.putConstraint(SpringLayout.WEST, description, 10, SpringLayout.WEST, getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, description, -22, SpringLayout.NORTH, btnValidate);
-		springLayout.putConstraint(SpringLayout.EAST, description, -19, SpringLayout.EAST, getContentPane());
+		description.setBounds(10, 416, 375, 116);
 		getContentPane().add(description);
 		
 		phoneNumber = new JTextField();
-		springLayout.putConstraint(SpringLayout.NORTH, phoneNumber, -43, SpringLayout.NORTH, lblCity);
-		springLayout.putConstraint(SpringLayout.WEST, phoneNumber, 112, SpringLayout.EAST, lastName);
-		springLayout.putConstraint(SpringLayout.SOUTH, phoneNumber, -23, SpringLayout.NORTH, lblCity);
-		springLayout.putConstraint(SpringLayout.EAST, phoneNumber, -9, SpringLayout.EAST, getContentPane());
+		phoneNumber.setBounds(254, 103, 141, 20);
 		getContentPane().add(phoneNumber);
 		phoneNumber.setColumns(10);
 		
 		siret = new JTextField();
-		springLayout.putConstraint(SpringLayout.NORTH, siret, 39, SpringLayout.NORTH, getContentPane());
-		springLayout.putConstraint(SpringLayout.WEST, siret, 112, SpringLayout.EAST, firstName);
-		springLayout.putConstraint(SpringLayout.EAST, siret, -9, SpringLayout.EAST, getContentPane());
+		siret.setBounds(254, 39, 141, 20);
 		getContentPane().add(siret);
 		siret.setColumns(10);
 		
 		JLabel lblSiret = new JLabel("SIRET");
-		springLayout.putConstraint(SpringLayout.NORTH, lblSiret, 0, SpringLayout.NORTH, lblFirstName);
-		springLayout.putConstraint(SpringLayout.WEST, lblSiret, 194, SpringLayout.EAST, lblFirstName);
+		lblSiret.setBounds(254, 19, 141, 14);
 		getContentPane().add(lblSiret);
 		
 		JLabel lblPhoneNumber = new JLabel("Phone number");
-		springLayout.putConstraint(SpringLayout.NORTH, lblPhoneNumber, 0, SpringLayout.NORTH, lblLastName);
-		springLayout.putConstraint(SpringLayout.WEST, lblPhoneNumber, 195, SpringLayout.EAST, lblLastName);
+		lblPhoneNumber.setBounds(254, 83, 141, 14);
 		getContentPane().add(lblPhoneNumber);
 		this.setSize(410, 616);
 		this.setLocationRelativeTo(null);
