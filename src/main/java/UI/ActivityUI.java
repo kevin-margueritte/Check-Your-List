@@ -2,6 +2,7 @@ package UI;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -16,6 +17,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
@@ -27,6 +29,7 @@ import model.comment.Comment;
 import model.person.User;
 import model.person.JDBC.UserJDBC;
 import model.task.Task;
+import javax.swing.ScrollPaneConstants;
 
 @SuppressWarnings("serial")
 public class ActivityUI extends JFrame implements ActionListener {
@@ -38,7 +41,12 @@ public class ActivityUI extends JFrame implements ActionListener {
 	private JButton btnAddTask;
 	private JButton btnAddComment;
 	private JLabel lblAddComment;
-	
+	private JPanel panelActivity;
+	private double heigth;
+	private JPanel panelTopDescription;
+	private JPanel panelTaskList;
+	private JPanel panelTask;
+	private JPanel panelComment;
 	
 	public static void main(String args[]) {
 		ActivityUI.launch();
@@ -68,105 +76,169 @@ public class ActivityUI extends JFrame implements ActionListener {
 		this.activity = act;
 		this.user = u;
 		this.af = new ActivityFacade();
+		List<Task> list = this.af.getAllTasks(this.activity);
 		
 		getContentPane().setLayout(null);
 		
-		JLabel lblActivityName = new JLabel(this.activity.getTitle());
-		lblActivityName.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblActivityName.setHorizontalAlignment(SwingConstants.CENTER);
-		lblActivityName.setBounds(178, 11, 162, 14);
-		getContentPane().add(lblActivityName);
+		/////PANEL PRINCIPAL ---------------------------------------------------------------------------
+		panelActivity = new JPanel();
+		panelActivity.setLayout(null);
 		
-		JLabel textPane = new JLabel();
-		textPane.setText(this.activity.getDescription());
-		textPane.setBounds(10, 58, 513, 89);
-		getContentPane().add(textPane);
+		//SCROLL PANEL
+		JScrollPane scrollPane_1 = new JScrollPane(panelActivity);
+		//scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollPane_1.setBounds(0, 0, 615, 700);
+		getContentPane().add(scrollPane_1);
+		
+		
+		///// PANEL TOP -------------------------------------------------------------------------------
+		panelTopDescription = new JPanel();
+		panelTopDescription.setLayout(null);
+
+		
+		JLabel lblActivityName = new JLabel(this.activity.getTitle());
+		lblActivityName.setBounds(195, 5, 175, 48);
+		panelTopDescription.add(lblActivityName);
+		lblActivityName.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblActivityName.setHorizontalAlignment(SwingConstants.CENTER);
+		
 		
 		JLabel lblDescription = new JLabel("Description :");
-		lblDescription.setBounds(10, 38, 118, 14);
-		getContentPane().add(lblDescription);
+		lblDescription.setBounds(10, 52, 80, 41);
+		panelTopDescription.add(lblDescription);
 		
+		JLabel textPane = new JLabel();
+		textPane.setBounds(74, 52, 452, 121);
+		panelTopDescription.add(textPane);
+		textPane.setText(this.activity.getDescription());
+		
+		this.heigth = 184;
+		
+		panelTopDescription.setBounds(0, 0, 582, 184);
+		panelActivity.add(panelTopDescription);
+		
+		//PANEL TASK  ----------------------------------------------------------------
+		panelTask = new JPanel();
+		panelTask.setLayout(null);
+	
 		if(user.getPseudo().equals(activity.getUser().getPseudo())) { 
 			JLabel lblTaskToDo = new JLabel("Task to do today");
-			lblTaskToDo.setBounds(10, 171, 153, 14);
-			getContentPane().add(lblTaskToDo);
+			lblTaskToDo.setBounds(10, 10, 153, 14);
+			panelTask.add(lblTaskToDo);
 		}
 		
-		JLabel lblTaskList = new JLabel("Task list");
-		
-		if(user.getPseudo().equals(activity.getUser().getPseudo())) { 
-			lblTaskList.setBounds(10, 331, 68, 14);
-		}
-		else {
-			lblTaskList.setBounds(10, 171, 153, 14);
-		}
-		getContentPane().add(lblTaskList);
 		if(user.getPseudo().equals(activity.getUser().getPseudo())) {			
 			btnAddTask = new JButton("Add task");
-			btnAddTask.addActionListener(this);
-			btnAddTask.setBounds(218, 301, 89, 23);
-			getContentPane().add(btnAddTask);
+			btnAddTask.addActionListener(this);	
+			btnAddTask.setBounds(255, 40 + ((23 * (list.size() + 1)) / 2 ), 90, 23);
+			this.panelTask.add(btnAddTask);
 		}
 		
-		List<Task> list = this.af.getAllTasks(this.activity);
+		
+		//panelTask.setBounds(0, 183, 582, 200);
+
+		panelActivity.add(panelTask);
+		
+		//PANEL TASKLIST ------------------------------------------------------------
+		
+		
+		panelTaskList = new JPanel();
+		panelTaskList.setLayout(null);
+		
+		this.initActivities(list);
+		
+		JLabel lblTaskList = new JLabel("Task list");
+		lblTaskList.setBounds(0, 10, 89, 23);
+		this.panelTaskList.add(lblTaskList);
+	
+		panelActivity.add(panelTaskList);
+
+		//PANEL COMMENT -------------------------------------------------------------
+		panelComment = new JPanel();
+		
+		panelComment.setLayout(null);
+		
 		lblAddComment = new JLabel("Add comment ");
-		if(user.getPseudo().equals(activity.getUser().getPseudo())) {
+		lblAddComment.setBounds(10, 10, 120, 14);
+		panelComment.add(lblAddComment);
+		
+
+		textPaneCommentContent = new JTextPane();
+		textPaneCommentContent.setBounds(32, 46, 519, 64);
+		panelComment.add(textPaneCommentContent);
+		
+		btnAddComment = new JButton("Add comment");
+		btnAddComment.setBounds(230, 115, 140, 23);
+		panelComment.add(btnAddComment);
+		btnAddComment.addActionListener(this);
+		
+		this.initComments();
+		
+		/*if(user.getPseudo().equals(activity.getUser().getPseudo())) {
 			lblAddComment.setBounds(10, 325 +(35*list.size() + 50), 105, 20);
 		}
 		else {
 			lblAddComment.setBounds(10, 150 + (35*list.size() + 50), 105, 20);			
 		}
-		getContentPane().add(lblAddComment);
 		
-		this.initActivities(list);
-		textPaneCommentContent = new JTextPane();
 		if(user.getPseudo().equals(activity.getUser().getPseudo())) {
 			textPaneCommentContent.setBounds(10, 325 +(35*list.size() + 100), 500, 103);
 		}
 		else {
 			textPaneCommentContent.setBounds(10, 150 +(35*list.size() + 100), 500, 103);
 		}
-		getContentPane().add(textPaneCommentContent);
-		
-		
-		btnAddComment = new JButton("Add comment");
-		btnAddComment.addActionListener(this);
 		if(user.getPseudo().equals(activity.getUser().getPseudo())) {
 			btnAddComment.setBounds(178, 325 +(35*list.size() + 220), 162, 29);
 		}
 		else {
 			btnAddComment.setBounds(178, 150 +(35*list.size() + 220), 162, 29);
-		}
-		getContentPane().add(btnAddComment);
+		}*/
 		
-		this.initComments();
+		panelActivity.add(panelComment);
+		
+		setSize(630, 700);
+		this.setLocationRelativeTo(null);
 	}
 	
 	public void initActivities(List<Task> list) {
-		int idx = 1;
+		int idx = 1;	
+		panelTaskList.removeAll();
 		for (Task t : list) {
 			this.addCheckBox(t, idx);
 			idx ++;
 		}
+		
+		if(user.getPseudo().equals(activity.getUser().getPseudo())) { 
+			panelTask.setBounds(0, 183, 600, 80 + (23 * (list.size() + 1 ))/2);
+		}else{
+			panelTask.setBounds(0, 183, 0, 0);
+		}
+		panelTaskList.setBounds(0, panelTask.getY() + panelTask.getHeight(), 600,23+ 40 * (list.size() + 1 ));
+		this.heigth = this.heigth + (40 * (list.size() + 1));
+
+		panelTaskList.repaint();
 	}
 	
 	public void addCheckBox(Task t, int idx) {
+		
 		if(user.getPseudo().equals(activity.getUser().getPseudo())) { 
 			JCheckBox chckbxNewCheckBox = new JCheckBox(t.getName());
 			chckbxNewCheckBox.putClientProperty("task", t);
 			chckbxNewCheckBox.addActionListener(this);
 			chckbxNewCheckBox.setSelected(t.isChecked());
 			if (idx == 1) {
-				chckbxNewCheckBox.setBounds(31, 200, 97, 23);
+				chckbxNewCheckBox.setBounds(31, 35, 200, 23);
 			}
 			else if (idx%2 == 1) {
-				chckbxNewCheckBox.setBounds(31, (175 + (25 * ((idx + 1)/2) )), 97, 23);
+				chckbxNewCheckBox.setBounds(31, (10 + (25 * ((idx + 1)/2) )), 200, 23);
 			}
 			else {
-				chckbxNewCheckBox.setBounds(370, 175 + (25 * (idx/2) ), 97, 23);
+				chckbxNewCheckBox.setBounds(370, 10 + (25 * (idx/2) ), 200, 23);
 			}
-			getContentPane().add(chckbxNewCheckBox);
+			this.panelTask.add(chckbxNewCheckBox);
 		}
+
+
 		if(user.getPseudo().equals(activity.getUser().getPseudo()) || t.getVisibility() == true) { 
 			this.addPanelTask(t, idx);
 		}
@@ -176,61 +248,77 @@ public class ActivityUI extends JFrame implements ActionListener {
 		
 		JPanel panel = new JPanel();
 		if(user.getPseudo().equals(activity.getUser().getPseudo())) { 
-			panel.setBounds(10, 325 +(35 * idx), 513, 46);
+			panel.setBounds(10, 60 + 35 * (idx-1), 580, 46);
 		}
 		else {
-			panel.setBounds(10, 150 +(35 * idx), 513, 46);
+			panel.setBounds(10,60 +  35 * (idx-1), 580, 46);
 		}
-		getContentPane().add(panel);
+	
+		//getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblTaskName = new JLabel(t.getName());
-		lblTaskName.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblTaskName.setBounds(10, 11, 143, 24);
+		lblTaskName.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblTaskName.setBounds(10, 11, 150, 24);
 		panel.add(lblTaskName);
 		
 		if(user.getPseudo().equals(activity.getUser().getPseudo())) { 
 			JButton btnNewButton = new JButton("Delete");
 			btnNewButton.addActionListener(this);
 			btnNewButton.putClientProperty("task", t);
-			btnNewButton.setBounds(414, 14, 89, 23);
+			btnNewButton.setBounds(450, 14, 89, 23);
 			panel.add(btnNewButton);
 		}
 		
 		JLabel lblNewLabel = new JLabel(t.getStartDate() + "/" + t.getEndDate());
-		lblNewLabel.setBounds(140, 18, 140, 14);
+		lblNewLabel.setBounds(155, 18, 140, 14);
 		panel.add(lblNewLabel);
 		
 		JButton btnNewButton_1 = new JButton("See");
 		btnNewButton_1.addActionListener(this);
 		btnNewButton_1.putClientProperty("task", t);
-		btnNewButton_1.setBounds(315, 14, 89, 23);
+		btnNewButton_1.setBounds(340, 14, 89, 23);
 		panel.add(btnNewButton_1);
+		
+		panelTaskList.add(panel);
 		
 	}
 	
 	public void initComments() {
-		List<Comment> list = this.af.getAllComments(this.activity);			
-		int idx = 17; // ??
+		//this.panelComment.removeAll();
+		//panelComment.removeAll();
+		List<Comment> list = this.af.getAllComments(this.activity);
+		int idx = 1; 
 		for (Comment comment : list) {
 			this.addPanelComment(comment, idx);
 			idx ++;
 		}
-		setSize(547, (100 * (list.size() + 1)) + 648); // à modifier
+		//this.panelComment.repaint();
+		System.out.println(panelComment.getHeight());
+		
+		this.panelComment.setBounds(0, this.panelTaskList.getY() + 
+				this.panelTaskList.getHeight() + 5, 615, list.size() * 100 + 200);
+		
+		System.out.println(panelComment.getHeight());
+		panelActivity.setPreferredSize(new Dimension(615,this.panelComment.getY()
+				+ this.panelComment.getHeight()));
+		panelActivity.repaint();
+		//this.heigth = this.heigth + (100 * (list.size() + 1));
+		//this.panelActivity.setBounds(0, 0, 700,(int) this.heigth*2);
 	}
 	
 	public void addPanelComment(Comment comment, int idx) {					
 		JPanel panel = new JPanel();
-		if(user.getPseudo().equals(activity.getUser().getPseudo())) { 
+		/*if(user.getPseudo().equals(activity.getUser().getPseudo())) { 
 			//panel.setBounds(10, idx * 38, 414, 40);
-			panel.setBounds(10, (idx * 38), 494,48);
+			panel.setBounds(10, 130 + ((idx-1) * 38), 494,48);
 			//Border blackline = BorderFactory.createLineBorder(Color.black);
 			//panel.setBorder(blackline);
 		}
-		else {
-			panel.setBounds(10, idx * 28, 414, 40);
-		}
-		getContentPane().add(panel);
+		else {*/
+		panel.setBounds(10, 150 + (idx-1) * 100, 580, 100);
+		//}
+	
 		panel.setLayout(null);
 		
 		JLabel lblDateComment = new JLabel("Posted the " + comment.getPostingDate());
@@ -247,6 +335,7 @@ public class ActivityUI extends JFrame implements ActionListener {
 		textPaneContentComment.setEditable(false);
 		panel.add(textPaneContentComment);		
 		
+		this.panelComment.add(panel);
 	}
 	
 	public void detectTaskRessourceUIClose() {

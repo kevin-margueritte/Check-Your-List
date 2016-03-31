@@ -70,7 +70,6 @@ public class CategoryManager {
 	 * @return true if sub-category is created else false
 	 */
 	public boolean createSubcategory(String name, String shortDescription, String detailedDescription, Category category) {
-
 		boolean res = false;
 		Subcategory c = this.fact.createSubcategory(name, shortDescription, detailedDescription, category);
 		res = ((SubcategoryJDBC)c).save();
