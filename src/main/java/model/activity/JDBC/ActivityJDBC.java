@@ -18,26 +18,60 @@ import model.person.JDBC.UserJDBC;
 import model.task.Task;
 import model.task.JDBC.TaskJDBC;
 
+/**
+ * persistance of activity
+ *
+ */
 public class ActivityJDBC extends Activity {
 	
+	/**
+	 * constructor of ActivityJDBC
+	 */
 	public ActivityJDBC() {
 		super();
 	}
 	
+	/**
+	 * constructor of ActivityJDBC
+	 * @param user
+	 */
 	public ActivityJDBC(User u) {
 		super(u);
 	}
 	
+	/**
+	 * constructor of ActivityJDBC
+	 * @param title
+	 * @param description
+	 * @param visible
+	 * @param creationDate
+	 * @param subcategory
+	 * @param user
+	 */
 	public ActivityJDBC(String title, String description, boolean visible, String creationDate, 
 			Subcategory subcategory, User user) {
 		super(title, description, visible, creationDate, subcategory, user);
 	}
 	
+	/**
+	 * constructor of ActivityJDBC
+	 * @param id
+	 * @param title
+	 * @param description
+	 * @param visible
+	 * @param creationDate
+	 * @param subcategory
+	 * @param user
+	 */
 	public ActivityJDBC(int id, String title, String description, boolean visible, String creationDate,
 			Subcategory subcategory, User user) {
 		super(id, title, description, visible, creationDate, subcategory, user);
 	}
 	
+	/**
+	 * constructor of ActivityJDBC
+	 * @param title
+	 */
 	public ActivityJDBC(String title) {
 		super(title);
 	}

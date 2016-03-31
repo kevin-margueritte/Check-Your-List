@@ -14,25 +14,56 @@ import model.person.Seller;
 import model.person.JDBC.SellerJDBC;
 import model.product.Product;
 
-
+/**
+ * persistance of product
+ *
+ */
 public class ProductJDBC extends Product {
 	
+	/**
+	 * constructor of productJDBC
+	 */
 	public ProductJDBC() {
 		super();
 	}
 	
+	/**
+	 * constructor of productJDBC
+	 * @param name
+	 * @param seller
+	 * @param subCategory
+	 */
 	public ProductJDBC(String name, Seller seller, Subcategory subCategory){
 		super(name,seller,subCategory);
 	}
 	
+	/**
+	 * constructor of productJDBC
+	 * @param id
+	 * @param name
+	 * @param seller
+	 * @param subCategory
+	 */
 	public ProductJDBC(int id,String name, Seller seller, Subcategory subCategory){
 		super(id,name,seller,subCategory);
 	}
 	
+	/**
+	 * constructor of productJDBC
+	 * @param name
+	 * @param seller
+	 * @param price
+	 * @param quantity
+	 * @param subCategory
+	 */
 	public ProductJDBC(String name, Seller seller, float price, int quantity, Subcategory subCategory) {
 		super(name,seller,price,quantity,subCategory);
 	}
 	
+	/**
+	 * constructor of productJDBC
+	 * @param sub
+	 */
 	public ProductJDBC(Subcategory sub){
 		super(sub);
 	}
@@ -50,6 +81,7 @@ public class ProductJDBC extends Product {
 	  name_subcategory character,
 	  [...]
 	 */
+	@Override
 	public boolean save(){
 		if (!checkProductExist()){
 			String sql = ("INSERT INTO  product (name,pseudo,price,quantity,name_subcategory)VALUES ("
@@ -70,6 +102,7 @@ public class ProductJDBC extends Product {
 		
 	}
 	
+	@Override
 	public boolean delete(){
 		// récupérer l'id du produit en fonction du nom et du seller
 		// int idProd = readByName();
@@ -86,6 +119,7 @@ public class ProductJDBC extends Product {
 	}
 	
 	//récupère l'id d'un produit en fonction du nom et du vendeur
+	@Override
 	public Product readByNameAndSeller(){
 		//si le nom ou le seller vide alors Erreur   <--------------------------
 		String sql = ("SELECT * FROM product WHERE name  = '" +  this.name + "' AND pseudo = '" +this.seller.getPseudo() +"'");
@@ -119,6 +153,7 @@ public class ProductJDBC extends Product {
 		return (Product)u;
 	}
 	
+	@Override
 	public List<Product> getAllProductFromSubCategory(){
 		//si le nom ou le seller vide alors Erreur   <--------------------------
 		List<Product> list = new ArrayList<Product>();
@@ -149,6 +184,7 @@ public class ProductJDBC extends Product {
 		return list;
 	}
 	
+	@Override
 	public List<Product> getAllProductFromSubCategoryAndNoPresentTask(){
 		//si le nom ou le seller vide alors Erreur   <--------------------------
 		List<Product> list = new ArrayList<Product>();
@@ -181,6 +217,10 @@ public class ProductJDBC extends Product {
 		return list;
 	}
 	
+	/**
+	 * find if the product exist
+	 * @return true if the product exist else false
+	 */
 	public boolean checkProductExist(){
 		String sql1 = ("SELECT * FROM product "
 				+ "WHERE name = '" + this.name + "' AND"

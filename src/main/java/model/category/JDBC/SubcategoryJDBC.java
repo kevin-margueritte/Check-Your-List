@@ -12,24 +12,50 @@ import database.ConnectionDB;
 import model.category.Category;
 import model.category.Subcategory;
 
+/**
+ * persistance of sub-category
+ *
+ */
 public class SubcategoryJDBC extends Subcategory {
 	
+	/**
+	 * constructor of SubcategoryJDBC
+	 */
 	public SubcategoryJDBC() {
 		super();
 	}
 	
+	/**
+	 * constructor of SubcategoryJDBC
+	 * @param sub-category
+	 */
 	public SubcategoryJDBC(Category sub) {
 		super(sub);
 	}
 	
+	/**
+	 * constructor of SubcategoryJDBC
+	 * @param name
+	 * @param shortDescription
+	 * @param detailedDescription
+	 * @param category
+	 */
 	public SubcategoryJDBC(String name, String shortDescription, String detailedDescription, Category category){
 		super(name, shortDescription, detailedDescription, category);	
 	}
 	
+	/**
+	 * constructor of SubcategoryJDBC
+	 * @param name
+	 */
 	public SubcategoryJDBC(String name) {
 		super(name);
 	}
 	
+	/**
+	 * get sub-category with its name
+	 * @return sub-category
+	 */
 	public Subcategory readByName() {
 		String sql = ("SELECT * FROM subCategory WHERE name = '" +  this.name + "'");
 		Subcategory c = null;
@@ -54,6 +80,10 @@ public class SubcategoryJDBC extends Subcategory {
 		return (Subcategory)c;
 	}
 	
+	/**
+	 * save a sub-category on the DB
+	 * @return true if the sub-category is saved else false
+	 */
 	public boolean save() {
 		String sql = ("INSERT INTO subCategory VALUES ( '" +  this.name + "','" + this.shortDescription + "','" + 
 				this.detailedDescription + "','" + this.category +"')");

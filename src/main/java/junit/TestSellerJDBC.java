@@ -1,15 +1,15 @@
 package junit;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
+import java.util.Random;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import model.person.Seller;
-import model.person.User;
 import model.person.JDBC.SellerJDBC;
-import model.person.JDBC.UserJDBC;
 
 public class TestSellerJDBC {
 	
@@ -39,6 +39,17 @@ public class TestSellerJDBC {
 		assertEquals(sellerReturn.getPostCode(),"TESTPostcode");
 		assertEquals(sellerReturn.getMail(),"TESTEmail");
 		assertEquals(sellerReturn.getCity(),"TESTCity");
+	}
+	
+	
+	@Test
+	public void pseudoExist() {
+		this.seller.setPseudo("TESTSeller");
+		assertEquals(true, this.seller.pseudoExist());
+		
+		Random rand = new Random();
+		this.seller.setPseudo(rand.nextInt((10000 - 0) + 1) + 0+ "");
+		assertEquals(false, this.seller.pseudoExist());
 	}
 	
 	
