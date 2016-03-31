@@ -95,6 +95,7 @@ public class TaskUI extends JFrame {
 		panelProducts.setLayout(null);
 		setSize(449,369);
 		this.initRessources(this.tf.getAllProductFromTask(this.task));
+		this.setLocationRelativeTo(null);
 	}
 	
 	public void initRessources(List<Product> list){
