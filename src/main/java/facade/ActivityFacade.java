@@ -84,4 +84,8 @@ public class ActivityFacade {
 	public Task getTask(String name, Activity act) {
 		return this.tm.getTask(name, act);
 	}
+	
+	public boolean activityExist(Activity a, String title) {
+		return this.am.activityExist(a, title);
+	}
 }

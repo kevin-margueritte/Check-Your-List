@@ -250,4 +250,27 @@ public class ActivityJDBC extends Activity {
 		return null;
 	}
 
+	@Override
+	public boolean activityExist(String title) {
+		String sql = ("select * from activity");
+		boolean exist = false;
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while(rs.next()){
+				if (title.equals(rs.getString("titre"))) {
+					exist = true;
+				}
+			}
+			rs.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return exist;
+	}
+	
+	
+
 }

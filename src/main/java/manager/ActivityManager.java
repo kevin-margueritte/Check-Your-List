@@ -46,4 +46,8 @@ public class ActivityManager {
 	public List<Task> getAllTasks(Activity act) {
 		return act.readAllTask();
 	}
+	
+	public boolean activityExist(Activity act,String title) {
+		return act.activityExist(title);
+	}
 }
