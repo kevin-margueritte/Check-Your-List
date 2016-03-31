@@ -8,7 +8,10 @@ import java.util.List;
 
 import database.ConnectionDB;
 import model.activity.Activity;
+import model.category.JDBC.SubcategoryJDBC;
+import model.person.JDBC.SellerJDBC;
 import model.product.Product;
+import model.product.JDBC.ProductJDBC;
 import model.task.Task;
 
 public class TaskJDBC extends Task {
@@ -127,6 +130,30 @@ public class TaskJDBC extends Task {
 			}
 		} catch (SQLException e) {}
 		return false;
+	}
+
+	@Override
+	public List<Product> getAllRessourceTask() {
+		List<Product> list = new ArrayList<Product>();
+		String sql = ("SELECT p.price, l.quantity, p.name FROM product p, lineRessource l "
+				+ "WHERE p.id = l.id_product AND name_task = '"+ this.getName() +"' ");
+		Product prod = null;
+		try {
+			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while( rs.next() ) {	
+				prod = new ProductJDBC();
+				prod.setName((String) rs.getObject("name"));	
+				prod.setPrice(rs.getFloat("price"));
+				prod.setQuantity((int) rs.getObject("quantity"));
+				list.add(prod);
+			}
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 }

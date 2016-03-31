@@ -199,6 +199,7 @@ public class InscriptionUserUI extends JFrame implements ActionListener {
 		springLayout.putConstraint(SpringLayout.EAST, description, 109, SpringLayout.EAST, lblCity);
 		getContentPane().add(description);
 		this.setSize(410, 616);
+		this.setLocationRelativeTo(null);
 	}
 
 	@Override
@@ -214,8 +215,8 @@ public class InscriptionUserUI extends JFrame implements ActionListener {
 					    JOptionPane.ERROR_MESSAGE);
 			}
 			else {
-				LoginUI frame = new LoginUI();
-				frame.setVisible(true);
+				JOptionPane.showMessageDialog(this,
+						"Congratulations, you are now a user of Check Your List ! Please Login");
 				this.dispose();
 			}
 		}

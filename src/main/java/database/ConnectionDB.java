@@ -12,17 +12,22 @@ import java.sql.SQLException;
 /**
  * Description of ConnectionDB.
  * 
- * @author kevine2710
  */
+
 public class ConnectionDB {
-	
+	/**
+	 * Description of connectionDB.
+	 */
 		private static String url = "jdbc:postgresql://ec2-107-20-148-211.compute-1.amazonaws.com:5432/d5nv3aotjuj9pl?sslmode=require";
 		private static String user = "oykxnuoftscyoh";
 		private static String password = "2gUPawazMrxePbk-HTcSxwl43m";
 		private static boolean instance = false;
 		private static ConnectionDB db;
 		private Connection conn;
-				
+		
+/**
+ * Create a single new connection
+ */
 		private ConnectionDB() {
 			try {
 				Class.forName("org.postgresql.Driver");
@@ -35,7 +40,11 @@ public class ConnectionDB {
 				e.printStackTrace();
 			}			
 		}
-		
+	
+/**
+ * Create a new connectionDB		
+ * @return connectionDB
+ */
 		public static ConnectionDB creetConnectionDB() {
 			if (!instance) {
 				db = new ConnectionDB();
@@ -44,6 +53,10 @@ public class ConnectionDB {
 			return db;
 		}
 
+/**
+ * Create a new connection
+ * @return connection
+ */
 		public Connection getConn() {
 			return conn;
 		}

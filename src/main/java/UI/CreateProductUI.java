@@ -67,10 +67,21 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 		});
 	}
 	
+	public void detectCategoryClose() {
+		CreateProductUI myUI = new CreateProductUI(this.seller);
+		myUI.setVisible(true);
+		this.dispose();
+	}
+	
+	public CreateProductUI()  {}
 	
 	public CreateProductUI(Seller s)  {
 		this.seller = s;
 		this.sellface = new SellerFacade();
+		this.initFrame();
+	}
+	
+	public void initFrame() {
 		this.setLocationRelativeTo(null);
 		setResizable(false);
 		getContentPane().setLayout(null);
@@ -233,11 +244,11 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		if (arg0.getSource() == this.lblProposeCategory) {
-			ProposeCategoryUI frame = new ProposeCategoryUI();
+			ProposeCategoryUI frame = new ProposeCategoryUI(this);
 			frame.setVisible(true);
 		}
 		else {
-			ProposeSubcategoryUI frame = new ProposeSubcategoryUI();
+			ProposeSubcategoryUI frame = new ProposeSubcategoryUI(this);
 			frame.setVisible(true);
 		}
 	}

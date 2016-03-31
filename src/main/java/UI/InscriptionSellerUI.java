@@ -226,6 +226,7 @@ public class InscriptionSellerUI extends JFrame implements ActionListener {
 		springLayout.putConstraint(SpringLayout.WEST, lblPhoneNumber, 195, SpringLayout.EAST, lblLastName);
 		getContentPane().add(lblPhoneNumber);
 		this.setSize(410, 616);
+		this.setLocationRelativeTo(null);
 	}
 
 	@Override
@@ -241,8 +242,8 @@ public class InscriptionSellerUI extends JFrame implements ActionListener {
 				    JOptionPane.ERROR_MESSAGE);
 			}
 			else {
-				LoginUI frame = new LoginUI();
-				frame.setVisible(true);
+				JOptionPane.showMessageDialog(this,
+						"Congratulations, you are now a seller of Check Your List ! Please Login");
 				this.dispose();
 			}
 		}

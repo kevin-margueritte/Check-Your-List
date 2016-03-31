@@ -63,6 +63,7 @@ public class AddRessourcesTaskUI extends JFrame implements ActionListener {
 	
 	public AddRessourcesTaskUI(String nameActivity, Activity act, ActivityUI actUI) {
 		this.actUI = actUI;
+		setResizable(false);
 		this.activityFace = new ActivityFacade();
 		this.task = this.activityFace.getTask(nameActivity, act);
 		getContentPane().setLayout(null);

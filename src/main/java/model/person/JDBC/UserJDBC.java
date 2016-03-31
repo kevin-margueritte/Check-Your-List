@@ -10,8 +10,11 @@ import java.util.List;
 import database.ConnectionDB;
 import model.activity.Activity;
 import model.activity.JDBC.ActivityJDBC;
+import model.category.JDBC.SubcategoryJDBC;
 import model.comment.Comment;
 import model.person.User;
+import model.product.Product;
+import model.product.JDBC.ProductJDBC;
 
 public class UserJDBC extends User {
 	
@@ -21,6 +24,10 @@ public class UserJDBC extends User {
 	
 	public UserJDBC(String pseudo) {
 		super(pseudo);
+	}
+	
+	public UserJDBC() {
+		super();
 	}
 
 	@Override
@@ -67,19 +74,25 @@ public class UserJDBC extends User {
 	
 	@Override
 	public List<Activity> readAllActivities() {
-		String sql = ("select * from activity where pseudo_user='"+this.pseudo+"' ");
-		Activity act = null;
+		String sql = ("select * from activity where pseudo_user='"+this.getPseudo()+"' ");
 		List<Activity> listAct= new ArrayList<Activity>();
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
 			ResultSet rs = stm.executeQuery(sql);
+			Activity act = null;
 			while(rs.next()){
-				act = new ActivityJDBC(rs.getString(2));
-				listAct.add(act.readByTitle());
+				act = new ActivityJDBC();
+				act.setTitle((String) rs.getObject("titre"));
+				act.setDescription((String) rs.getObject("description"));
+				act.setVisible((Boolean) rs.getObject("visible"));
+				act.setCreationDate((String) rs.getObject("creationdate").toString());
+				SubcategoryJDBC subcat = new SubcategoryJDBC(rs.getObject("name_subcategory").toString());
+				act.setSubcategory(subcat.readByName());
+				act.setUser(this);
+				listAct.add(act);
 			}
 			rs.close();
 			return listAct;
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

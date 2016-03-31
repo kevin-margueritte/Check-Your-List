@@ -229,7 +229,8 @@ public class ActivityUI extends JFrame implements ActionListener {
 			}
 			this.panelTask.add(chckbxNewCheckBox);
 		}
-		
+
+
 		if(user.getPseudo().equals(activity.getUser().getPseudo()) || t.getVisibility() == true) { 
 			this.addPanelTask(t, idx);
 		}

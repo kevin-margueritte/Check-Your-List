@@ -30,11 +30,12 @@ public class ProposeSubcategoryUI extends JFrame implements ActionListener {
 	private JTextPane textDetailedDescription;
 	private JComboBox comboBoxCategory;
 	private List<Category> listCategory;
+	private CreateProductUI createProductUI;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -45,14 +46,14 @@ public class ProposeSubcategoryUI extends JFrame implements ActionListener {
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
 	 */
-	public ProposeSubcategoryUI() {
+	public ProposeSubcategoryUI(CreateProductUI createProductUI) {
 		this.cf = new CategoryFacade();
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.createProductUI = createProductUI;
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -133,7 +134,9 @@ public class ProposeSubcategoryUI extends JFrame implements ActionListener {
 			if(!cf.subcategoryExist(this.categoryName.getText())) {
 				if(!cf.categoryExist(this.categoryName.getText())) {
 					this.cf.createSubcategory(this.categoryName.getText(), this.textShortDescription.getText(),
-					this.textDetailedDescription.getText(),(Category) this.comboBoxCategory.getSelectedItem());	
+							this.textDetailedDescription.getText(),(Category) this.comboBoxCategory.getSelectedItem());
+					this.createProductUI.detectCategoryClose();
+					this.dispose();
 					JOptionPane.showMessageDialog(this,
 						    "You have created your product.");
 				}
@@ -152,9 +155,6 @@ public class ProposeSubcategoryUI extends JFrame implements ActionListener {
 			}
 		}
 	}
-	
-	
-	
 	
 	public boolean formComplete() {
 		if (this.categoryName.getText().isEmpty()) {

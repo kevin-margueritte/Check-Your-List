@@ -60,6 +60,7 @@ public abstract class Activity {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
 	public String getDescription() {
 		return description;
 	}
@@ -94,12 +95,14 @@ public abstract class Activity {
 	public abstract boolean save();
 	public abstract Activity readByTitle();
 	public abstract List<Activity> readAll();
+	public abstract List<Activity> readAllPrivate();
 	public abstract boolean delete();
 	public abstract boolean addTask();
 	public abstract boolean deleteTask();
 	public abstract boolean deleteByPseudoUserAndName();
 	public abstract List<Task> readAllTask();
 	public abstract List<Comment> readAllComments();
+	public abstract boolean activityExist(String title);
 
 	
 }

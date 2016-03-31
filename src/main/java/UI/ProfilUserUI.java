@@ -4,22 +4,24 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import facade.ProfilUserFacade;
 import model.activity.Activity;
 import model.person.User;
-import javax.swing.SwingConstants;
 
 public class ProfilUserUI extends JFrame implements ActionListener {
 	
 	private ProfilUserFacade pf;
 	private User u;
+	private List<JPanel> panelActivity;
 	
 	/**
 	 * Launch the application.
@@ -39,6 +41,7 @@ public class ProfilUserUI extends JFrame implements ActionListener {
 	
 	public ProfilUserUI(User u) {
 		setResizable(false);
+		this.panelActivity = new ArrayList<JPanel>();
 		getContentPane().setLayout(null);
 		
 		JLabel lblPseudo = new JLabel("Welcolme, " + u.getPseudo());
@@ -54,23 +57,27 @@ public class ProfilUserUI extends JFrame implements ActionListener {
 		//this.u.readByPseudo();
 		this.u = u;
 		this.pf = new ProfilUserFacade();
-		this.initFrame();
+		//this.initFrame();
 	}
 	
 	public void initFrame() {
 		List<Activity> list = this.pf.getAllActivities(this.u);
+		for (JPanel p : this.panelActivity) {
+			this.remove(p);
+		}
+		
 		int idx = 1;
 		for (Activity act : list) {
 			this.addPanelActivity(act, idx);
 			idx ++;
 		}
 		
-		setSize(550, (50 * (list.size() + 1)) + 50);
+		setSize(550, (40 * (list.size() + 1)) + 50 );
 	}
 	
 	public void addPanelActivity(Activity act, int idx) {
-		
 		JPanel panel = new JPanel();
+		this.panelActivity.add(panel);
 		panel.setBounds(10, idx * 38, 520, 40);
 		getContentPane().add(panel);
 		panel.setLayout(null);

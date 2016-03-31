@@ -1,6 +1,7 @@
 package manager;
 
 import java.util.Calendar;
+import java.util.List;
 
 import factory.task.AbstractTaskFactory;
 import factory.task.TaskFactory;
@@ -62,5 +63,9 @@ public class TaskManager {
 	public Task getTask(String name, Activity act) {
 		Task task = this.fact.createTask(name, act);
 		return task.readByName();
+	}
+	
+	public List<Product> getAllProductFromTask(Task t) {
+		return t.getAllRessourceTask();
 	}
 }

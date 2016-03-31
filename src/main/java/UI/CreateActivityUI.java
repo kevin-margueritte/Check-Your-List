@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import facade.ActivityFacade;
+import model.activity.Activity;
+import model.activity.JDBC.ActivityJDBC;
 import model.category.Category;
 import model.category.Subcategory;
 import model.person.User;
@@ -138,11 +140,23 @@ public class CreateActivityUI extends JFrame implements ActionListener {
 		}
 		else if(e.getSource() == this.btnValidate && this.formComplete()) {
 			boolean visibility = false;
-			if ( ((String) this.comboVisibility.getSelectedItem()).equals("true") ) {
+			if ( ((String) this.comboVisibility.getSelectedItem()).equals("True") ) {
 				visibility = true;
 			}
-			this.af.createActivity(this.textActivity.getText(), this.textDescription.getText(), visibility, 
+			if(this.af.activityExist(new ActivityJDBC(),this.textActivity.getText())){
+				JOptionPane.showMessageDialog(this,
+						"This activity already exist",
+					    "Error",
+					    JOptionPane.ERROR_MESSAGE);
+			}
+			else {
+				this.af.createActivity(this.textActivity.getText(), this.textDescription.getText(), visibility, 
 				(Subcategory) this.comboSubcategory.getSelectedItem(), this.u);
+				JOptionPane.showMessageDialog(this,
+						"Your activty has been created",
+					    "Congratulation",
+					    JOptionPane.INFORMATION_MESSAGE);
+			}
 		}
 	}
 	

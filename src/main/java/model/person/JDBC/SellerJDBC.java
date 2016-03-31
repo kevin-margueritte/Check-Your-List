@@ -125,8 +125,8 @@ public class SellerJDBC extends Seller {
 				subCategory = new SubcategoryJDBC(nameSubcategory);
 				subCategory.readByName();
 				prod.setSubCategory(subCategory);
-				prod = new ProductJDBC();
 				listProd.add(prod);
+				prod = new ProductJDBC();
 			}
 			rs.close();
 			return listProd;
