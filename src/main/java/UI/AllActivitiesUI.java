@@ -1,5 +1,6 @@
 package UI;
 
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,11 +26,12 @@ public class AllActivitiesUI extends JFrame implements ActionListener {
 	/**
 	 * Launch the application.
 	 */
-	/*
-	public static void main(String[] args) {
+	
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					
 					AllActivitiesUI frame = new AllActivitiesUI();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -37,8 +39,8 @@ public class AllActivitiesUI extends JFrame implements ActionListener {
 				}
 			}
 		});
-	}
-	*/
+	}*/
+	
 
 	/**
 	 * Create the frame.
@@ -46,14 +48,14 @@ public class AllActivitiesUI extends JFrame implements ActionListener {
 	public AllActivitiesUI(User u) {
 		setResizable(false);
 		getContentPane().setLayout(null);
+		this.u =u;
 		
 		JLabel lblTitle = new JLabel("Activities");
 		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTitle.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblTitle.setBounds(10, 11, 427, 14);
 		getContentPane().add(lblTitle);
-		
-		this.u = u;
+	
 		this.af = new ActivityFacade();
 		this.initFrame();
 	}
@@ -67,23 +69,24 @@ public class AllActivitiesUI extends JFrame implements ActionListener {
 			idx ++;
 		}
 		
-		setSize(453, (100 * (list.size() + 1)) + 50);
+		setSize(470, (40 * (list.size() + 1)) + 50);
+		this.setLocationRelativeTo(null);
 	}
 	
 	public void addPanelActivity(Activity act, int idx) {		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, idx * 38, 414, 40);
+		panel.setBounds(10, idx * 38, 440, 40);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblNameActivity = new JLabel(act.getTitle());
 		lblNameActivity.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblNameActivity.setBounds(23, 18, 99, 20);
+		lblNameActivity.setBounds(23, 18, 300, 20);
 		panel.add(lblNameActivity);
 		
 		JButton btnSee = new JButton("See");
 		btnSee.putClientProperty("activity", act);
-		btnSee.setBounds(175, 17, 89, 23);
+		btnSee.setBounds(350, 17, 89, 23);
 		btnSee.addActionListener(this);
 		panel.add(btnSee);
 	}
