@@ -59,7 +59,7 @@ public class CategoryManager {
 		((SubcategoryJDBC)c).readByName();
 		return c;
 	}
-	
+
 	/**
 	 * create a sub-category
 	 * @param name of the sub-category

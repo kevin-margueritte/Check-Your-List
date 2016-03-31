@@ -46,6 +46,7 @@ public abstract class Seller extends Person {
 	 */
 	protected String city;
 	
+	
 	// Start of user code (user defined attributes for Seller)
 	
 	// End of user code
@@ -207,6 +208,59 @@ public abstract class Seller extends Person {
 	public void setCity(String newCity) {
 	    this.city = newCity;
 	}
+	
+	/**
+	 * Returns lastname
+	 * @return lastname
+	 */
+	public String getLastname() {
+		return this.lastName;
+	}	
+	
+	public void setLastname(String lastname) {
+	    this.lastName = lastname;
+	}
+	
+	/**
+	 * Returns firstname
+	 * @return firstname
+	 */
+	public String getFirstname() {
+		return this.firstName;
+	}	
+	
+	public void setFirstname(String firstname) {
+	    this.firstName = firstname;
+	}
+	
+	/**
+	 * Returns lastname
+	 * @return lastname
+	 */
+	public String getPseudo() {
+		return this.pseudo;
+	}	
+	
+	public void setPseudo(String pseudo) {
+	    this.pseudo = pseudo;
+	}
+	
+	public String getPassword() {
+		return this.password;
+	}	
+	
+	public void setPass(String password) {
+	    this.password = password;
+	}
+	
+	public String getDescription() {
+		return this.description;
+	}	
+	
+	public void setDescription(String description) {
+	    this.description = description;
+	}
+	
 
 	/**
 	 * find if the seller exist

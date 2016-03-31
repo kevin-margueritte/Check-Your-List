@@ -150,8 +150,5 @@ public class CategoryJDBC extends Category {
 	public String toString() {
 		return this.name;
 	}
-
-
-	
 	
 }
