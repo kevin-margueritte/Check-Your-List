@@ -62,14 +62,21 @@ public class UserJDBC extends User {
 
 	@Override
 	public boolean save() {
-		String sql = ("INSERT INTO customer VALUES ( '" +  this.firstName + "','" + this.lastName + "','" + 
-				this.pseudo + "','" + this.password + "','" + this.description + "','" + this.city + "','" + this.postCode + "','" +
-				this.street + "','" + this.houseNumber + "','" + this.mail +"')");
-		try {
-			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
-			stm.executeQuery(sql);
-		} catch (SQLException e) {}
-		return true;
+		if (!this.pseudoExist()) {
+			String sql = ("INSERT INTO customer VALUES ( '" +  this.firstName + "','" + this.lastName + "','" + 
+					this.pseudo + "','" + this.password + "','" + this.description + "','" + this.city + "','" + this.postCode + "','" +
+					this.street + "','" + this.houseNumber + "','" + this.mail +"')");
+			try {
+				Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
+				stm.executeQuery(sql);
+			} catch (SQLException e) {
+				return true;
+			}
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	@Override

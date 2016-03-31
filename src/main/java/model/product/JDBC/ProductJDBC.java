@@ -228,7 +228,6 @@ public class ProductJDBC extends Product {
 		this.name = name;
 		String sql = ("update product "
 				+ "set name = '" + this.name + "' where id='"+ this.idProd +"'");
-		System.out.println(sql);
 		try {
 			Statement stm = ConnectionDB.creetConnectionDB().getConn().createStatement();
 			return stm.execute(sql);
