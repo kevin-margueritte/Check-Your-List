@@ -5,6 +5,10 @@ import model.category.Subcategory;
 import model.category.JDBC.CategoryJDBC;
 import model.category.JDBC.SubcategoryJDBC;
 
+/**
+ * to be the intermediary between CategoryJDBC and AbstractCategoryFactory 
+ *
+ */
 public class CategoryFactory extends AbstractCategoryFactory {
 
 	@Override

@@ -5,6 +5,10 @@ import java.util.List;
 import model.category.Subcategory;
 import model.person.Seller;
 
+/**
+ * 
+ *
+ */
 public abstract class Product {
 
 	

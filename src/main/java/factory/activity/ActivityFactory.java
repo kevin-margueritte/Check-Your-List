@@ -5,6 +5,10 @@ import model.activity.JDBC.ActivityJDBC;
 import model.category.Subcategory;
 import model.person.User;
 
+/**
+ * to be the intermediary between ActivityJDBC and AbstractActivityFactory 
+ *
+ */
 public class ActivityFactory extends AbstractActivityFactory{
 
 	@Override
