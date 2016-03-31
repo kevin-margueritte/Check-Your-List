@@ -164,8 +164,7 @@ public class CreateTaskUI extends JFrame implements ActionListener{
 		getContentPane().add(comboFreq);
 		
 		setSize(428, 366);
-		this.setLocation(null);
-		
+		this.setLocation(null);		
 		
 	}
 	
