@@ -1,6 +1,5 @@
 package UI;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,31 +17,12 @@ import model.activity.Activity;
 import model.activity.JDBC.ActivityJDBC;
 import model.person.User;
 
+@SuppressWarnings("serial")
 public class AllActivitiesUI extends JFrame implements ActionListener {
 
-	//private JPanel contentPane;
 	private ActivityFacade af;
 	private User u;
 	private List<JPanel> panelActivity;
-
-	/**
-	 * Launch the application.
-	 */
-	
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					
-					AllActivitiesUI frame = new AllActivitiesUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-	
 
 	/**
 	 * Create the frame.

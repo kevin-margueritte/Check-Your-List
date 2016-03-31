@@ -12,24 +12,55 @@ import model.activity.Activity;
 import model.comment.Comment;
 import model.person.User;
 
+/**
+ * persistance of comment
+ *
+ */
 public class CommentJDBC extends Comment {
 	
+	/**
+	 * constructor of commentJDBC
+	 */
 	public CommentJDBC(){
 		super();
 	}
 
+	/**
+	 * constructor of commentJDBC
+	 * @param content
+	 * @param postingDate
+	 */
 	public CommentJDBC(String content, String postingDate) {
 		super(content, postingDate);
 	}
 	
+	/**
+	 * constructor of commentJDBC
+	 * @param content
+	 * @param postingDate
+	 * @param activity
+	 */
 	public CommentJDBC(String content, String postingDate, Activity activity) {
 		super(content, postingDate, activity);
 	}
 	
+	/**
+	 * constructor of commentJDBC
+	 * @param content
+	 * @param postingDate
+	 * @param user
+	 */
 	public CommentJDBC(String content, String postingDate, User user) {
 		super(content, postingDate, user);
 	}
 	
+	/**
+	 * constructor of commentJDBC
+	 * @param content
+	 * @param postingDate
+	 * @param activity
+	 * @param user
+	 */
 	public CommentJDBC(String content, String postingDate, Activity activity, User user) {
 		super(content, postingDate, activity, user);
 	}

@@ -13,9 +13,8 @@ import model.comment.Comment;
 // End of user code
 
 /**
- * Description of User.
- * 
- * @author kevine2710
+ *business class of activity 
+ *
  */
 public abstract class User extends Person {
 	/**
@@ -48,7 +47,7 @@ public abstract class User extends Person {
 	// End of user code
 	
 	/**
-	 * The constructor.
+	 * The constructor of user
 	 */
 	public User() {
 		// Start of user code constructor for User)
@@ -56,6 +55,19 @@ public abstract class User extends Person {
 		// End of user code
 	}
 	
+	/**
+	 * The constructor of user
+	 * @param pseudo
+	 * @param lastName
+	 * @param firstName
+	 * @param description
+	 * @param password
+	 * @param city
+	 * @param postCode
+	 * @param street
+	 * @param houseNumber
+	 * @param mail
+	 */
 	public User(String pseudo, String lastName, String firstName, String description, String password, String city, String postCode, String street, String houseNumber, String mail) {
 		super(pseudo, lastName, firstName, description, password);
 		this.city = city;
@@ -65,6 +77,10 @@ public abstract class User extends Person {
 		this.mail = mail;
 	}
 	
+	/**
+	 * The constructor of user
+	 * @param pseudo
+	 */
 	public User(String pseudo) {
 		super(pseudo);
 	}
@@ -72,11 +88,15 @@ public abstract class User extends Person {
 	// Start of user code (user defined methods for User)
 	
 	// End of user code
+	/**
+	 * get pseudo of user
+	 * @return pseudo
+	 */
 	public String getPseudo() {
 		return this.pseudo;
 	}
 	/**
-	 * Returns city.
+	 * get city of user
 	 * @return city 
 	 */
 	public String getCity() {
@@ -92,7 +112,7 @@ public abstract class User extends Person {
 	}
 
 	/**
-	 * Returns postCode.
+	 * get postCode of user.
 	 * @return postCode 
 	 */
 	public String getPostCode() {
@@ -108,7 +128,7 @@ public abstract class User extends Person {
 	}
 
 	/**
-	 * Returns street.
+	 * get street of user.
 	 * @return street 
 	 */
 	public String getStreet() {
@@ -124,7 +144,7 @@ public abstract class User extends Person {
 	}
 
 	/**
-	 * Returns houseNumber.
+	 * get houseNumber of user.
 	 * @return houseNumber 
 	 */
 	public String getHouseNumber() {
@@ -140,7 +160,7 @@ public abstract class User extends Person {
 	}
 
 	/**
-	 * Returns mail.
+	 * get mail of user.
 	 * @return mail 
 	 */
 	public String getMail() {
@@ -155,6 +175,7 @@ public abstract class User extends Person {
 	    this.mail = newMail;
 	}
 	
+
 	public String getDescription() {
 		return this.description;
 	}
@@ -172,8 +193,23 @@ public abstract class User extends Person {
 	}
 
 	public abstract boolean save();
+	
+	/**
+	 * get all activities of an user
+	 * @return list of activities
+	 */
 	public abstract List<Activity> readAllActivities();
+	
+	/**
+	 * get all comment of the user
+	 * @return list of comments
+	 */
 	public abstract List<Comment> readAllComments();
+	
+	/**
+	 * find if the pseudo exist
+	 * @return true if the pseudo exist else false 
+	 */
 	public abstract boolean pseudoExist();
 
 }

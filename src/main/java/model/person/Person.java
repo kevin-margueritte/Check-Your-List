@@ -8,9 +8,8 @@ package model.person;
 // End of user code
 
 /**
- * Description of Person.
- * 
- * @author kevine2710
+ *business class of person 
+ *
  */
 public abstract class Person {
 	/**
@@ -48,7 +47,7 @@ public abstract class Person {
 	// End of user code
 
 	/**
-	 * The constructor.
+	 * The constructor of person
 	 */
 	public Person() {
 		// Start of user code constructor for Person)
@@ -57,7 +56,14 @@ public abstract class Person {
 	}
 	
 	
-
+	/**
+	 * The constructor of person
+	 * @param pseudo
+	 * @param lastName
+	 * @param firstName
+	 * @param description
+	 * @param password
+	 */
 	public Person(String pseudo, String lastName, String firstName, String description, String password) {
 		super();
 		this.pseudo = pseudo;
@@ -67,6 +73,10 @@ public abstract class Person {
 		this.password = password;
 	}
 
+	/**
+	 * The constructor of person
+	 * @param pseudo
+	 */
 	public Person(String pseudo) {
 		this.pseudo = pseudo;
 	}
@@ -76,7 +86,7 @@ public abstract class Person {
 
 	// End of user code
 	/**
-	 * Returns photo.
+	 * get photo of person
 	 * @return photo 
 	 */
 	public String getPhoto() {
@@ -92,7 +102,7 @@ public abstract class Person {
 	}
 
 	/**
-	 * Returns pseudo.
+	 * get pseudo of person
 	 * @return pseudo 
 	 */
 	public String getPseudo() {
@@ -108,7 +118,7 @@ public abstract class Person {
 	}
 
 	/**
-	 * Returns lastName.
+	 * get last name of person
 	 * @return lastName 
 	 */
 	public String getLastName() {
@@ -124,7 +134,7 @@ public abstract class Person {
 	}
 
 	/**
-	 * Returns firstName.
+	 * get firstName of person
 	 * @return firstName 
 	 */
 	public String getFirstName() {
@@ -140,7 +150,7 @@ public abstract class Person {
 	}
 
 	/**
-	 * Returns description.
+	 * get description of person
 	 * @return description 
 	 */
 	public String getDescription() {
@@ -156,7 +166,7 @@ public abstract class Person {
 	}
 
 	/**
-	 * Returns password.
+	 * get password of person
 	 * @return password 
 	 */
 	public String getPassword() {
@@ -171,7 +181,21 @@ public abstract class Person {
 		this.password = newPassword;
 	}
 	
+	/**
+	 * get person with its pseudo
+	 * @return person
+	 */
 	public abstract Person readByPseudo();
+	
+	/**
+	 * save a person
+	 * @return true if the person is saved
+	 */
 	public abstract boolean save();
+	
+	/**
+	 * find if the pseudo exist
+	 * @return true if the pseudo exist else false
+	 */
 	public abstract boolean pseudoExist();
 }

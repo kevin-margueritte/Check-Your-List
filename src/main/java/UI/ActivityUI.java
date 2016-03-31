@@ -1,16 +1,12 @@
 package UI;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Iterator;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -20,16 +16,12 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
 
 import facade.ActivityFacade;
 import model.activity.Activity;
-import model.activity.JDBC.ActivityJDBC;
 import model.comment.Comment;
 import model.person.User;
-import model.person.JDBC.UserJDBC;
 import model.task.Task;
-import javax.swing.ScrollPaneConstants;
 
 @SuppressWarnings("serial")
 public class ActivityUI extends JFrame implements ActionListener {
@@ -47,30 +39,6 @@ public class ActivityUI extends JFrame implements ActionListener {
 	private JPanel panelTaskList;
 	private JPanel panelTask;
 	private JPanel panelComment;
-	/*
-	public static void main(String args[]) {
-		ActivityUI.launch();
-	}*/
-	
-	/**
-	 * Launch the application.
-	 *//*
-	public static void launch() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					User u = new UserJDBC("titi");
-					u.readByPseudo();
-					Activity a = new ActivityJDBC(u);
-					Iterator<Activity> it = a.readAll().iterator();
-					ActivityUI frame = new ActivityUI(u,it.next());
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
 	
 	public ActivityUI(User u, Activity act) {
 		this.activity = act;
@@ -86,7 +54,6 @@ public class ActivityUI extends JFrame implements ActionListener {
 		
 		//SCROLL PANEL
 		JScrollPane scrollPane_1 = new JScrollPane(panelActivity);
-		//scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollPane_1.setBounds(0, 0, 615, 700);
 		getContentPane().add(scrollPane_1);
 		
@@ -148,7 +115,7 @@ public class ActivityUI extends JFrame implements ActionListener {
 		this.initActivities(list);
 		
 		JLabel lblTaskList = new JLabel("Task list");
-		lblTaskList.setBounds(0, 10, 89, 23);
+		lblTaskList.setBounds(10, 10, 89, 23);
 		this.panelTaskList.add(lblTaskList);
 	
 		panelActivity.add(panelTaskList);
@@ -173,26 +140,6 @@ public class ActivityUI extends JFrame implements ActionListener {
 		btnAddComment.addActionListener(this);
 		
 		this.initComments();
-		
-		/*if(user.getPseudo().equals(activity.getUser().getPseudo())) {
-			lblAddComment.setBounds(10, 325 +(35*list.size() + 50), 105, 20);
-		}
-		else {
-			lblAddComment.setBounds(10, 150 + (35*list.size() + 50), 105, 20);			
-		}
-		
-		if(user.getPseudo().equals(activity.getUser().getPseudo())) {
-			textPaneCommentContent.setBounds(10, 325 +(35*list.size() + 100), 500, 103);
-		}
-		else {
-			textPaneCommentContent.setBounds(10, 150 +(35*list.size() + 100), 500, 103);
-		}
-		if(user.getPseudo().equals(activity.getUser().getPseudo())) {
-			btnAddComment.setBounds(178, 325 +(35*list.size() + 220), 162, 29);
-		}
-		else {
-			btnAddComment.setBounds(178, 150 +(35*list.size() + 220), 162, 29);
-		}*/
 		
 		panelActivity.add(panelComment);
 		
@@ -249,7 +196,6 @@ public class ActivityUI extends JFrame implements ActionListener {
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 60 + 35 * (idx-1), 580, 46);
 	
-		//getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblTaskName = new JLabel(t.getName());
@@ -280,15 +226,12 @@ public class ActivityUI extends JFrame implements ActionListener {
 	}
 	
 	public void initComments() {
-		//this.panelComment.removeAll();
-		//panelComment.removeAll();
 		List<Comment> list = this.af.getAllComments(this.activity);
 		int idx = 1; 
 		for (Comment comment : list) {
 			this.addPanelComment(comment, idx);
 			idx ++;
 		}
-		//this.panelComment.repaint();
 		System.out.println(panelComment.getHeight());
 		
 		this.panelComment.setBounds(0, this.panelTaskList.getY() + 
@@ -302,15 +245,7 @@ public class ActivityUI extends JFrame implements ActionListener {
 	
 	public void addPanelComment(Comment comment, int idx) {					
 		JPanel panel = new JPanel();
-		/*if(user.getPseudo().equals(activity.getUser().getPseudo())) { 
-			//panel.setBounds(10, idx * 38, 414, 40);
-			panel.setBounds(10, 130 + ((idx-1) * 38), 494,48);
-			//Border blackline = BorderFactory.createLineBorder(Color.black);
-			//panel.setBorder(blackline);
-		}
-		else {*/
 		panel.setBounds(10, 150 + (idx-1) * 100, 580, 100);
-		//}
 	
 		panel.setLayout(null);
 		
@@ -324,7 +259,7 @@ public class ActivityUI extends JFrame implements ActionListener {
 		
 		JTextPane textPaneContentComment = new JTextPane();
 		textPaneContentComment.setText(comment.getContent());
-		textPaneContentComment.setBounds(23, 30, 494, 60);
+		textPaneContentComment.setBounds(23, 30, 519, 60);
 		textPaneContentComment.setEditable(false);
 		panel.add(textPaneContentComment);		
 		
@@ -344,10 +279,6 @@ public class ActivityUI extends JFrame implements ActionListener {
 				this.af.createComment(this.textPaneCommentContent.getText(), activity, user);
 				initComments();
 			}
-			
-			//this.cf.createCategory(this.categoryName.getText(), this.textShortDescription.getText(),this.textDetailedDescription.getText());
-			//ActivityUI frame = new ActivityUI(this.u, (Activity) button.getClientProperty("activity"));
-		 	//frame.setVisible(true);
 		}
 		else if (e.getSource() == this.btnAddTask) {
 			CreateTaskUI tr = new CreateTaskUI(this.activity,this);
@@ -365,8 +296,6 @@ public class ActivityUI extends JFrame implements ActionListener {
 				TaskUI taskUI = new TaskUI((Task) button.getClientProperty("task"));
 				taskUI.setVisible(true);
 				
-				//ActivityUI frame = new ActivityUI(this.u, (Activity) button.getClientProperty("activity"));
-				//frame.setVisible(true);
 			}
 			else {
 				this.af.deleteTask((Task) button.getClientProperty("task"));
@@ -375,16 +304,7 @@ public class ActivityUI extends JFrame implements ActionListener {
 				     com[a].setEnabled(false);
 				}
 			}
-		}
-		/*
-		else {
-			this.pf.deleteActivity((Activity) button.getClientProperty("activity"));
-			Component[] com = button.getParent().getComponents();
-			for (int a = 0; a < com.length; a++) {
-			     com[a].setEnabled(false);
-			}
 		}	
-		*/ 		
 	}
 	
 	public boolean formComplete() {

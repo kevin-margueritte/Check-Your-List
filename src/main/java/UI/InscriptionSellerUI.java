@@ -1,6 +1,5 @@
 package UI;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,7 +10,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
-import javax.swing.SpringLayout;
 
 import facade.PersonFacade;
 
@@ -32,26 +30,6 @@ public class InscriptionSellerUI extends JFrame implements ActionListener {
 	private PersonFacade pf;
 	private JTextField phoneNumber;
 	private JTextField siret;
-	
-	public static void main(String args[]) {
-		InscriptionSellerUI.launch();
-	}
-	
-	/**
-	 * Launch the application.
-	 */
-	public static void launch() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InscriptionSellerUI frame = new InscriptionSellerUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 	
 	public InscriptionSellerUI() {
 		this.pf = new PersonFacade();

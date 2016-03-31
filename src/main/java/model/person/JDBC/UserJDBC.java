@@ -16,16 +16,40 @@ import model.person.User;
 import model.product.Product;
 import model.product.JDBC.ProductJDBC;
 
+/**
+ * persistance of user
+ *
+ */
 public class UserJDBC extends User {
 	
+	/**
+	 * constructor of UserJDBC
+	 * @param pseudo
+	 * @param lastName
+	 * @param firstName
+	 * @param description
+	 * @param password
+	 * @param city
+	 * @param postCode
+	 * @param street
+	 * @param houseNumber
+	 * @param mail
+	 */
 	public UserJDBC(String pseudo, String lastName, String firstName, String description, String password, String city, String postCode, String street, String houseNumber, String mail){
 		super(pseudo, lastName, firstName, description, password, city, postCode, street, houseNumber, mail);	
 	}
 	
+	/**
+	 * constructor of UserJDBC
+	 * @param pseudo
+	 */
 	public UserJDBC(String pseudo) {
 		super(pseudo);
 	}
 	
+	/**
+	 * constructor of UserJDBC
+	 */
 	public UserJDBC() {
 		super();
 	}
@@ -100,6 +124,7 @@ public class UserJDBC extends User {
 		return null;
 	}
 	
+	@Override
 	public boolean pseudoExist() {
 		String sql1 = ("SELECT pseudo FROM customer WHERE pseudo='"+ this.pseudo + "'");
 		try {

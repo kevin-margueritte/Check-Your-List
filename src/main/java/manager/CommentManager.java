@@ -51,12 +51,23 @@ public class CommentManager {
 		return a.readAllComments();
 	}
 	
+	/**
+	 * create profil comment
+	 * @param content of comment
+	 * @param user
+	 * @return true if the comment is created else false
+	 */
 	public boolean createCommentProfil(String content, User user) {
 		java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());			
 		Comment c = this.fact.createComment(content,date.toString(),user);		
 		return c.addCommentProfil();
 	}
 	
+	/**
+	 * get all comments of an user
+	 * @param user
+	 * @return list of comments
+	 */
 	public List<Comment> getAllCommentsUser(User u) {
 		return u.readAllComments();
 	}
