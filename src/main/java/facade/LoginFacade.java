@@ -11,9 +11,8 @@ import model.person.Person;
 // End of user code
 
 /**
- * Description of Connection.
- * 
- * @author kevine2710
+ * to be the intermediary between LoginManager and UI login class
+ *
  */
 public class LoginFacade {
 
@@ -32,11 +31,22 @@ public class LoginFacade {
 	public LoginFacade() {
 		this.mu = new PersonManager();
 	}
-
+	
+	/**
+	 * connect a user 
+	 * @param username of the user
+	 * @param password of the user 
+	 * @return true if the user is connected
+	 */
 	public boolean connect(String username, String password) {
 		return this.mu.connect(username, password);
 	}
 	
+	/**
+	 * get a person
+	 * @param username of the person
+	 * @return person
+	 */
 	public Person getPerson(String username) {
 		return this.mu.getPerson(username);
 	}

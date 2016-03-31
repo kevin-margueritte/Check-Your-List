@@ -154,6 +154,22 @@ public abstract class User extends Person {
 	public void setMail(String newMail) {
 	    this.mail = newMail;
 	}
+	
+	public String getDescription() {
+		return this.description;
+	}
+	
+	public void setDescription(String description) {
+	    this.description = description;
+	}
+	
+	public String getPassword() {
+		return this.password;
+	}
+	
+	public void setPassword(String password) {
+	    this.password = password;
+	}
 
 	public abstract boolean save();
 	public abstract List<Activity> readAllActivities();

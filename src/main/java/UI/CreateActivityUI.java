@@ -33,13 +33,13 @@ public class CreateActivityUI extends JFrame implements ActionListener {
 	private JComboBox comboVisibility;
 	private User u;
 	
+	
+	
+	/*
 	public static void main(String args[]) {
 		CreateActivityUI.launch();
 	}
-	
-	/**
-	 * Launch the application.
-	 */
+
 	public static void launch() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -53,13 +53,13 @@ public class CreateActivityUI extends JFrame implements ActionListener {
 		});
 	}
 	
-	
-	public CreateActivityUI() {
+	*/
+	public CreateActivityUI(User u) {
 		/**
 		 * Set User
 		 */
-		this.u = new UserJDBC("titi"); // à modifier => faire passer le user connecté par la vue
-		this.u.readByPseudo();
+		
+		this.u=u;
 		
 		this.af = new ActivityFacade();
 		setResizable(false);
