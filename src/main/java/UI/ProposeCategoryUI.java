@@ -65,8 +65,8 @@ public class ProposeCategoryUI extends JFrame implements ActionListener {
 		categoryName.setColumns(10);
 		
 		JButton btnProposeNewCategory = new JButton("Propose new category");
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnProposeNewCategory, -24, SpringLayout.SOUTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, btnProposeNewCategory, -116, SpringLayout.EAST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.WEST, btnProposeNewCategory, 141, SpringLayout.WEST, contentPane);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, btnProposeNewCategory, -22, SpringLayout.SOUTH, contentPane);
 		btnProposeNewCategory.addActionListener(this);
 		contentPane.add(btnProposeNewCategory);
 		
@@ -88,9 +88,9 @@ public class ProposeCategoryUI extends JFrame implements ActionListener {
 		contentPane.add(textShortDescription);
 		
 		this.textDetailedDescription = new JTextPane();
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblDetailedDescription, -16, SpringLayout.NORTH, textDetailedDescription);
 		sl_contentPane.putConstraint(SpringLayout.NORTH, textDetailedDescription, 394, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, textDetailedDescription, -57, SpringLayout.NORTH, btnProposeNewCategory);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, textDetailedDescription, -59, SpringLayout.NORTH, btnProposeNewCategory);
+		sl_contentPane.putConstraint(SpringLayout.SOUTH, lblDetailedDescription, -16, SpringLayout.NORTH, textDetailedDescription);
 		sl_contentPane.putConstraint(SpringLayout.WEST, textDetailedDescription, 0, SpringLayout.WEST, lblCategoryName);
 		sl_contentPane.putConstraint(SpringLayout.EAST, textDetailedDescription, 0, SpringLayout.EAST, textShortDescription);
 		contentPane.add(textDetailedDescription);
