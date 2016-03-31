@@ -12,18 +12,38 @@ import model.product.Product;
 // End of user code
 
 /**
- * Description of Seller.
- * 
- * @author kevine2710
+ *business class of seller 
+ *
  */
 public abstract class Seller extends Person {
 
+	/**
+	 * siret of seller
+	 */
 	protected String siret;
+	/**
+	 * phoneNumber of seller
+	 */
 	protected String phoneNumber;
+	/**
+	 * houseNumber of seller
+	 */
 	protected String houseNumber;
+	/**
+	 * street of seller
+	 */
 	protected String street;
+	/**
+	 * postCode of seller
+	 */
 	protected String postCode;
+	/**
+	 * mail of seller
+	 */
 	protected String mail;
+	/**
+	 * city of seller
+	 */
 	protected String city;
 	
 	// Start of user code (user defined attributes for Seller)
@@ -31,7 +51,7 @@ public abstract class Seller extends Person {
 	// End of user code
 	
 	/**
-	 * The constructor.
+	 * The constructor of seller
 	 */
 	public Seller() {
 		// Start of user code constructor for Seller)
@@ -40,7 +60,21 @@ public abstract class Seller extends Person {
 	}
 	
 	// Start of user code (user defined methods for Seller)
-	
+	/**
+	 * The constructor of seller
+	 * @param pseudo
+	 * @param lastName
+	 * @param firstName
+	 * @param description
+	 * @param password
+	 * @param siret
+	 * @param phoneNumber
+	 * @param houseNumber
+	 * @param street
+	 * @param postCode
+	 * @param mail
+	 * @param city
+	 */
 	public Seller(String pseudo, String lastName, String firstName, String description, String password, String siret, String phoneNumber, String houseNumber, String street, String postCode, String mail,
 			String city) {
 		super(pseudo, lastName, firstName, description, password);
@@ -53,13 +87,17 @@ public abstract class Seller extends Person {
 		this.city = city;
 	}
 	
+	/**
+	 * The constructor of seller
+	 * @param pseudo
+	 */
 	public Seller(String pseudo) {
 		super(pseudo);
 	}
 
 	// End of user code
 	/**
-	 * Returns siret.
+	 * get siret of seller
 	 * @return siret 
 	 */
 	public String getSiret() {
@@ -75,7 +113,7 @@ public abstract class Seller extends Person {
 	}
 
 	/**
-	 * Returns phoneNumber.
+	 * get phoneNumber of seller.
 	 * @return phoneNumber 
 	 */
 	public String getPhoneNumber() {
@@ -91,7 +129,7 @@ public abstract class Seller extends Person {
 	}
 
 	/**
-	 * Returns houseNumber.
+	 * get houseNumber of seller.
 	 * @return houseNumber 
 	 */
 	public String getHouseNumber() {
@@ -107,7 +145,7 @@ public abstract class Seller extends Person {
 	}
 
 	/**
-	 * Returns street.
+	 * get street of seller.
 	 * @return street 
 	 */
 	public String getStreet() {
@@ -123,7 +161,7 @@ public abstract class Seller extends Person {
 	}
 
 	/**
-	 * Returns postCode.
+	 * get postCode of seller.
 	 * @return postCode 
 	 */
 	public String getPostCode() {
@@ -139,7 +177,7 @@ public abstract class Seller extends Person {
 	}
 
 	/**
-	 * Returns mail.
+	 * get mail of seller.
 	 * @return mail 
 	 */
 	public String getMail() {
@@ -155,7 +193,7 @@ public abstract class Seller extends Person {
 	}
 
 	/**
-	 * Returns city.
+	 * get city of seller.
 	 * @return city 
 	 */
 	public String getCity() {
@@ -170,7 +208,21 @@ public abstract class Seller extends Person {
 	    this.city = newCity;
 	}
 
+	/**
+	 * find if the seller exist
+	 * @return true if the seller exist else false
+	 */
 	public abstract boolean sellerExist();
+	
+	/**
+	 * get all products of seller
+	 * @return list of products
+	 */
 	public abstract List<Product> readAllProducts();
+	
+	/**
+	 * find if the pseudo exist
+	 * @return true if the pseudo exist
+	 */
 	public abstract boolean pseudoExist();
 }

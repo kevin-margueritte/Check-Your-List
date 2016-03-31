@@ -8,10 +8,6 @@ import org.junit.Test;
 
 import facade.LoginFacade;
 
-/**
- * Test of LoginFacade
- *
- */
 public class TestLoginFacade {
 	
 	protected LoginFacade l;

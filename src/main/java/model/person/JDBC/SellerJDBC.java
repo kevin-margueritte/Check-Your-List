@@ -15,8 +15,27 @@ import model.person.Seller;
 import model.product.Product;
 import model.product.JDBC.ProductJDBC;
 
+/**
+ * persistance of seller
+ *
+ */
 public class SellerJDBC extends Seller {
 	
+	/**
+	 * constructor of SellerJDBC
+	 * @param pseudo
+	 * @param lastName
+	 * @param firstName
+	 * @param description
+	 * @param password
+	 * @param siret
+	 * @param phoneNumber
+	 * @param houseNumber
+	 * @param street
+	 * @param postCode
+	 * @param mail
+	 * @param city
+	 */
 	public SellerJDBC(String pseudo, String lastName, String firstName, String description, String password, String siret, String phoneNumber, String houseNumber, String street, String postCode, String mail,
 			String city) {
 		super(pseudo, lastName, firstName, description, password,
@@ -24,6 +43,10 @@ public class SellerJDBC extends Seller {
 				city);
 	}
 	
+	/**
+	 * constructor of SellerJDBC
+	 * @param pseudo
+	 */
 	public SellerJDBC(String pseudo) {
 		super(pseudo);
 	}
@@ -77,6 +100,7 @@ public class SellerJDBC extends Seller {
 		return false;
 	}
 	
+	@Override
 	public boolean pseudoExist() {
 		String sql2 = ("SELECT pseudo FROM seller WHERE pseudo='"+ this.pseudo + "'");
 		try {
@@ -92,6 +116,7 @@ public class SellerJDBC extends Seller {
 		return false;
 	}
 	
+	@Override
 	public boolean sellerExist() {
 			String sql1 = ("SELECT pseudo FROM seller WHERE pseudo='"+ this.pseudo + "'");
 		try {

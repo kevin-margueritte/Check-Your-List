@@ -12,20 +12,41 @@ import database.ConnectionDB;
 import model.category.Category;
 import model.category.Subcategory;
 
+/**
+ * persistance of activity
+ *
+ */
 public class CategoryJDBC extends Category {
 	
+	/**
+	 * constructor of categoryJDBC
+	 */
 	public CategoryJDBC() {
 		super();
 	}
 	
+	/**
+	 * constructor of categoryJDBC
+	 * @param name
+	 * @param shortDescription
+	 * @param detailedDescription
+	 */
 	public CategoryJDBC(String name, String shortDescription, String detailedDescription){
 		super(name, shortDescription, detailedDescription);	
 	}
 	
+	/**
+	 * constructor of categoryJDBC
+	 * @param name
+	 */
 	public CategoryJDBC(String name) {
 		super(name);
 	}
 	
+	/**
+	 * get category with its name
+	 * @return category
+	 */
 	public Category readByName() {
 		String sql = ("SELECT * FROM category WHERE name = '" +  this.name + "'");
 		Category c = null;
@@ -49,6 +70,10 @@ public class CategoryJDBC extends Category {
 		return (Category)c;
 	}
 	
+	/**
+	 * save category on DB
+	 * @return true if category is saved else false
+	 */
 	public boolean save() {
 		String sql = ("INSERT INTO category VALUES ( '" +  this.name + "','" + this.shortDescription + "','" + 
 				this.detailedDescription +"')");

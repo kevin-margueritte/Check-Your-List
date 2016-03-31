@@ -14,24 +14,64 @@ import model.product.Product;
 import model.product.JDBC.ProductJDBC;
 import model.task.Task;
 
+/**
+ * persistance of task
+ *
+ */
 public class TaskJDBC extends Task {
 	
+	/**
+	 * constructor of taskJDBC
+	 */
 	public TaskJDBC() {
 		super();
 	}
 	
+	/**
+	 * constructor of taskJDBC
+	 * @param name
+	 * @param description
+	 * @param frequency
+	 * @param checked
+	 * @param startDate
+	 * @param endDate
+	 * @param activity
+	 * @param visibility
+	 */
 	public TaskJDBC(String name, String description, String frequency, boolean checked, String startDate, String endDate, Activity activity, boolean visibility) {
 		super(name, description, frequency, checked, startDate, endDate, activity, visibility);
 	}
 	
+	/**
+	 * constructor of taskJDBC
+	 * @param id
+	 * @param name
+	 * @param description
+	 * @param frequency
+	 * @param checked
+	 * @param startDate
+	 * @param endDate
+	 * @param activity
+	 * @param visibility
+	 */
 	public TaskJDBC(int id, String name, String description, String frequency, boolean checked, String startDate, String endDate, Activity activity, boolean visibility) {
 		super(id, name, description, frequency, checked, startDate, endDate, activity, visibility);
 	}
 	
+	/**
+	 * constructor of taskJDBC
+	 * @param id
+	 * @param name
+	 */
 	public TaskJDBC(int id, String name) {
 		super(id, name);
 	}
 	
+	/**
+	 * constructor of taskJDBC
+	 * @param name
+	 * @param act
+	 */
 	public TaskJDBC(String name, Activity act) {
 		super(name, act);
 	}
