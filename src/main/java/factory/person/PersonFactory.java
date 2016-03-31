@@ -7,6 +7,10 @@ import model.person.JDBC.AdministratorJDBC;
 import model.person.JDBC.SellerJDBC;
 import model.person.JDBC.UserJDBC;
 
+/**
+ * to be the intermediary between personJDBC and AbstractPersonFactory 
+ *
+ */
 public class PersonFactory extends AbstractPersonFactory {
 
 	@Override
@@ -34,6 +38,12 @@ public class PersonFactory extends AbstractPersonFactory {
 				city, postCode, street, houseNumber, mail);
 	}
 	
+	/**
+	 * encrypt password
+	 * @param x
+	 * @return byte[]
+	 * @throws Exception
+	 */
 	public static byte[] encrypt(String x) throws Exception {
 	    java.security.MessageDigest d = null;
 	    d = java.security.MessageDigest.getInstance("SHA-1");

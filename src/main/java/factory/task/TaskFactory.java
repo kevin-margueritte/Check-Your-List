@@ -4,6 +4,10 @@ import model.activity.Activity;
 import model.task.Task;
 import model.task.JDBC.TaskJDBC;
 
+/**
+ * to be the intermediary between TaskJDBC and AbstractTaskFactory 
+ *
+ */
 public class TaskFactory extends AbstractTaskFactory{
 	@Override
 	public Task createTask() {

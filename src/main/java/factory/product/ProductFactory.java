@@ -6,6 +6,10 @@ import model.person.Seller;
 import model.product.Product;
 import model.product.JDBC.ProductJDBC;
 
+/**
+ * to be the intermediary between ProductJDBC and AbstractProductFactory 
+ *
+ */
 public class ProductFactory extends AbstractProductFactory{
 	
 /*	

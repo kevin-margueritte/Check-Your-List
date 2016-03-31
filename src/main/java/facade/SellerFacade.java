@@ -8,13 +8,21 @@ import model.category.Subcategory;
 import model.person.Seller;
 import model.person.JDBC.SellerJDBC;
 
-
+/**
+ * to be the intermediary between personManager and UI seller class
+ *
+ */
 public class SellerFacade {
 
-	// manager des Produits
+	/**
+	 * Description of the property sellerUIs.
+	 */
 	private ProductManager manProd;
 	private CategoryManager cm;
-	//initialisation du manager
+
+	/**
+	 * constructor of SellerFacade
+	 */
 	public SellerFacade() {
 		this.manProd = new ProductManager();
 		this.cm = new CategoryManager();
@@ -33,14 +41,32 @@ public class SellerFacade {
 	}
 	*/
 	
+	/**
+	 * get all sub-categories of a category
+	 * @param category
+	 * @return list of sub-categories
+	 */
 	public List<Subcategory> getAllSubcategories(Category c) {
 		return this.cm.getAllSubcategories(c);
 	}
 	
+	/**
+	 * get all categories
+	 * @return list of categories
+	 */
 	public List<Category> getAllCategories() {
 		return this.cm.getAllCategories();
 	}
 
+	/**
+	 * create a product
+	 * @param name of product
+	 * @param seller of product
+	 * @param price of product
+	 * @param quantity of product
+	 * @param subCategory of product
+	 * @return true if the product is created else false
+	 */
 	public boolean createProduct(String name, Seller seller, float price, int quantity,
 			Subcategory subCategory) {
 			return this.manProd.createProduct(name, seller, price, quantity, subCategory);
