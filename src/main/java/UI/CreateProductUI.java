@@ -1,7 +1,6 @@
 package UI;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,21 +27,30 @@ import facade.SellerFacade;
 import model.category.Category;
 import model.category.Subcategory;
 import model.person.Seller;
-import model.person.JDBC.SellerJDBC;
 
+<<<<<<< HEAD
 // TODO: Auto-generated Javadoc
 /**
  * The Class CreateProductUI.
  */
+=======
+@SuppressWarnings("serial")
+>>>>>>> origin/master
 public class CreateProductUI extends JFrame implements ActionListener, MouseListener {
 	
 	/** The name product. */
 	private JTextField nameProduct;
+<<<<<<< HEAD
 	
 	/** The combo subcategory. */
 	private JComboBox comboSubcategory;
 	
 	/** The combo category. */
+=======
+	@SuppressWarnings("rawtypes")
+	private JComboBox comboSubcategory;
+	@SuppressWarnings("rawtypes")
+>>>>>>> origin/master
 	private JComboBox comboCategory;
 	
 	/** The sellface. */
@@ -50,8 +58,12 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 	
 	/** The btn validate. */
 	private JButton btnValidate;
+<<<<<<< HEAD
 	
 	/** The combo visibility. */
+=======
+	@SuppressWarnings({ "rawtypes", "unused" })
+>>>>>>> origin/master
 	private JComboBox comboVisibility;
 	
 	/** The price. */
@@ -69,6 +81,7 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 	/** The lbl propose subcategory. */
 	private JLabel lblProposeSubcategory;
 	
+<<<<<<< HEAD
 	/**
 	 * The main method.
 	 *
@@ -100,10 +113,11 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 	/**
 	 * Detect category close.
 	 */
+=======
+>>>>>>> origin/master
 	public void detectCategoryClose() {
-		CreateProductUI myUI = new CreateProductUI(this.seller);
-		myUI.setVisible(true);
-		this.dispose();
+		initComboBoxCategory();
+		initComboBoxSubCategory();
 	}
 	
 	/**
@@ -122,9 +136,13 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 		this.initFrame();
 	}
 	
+<<<<<<< HEAD
 	/**
 	 * Inits the frame.
 	 */
+=======
+	@SuppressWarnings({ "rawtypes" })
+>>>>>>> origin/master
 	public void initFrame() {
 		this.setLocationRelativeTo(null);
 		setResizable(false);
@@ -144,7 +162,6 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 		JLabel lblNewLabel = new JLabel("Price");
 		lblNewLabel.setBounds(10, 78, 138, 14);
 		getContentPane().add(lblNewLabel);
-		// <--------------- Obligé en float
 		this.price = new JFormattedTextField();
 		this.price.setFormatterFactory(new AbstractFormatterFactory() {
 
@@ -257,7 +274,6 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 		if (e.getSource() == this.comboCategory) {
 			this.initComboBoxSubCategory();
 		}else if(e.getSource() == this.btnValidate && this.formComplete()) {	
-			//nom product seller price quantity subcategory
 			boolean bool;
 			System.out.println(price.getValue().getClass().getName());
 			bool = this.sellface.createProduct(this.nameProduct.getText(),this.seller, ((Number) price.getValue()).floatValue()
@@ -282,7 +298,7 @@ public class CreateProductUI extends JFrame implements ActionListener, MouseList
 				    "Error",
 				    JOptionPane.ERROR_MESSAGE);
 			return false;
-		}//verifie pour quantité et prix
+		}
 		else if (this.price.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(this,
 					"price is empty",

@@ -26,6 +26,7 @@ import model.category.Subcategory;
 import model.product.Product;
 import model.task.Task;
 
+<<<<<<< HEAD
 // TODO: Auto-generated Javadoc
 /**
  * The Class AddRessourcesTaskUI.
@@ -36,6 +37,14 @@ public class AddRessourcesTaskUI extends JFrame implements ActionListener {
 	private JComboBox comboCategory;
 	
 	/** The combo subcategory. */
+=======
+@SuppressWarnings("serial")
+public class AddRessourcesTaskUI extends JFrame implements ActionListener {
+	
+	@SuppressWarnings("rawtypes")
+	private JComboBox comboCategory;
+	@SuppressWarnings("rawtypes")
+>>>>>>> origin/master
 	private JComboBox comboSubcategory;
 	
 	/** The activity face. */
@@ -53,6 +62,7 @@ public class AddRessourcesTaskUI extends JFrame implements ActionListener {
 	/** The act ui. */
 	private ActivityUI actUI;
 	
+<<<<<<< HEAD
 	/*public static void main(String args[]) {
 		AddRessourcesTaskUI.launch();
 	}
@@ -85,6 +95,9 @@ public class AddRessourcesTaskUI extends JFrame implements ActionListener {
 	 * @param act the act
 	 * @param actUI the act ui
 	 */
+=======
+	@SuppressWarnings("rawtypes")
+>>>>>>> origin/master
 	public AddRessourcesTaskUI(String nameActivity, Activity act, ActivityUI actUI) {
 		this.actUI = actUI;
 		setResizable(false);
@@ -143,10 +156,10 @@ public class AddRessourcesTaskUI extends JFrame implements ActionListener {
 		
 		btnTerminated = new JButton("Terminated");
 		btnTerminated.addActionListener(this);
-		btnTerminated.setBounds(224, 333, 89, 23);
+		btnTerminated.setBounds(224, 333, 110, 23);
 		getContentPane().add(btnTerminated);
 		
-		setSize(560,408);
+		setSize(549,408);
 		List<Product> list = this.activityFace.getAllProductsFromSubCategory((Subcategory) this.comboSubcategory.getSelectedItem());
 		this.initProducts(list);
 	}

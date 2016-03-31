@@ -1,6 +1,5 @@
 package UI;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -14,12 +13,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import facade.ActivityFacade;
-import model.activity.Activity;
 import model.activity.JDBC.ActivityJDBC;
 import model.category.Category;
 import model.category.Subcategory;
 import model.person.User;
-import model.person.JDBC.UserJDBC;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -36,22 +33,33 @@ public class CreateActivityUI extends JFrame implements ActionListener {
 	
 	/** The af. */
 	private ActivityFacade af;
+<<<<<<< HEAD
 	
 	/** The combo subcategory. */
 	private JComboBox comboSubcategory;
 	
 	/** The combo category. */
+=======
+	@SuppressWarnings("rawtypes")
+	private JComboBox comboSubcategory;
+	@SuppressWarnings("rawtypes")
+>>>>>>> origin/master
 	private JComboBox comboCategory;
 	
 	/** The btn validate. */
 	private JButton btnValidate;
+<<<<<<< HEAD
 	
 	/** The combo visibility. */
+=======
+	@SuppressWarnings("rawtypes")
+>>>>>>> origin/master
 	private JComboBox comboVisibility;
 	
 	/** The u. */
 	private User u;
 	
+<<<<<<< HEAD
 	
 	
 	/**
@@ -83,6 +91,10 @@ public class CreateActivityUI extends JFrame implements ActionListener {
 		 * Set User
 		 */
 		
+=======
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public CreateActivityUI(User u) {	
+>>>>>>> origin/master
 		this.u=u;
 		
 		this.af = new ActivityFacade();
@@ -99,7 +111,7 @@ public class CreateActivityUI extends JFrame implements ActionListener {
 		getContentPane().add(lblActivityName);
 		
 		JLabel lblNewLabel = new JLabel("Visibility");
-		lblNewLabel.setBounds(10, 96, 46, 14);
+		lblNewLabel.setBounds(10, 96, 140, 14);
 		getContentPane().add(lblNewLabel);
 		
 		comboVisibility = new JComboBox();
@@ -115,7 +127,7 @@ public class CreateActivityUI extends JFrame implements ActionListener {
 		this.initComboBoxCategory();
 		
 		JLabel lblCategory = new JLabel("Category");
-		lblCategory.setBounds(236, 27, 46, 14);
+		lblCategory.setBounds(236, 27, 140, 14);
 		getContentPane().add(lblCategory);
 		
 		this.comboSubcategory = new JComboBox();
@@ -124,7 +136,7 @@ public class CreateActivityUI extends JFrame implements ActionListener {
 		getContentPane().add(comboSubcategory);
 		
 		JLabel lblSubcategory = new JLabel("Subcategory");
-		lblSubcategory.setBounds(236, 96, 91, 14);
+		lblSubcategory.setBounds(236, 96, 140, 14);
 		getContentPane().add(lblSubcategory);
 		
 		JLabel lblDescription = new JLabel("Description");

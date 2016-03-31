@@ -1,6 +1,5 @@
 package UI;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,10 +15,14 @@ import javax.swing.border.EmptyBorder;
 
 import facade.CategoryFacade;
 
+<<<<<<< HEAD
 // TODO: Auto-generated Javadoc
 /**
  * The Class ProposeCategoryUI.
  */
+=======
+@SuppressWarnings("serial")
+>>>>>>> origin/master
 public class ProposeCategoryUI extends JFrame implements ActionListener {
 
 	/** The cf. */
@@ -45,18 +48,7 @@ public class ProposeCategoryUI extends JFrame implements ActionListener {
 	 *
 	 * @param createProductUI the create product ui
 	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ProposeCategoryUI frame = new ProposeCategoryUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
+
 
 	/**
 	 * Create the frame.

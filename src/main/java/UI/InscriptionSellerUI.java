@@ -1,6 +1,5 @@
 package UI;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,7 +10,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
-import javax.swing.SpringLayout;
 
 import facade.PersonFacade;
 
@@ -64,6 +62,7 @@ public class InscriptionSellerUI extends JFrame implements ActionListener {
 	/** The siret. */
 	private JTextField siret;
 	
+<<<<<<< HEAD
 	/**
 	 * The main method.
 	 *
@@ -92,6 +91,8 @@ public class InscriptionSellerUI extends JFrame implements ActionListener {
 	/**
 	 * Instantiates a new inscription seller ui.
 	 */
+=======
+>>>>>>> origin/master
 	public InscriptionSellerUI() {
 		this.pf = new PersonFacade();
 		setResizable(false);

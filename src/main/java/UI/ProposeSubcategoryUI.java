@@ -1,6 +1,5 @@
 package UI;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -21,10 +20,14 @@ import javax.swing.border.EmptyBorder;
 import facade.CategoryFacade;
 import model.category.Category;
 
+<<<<<<< HEAD
 // TODO: Auto-generated Javadoc
 /**
  * The Class ProposeSubcategoryUI.
  */
+=======
+@SuppressWarnings("serial")
+>>>>>>> origin/master
 public class ProposeSubcategoryUI extends JFrame implements ActionListener {
 
 	/** The cf. */
@@ -41,11 +44,17 @@ public class ProposeSubcategoryUI extends JFrame implements ActionListener {
 	
 	/** The text detailed description. */
 	private JTextPane textDetailedDescription;
+<<<<<<< HEAD
 	
 	/** The combo box category. */
 	private JComboBox comboBoxCategory;
 	
 	/** The list category. */
+=======
+	@SuppressWarnings("rawtypes")
+	private JComboBox comboBoxCategory;
+	@SuppressWarnings("unused")
+>>>>>>> origin/master
 	private List<Category> listCategory;
 	
 	/** The create product ui. */
@@ -56,22 +65,12 @@ public class ProposeSubcategoryUI extends JFrame implements ActionListener {
 	 *
 	 * @param createProductUI the create product ui
 	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ProposeSubcategoryUI frame = new ProposeSubcategoryUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
+
 
 	/**
 	 * Create the frame.
 	 */
+	@SuppressWarnings("rawtypes")
 	public ProposeSubcategoryUI(CreateProductUI createProductUI) {
 		this.cf = new CategoryFacade();
 		this.createProductUI = createProductUI;
@@ -127,6 +126,7 @@ public class ProposeSubcategoryUI extends JFrame implements ActionListener {
 		this.comboBoxCategory = new JComboBox();
 		sl_contentPane.putConstraint(SpringLayout.WEST, comboBoxCategory, 0, SpringLayout.WEST, lblCategoryName);
 		sl_contentPane.putConstraint(SpringLayout.EAST, comboBoxCategory, 0, SpringLayout.EAST, categoryName);
+		@SuppressWarnings("unused")
 		List<String> ls = new ArrayList<String>();
 		contentPane.add(comboBoxCategory);
 		this.initComboBoxCategory();

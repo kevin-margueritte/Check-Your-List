@@ -17,16 +17,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.SwingConstants;
 
-import facade.ActivityFacade;
 import facade.ShopFacade;
 import model.category.Category;
 import model.category.Subcategory;
 import model.person.Seller;
 import model.person.JDBC.SellerJDBC;
 import model.product.Product;
-import javax.swing.SwingConstants;
 
+<<<<<<< HEAD
 // TODO: Auto-generated Javadoc
 /**
  * The Class ShopUI.
@@ -37,6 +37,14 @@ public class ShopUI extends JFrame implements ActionListener {
 	private JComboBox comboCategory;
 	
 	/** The combo subcategory. */
+=======
+@SuppressWarnings("serial")
+public class ShopUI extends JFrame implements ActionListener {
+	
+	@SuppressWarnings("rawtypes")
+	private JComboBox comboCategory;
+	@SuppressWarnings("rawtypes")
+>>>>>>> origin/master
 	private JComboBox comboSubcategory;
 	
 	/** The Shop face. */
@@ -75,9 +83,13 @@ public class ShopUI extends JFrame implements ActionListener {
 
 	
 	
+<<<<<<< HEAD
 	/**
 	 * Instantiates a new shop ui.
 	 */
+=======
+	@SuppressWarnings("rawtypes")
+>>>>>>> origin/master
 	public ShopUI() {
 		setResizable(false);
 		setTitle("Shop");

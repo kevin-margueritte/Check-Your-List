@@ -1,7 +1,6 @@
 package UI;
 
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.util.List;
 
@@ -12,17 +11,17 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
 import facade.TaskFacade;
-import model.activity.Activity;
-import model.activity.JDBC.ActivityJDBC;
-import model.person.User;
-import model.person.JDBC.UserJDBC;
 import model.product.Product;
 import model.task.Task;
 
+<<<<<<< HEAD
 // TODO: Auto-generated Javadoc
 /**
  * The Class TaskUI.
  */
+=======
+@SuppressWarnings("serial")
+>>>>>>> origin/master
 public class TaskUI extends JFrame {
 	
 	/** The task. */
@@ -33,6 +32,7 @@ public class TaskUI extends JFrame {
 	
 	/** The panel products. */
 	private JPanel panelProducts;
+<<<<<<< HEAD
 	
 	/**
 	 * Instantiates a new task ui.
@@ -43,25 +43,9 @@ public class TaskUI extends JFrame {
 	public static void main(String args[]) {
 		TaskUI.launch();
 	}
+=======
+>>>>>>> origin/master
 
-	public static void launch() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					User u = new UserJDBC("titi");
-					u.readByPseudo();
-					Activity act = new ActivityJDBC(u);
-					act.setTitle("creeer cabane");
-					TaskUI frame = new TaskUI(act.readAllTask().get(0));
-					frame.setLocationRelativeTo(null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	*/
 	public TaskUI(Task task) {
 		this.task = task;
 		this.tf = new TaskFacade();
@@ -110,6 +94,7 @@ public class TaskUI extends JFrame {
 		panelProducts.setLayout(null);
 		setSize(449,369);
 		this.initRessources(this.tf.getAllProductFromTask(this.task));
+		this.setLocationRelativeTo(null);
 	}
 	
 	/**

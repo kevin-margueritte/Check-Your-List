@@ -1,6 +1,5 @@
 package UI;
 
-import java.awt.EventQueue;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,8 +19,6 @@ import javax.swing.JTextField;
 
 import facade.RessourceFacade;
 import model.activity.Activity;
-import model.activity.JDBC.ActivityJDBC;
-import model.category.Category;
 import model.person.User;
 
 // TODO: Auto-generated Javadoc
@@ -45,15 +42,22 @@ public class CreateTaskUI extends JFrame implements ActionListener{
 	
 	/** The u. */
 	private User u;
+<<<<<<< HEAD
 	
 	/** The combo visibility. */
 	private JComboBox comboVisibility;
 	
 	/** The combo activity. */
+=======
+	@SuppressWarnings("rawtypes")
+	private JComboBox comboVisibility;
+	@SuppressWarnings("rawtypes")
+>>>>>>> origin/master
 	private JComboBox comboActivity;
 	
 	/** The text name task. */
 	private JTextField textNameTask;
+<<<<<<< HEAD
 	
 	/** The start day. */
 	private JComboBox startDay;
@@ -71,17 +75,35 @@ public class CreateTaskUI extends JFrame implements ActionListener{
 	private JComboBox endMonth;
 	
 	/** The end year. */
+=======
+	@SuppressWarnings("rawtypes")
+	private JComboBox startDay;
+	@SuppressWarnings("rawtypes")
+	private JComboBox startMonth;
+	@SuppressWarnings("rawtypes")
+	private JComboBox startYear;
+	@SuppressWarnings("rawtypes")
+	private JComboBox endDay;
+	@SuppressWarnings("rawtypes")
+	private JComboBox endMonth;
+	@SuppressWarnings("rawtypes")
+>>>>>>> origin/master
 	private JComboBox endYear;
 	
 	/** The spinner freq. */
 	private JSpinner spinnerFreq;
+<<<<<<< HEAD
 	
 	/** The combo freq. */
+=======
+	@SuppressWarnings("rawtypes")
+>>>>>>> origin/master
 	private JComboBox comboFreq;
 	
 	/** The act ui. */
 	private ActivityUI actUI;
 	
+<<<<<<< HEAD
 	/*
 	public static void main(String args[]) {
 		CreateTaskUI.launch();
@@ -109,6 +131,9 @@ public class CreateTaskUI extends JFrame implements ActionListener{
 		});
 	}*/
 	
+=======
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+>>>>>>> origin/master
 	public CreateTaskUI(Activity act, ActivityUI actUI) {
 		setTitle("Create task");
 		setResizable(false);
@@ -132,7 +157,7 @@ public class CreateTaskUI extends JFrame implements ActionListener{
 		this.btnValidate = new JButton("Add ressources");
 		this.btnValidate.addActionListener(this);
 		
-		this.btnValidate.setBounds(155, 303, 118, 23);
+		this.btnValidate.setBounds(149, 303, 135, 23);
 		getContentPane().add(this.btnValidate);
 		
 		JLabel lblEndDate = new JLabel("End date (dd mm yyyy)");
@@ -148,7 +173,7 @@ public class CreateTaskUI extends JFrame implements ActionListener{
 		getContentPane().add(lblFrequency);
 		
 		JLabel lblVisible = new JLabel("Visibility");
-		lblVisible.setBounds(24, 87, 46, 14);
+		lblVisible.setBounds(24, 87, 148, 14);
 		getContentPane().add(lblVisible);
 		
 		JLabel lblDescription = new JLabel("Description");
@@ -203,8 +228,7 @@ public class CreateTaskUI extends JFrame implements ActionListener{
 		comboFreq.setBounds(294, 167, 101, 20);
 		getContentPane().add(comboFreq);
 		
-		setSize(428, 366);
-		this.setLocation(null);		
+		setSize(428, 366);	
 		
 	}
 	
@@ -213,8 +237,6 @@ public class CreateTaskUI extends JFrame implements ActionListener{
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void initComboBoxActivity() {
-		System.out.print("initComboBoxActivity");
-		Category c = (Category) this.comboActivity.getSelectedItem();
 		List<Activity> list = u.readAllActivities();
 		this.comboActivity.setModel(new DefaultComboBoxModel(list.toArray()));
 	}

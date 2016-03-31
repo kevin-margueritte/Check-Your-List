@@ -68,6 +68,7 @@ public class ProfilSellerUI extends JFrame implements ActionListener {
 		});
 	}
 	
+<<<<<<< HEAD
 	//public ProfilSellerUI() {}
 	
 	/**
@@ -75,6 +76,9 @@ public class ProfilSellerUI extends JFrame implements ActionListener {
 	 *
 	 * @param s the s
 	 */
+=======
+
+>>>>>>> origin/master
 	public ProfilSellerUI(Seller s) {
 		this.pf = new ProfilSellerFacade();
 		this.seller = s;
@@ -203,6 +207,7 @@ public class ProfilSellerUI extends JFrame implements ActionListener {
 		}else if( button.getText().equals("Modify") ){
 			Component[] com = button.getParent().getComponents();
 			JSpinner spinnerQt = null; 
+			@SuppressWarnings("unused")
 			JLabel lblQT = null;
 			JFormattedTextField fmtPrice = null;
 			JTextField nameProduct = null;

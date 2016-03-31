@@ -1,6 +1,5 @@
 package UI;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +17,7 @@ import model.activity.Activity;
 import model.activity.JDBC.ActivityJDBC;
 import model.person.User;
 
+<<<<<<< HEAD
 // TODO: Auto-generated Javadoc
 /**
  * The Class AllActivitiesUI.
@@ -26,6 +26,11 @@ public class AllActivitiesUI extends JFrame implements ActionListener {
 
 	/** The af. */
 	//private JPanel contentPane;
+=======
+@SuppressWarnings("serial")
+public class AllActivitiesUI extends JFrame implements ActionListener {
+
+>>>>>>> origin/master
 	private ActivityFacade af;
 	
 	/** The u. */
@@ -35,6 +40,7 @@ public class AllActivitiesUI extends JFrame implements ActionListener {
 	private List<JPanel> panelActivity;
 
 	/**
+<<<<<<< HEAD
 	 * Launch the application.
 	 *
 	 * @param u the u
@@ -56,6 +62,8 @@ public class AllActivitiesUI extends JFrame implements ActionListener {
 	
 
 	/**
+=======
+>>>>>>> origin/master
 	 * Create the frame.
 	 */
 	public AllActivitiesUI(User u) {
