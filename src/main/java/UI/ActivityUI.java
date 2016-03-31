@@ -47,14 +47,14 @@ public class ActivityUI extends JFrame implements ActionListener {
 	private JPanel panelTaskList;
 	private JPanel panelTask;
 	private JPanel panelComment;
-	
+	/*
 	public static void main(String args[]) {
 		ActivityUI.launch();
-	}
+	}*/
 	
 	/**
 	 * Launch the application.
-	 */
+	 *//*
 	public static void launch() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -70,7 +70,7 @@ public class ActivityUI extends JFrame implements ActionListener {
 				}
 			}
 		});
-	}
+	}*/
 	
 	public ActivityUI(User u, Activity act) {
 		this.activity = act;
@@ -247,12 +247,7 @@ public class ActivityUI extends JFrame implements ActionListener {
 	public void addPanelTask(Task t, int idx) {
 		
 		JPanel panel = new JPanel();
-		if(user.getPseudo().equals(activity.getUser().getPseudo())) { 
-			panel.setBounds(10, 60 + 35 * (idx-1), 580, 46);
-		}
-		else {
-			panel.setBounds(10,60 +  35 * (idx-1), 580, 46);
-		}
+		panel.setBounds(10, 60 + 35 * (idx-1), 580, 46);
 	
 		//getContentPane().add(panel);
 		panel.setLayout(null);
@@ -303,8 +298,6 @@ public class ActivityUI extends JFrame implements ActionListener {
 		panelActivity.setPreferredSize(new Dimension(615,this.panelComment.getY()
 				+ this.panelComment.getHeight()));
 		panelActivity.repaint();
-		//this.heigth = this.heigth + (100 * (list.size() + 1));
-		//this.panelActivity.setBounds(0, 0, 700,(int) this.heigth*2);
 	}
 	
 	public void addPanelComment(Comment comment, int idx) {					
@@ -369,6 +362,9 @@ public class ActivityUI extends JFrame implements ActionListener {
 		else if (e.getSource() instanceof JButton) {
 			JButton button = (JButton) e.getSource();
 			if ( button.getText().equals("See") ) {
+				TaskUI taskUI = new TaskUI((Task) button.getClientProperty("task"));
+				taskUI.setVisible(true);
+				
 				//ActivityUI frame = new ActivityUI(this.u, (Activity) button.getClientProperty("activity"));
 				//frame.setVisible(true);
 			}

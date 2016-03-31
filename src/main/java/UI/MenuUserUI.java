@@ -38,7 +38,7 @@ public class MenuUserUI extends JFrame implements ChangeListener {
 		this.setSize(fp.getWidth() + 15, fp.getHeight() + 30);
 		tabbedPane.setSize(fp.getWidth(), fp.getHeight());
 		tabbedPane.addTab("Profil", comp);
-		fc = new CreateActivityUI();
+		fc = new CreateActivityUI(this.user);
 		comp = fc.getContentPane();
 		//tabbedPane.setSize(fc.getWidth(), fc.getHeight());
 		tabbedPane.addTab("Create activity", comp);

@@ -24,14 +24,11 @@ public class TaskUI extends JFrame {
 	private Task task;
 	private TaskFacade tf;
 	private JPanel panelProducts;
-	
+	/*
 	public static void main(String args[]) {
 		TaskUI.launch();
 	}
 
-	/**
-	 * Launch the application.
-	 */
 	public static void launch() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -49,7 +46,7 @@ public class TaskUI extends JFrame {
 			}
 		});
 	}
-	
+	*/
 	public TaskUI(Task task) {
 		this.task = task;
 		this.tf = new TaskFacade();
