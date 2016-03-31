@@ -140,10 +140,13 @@ public class ActivityUI extends JFrame implements ActionListener {
 		panelActivity.add(panelTask);
 		
 		//PANEL TASKLIST ------------------------------------------------------------
+		
+		
 		panelTaskList = new JPanel();
 		panelTaskList.setLayout(null);
 		
 		this.initActivities(list);
+		
 		JLabel lblTaskList = new JLabel("Task list");
 		lblTaskList.setBounds(0, 10, 89, 23);
 		this.panelTaskList.add(lblTaskList);
@@ -204,7 +207,12 @@ public class ActivityUI extends JFrame implements ActionListener {
 			this.addCheckBox(t, idx);
 			idx ++;
 		}
-		panelTask.setBounds(0, 183, 600, 80 + (23 * (list.size() + 1 ))/2);
+		
+		if(user.getPseudo().equals(activity.getUser().getPseudo())) { 
+			panelTask.setBounds(0, 183, 600, 80 + (23 * (list.size() + 1 ))/2);
+		}else{
+			panelTask.setBounds(0, 183, 0, 0);
+		}
 		panelTaskList.setBounds(0, panelTask.getY() + panelTask.getHeight(), 600,23+ 40 * (list.size() + 1 ));
 		this.heigth = this.heigth + (40 * (list.size() + 1));
 

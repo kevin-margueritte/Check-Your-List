@@ -60,7 +60,7 @@ public class AllActivitiesUI extends JFrame implements ActionListener {
 		getContentPane().add(lblTitle);
 	
 		this.af = new ActivityFacade();
-		//this.initFrame();
+		this.initFrame();
 	}
 	
 	public void initFrame() {
@@ -84,7 +84,7 @@ public class AllActivitiesUI extends JFrame implements ActionListener {
 		JPanel panel = new JPanel();
 
 		this.panelActivity.add(panel);
-		panel.setBounds(10, idx * 38, 414, 40);
+		panel.setBounds(10, idx * 38, 450, 40);
 
 		getContentPane().add(panel);
 		panel.setLayout(null);

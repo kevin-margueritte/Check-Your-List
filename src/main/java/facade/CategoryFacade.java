@@ -57,7 +57,7 @@ public class CategoryFacade {
 	 * @return true if the sub-category is created else false
 	 */
 	public boolean createSubcategory(String name, String shortDescription, String detailedDescription, Category category) {
-		return this.cm.createCategory(name, shortDescription, detailedDescription, category);
+		return this.cm.createSubcategory(name, shortDescription, detailedDescription, category);
 	}
 	
 	/**
