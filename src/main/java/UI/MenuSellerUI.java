@@ -10,6 +10,7 @@ import javax.swing.event.ChangeListener;
 
 import model.person.Seller;
 
+@SuppressWarnings("serial")
 public class MenuSellerUI extends JFrame implements ChangeListener {
 	
 	private JTabbedPane tabbedPane;
@@ -64,7 +65,6 @@ public class MenuSellerUI extends JFrame implements ChangeListener {
 		}
 		else if (panneName.equals("Create product")) {
 			this.cp.dispose();
-			//this.cp.initFrame();
 			this.setSize(cp.getWidth() + 15, cp.getHeight() + 30);
 			tabbedPane.setSize(cp.getWidth(), cp.getHeight());
 		}

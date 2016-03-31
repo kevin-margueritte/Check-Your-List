@@ -17,6 +17,7 @@ import facade.ProfilUserFacade;
 import model.activity.Activity;
 import model.person.User;
 
+@SuppressWarnings("serial")
 public class ProfilUserUI extends JFrame implements ActionListener {
 	
 	private ProfilUserFacade pf;
@@ -26,18 +27,7 @@ public class ProfilUserUI extends JFrame implements ActionListener {
 	/**
 	 * Launch the application.
 	 */
-	/*public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ProfilUserUI frame = new ProfilUserUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
+
 	
 	public ProfilUserUI(User u) {
 		setResizable(false);
@@ -53,11 +43,9 @@ public class ProfilUserUI extends JFrame implements ActionListener {
 		/**
 		 * Set User
 		 */
-		//this.u = new UserJDBC("titi");
-		//this.u.readByPseudo();
+		
 		this.u = u;
 		this.pf = new ProfilUserFacade();
-		//this.initFrame();
 	}
 	
 	public void initFrame() {

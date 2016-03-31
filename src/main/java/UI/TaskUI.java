@@ -1,7 +1,6 @@
 package UI;
 
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.util.List;
 
@@ -12,41 +11,16 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
 import facade.TaskFacade;
-import model.activity.Activity;
-import model.activity.JDBC.ActivityJDBC;
-import model.person.User;
-import model.person.JDBC.UserJDBC;
 import model.product.Product;
 import model.task.Task;
 
+@SuppressWarnings("serial")
 public class TaskUI extends JFrame {
 	
 	private Task task;
 	private TaskFacade tf;
 	private JPanel panelProducts;
-	/*
-	public static void main(String args[]) {
-		TaskUI.launch();
-	}
 
-	public static void launch() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					User u = new UserJDBC("titi");
-					u.readByPseudo();
-					Activity act = new ActivityJDBC(u);
-					act.setTitle("creeer cabane");
-					TaskUI frame = new TaskUI(act.readAllTask().get(0));
-					frame.setLocationRelativeTo(null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	*/
 	public TaskUI(Task task) {
 		this.task = task;
 		this.tf = new TaskFacade();

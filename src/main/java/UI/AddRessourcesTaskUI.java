@@ -26,9 +26,12 @@ import model.category.Subcategory;
 import model.product.Product;
 import model.task.Task;
 
+@SuppressWarnings("serial")
 public class AddRessourcesTaskUI extends JFrame implements ActionListener {
 	
+	@SuppressWarnings("rawtypes")
 	private JComboBox comboCategory;
+	@SuppressWarnings("rawtypes")
 	private JComboBox comboSubcategory;
 	private ActivityFacade activityFace;
 	private JPanel panelProducts;
@@ -36,31 +39,7 @@ public class AddRessourcesTaskUI extends JFrame implements ActionListener {
 	private JButton btnTerminated;
 	private ActivityUI actUI;
 	
-	/*public static void main(String args[]) {
-		AddRessourcesTaskUI.launch();
-	}
-	
-	/**
-	 * Launch the application.
-	 */
-	/*public static void launch() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					User u = new UserJDBC("titi");
-					u.readByPseudo();
-					Activity act = new ActivityJDBC(u);
-					act.setTitle("a");
-					AddRessourcesTaskUI frame = new AddRessourcesTaskUI(act.readAllTask().get(0));
-					frame.setLocationRelativeTo(null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
-	
+	@SuppressWarnings("rawtypes")
 	public AddRessourcesTaskUI(String nameActivity, Activity act, ActivityUI actUI) {
 		this.actUI = actUI;
 		setResizable(false);
@@ -119,10 +98,10 @@ public class AddRessourcesTaskUI extends JFrame implements ActionListener {
 		
 		btnTerminated = new JButton("Terminated");
 		btnTerminated.addActionListener(this);
-		btnTerminated.setBounds(224, 333, 89, 23);
+		btnTerminated.setBounds(224, 333, 110, 23);
 		getContentPane().add(btnTerminated);
 		
-		setSize(560,408);
+		setSize(549,408);
 		List<Product> list = this.activityFace.getAllProductsFromSubCategory((Subcategory) this.comboSubcategory.getSelectedItem());
 		this.initProducts(list);
 	}
